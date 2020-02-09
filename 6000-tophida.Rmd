@@ -1,4 +1,4 @@
-# TOP.HIDA {#top.hida}
+# TOP.HIDA {#top}
 
 *Tópicos avançados em HIDA*
 

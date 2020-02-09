@@ -4,7 +4,9 @@ All the files and code of this book are available in the repository: https://git
 
 All the students can contribute to this compilation sending me their own homeworks and correcting the mistakes I will certainly do. You can send me your files and code to `balima78@gmail.com`. When possible you must send me *.Rmd* files and data as *.csv*.
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(top.hida).
+Here, *.Rmd* files are named by number from 1000 to 9000 (**CLLS** - **C**lass **LL**esson **S**tudent) followed by a breave description.
+
+You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(top). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(compstat).
 
 Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
 
