@@ -1,0 +1,12 @@
+# STATS {#stats}
+
+*Modelação Estatística*
+
+**Conteúdos programáticos**
+
+- Regressão logística.
+- Análise de sobrevida.
+- Análise de dados longitudinais.
+- Causalidade.
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

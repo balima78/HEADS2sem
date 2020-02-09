@@ -1,0 +1,28 @@
+## Seminar 1 {#top.hida01}
+
+**Physiological signal processing in affective computing** by Susana Brás
+
+Susana Brás is Postdoctoral researcher at Institute of Electronics and Telematics 
+Engineering of Aveiro (IEETA), University of Aveiro, Portugal. 
+At this moment, she is focused on ECG biometric identification, emotional 
+modulated environments and information extraction from large biomedical databases. 
+Before, she was a PhD student at Abel Salazar Biomedical Sciences Institute, at 
+University of Porto, Portugal. Her thesis was focused on automation in anesthesia, 
+basically the drug distribution and effect (alterations in the brain electrical activity)
+ were studied, modeled and a controller was presented for the hypnotic effect. 
+Her background is in Applied Mathematics, from the Sciences Faculty, at University of 
+Porto.
+
+### Bruno Lima
+Podemos definir sinais como dados indexados a uma variável temporal e que podem ser oriundos de campos tão diversos como a biomedicina ou as comunicações sem fios. 
+Neste seminário foi-nos apresentado o conceito de computação afectiva que consiste em identificar emoções a partir do processamento de sinais fisiológicos. O conceito de emoção é de difícil definição ainda que a caracterização das emoções seja algo mais perceptível. Conseguimos reconhecer emoções através de respostas fisiológicas como sejam o batimento cardíaco, a expressão facial, a tensão, o riso, a rubescência ou a sudação embora estas reacções do corpo variem de pessoa para pessoa. 
+
+Com a ajuda de disciplinas como a psicofisiologia ou a psiconeuroimunologia pretende-se fazer a caracterização das emoções que permitam treinar algoritmos que identifiquem essas emoções e que assim auxiliem sistemas a tomar respostas adequadas às emoções identificadas. 
+
+O desafio é o de criar um sistema que reconheça, interprete, processe ou simule afectos humanos. Esta computação afectiva procurará ser uma ajuda perante diferentes estados emocionais. Podemos imaginar uma robot que seja de facto uma companhia para os humanos e um prestador de cuidados emocionais.
+A criação de um sistema como descrito está sujeito, não só, a grandes desafios tecnológicos (como sejam: a monitorização, armazenamento, processamento, data mining e machine learning) mas também desafios éticos.  Com a identificação de emoções identificam-se também preferências e consequentemente surge a possibilidade de manipular essas preferências.
+
+No campo da saúde, a chamada *‘emotional analytics’* permite prever diagnósticos perante a identificação de emoções e consequentemente actuar preventivamente minimizando danos mais graves. Em campos como a saúde mental ou a saúde geriátrica a correcta classificação das emoções dos doentes é a chave para prestar os melhores cuidados de saúde.
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

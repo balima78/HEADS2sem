@@ -1,0 +1,38 @@
+# LEARN {#learn}
+
+*Macine Learning*
+
+**Conteúdos programáticos**
+
+O processo de extração de conhecimento de dados
+
+- Compreensão do negócio
+- Compreensão dos dados
+- Pré-processamento de dados
+- Modelação de dados
+- Avaliação de modelos de extração de conhecimento de dados
+- Implantação prática dos resultados de modelação
+
+Aprendizagem automática
+
+- Aprender conceitos a partir de dados
+- Processos indutivos vs processos dedutivos
+- Viés indutivo
+- Validação de modelos
+- Medidas de erro e processos de estimação
+
+Aprendizagem supervisionada
+
+- Árvores de decisão
+- Redes Bayesianas
+- Redes neuronais
+- Deep learning e análise de grandes bases de dados
+
+Aprendizagem não supervisionada
+
+- Análise de clusters
+- Deteção de casos extremos e anomalias
+- Associação e análise de padrões frequentes
+- Interpretação de grandes bases de dados
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

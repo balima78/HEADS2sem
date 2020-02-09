@@ -1,0 +1,9 @@
+# TOP.HIDA {#top.hida}
+
+*Tópicos avançados em HIDA*
+
+**Conteúdos programáticos**
+
+Os conteúdos abrangerão as diversas áreas da análise inteligente de dados, nomeadamente metodologias de visualização, pré-processamento, exploração e classificação de dados, proporcionando também a expansão dos conteúdos de outras UC relacionadas. A escolha dos tópicos será feita em cada edição desta unidade curricular, tendo em consideração não só o perfil e interesses dos alunos, como também os tópicos que no momento se considerem ser os mais relevantes na área.
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

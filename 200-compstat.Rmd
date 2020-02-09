@@ -1,0 +1,42 @@
+# COMPSTAT {#compstat}
+
+*Estatística Computacional*
+
+
+**Conteúdos programáticos**
+
+Estatística computacional
+
+- Porque usar computação em estatística?
+- Ferramentas e software para estatística computacional
+- Estatística computacional utilizando grandes infra-estruturas de dados
+
+Sinopses de dados
+
+- Estatísticas suficientes
+- Histogramas
+- Micro-Clusters
+- Fading Statistics
+
+Estimativas de densidade
+
+- Máxima verosimilhança
+- Expectation-Maximization
+- Kernel Estimation
+
+Estimativas e Simulação
+
+- Métodos Jackknife
+- Validação cruzada
+- Geração de números aleatórios
+- Métodos de Monte Carlo
+- Métodos de Bootstrap
+
+Análise numérica
+
+- Visualização de dados complexos
+- Análise de componentes principais
+- Bivariate smoothing
+- Splines
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
