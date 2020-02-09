@@ -1,0 +1,173 @@
+## Lection 1
+
+2020-02-04
+
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = T, message = T, warning = F, error = T)
+
+```
+
+
+This exercise was done as described by: https://machinelearningmastery.com/machine-learning-in-r-step-by-step/
+
+but using a data set from:
+https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Coimbra#
+
+Read the data
+```{r}
+dataset <- read.csv("2.UploadedData/dataR2.csv")
+```
+
+Factor variable *Classification*
+```{r}
+dataset$Classification<-as.factor(dataset$Classification)
+```
+
+**NOTE**: in order to use the caret packages in all its' capabilities you must do `install.packages("caret", dependencies = T)`
+
+create a validation dataset and use the remaing for training
+```{r}
+library(caret)
+
+# create a list of 80% of the rows in the original dataset we can use for training
+validation_index <- createDataPartition(dataset$Classification, p=0.80, list=FALSE)
+# select 20% of the data for validation
+validation <- dataset[-validation_index,]
+# use the remaining 80% of data to training and testing the models
+dataset <- dataset[validation_index,]
+```
+
+dimensions of the new dataset
+```{r}
+dim(dataset)
+```
+
+list types for each attribute
+```{r}
+sapply(dataset, class)
+```
+
+take a peek at the first 5 rows of the data
+```{r}
+head(dataset)
+```
+
+list the levels for the class
+```{r}
+levels(dataset$Classification)
+```
+
+summarize the class distribution
+```{r}
+percentage <- prop.table(table(dataset$Classification)) * 100
+cbind(freq=table(dataset$Classification), percentage=percentage)
+```
+
+summarize attribute distributions
+```{r}
+summary(dataset)
+```
+
+split input and output
+```{r}
+x <- dataset[,1:9]
+y <- dataset[,10]
+```
+
+boxplot for each attribute on one image
+```{r}
+par(mfrow=c(2,5))
+for(i in 1:9) {
+  boxplot(x[,i], main=names(dataset)[i])
+}
+```
+
+barplot for class breakdown
+```{r}
+par(mfrow=c(1,1))
+
+plot(y)
+```
+
+scatterplot matrix
+```{r}
+featurePlot(x=x, y=y, plot="ellipse")
+```
+
+box and whisker plots for each attribute
+```{r}
+featurePlot(x=x, y=y, plot="box")
+```
+
+density plots for each attribute by class value
+```{r}
+scales <- list(x=list(relation="free"), y=list(relation="free"))
+featurePlot(x=x, y=y, plot="density", scales=scales)
+```
+
+Run algorithms using 10-fold cross validation
+```{r}
+control <- trainControl(method="cv", number=10)
+metric <- "Accuracy"
+```
+
+a) linear algorithms
+```{r}
+set.seed(7)
+fit.lda <- train(Classification~., data=dataset, method="lda", metric=metric, trControl=control)
+```
+
+
+b) nonlinear algorithms
+CART
+```{r}
+set.seed(7)
+fit.cart <- train(Classification~., data=dataset, method="rpart", metric=metric, trControl=control)
+```
+ 
+kNN
+```{r}
+set.seed(7)
+fit.knn <- train(Classification~., data=dataset, method="knn", metric=metric, trControl=control)
+```
+
+c) advanced algorithms
+SVM
+```{r}
+set.seed(7)
+fit.svm <- train(Classification~., data=dataset, method="svmRadial", metric=metric, trControl=control)
+```
+
+Random Forest
+```{r}
+set.seed(7)
+fit.rf <- train(Classification~., data=dataset, method="rf", metric=metric, trControl=control)
+```
+
+summarize accuracy of models
+```{r}
+results <- resamples(list(lda=fit.lda, cart=fit.cart, knn=fit.knn, svm=fit.svm, rf=fit.rf))
+summary(results)
+```
+
+compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+summarize Best Model
+```{r}
+print(fit.rf)
+```
+
+estimate skill of LDA on the validation dataset
+```{r}
+predictions <- predict(fit.rf, validation)
+confusionMatrix(predictions, validation$Classification)
+```
+
+In this post you discovered step-by-step how to complete your first machine learning project in R
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

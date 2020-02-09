@@ -1,0 +1,160 @@
+## Lection 1
+
+2020-02-03
+
+**Exercises Solutions** (just copied teacher's solutions)
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = T, message = T, warning = F, error = T)
+
+```
+
+1. Open the database Anesthesia-BD.csv
+```{r}
+data = read.csv("2.UploadedData/Anesthesia-BD.csv") ###load dat
+
+str(data) ###see data structure
+```
+
+Factor variable AdvEvent
+```{r}
+data$AdvEvent <- factor(data$AdvEvent, levels = c(0,1),labels=c("No","Yes"))
+```
+
+2. For the columns which contain numeric values, create a new summary table in which the rows are the mean, the standard deviation, and the median of each of the numeric columns.
+
+```{r}
+T <- sapply(data[,sapply(data,is.numeric)],function(x){
+  return(rbind(mean(x,na.rm = T),sd(x,na.rm = T),median(x,na.rm = T)))
+  }
+  )
+
+rownames(T) = c("Mean","SD","Median")
+
+T
+```
+
+3. Considering only the subjects who had CAB or Valve surgery, how many had adverse events? How many males and females in the two groups (having or not having adverse events)? (count and percentage)
+
+```{r}
+# create an index with the observation that comply with the conditions
+ind = which(data$TypeSurgery=="CAB" | data$TypeSurgery=="Valve" )
+
+# table these data counts
+table(data[ind,"AdvEvent"])
+
+```
+
+```{r}
+# and frequencies
+prop.table(table(data[ind,"AdvEvent"]))
+```
+
+```{r}
+# now by gender
+table(data[ind,"Gender"],data[ind,"AdvEvent"])
+```
+
+```{r}
+# and their frequencies
+prop.table(table(data[ind,"Gender"],data[ind,"AdvEvent"]))
+```
+
+4.Merge the two datasets (Anesthesia-BD.csv and Anesthesia-BD2.csv)
+by the subject identification number.
+```{r}
+data2 = read.csv("2.UploadedData/Anesthesia-BD2.csv") ###load data Anesthesia-BD2.csv
+
+# I had to rename the first column, I don't know why
+names(data2)[1]<-"SubjectID"
+
+str(data2)
+```
+
+A) The merge must be such that only the common subjects should be present in the final database (natural join).
+```{r}
+Ma = merge(data,data2,by.x = "Subject",by.y="SubjectID",all = F)
+
+dim(Ma)
+```
+
+B) The merge must be such that if some subject is not in one of the databases, the subject should be in the database, and missing information must be not available (full outer join).
+```{r}
+Mb = merge(data,data2,by.x = "Subject",by.y="SubjectID",all = T)
+
+dim(Mb)
+```
+
+Consider the following statement: “For people without diabetes, the normal range for the hemoglobin A1c level is between 4% and 5.6%. Hemoglobin A1c levels between 5.7% and 6.4% mean you have a higher chance of getting diabetes. Levels of 6.5% or higher mean you have diabetes.”
+
+5. Create a new variable with three factors (normal, prediabetes, and diabetes), taking into consideration the values the A1c levels. Compare the results obtained with the variable Diabetes (assuming that 1 means to have diabetes and 0 no diabetes).
+```{r}
+diab <- ifelse(Mb$RFLastA1cLevel<5.7,0,ifelse(Mb$RFLastA1cLevel<6.4,1,2))
+
+Mb$Diabetes2 <- factor(x = diab,
+                       levels = 0:2, 
+                       labels =c("Normal","PreDiabetes","Diabetes"))
+
+Mb$Diabetes <- factor(Mb$Diabetes,
+                      levels=0:1,
+                      labels=c("Normal","Diabetes"))
+
+table(Mb$Diabetes,Mb$Diabetes2)
+```
+
+6. Create a table with the comparison between the groups having or not having
+adverse events for all the variables available in the combined database. Use the
+appropriate measures for each type of variable.
+```{r}
+str(Mb)
+```
+
+```{r}
+Mb$Hypertension <- factor(Mb$Hypertension,
+                          levels=0:1,
+                          labels=c("No","Yes"))
+
+Mb$CHF <- factor(Mb$CHF,
+                 levels=0:1,
+                 labels=c("No","Yes"))
+
+Mb$Subject <- as.character(Mb$Subject)
+
+#windows()
+
+par(mfrow=c(2,3))
+
+for (i in which(sapply(Mb,is.numeric))){
+hist(Mb[,i],xlab=colnames(Mb)[i])
+}
+
+par(mfrow=c(1,1))
+```
+
+```{r}
+table <- by(Mb[,which(sapply(Mb,is.numeric))],
+            INDICES = Mb$AdvEvent,
+            FUN = function(x) apply(x,2,quantile,na.rm=T))
+
+table
+```
+
+```{r}
+table$pvalue <- apply(Mb[,which(sapply(Mb,is.numeric))],2,
+                      function(x)
+                        wilcox.test(x[which(Mb$AdvEvent=="No")],x[which(Mb$AdvEvent=="Yes")])$p.value)
+
+table
+```
+
+```{r}
+Mb$Euroscore<-as.character(Mb$Euroscore)
+
+table2 <- by(Mb[,which(sapply(Mb,is.factor))], 
+             INDICES = Mb$AdvEvent, 
+             FUN = function(x){sapply(x,table)})
+
+table2
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
