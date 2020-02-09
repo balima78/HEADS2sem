@@ -6,16 +6,16 @@
 
 Inferência Bayesiana:
 
-– Introdução à inferência Bayesiana: Probabilidade e parâmetros; Inferência frequentista clássica versus inferência Bayesiana; Fundamentos da inferência Bayesiana; Distribuições a priori; Distribuições a posteriori; Distribuições preditivas a posteriori; Modelos Bayesianos básicos; Modelação hierárquica;
+- Introdução à inferência Bayesiana: Probabilidade e parâmetros; Inferência frequentista clássica versus inferência Bayesiana; Fundamentos da inferência Bayesiana; Distribuições a priori; Distribuições a posteriori; Distribuições preditivas a posteriori; Modelos Bayesianos básicos; Modelação hierárquica;
 
 Avaliação dos modelos.
 
-– Construção de modelos de inferência Bayesiana: Inferência Bayesiana com distribuições a priori conjugadas; Computação Bayesiana – métodos de Monte Carlo, métodos de Monte Carlo via Cadeias de Markov (MCMC), algoritmo de Metropolis-Hastings, algoritmo de Gibbs e outros algoritmos relacionados; Métodos de avaliação da qualidade dos modelos (escolha de valores iniciais, convergência, eficiência e precisão); Métodos de selecção de modelos; Aplicação dos métodos de inferência Bayesiana a problemas mais comuns de inferência estatística – modelos de regressão, análise de dados categóricos e modelos de síntese de evidência.
+- Construção de modelos de inferência Bayesiana: Inferência Bayesiana com distribuições a priori conjugadas; Computação Bayesiana – métodos de Monte Carlo, métodos de Monte Carlo via Cadeias de Markov (MCMC), algoritmo de Metropolis-Hastings, algoritmo de Gibbs e outros algoritmos relacionados; Métodos de avaliação da qualidade dos modelos (escolha de valores iniciais, convergência, eficiência e precisão); Métodos de selecção de modelos; Aplicação dos métodos de inferência Bayesiana a problemas mais comuns de inferência estatística – modelos de regressão, análise de dados categóricos e modelos de síntese de evidência.
 
 Redes Bayesianas:
 
-– Introdução às Redes Bayesianas: Motivação e exemplos; Probabilidade e aplicações médicas; Modelos gráficos de probabilidade; Semântica e factorização nas redes Bayesianas.
+- Introdução às Redes Bayesianas: Motivação e exemplos; Probabilidade e aplicações médicas; Modelos gráficos de probabilidade; Semântica e factorização nas redes Bayesianas.
 
-– Construção de redes Bayesianas a partir de dados: Aprendizagem automática; Estimação de parâmetros de redes Bayesianas; Aprendizagem da estrutura de redes Bayesianas; Aprendizagem com dados incompletos.
+- Construção de redes Bayesianas a partir de dados: Aprendizagem automática; Estimação de parâmetros de redes Bayesianas; Aprendizagem da estrutura de redes Bayesianas; Aprendizagem com dados incompletos.
 
 <img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

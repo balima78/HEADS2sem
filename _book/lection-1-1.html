@@ -164,16 +164,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 1  48 23.50000      70   2.707 0.4674087  8.8071    9.702400  7.99585
 ## 2  83 20.69049      92   3.115 0.7068973  8.8438    5.429285  4.06405
 ## 3  82 23.12467      91   4.498 1.0096511 17.9393   22.432040  9.27715
-## 4  68 21.36752      77   3.226 0.6127249  9.8827    7.169560 12.76600
 ## 5  86 21.11111      92   3.549 0.8053864  6.6994    4.819240 10.57635
-## 7  89 22.70000      77   4.690 0.8907873  6.9640    5.589865 12.93610
-##      MCP.1 Classification
-## 1  417.114              1
-## 2  468.786              1
-## 3  554.697              1
-## 4  928.220              1
-## 5  773.920              1
-## 7 1256.083              1</code></pre>
+## 6  49 22.85446      92   3.226 0.7320869  6.8317   13.679750 10.31760
+## 8  76 23.80000     118   6.470 1.8832013  4.3110   13.251320  5.10420
+##     MCP.1 Classification
+## 1 417.114              1
+## 2 468.786              1
+## 3 554.697              1
+## 5 773.920              1
+## 6 530.410              1
+## 8 280.694              1</code></pre>
 <p>list the levels for the class</p>
 <pre><code>## [1] &quot;1&quot; &quot;2&quot;</code></pre>
 <p>summarize the class distribution</p>
@@ -182,25 +182,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 2   52   55.31915</code></pre>
 <p>summarize attribute distributions</p>
 <pre><code>##       Age             BMI           Glucose          Insulin      
-##  Min.   :25.00   Min.   :18.37   Min.   : 60.00   Min.   : 2.432  
-##  1st Qu.:45.00   1st Qu.:22.87   1st Qu.: 85.00   1st Qu.: 4.367  
-##  Median :56.00   Median :27.66   Median : 93.00   Median : 6.335  
-##  Mean   :57.73   Mean   :27.56   Mean   : 98.68   Mean   :10.551  
-##  3rd Qu.:70.50   3rd Qu.:31.25   3rd Qu.:103.00   3rd Qu.:12.269  
-##  Max.   :89.00   Max.   :38.58   Max.   :201.00   Max.   :58.460  
+##  Min.   :29.00   Min.   :18.37   Min.   : 60.00   Min.   : 2.432  
+##  1st Qu.:45.00   1st Qu.:23.13   1st Qu.: 85.25   1st Qu.: 4.174  
+##  Median :56.50   Median :27.25   Median : 92.00   Median : 5.796  
+##  Mean   :57.85   Mean   :27.42   Mean   : 97.12   Mean   :10.396  
+##  3rd Qu.:71.00   3rd Qu.:30.90   3rd Qu.:103.00   3rd Qu.:11.670  
+##  Max.   :86.00   Max.   :38.58   Max.   :201.00   Max.   :58.460  
 ##       HOMA             Leptin        Adiponectin        Resistin     
 ##  Min.   : 0.4674   Min.   : 4.311   Min.   : 1.656   Min.   : 3.210  
-##  1st Qu.: 0.9201   1st Qu.:11.478   1st Qu.: 5.438   1st Qu.: 6.763  
-##  Median : 1.4194   Median :19.579   Median : 8.128   Median :11.230  
-##  Mean   : 2.9080   Mean   :27.434   Mean   : 9.495   Mean   :15.250  
-##  3rd Qu.: 2.9926   3rd Qu.:38.871   3rd Qu.:10.962   3rd Qu.:19.186  
+##  1st Qu.: 0.8357   1st Qu.:12.466   1st Qu.: 5.438   1st Qu.: 6.703  
+##  Median : 1.3234   Median :20.652   Median : 8.184   Median :10.476  
+##  Mean   : 2.8241   Mean   :26.723   Mean   : 9.734   Mean   :14.466  
+##  3rd Qu.: 2.9754   3rd Qu.:36.890   3rd Qu.:11.182   3rd Qu.:17.347  
 ##  Max.   :25.0503   Max.   :90.280   Max.   :38.040   Max.   :82.100  
 ##      MCP.1         Classification
 ##  Min.   :  45.84   1:42          
-##  1st Qu.: 264.68   2:52          
-##  Median : 478.62                 
-##  Mean   : 532.89                 
-##  3rd Qu.: 710.92                 
+##  1st Qu.: 257.88   2:52          
+##  Median : 458.79                 
+##  Mean   : 515.39                 
+##  3rd Qu.: 691.07                 
 ##  Max.   :1698.44</code></pre>
 <p>split input and output</p>
 <p>boxplot for each attribute on one image <img src="heads2sem_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
@@ -228,19 +228,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 
 ## Accuracy 
 ##           Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
-## lda  0.4444444 0.6444444 0.7777778 0.7453535 0.8888889 0.9090909    0
-## cart 0.5555556 0.6750000 0.7777778 0.7429293 0.7944444 0.8888889    0
-## knn  0.3333333 0.4583333 0.5505051 0.5645455 0.6500000 0.8888889    0
-## svm  0.5555556 0.7777778 0.7888889 0.7953535 0.8666667 0.9090909    0
-## rf   0.6000000 0.7777778 0.7979798 0.7984848 0.8888889 0.9000000    0
+## lda  0.4000000 0.5916667 0.7777778 0.7362626 0.8712121 1.0000000    0
+## cart 0.2222222 0.5138889 0.6333333 0.6049495 0.7121212 0.8888889    0
+## knn  0.3333333 0.5138889 0.6111111 0.5929293 0.6666667 0.8181818    0
+## svm  0.4000000 0.5666667 0.7777778 0.7333333 0.8611111 1.0000000    0
+## rf   0.5555556 0.6666667 0.6833333 0.7340404 0.8080808 1.0000000    0
 ## 
 ## Kappa 
-##             Min.     1st Qu.     Median      Mean   3rd Qu.      Max. NA&#39;s
-## lda  -0.09756098  0.26250000 0.56071429 0.4884300 0.7776735 0.8135593    0
-## cart  0.10000000  0.35609756 0.52631579 0.4771456 0.5750000 0.7692308    0
-## knn  -0.42105263 -0.07317073 0.08389831 0.1042530 0.2527027 0.7692308    0
-## svm   0.10000000  0.55000000 0.58571429 0.5876407 0.7307692 0.8135593    0
-## rf    0.20000000  0.53223684 0.60238095 0.5907719 0.7692308 0.8000000    0</code></pre>
+##            Min.    1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## lda  -0.3636364 0.20714286 0.5263158 0.4526732 0.7382134 1.0000000    0
+## cart -0.6153846 0.01315789 0.1993007 0.1853771 0.4372856 0.7692308    0
+## knn  -0.3500000 0.01315789 0.2252747 0.1723948 0.3414634 0.6333333    0
+## svm  -0.2500000 0.15714286 0.5263158 0.4586148 0.7197802 1.0000000    0
+## rf    0.1000000 0.27962578 0.3446448 0.4542901 0.6213710 1.0000000    0</code></pre>
 <p>compare accuracy of models <img src="heads2sem_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>summarize Best Model</p>
 <pre><code>## Random Forest 
@@ -255,37 +255,37 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy   Kappa    
-##   2     0.7784848  0.5499701
-##   5     0.7773737  0.5508384
-##   9     0.7984848  0.5907719
+##   2     0.7340404  0.4542901
+##   5     0.7118182  0.4082955
+##   9     0.7329293  0.4549273
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final value used for the model was mtry = 9.</code></pre>
+## The final value used for the model was mtry = 2.</code></pre>
 <p>estimate skill of LDA on the validation dataset</p>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction 1 2
-##          1 6 3
-##          2 4 9
+## Prediction  1  2
+##          1  6  2
+##          2  4 10
 ##                                           
-##                Accuracy : 0.6818          
-##                  95% CI : (0.4513, 0.8614)
+##                Accuracy : 0.7273          
+##                  95% CI : (0.4978, 0.8927)
 ##     No Information Rate : 0.5455          
-##     P-Value [Acc &gt; NIR] : 0.1419          
+##     P-Value [Acc &gt; NIR] : 0.06495         
 ##                                           
-##                   Kappa : 0.3529          
+##                   Kappa : 0.4407          
 ##                                           
-##  Mcnemar&#39;s Test P-Value : 1.0000          
+##  Mcnemar&#39;s Test P-Value : 0.68309         
 ##                                           
 ##             Sensitivity : 0.6000          
-##             Specificity : 0.7500          
-##          Pos Pred Value : 0.6667          
-##          Neg Pred Value : 0.6923          
+##             Specificity : 0.8333          
+##          Pos Pred Value : 0.7500          
+##          Neg Pred Value : 0.7143          
 ##              Prevalence : 0.4545          
 ##          Detection Rate : 0.2727          
-##    Detection Prevalence : 0.4091          
-##       Balanced Accuracy : 0.6750          
+##    Detection Prevalence : 0.3636          
+##       Balanced Accuracy : 0.7167          
 ##                                           
 ##        &#39;Positive&#39; Class : 1               
 ## </code></pre>

@@ -1,18 +1,3 @@
-## Seminar 1 {#top.hida01}
-
-**Physiological signal processing in affective computing** by Susana Brás
-
-Susana Brás is Postdoctoral researcher at Institute of Electronics and Telematics 
-Engineering of Aveiro (IEETA), University of Aveiro, Portugal. 
-At this moment, she is focused on ECG biometric identification, emotional 
-modulated environments and information extraction from large biomedical databases. 
-Before, she was a PhD student at Abel Salazar Biomedical Sciences Institute, at 
-University of Porto, Portugal. Her thesis was focused on automation in anesthesia, 
-basically the drug distribution and effect (alterations in the brain electrical activity)
- were studied, modeled and a controller was presented for the hypnotic effect. 
-Her background is in Applied Mathematics, from the Sciences Faculty, at University of 
-Porto.
-
 ### Bruno Lima
 Podemos definir sinais como dados indexados a uma variável temporal e que podem ser oriundos de campos tão diversos como a biomedicina ou as comunicações sem fios. 
 Neste seminário foi-nos apresentado o conceito de computação afectiva que consiste em identificar emoções a partir do processamento de sinais fisiológicos. O conceito de emoção é de difícil definição ainda que a caracterização das emoções seja algo mais perceptível. Conseguimos reconhecer emoções através de respostas fisiológicas como sejam o batimento cardíaco, a expressão facial, a tensão, o riso, a rubescência ou a sudação embora estas reacções do corpo variem de pessoa para pessoa. 

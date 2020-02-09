@@ -1,0 +1,19 @@
+## Seminar 1 {#seminar1}
+
+2020-02-04
+
+**Physiological signal processing in affective computing** by Susana Brás
+
+Susana Brás is Postdoctoral researcher at Institute of Electronics and Telematics 
+Engineering of Aveiro (IEETA), University of Aveiro, Portugal. 
+At this moment, she is focused on ECG biometric identification, emotional 
+modulated environments and information extraction from large biomedical databases. 
+Before, she was a PhD student at Abel Salazar Biomedical Sciences Institute, at 
+University of Porto, Portugal. Her thesis was focused on automation in anesthesia, 
+basically the drug distribution and effect (alterations in the brain electrical activity) were studied, modeled and a controller was presented for the hypnotic effect. 
+Her background is in Applied Mathematics, from the Sciences Faculty, at University of 
+Porto.
+
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
