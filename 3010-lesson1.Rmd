@@ -1,0 +1,125 @@
+## Lesson 1
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+**exercise 1**
+The BMD_weight.sav database contains 190 densitometry records. 
+
+```{r}
+library(foreign)
+
+data1 <- read.spss(file="2.UploadedData/BMD_weight_new.sav", use.missing=TRUE)
+	
+```
+
+a) Calculate the body mass index.	
+```{r}
+data1$IMC <- ((data1$peso)/((data1$altura)/100)^2) 
+```
+
+b) Calculate the mean and standard deviation of total bone mineral density
+```{r}
+mean(data1$IMC)
+sd(data1$IMC)
+```
+
+
+c) Analyze the relationship between bone mineral density and BMI using linear regression.
+```{r}
+plot(x = data1$IMC, y=data1$bmdtot)
+cor.test(data1$IMC, data1$bmdtot, method = "pearson")
+regressao <- lm(formula = bmdtot ~ IMC, data=data1)
+summary(regressao)
+```
+
+d) Compare the BMDTOT average according to the type of medication, adjusting for BMI and age.
+```{r}
+regressaoM <- lm(formula = bmdtot ~ Medication + IMC + idade, data=data1)
+```
+
+e) Check the assumptions for the model used in d).
+```{r}
+plot(regressaoM$fitted.values, regressaoM$residuals)
+hist(regressaoM$residuals)
+```
+
+or we can plot everything
+```{r}
+plot(regressaoM)
+```
+
+
+**exercise 2**
+The data in the score2013.sav file refer to 1768 admissions to pediatric intensive
+care units in several Portuguese hospital units.
+
+```{r}
+data2 <- read.spss(file="2.UploadedData/score2013.sav", use.missing=TRUE)
+```
+
+a) The minimum systolic tension of the first 12 hours of hospitalization and mechanical ventilation at some point in the first hour of hospitalization are potential predictors of mortality in the ICU. 
+
+```{r}
+summary(data2)
+
+```
+
+Study the individual association of each of them with mortality first. 
+```{r}
+data2$TAS12 <- as.numeric(factor(data2$TAS12))
+
+logistic1 <- glm(outcome ~ TAS12, data = data2, family = "binomial")
+logistic2 <- glm(outcome ~ ventil, data = data2, family = "binomial")
+
+summary(logistic1)
+summary(logistic2)
+
+exp(cbind(OR = coef(logistic1), confint(logistic1)))
+exp(cbind(OR = coef(logistic2), confint(logistic2)))
+```
+
+Then test the interaction of these two variables and interpret the results.	
+```{r}
+logistic3 <- glm(outcome ~ ventil + TAS12 + ventil * TAS12, data = data2, family = "binomial")
+
+summary(logistic3)
+
+exp(cbind(OR = coef(logistic3), confint(logistic3)))
+```
+
+b) Using all the variables in the database, build a model for mortality and study the model's discrimination and calibration. 
+
+accuracy
+
+```{r}
+pred<-predict(logistic3, type = "response")
+
+pred01<-ifelse(pred<0.5, 0, 1)
+
+
+table(pred01,data2$outcome)
+
+acc<-(1624+13)/(1624+121+10+13)
+
+acc
+```
+
+AUC
+```{r}
+library(pROC)
+g <- roc(outcome ~ pred, data = data2)
+plot(g)
+```
+
+
+Goodness of fit test
+
+```{r}
+library(ResourceSelection)
+
+hoslem.test(data2$outcome, pred01)
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

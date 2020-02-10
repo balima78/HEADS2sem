@@ -1,0 +1,63 @@
+## Lesson 2
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+
+```{r}
+library(foreign)
+
+aula2 <- read.spss(file="2.UploadedData/UCIP_PRISM HEADS.sav", use.missing=TRUE)
+	
+summary(aula2)
+
+```
+
+
+1. Make a histogram of the length of stay
+```{r}
+
+hist(aula2$tempoint)
+```
+
+2.Make a linear regression model with the dependent variable length of stay (tempoint), and the intensive care unit (P1) and PRISM variables as independent variables.
+```{r}
+regressao <- lm(formula = tempoint ~ P1 + PRISM, data=aula2)
+summary(regressao)
+```
+
+3.Check that the model assumptions in question b) are not satisfied.
+```{r}
+plot(regressao$fitted.values, regressao$residuals)
+hist(regressao$residuals)
+```
+
+or you can plot everything
+```{r}
+plot(regressao)
+```
+
+4.Transform the length of stay variable into the Neperian logarithm of length of stay (tempoint -> logtempoint).
+```{r}
+aula2$logtempoint <- log(aula2$tempoint)
+```
+
+5.Analyze the differences in the logarithm of length of stay between the 3 units, adjusting to the severity of the patients, ie, remake the model in question b) but with the logarithm of length of stay as dependent variable.
+```{r}
+logregressao <- lm(formula = logtempoint ~ P1 + PRISM, data=aula2)
+summary(logregressao)
+```
+
+6.Check that the model assumptions in question e) are satisfied.
+```{r}
+plot(logregressao$fitted.values, logregressao$residuals)
+hist(logregressao$residuals)
+```
+
+or you can plot everything
+```{r}
+plot(logregressao)
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

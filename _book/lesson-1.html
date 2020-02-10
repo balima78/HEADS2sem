@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-09" />
+<meta name="date" content="2020-02-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,41 +53,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -112,9 +137,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="3.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
-<li class="chapter" data-level="4.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
@@ -150,9 +178,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: decimal">
 <li>Open the database Anesthesia-BD.csv</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/Anesthesia-BD.csv&quot;</span>) ###load dat
-
-<span class="kw">str</span>(data) ###see data structure</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/Anesthesia-BD.csv&quot;</span>) <span class="co">###load dat</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">str</span>(data) <span class="co">###see data structure</span></a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    387 obs. of  9 variables:
 ##  $ Subject         : Factor w/ 387 levels &quot;Sbj001&quot;,&quot;Sbj002&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ Gender          : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 2 1 2 2 2 2 2 2 1 ...
@@ -164,18 +192,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  $ Cross_Clamp_Time: int  83 67 83 51 63 114 94 138 42 172 ...
 ##  $ AdvEvent        : int  0 0 0 0 1 0 0 0 0 0 ...</code></pre>
 <p>Factor variable AdvEvent</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data<span class="op">$</span>AdvEvent &lt;-<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>AdvEvent, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">data<span class="op">$</span>AdvEvent &lt;-<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>AdvEvent, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>For the columns which contain numeric values, create a new summary table in which the rows are the mean, the standard deviation, and the median of each of the numeric columns.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T &lt;-<span class="st"> </span><span class="kw">sapply</span>(data[,<span class="kw">sapply</span>(data,is.numeric)],<span class="cf">function</span>(x){
-  <span class="kw">return</span>(<span class="kw">rbind</span>(<span class="kw">mean</span>(x,<span class="dt">na.rm =</span> T),<span class="kw">sd</span>(x,<span class="dt">na.rm =</span> T),<span class="kw">median</span>(x,<span class="dt">na.rm =</span> T)))
-  }
-  )
-
-<span class="kw">rownames</span>(T) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>,<span class="st">&quot;SD&quot;</span>,<span class="st">&quot;Median&quot;</span>)
-
-T</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">T &lt;-<span class="st"> </span><span class="kw">sapply</span>(data[,<span class="kw">sapply</span>(data,is.numeric)],<span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">return</span>(<span class="kw">rbind</span>(<span class="kw">mean</span>(x,<span class="dt">na.rm =</span> T),<span class="kw">sd</span>(x,<span class="dt">na.rm =</span> T),<span class="kw">median</span>(x,<span class="dt">na.rm =</span> T)))</a>
+<a class="sourceLine" id="cb7-3" title="3">  }</a>
+<a class="sourceLine" id="cb7-4" title="4">  )</a>
+<a class="sourceLine" id="cb7-5" title="5"></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="kw">rownames</span>(T) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>,<span class="st">&quot;SD&quot;</span>,<span class="st">&quot;Median&quot;</span>)</a>
+<a class="sourceLine" id="cb7-7" title="7"></a>
+<a class="sourceLine" id="cb7-8" title="8">T</a></code></pre></div>
 <pre><code>##             Age Diastolic  Systolic Cross_Clamp_Time
 ## Mean   67.27390  60.93076 132.04705         72.00521
 ## SD     11.25574  11.35387  21.22864         32.04680
@@ -183,38 +211,39 @@ T</code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Considering only the subjects who had CAB or Valve surgery, how many had adverse events? How many males and females in the two groups (having or not having adverse events)? (count and percentage)</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an index with the observation that comply with the conditions</span>
-ind =<span class="st"> </span><span class="kw">which</span>(data<span class="op">$</span>TypeSurgery<span class="op">==</span><span class="st">&quot;CAB&quot;</span> <span class="op">|</span><span class="st"> </span>data<span class="op">$</span>TypeSurgery<span class="op">==</span><span class="st">&quot;Valve&quot;</span> )
-
-<span class="co"># table these data counts</span>
-<span class="kw">table</span>(data[ind,<span class="st">&quot;AdvEvent&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># create an index with the observation that comply with the conditions</span></a>
+<a class="sourceLine" id="cb9-2" title="2">ind =<span class="st"> </span><span class="kw">which</span>(data<span class="op">$</span>TypeSurgery<span class="op">==</span><span class="st">&quot;CAB&quot;</span> <span class="op">|</span><span class="st"> </span>data<span class="op">$</span>TypeSurgery<span class="op">==</span><span class="st">&quot;Valve&quot;</span> )</a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co"># table these data counts</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">table</span>(data[ind,<span class="st">&quot;AdvEvent&quot;</span>])</a></code></pre></div>
 <pre><code>## 
 ##  No Yes 
 ## 231  80</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># and frequencies</span>
-<span class="kw">prop.table</span>(<span class="kw">table</span>(data[ind,<span class="st">&quot;AdvEvent&quot;</span>]))</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># and frequencies</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">prop.table</span>(<span class="kw">table</span>(data[ind,<span class="st">&quot;AdvEvent&quot;</span>]))</a></code></pre></div>
 <pre><code>## 
 ##        No       Yes 
 ## 0.7427653 0.2572347</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># now by gender</span>
-<span class="kw">table</span>(data[ind,<span class="st">&quot;Gender&quot;</span>],data[ind,<span class="st">&quot;AdvEvent&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># now by gender</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">table</span>(data[ind,<span class="st">&quot;Gender&quot;</span>],data[ind,<span class="st">&quot;AdvEvent&quot;</span>])</a></code></pre></div>
 <pre><code>##         
 ##           No Yes
 ##   Female  60  21
 ##   Male   171  59</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># and their frequencies</span>
-<span class="kw">prop.table</span>(<span class="kw">table</span>(data[ind,<span class="st">&quot;Gender&quot;</span>],data[ind,<span class="st">&quot;AdvEvent&quot;</span>]))</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># and their frequencies</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">prop.table</span>(<span class="kw">table</span>(data[ind,<span class="st">&quot;Gender&quot;</span>],data[ind,<span class="st">&quot;AdvEvent&quot;</span>]))</a></code></pre></div>
 <pre><code>##         
 ##                  No        Yes
 ##   Female 0.19292605 0.06752412
 ##   Male   0.54983923 0.18971061</code></pre>
-<p>4.Merge the two datasets (Anesthesia-BD.csv and Anesthesia-BD2.csv) by the subject identification number.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data2 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/Anesthesia-BD2.csv&quot;</span>) ###load data Anesthesia-BD2.csv
-
-<span class="co"># I had to rename the first column, I don&#39;t know why</span>
-<span class="kw">names</span>(data2)[<span class="dv">1</span>]&lt;-<span class="st">&quot;SubjectID&quot;</span>
-
-<span class="kw">str</span>(data2)</code></pre></div>
+<p>4.Merge the two datasets (Anesthesia-BD.csv and Anesthesia-BD2.csv)
+by the subject identification number.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">data2 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/Anesthesia-BD2.csv&quot;</span>) <span class="co">###load data Anesthesia-BD2.csv</span></a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co"># I had to rename the first column, I don&#39;t know why</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="kw">names</span>(data2)[<span class="dv">1</span>]&lt;-<span class="st">&quot;SubjectID&quot;</span></a>
+<a class="sourceLine" id="cb17-5" title="5"></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="kw">str</span>(data2)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    363 obs. of  7 variables:
 ##  $ SubjectID         : Factor w/ 363 levels &quot;Sbj001&quot;,&quot;Sbj002&quot;,..: 3 25 30 32 36 39 46 56 60 63 ...
 ##  $ Diabetes          : int  0 0 1 1 0 0 0 1 0 0 ...
@@ -226,40 +255,42 @@ ind =<span class="st"> </span><span class="kw">which</span>(data<span class="op"
 <ol style="list-style-type: upper-alpha">
 <li>The merge must be such that only the common subjects should be present in the final database (natural join).</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Ma =<span class="st"> </span><span class="kw">merge</span>(data,data2,<span class="dt">by.x =</span> <span class="st">&quot;Subject&quot;</span>,<span class="dt">by.y=</span><span class="st">&quot;SubjectID&quot;</span>,<span class="dt">all =</span> F)
-
-<span class="kw">dim</span>(Ma)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">Ma =<span class="st"> </span><span class="kw">merge</span>(data,data2,<span class="dt">by.x =</span> <span class="st">&quot;Subject&quot;</span>,<span class="dt">by.y=</span><span class="st">&quot;SubjectID&quot;</span>,<span class="dt">all =</span> F)</a>
+<a class="sourceLine" id="cb19-2" title="2"></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="kw">dim</span>(Ma)</a></code></pre></div>
 <pre><code>## [1] 363  15</code></pre>
 <ol start="2" style="list-style-type: upper-alpha">
 <li>The merge must be such that if some subject is not in one of the databases, the subject should be in the database, and missing information must be not available (full outer join).</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Mb =<span class="st"> </span><span class="kw">merge</span>(data,data2,<span class="dt">by.x =</span> <span class="st">&quot;Subject&quot;</span>,<span class="dt">by.y=</span><span class="st">&quot;SubjectID&quot;</span>,<span class="dt">all =</span> T)
-
-<span class="kw">dim</span>(Mb)</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">Mb =<span class="st"> </span><span class="kw">merge</span>(data,data2,<span class="dt">by.x =</span> <span class="st">&quot;Subject&quot;</span>,<span class="dt">by.y=</span><span class="st">&quot;SubjectID&quot;</span>,<span class="dt">all =</span> T)</a>
+<a class="sourceLine" id="cb21-2" title="2"></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="kw">dim</span>(Mb)</a></code></pre></div>
 <pre><code>## [1] 387  15</code></pre>
 <p>Consider the following statement: “For people without diabetes, the normal range for the hemoglobin A1c level is between 4% and 5.6%. Hemoglobin A1c levels between 5.7% and 6.4% mean you have a higher chance of getting diabetes. Levels of 6.5% or higher mean you have diabetes.”</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Create a new variable with three factors (normal, prediabetes, and diabetes), taking into consideration the values the A1c levels. Compare the results obtained with the variable Diabetes (assuming that 1 means to have diabetes and 0 no diabetes).</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diab &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Mb<span class="op">$</span>RFLastA1cLevel<span class="op">&lt;</span><span class="fl">5.7</span>,<span class="dv">0</span>,<span class="kw">ifelse</span>(Mb<span class="op">$</span>RFLastA1cLevel<span class="op">&lt;</span><span class="fl">6.4</span>,<span class="dv">1</span>,<span class="dv">2</span>))
-
-Mb<span class="op">$</span>Diabetes2 &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dt">x =</span> diab,
-                       <span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, 
-                       <span class="dt">labels =</span><span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>,<span class="st">&quot;PreDiabetes&quot;</span>,<span class="st">&quot;Diabetes&quot;</span>))
-
-Mb<span class="op">$</span>Diabetes &lt;-<span class="st"> </span><span class="kw">factor</span>(Mb<span class="op">$</span>Diabetes,
-                      <span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,
-                      <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>,<span class="st">&quot;Diabetes&quot;</span>))
-
-<span class="kw">table</span>(Mb<span class="op">$</span>Diabetes,Mb<span class="op">$</span>Diabetes2)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">diab &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Mb<span class="op">$</span>RFLastA1cLevel<span class="op">&lt;</span><span class="fl">5.7</span>,<span class="dv">0</span>,<span class="kw">ifelse</span>(Mb<span class="op">$</span>RFLastA1cLevel<span class="op">&lt;</span><span class="fl">6.4</span>,<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb23-2" title="2"></a>
+<a class="sourceLine" id="cb23-3" title="3">Mb<span class="op">$</span>Diabetes2 &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dt">x =</span> diab,</a>
+<a class="sourceLine" id="cb23-4" title="4">                       <span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb23-5" title="5">                       <span class="dt">labels =</span><span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>,<span class="st">&quot;PreDiabetes&quot;</span>,<span class="st">&quot;Diabetes&quot;</span>))</a>
+<a class="sourceLine" id="cb23-6" title="6"></a>
+<a class="sourceLine" id="cb23-7" title="7">Mb<span class="op">$</span>Diabetes &lt;-<span class="st"> </span><span class="kw">factor</span>(Mb<span class="op">$</span>Diabetes,</a>
+<a class="sourceLine" id="cb23-8" title="8">                      <span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb23-9" title="9">                      <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>,<span class="st">&quot;Diabetes&quot;</span>))</a>
+<a class="sourceLine" id="cb23-10" title="10"></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="kw">table</span>(Mb<span class="op">$</span>Diabetes,Mb<span class="op">$</span>Diabetes2)</a></code></pre></div>
 <pre><code>##           
 ##            Normal PreDiabetes Diabetes
 ##   Normal      120          99       11
 ##   Diabetes      7          35       83</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>Create a table with the comparison between the groups having or not having adverse events for all the variables available in the combined database. Use the appropriate measures for each type of variable.</li>
+<li>Create a table with the comparison between the groups having or not having
+adverse events for all the variables available in the combined database. Use the
+appropriate measures for each type of variable.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(Mb)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">str</span>(Mb)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    387 obs. of  16 variables:
 ##  $ Subject           : Factor w/ 387 levels &quot;Sbj001&quot;,&quot;Sbj002&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ Gender            : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 2 1 2 2 2 2 2 2 1 ...
@@ -277,31 +308,31 @@ Mb<span class="op">$</span>Diabetes &lt;-<span class="st"> </span><span class="k
 ##  $ CHF               : int  1 0 0 0 0 1 1 1 1 1 ...
 ##  $ Euroscore         : Factor w/ 330 levels &quot;#N/A&quot;,&quot;0.501743134&quot;,..: 47 206 8 289 159 96 119 98 77 4 ...
 ##  $ Diabetes2         : Factor w/ 3 levels &quot;Normal&quot;,&quot;PreDiabetes&quot;,..: 3 1 2 2 2 NA 2 2 1 3 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Mb<span class="op">$</span>Hypertension &lt;-<span class="st"> </span><span class="kw">factor</span>(Mb<span class="op">$</span>Hypertension,
-                          <span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,
-                          <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))
-
-Mb<span class="op">$</span>CHF &lt;-<span class="st"> </span><span class="kw">factor</span>(Mb<span class="op">$</span>CHF,
-                 <span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,
-                 <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))
-
-Mb<span class="op">$</span>Subject &lt;-<span class="st"> </span><span class="kw">as.character</span>(Mb<span class="op">$</span>Subject)
-
-<span class="co">#windows()</span>
-
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))
-
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.numeric))){
-<span class="kw">hist</span>(Mb[,i],<span class="dt">xlab=</span><span class="kw">colnames</span>(Mb)[i])
-}
-
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">Mb<span class="op">$</span>Hypertension &lt;-<span class="st"> </span><span class="kw">factor</span>(Mb<span class="op">$</span>Hypertension,</a>
+<a class="sourceLine" id="cb27-2" title="2">                          <span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb27-3" title="3">                          <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))</a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5">Mb<span class="op">$</span>CHF &lt;-<span class="st"> </span><span class="kw">factor</span>(Mb<span class="op">$</span>CHF,</a>
+<a class="sourceLine" id="cb27-6" title="6">                 <span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb27-7" title="7">                 <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))</a>
+<a class="sourceLine" id="cb27-8" title="8"></a>
+<a class="sourceLine" id="cb27-9" title="9">Mb<span class="op">$</span>Subject &lt;-<span class="st"> </span><span class="kw">as.character</span>(Mb<span class="op">$</span>Subject)</a>
+<a class="sourceLine" id="cb27-10" title="10"></a>
+<a class="sourceLine" id="cb27-11" title="11"><span class="co">#windows()</span></a>
+<a class="sourceLine" id="cb27-12" title="12"></a>
+<a class="sourceLine" id="cb27-13" title="13"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb27-14" title="14"></a>
+<a class="sourceLine" id="cb27-15" title="15"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.numeric))){</a>
+<a class="sourceLine" id="cb27-16" title="16"><span class="kw">hist</span>(Mb[,i],<span class="dt">xlab=</span><span class="kw">colnames</span>(Mb)[i])</a>
+<a class="sourceLine" id="cb27-17" title="17">}</a>
+<a class="sourceLine" id="cb27-18" title="18"></a>
+<a class="sourceLine" id="cb27-19" title="19"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table &lt;-<span class="st"> </span><span class="kw">by</span>(Mb[,<span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.numeric))],
-            <span class="dt">INDICES =</span> Mb<span class="op">$</span>AdvEvent,
-            <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">apply</span>(x,<span class="dv">2</span>,quantile,<span class="dt">na.rm=</span>T))
-
-table</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">table &lt;-<span class="st"> </span><span class="kw">by</span>(Mb[,<span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.numeric))],</a>
+<a class="sourceLine" id="cb28-2" title="2">            <span class="dt">INDICES =</span> Mb<span class="op">$</span>AdvEvent,</a>
+<a class="sourceLine" id="cb28-3" title="3">            <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">apply</span>(x,<span class="dv">2</span>,quantile,<span class="dt">na.rm=</span>T))</a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5">table</a></code></pre></div>
 <pre><code>## Mb$AdvEvent: No
 ##      Age Diastolic  Systolic Cross_Clamp_Time RFLastA1cLevel
 ## 0%    25  26.42047  88.70903               15            4.7
@@ -317,11 +348,11 @@ table</code></pre></div>
 ## 50%   69  59.94571 131.48461             64.0          5.800
 ## 75%   77  65.97349 153.50990             88.5          6.425
 ## 100%  88  92.51766 193.75080            298.0         11.700</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table<span class="op">$</span>pvalue &lt;-<span class="st"> </span><span class="kw">apply</span>(Mb[,<span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.numeric))],<span class="dv">2</span>,
-                      <span class="cf">function</span>(x)
-                        <span class="kw">wilcox.test</span>(x[<span class="kw">which</span>(Mb<span class="op">$</span>AdvEvent<span class="op">==</span><span class="st">&quot;No&quot;</span>)],x[<span class="kw">which</span>(Mb<span class="op">$</span>AdvEvent<span class="op">==</span><span class="st">&quot;Yes&quot;</span>)])<span class="op">$</span>p.value)
-
-table</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">table<span class="op">$</span>pvalue &lt;-<span class="st"> </span><span class="kw">apply</span>(Mb[,<span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.numeric))],<span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb30-2" title="2">                      <span class="cf">function</span>(x)</a>
+<a class="sourceLine" id="cb30-3" title="3">                        <span class="kw">wilcox.test</span>(x[<span class="kw">which</span>(Mb<span class="op">$</span>AdvEvent<span class="op">==</span><span class="st">&quot;No&quot;</span>)],x[<span class="kw">which</span>(Mb<span class="op">$</span>AdvEvent<span class="op">==</span><span class="st">&quot;Yes&quot;</span>)])<span class="op">$</span>p.value)</a>
+<a class="sourceLine" id="cb30-4" title="4"></a>
+<a class="sourceLine" id="cb30-5" title="5">table</a></code></pre></div>
 <pre><code>##      Age Diastolic  Systolic Cross_Clamp_Time RFLastA1cLevel
 ## 0%    25  26.42047  88.70903               15            4.7
 ## 25%   59  53.30694 115.03977               51            5.6
@@ -340,13 +371,13 @@ table</code></pre></div>
 ##       0.09297764       0.41375034       0.09079886       0.76575185 
 ##   RFLastA1cLevel 
 ##       0.78804579</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Mb<span class="op">$</span>Euroscore&lt;-<span class="kw">as.character</span>(Mb<span class="op">$</span>Euroscore)
-
-table2 &lt;-<span class="st"> </span><span class="kw">by</span>(Mb[,<span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.factor))], 
-             <span class="dt">INDICES =</span> Mb<span class="op">$</span>AdvEvent, 
-             <span class="dt">FUN =</span> <span class="cf">function</span>(x){<span class="kw">sapply</span>(x,table)})
-
-table2</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">Mb<span class="op">$</span>Euroscore&lt;-<span class="kw">as.character</span>(Mb<span class="op">$</span>Euroscore)</a>
+<a class="sourceLine" id="cb32-2" title="2"></a>
+<a class="sourceLine" id="cb32-3" title="3">table2 &lt;-<span class="st"> </span><span class="kw">by</span>(Mb[,<span class="kw">which</span>(<span class="kw">sapply</span>(Mb,is.factor))], </a>
+<a class="sourceLine" id="cb32-4" title="4">             <span class="dt">INDICES =</span> Mb<span class="op">$</span>AdvEvent, </a>
+<a class="sourceLine" id="cb32-5" title="5">             <span class="dt">FUN =</span> <span class="cf">function</span>(x){<span class="kw">sapply</span>(x,table)})</a>
+<a class="sourceLine" id="cb32-6" title="6"></a>
+<a class="sourceLine" id="cb32-7" title="7">table2</a></code></pre></div>
 <pre><code>## Mb$AdvEvent: No
 ## $Gender
 ## 

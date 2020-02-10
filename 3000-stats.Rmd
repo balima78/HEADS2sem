@@ -5,7 +5,7 @@
 **Conteúdos programáticos**
 
 - Regressão logística.
-- Análise de sobrevida.
+- Análise de sobrevivência.
 - Análise de dados longitudinais.
 - Causalidade.
 
