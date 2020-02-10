@@ -4,6 +4,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
+Length of stay is an important indicator used in health care assessment. The UCIP_PRISM.sav database contains the record of 812 pediatric admissions in 3 intensive care units (Variable P1: Coimbra, Lisboa and Porto). We want to compare the hospitalization time (Variable tempoint) of the three units. However, we must take into account that the units may receive patients with different levels of severity. The PRISM variable is an indicator of the patient's severity at the date of admission.
 
 ```{r}
 library(foreign)
@@ -13,7 +14,6 @@ aula2 <- read.spss(file="2.UploadedData/UCIP_PRISM HEADS.sav", use.missing=TRUE)
 summary(aula2)
 
 ```
-
 
 1. Make a histogram of the length of stay
 ```{r}
@@ -47,6 +47,11 @@ aula2$logtempoint <- log(aula2$tempoint)
 ```{r}
 logregressao <- lm(formula = logtempoint ~ P1 + PRISM, data=aula2)
 summary(logregressao)
+```
+
+Geometric mean ratio (percentage value)
+```{r}
+(exp(logregressao$coefficients)-1)*100
 ```
 
 6.Check that the model assumptions in question e) are satisfied.

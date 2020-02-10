@@ -173,6 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="lesson-2" class="section level2">
 <h2><span class="header-section-number">3.2</span> Lesson 2</h2>
+<p>Length of stay is an important indicator used in health care assessment. The UCIP_PRISM.sav database contains the record of 812 pediatric admissions in 3 intensive care units (Variable P1: Coimbra, Lisboa and Porto). We want to compare the hospitalization time (Variable tempoint) of the three units. However, we must take into account that the units may receive patients with different levels of severity. The PRISM variable is an indicator of the patient’s severity at the date of admission.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(foreign)</a>
 <a class="sourceLine" id="cb85-2" title="2"></a>
 <a class="sourceLine" id="cb85-3" title="3">aula2 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/UCIP_PRISM HEADS.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
@@ -243,14 +244,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 1.133 on 808 degrees of freedom
 ## Multiple R-squared:  0.05785,    Adjusted R-squared:  0.05435 
 ## F-statistic: 16.54 on 3 and 808 DF,  p-value: 1.954e-10</code></pre>
+<p>Geometric mean ratio (percentage value)</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">(<span class="kw">exp</span>(logregressao<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
+<pre><code>## (Intercept)    P1Lisboa     P1Porto       PRISM 
+##  108.451271   48.612650   37.595032    2.721276</code></pre>
 <p>6.Check that the model assumptions in question e) are satisfied.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">plot</span>(logregressao<span class="op">$</span>fitted.values, logregressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">hist</span>(logregressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-44-2.png" width="672" /></p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">plot</span>(logregressao<span class="op">$</span>fitted.values, logregressao<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">hist</span>(logregressao<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
 <p>or you can plot everything</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">plot</span>(logregressao)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-45-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-45-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-45-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-45-4.png" width="672" /></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">plot</span>(logregressao)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-46-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-46-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-46-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-46-4.png" width="672" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
