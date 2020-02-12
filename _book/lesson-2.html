@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.2 Lesson 2 | HEADS 2nd semester</title>
+  <title>2.2 Lesson 2 | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.2 Lesson 2 | HEADS 2nd semester" />
+  <meta property="og:title" content="2.2 Lesson 2 | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.2 Lesson 2 | HEADS 2nd semester" />
+  <meta name="twitter:title" content="2.2 Lesson 2 | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-10" />
+<meta name="date" content="2020-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lesson-1-1.html"/>
-<link rel="next" href="learn.html"/>
+<link rel="prev" href="lesson-1.html"/>
+<link rel="next" href="assignment-histogram-lesson-2.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -136,10 +136,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="2.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram-lesson-2.html"><a href="assignment-histogram-lesson-2.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram (lesson 2)</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
-<li class="chapter" data-level="3.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="3.2" data-path="lesson-2-1.html"><a href="lesson-2-1.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
@@ -172,101 +174,155 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="lesson-2" class="section level2">
-<h2><span class="header-section-number">3.2</span> Lesson 2</h2>
-<p>Length of stay is an important indicator used in health care assessment. The UCIP_PRISM.sav database contains the record of 812 pediatric admissions in 3 intensive care units (Variable P1: Coimbra, Lisboa and Porto). We want to compare the hospitalization time (Variable tempoint) of the three units. However, we must take into account that the units may receive patients with different levels of severity. The PRISM variable is an indicator of the patient’s severity at the date of admission.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(foreign)</a>
-<a class="sourceLine" id="cb85-2" title="2"></a>
-<a class="sourceLine" id="cb85-3" title="3">aula2 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/UCIP_PRISM HEADS.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## re-encoding from UTF-8</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">summary</span>(aula2)</a></code></pre></div>
-<pre><code>##          Length Class  Mode   
-## P1       812    factor numeric
-## PRISM    812    -none- numeric
-## tempoint 812    -none- numeric</code></pre>
-<ol style="list-style-type: decimal">
-<li>Make a histogram of the length of stay</li>
-</ol>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">hist</span>(aula2<span class="op">$</span>tempoint)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<p>2.Make a linear regression model with the dependent variable length of stay (tempoint), and the intensive care unit (P1) and PRISM variables as independent variables.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">regressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> tempoint <span class="op">~</span><span class="st"> </span>P1 <span class="op">+</span><span class="st"> </span>PRISM, <span class="dt">data=</span>aula2)</a>
-<a class="sourceLine" id="cb90-2" title="2"><span class="kw">summary</span>(regressao)</a></code></pre></div>
+<h2><span class="header-section-number">2.2</span> Lesson 2</h2>
+<p>2020-02-10</p>
+<p><strong>Classe Exercises</strong> (code given by the professor)</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">library</span>(stream)</a></code></pre></div>
+<pre><code>## Loading required package: proxy</code></pre>
 <pre><code>## 
-## Call:
-## lm(formula = tempoint ~ P1 + PRISM, data = aula2)
+## Attaching package: &#39;proxy&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -14.987  -6.568  -3.944  -0.047 255.598 
+##     as.dist, dist</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
 ## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)   
-## (Intercept)  3.84611    1.36895   2.810  0.00508 **
-## P1Lisboa     4.27584    1.54619   2.765  0.00581 **
-## P1Porto      2.70428    1.54758   1.747  0.08094 . 
-## PRISM        0.18291    0.07643   2.393  0.01693 * 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 18.04 on 808 degrees of freedom
-## Multiple R-squared:  0.01558,    Adjusted R-squared:  0.01192 
-## F-statistic: 4.261 on 3 and 808 DF,  p-value: 0.005353</code></pre>
-<p>3.Check that the model assumptions in question b) are not satisfied.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">plot</span>(regressao<span class="op">$</span>fitted.values, regressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">hist</span>(regressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-40-2.png" width="672" /></p>
-<p>or you can plot everything</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">plot</span>(regressao)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-41-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-41-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-41-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-41-4.png" width="672" /></p>
-<p>4.Transform the length of stay variable into the Neperian logarithm of length of stay (tempoint -&gt; logtempoint).</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">aula2<span class="op">$</span>logtempoint &lt;-<span class="st"> </span><span class="kw">log</span>(aula2<span class="op">$</span>tempoint)</a></code></pre></div>
-<p>5.Analyze the differences in the logarithm of length of stay between the 3 units, adjusting to the severity of the patients, ie, remake the model in question b) but with the logarithm of length of stay as dependent variable.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">logregressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> logtempoint <span class="op">~</span><span class="st"> </span>P1 <span class="op">+</span><span class="st"> </span>PRISM, <span class="dt">data=</span>aula2)</a>
-<a class="sourceLine" id="cb96-2" title="2"><span class="kw">summary</span>(logregressao)</a></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = logtempoint ~ P1 + PRISM, data = aula2)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.4230 -0.9225 -0.1198  0.7848  4.2611 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 0.734535   0.085985   8.543  &lt; 2e-16 ***
-## P1Lisboa    0.396173   0.097117   4.079 4.96e-05 ***
-## P1Porto     0.319145   0.097205   3.283  0.00107 ** 
-## PRISM       0.026849   0.004801   5.593 3.06e-08 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.133 on 808 degrees of freedom
-## Multiple R-squared:  0.05785,    Adjusted R-squared:  0.05435 
-## F-statistic: 16.54 on 3 and 808 DF,  p-value: 1.954e-10</code></pre>
-<p>Geometric mean ratio (percentage value)</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">(<span class="kw">exp</span>(logregressao<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
-<pre><code>## (Intercept)    P1Lisboa     P1Porto       PRISM 
-##  108.451271   48.612650   37.595032    2.721276</code></pre>
-<p>6.Check that the model assumptions in question e) are satisfied.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">plot</span>(logregressao<span class="op">$</span>fitted.values, logregressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">hist</span>(logregressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
-<p>or you can plot everything</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">plot</span>(logregressao)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-46-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-46-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-46-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-46-4.png" width="672" /></p>
-<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
+##     as.matrix</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co">#par(mfrow=c(2,2))</span></a></code></pre></div>
+<p><strong>keep sample mean</strong></p>
+<p>definitions</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb40-2" title="2">lbound &lt;-<span class="st"> </span><span class="dv">-3</span></a>
+<a class="sourceLine" id="cb40-3" title="3">ubound &lt;-<span class="st"> </span><span class="dv">8</span></a>
+<a class="sourceLine" id="cb40-4" title="4">mu1 &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb40-5" title="5">mu2 &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb40-6" title="6"></a>
+<a class="sourceLine" id="cb40-7" title="7"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb40-8" title="8">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">0</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb40-9" title="9">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb41-2" title="2">n &lt;-<span class="st"> </span>sum &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb41-4" title="4">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>), <span class="dt">main=</span><span class="st">&quot;Sample Mean&quot;</span>)</a>
+<a class="sourceLine" id="cb41-5" title="5"></a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb41-7" title="7"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb41-8" title="8">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb41-9" title="9">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb41-10" title="10">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb41-11" title="11">  sum &lt;-<span class="st"> </span>sum <span class="op">+</span><span class="st"> </span>xi</a>
+<a class="sourceLine" id="cb41-12" title="12">  n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb41-13" title="13">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>xi, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">1</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb41-14" title="14">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>sum <span class="op">/</span><span class="st"> </span>n, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb41-15" title="15">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><strong>keep sample mean over a sliding window</strong></p>
+<p>definitions</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">w &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb42-2" title="2"></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb42-4" title="4">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">0</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb42-5" title="5">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb43-2" title="2">n &lt;-<span class="st"> </span>sum &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb43-4" title="4">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>), <span class="dt">main=</span><span class="st">&quot;Sliding Mean&quot;</span>)</a>
+<a class="sourceLine" id="cb43-5" title="5">window &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb43-6" title="6"></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb43-8" title="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb43-9" title="9">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb43-10" title="10">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb43-11" title="11">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb43-12" title="12">  sum &lt;-<span class="st"> </span>sum <span class="op">+</span><span class="st"> </span>xi</a>
+<a class="sourceLine" id="cb43-13" title="13">  n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb43-14" title="14">  </a>
+<a class="sourceLine" id="cb43-15" title="15">  window &lt;-<span class="st"> </span><span class="kw">c</span>(window, xi)</a>
+<a class="sourceLine" id="cb43-16" title="16">  </a>
+<a class="sourceLine" id="cb43-17" title="17">  <span class="cf">if</span> (<span class="kw">length</span>(window) <span class="op">&gt;</span><span class="st">  </span>w) {</a>
+<a class="sourceLine" id="cb43-18" title="18">    sum &lt;-<span class="st"> </span>sum <span class="op">-</span><span class="st"> </span>window[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb43-19" title="19">    n &lt;-<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb43-20" title="20">    window &lt;-<span class="st"> </span>window[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb43-21" title="21">  }</a>
+<a class="sourceLine" id="cb43-22" title="22">  </a>
+<a class="sourceLine" id="cb43-23" title="23">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>xi, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">1</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb43-24" title="24">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>sum <span class="op">/</span><span class="st"> </span>n, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb43-25" title="25">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><strong>keep sample mean over a alpha weighted sliding window</strong></p>
+<p>definitions</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">w &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb44-2" title="2">eps &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb44-3" title="3">alpha &lt;-<span class="st"> </span>eps<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>w)</a>
+<a class="sourceLine" id="cb44-4" title="4"></a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb44-6" title="6">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">0</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb44-7" title="7">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb45-2" title="2">n &lt;-<span class="st"> </span>sum &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb45-4" title="4">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>), <span class="dt">main=</span><span class="st">&quot;Weighted Sliding Mean&quot;</span>)</a>
+<a class="sourceLine" id="cb45-5" title="5">window &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb45-6" title="6"></a>
+<a class="sourceLine" id="cb45-7" title="7"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb45-8" title="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb45-9" title="9">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb45-10" title="10">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb45-11" title="11">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb45-12" title="12">  sum &lt;-<span class="st"> </span>sum <span class="op">*</span><span class="st"> </span>alpha <span class="op">+</span><span class="st"> </span>xi</a>
+<a class="sourceLine" id="cb45-13" title="13">  n &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>alpha <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb45-14" title="14">  </a>
+<a class="sourceLine" id="cb45-15" title="15">  window &lt;-<span class="st"> </span><span class="kw">c</span>(window, xi)</a>
+<a class="sourceLine" id="cb45-16" title="16">  </a>
+<a class="sourceLine" id="cb45-17" title="17">  <span class="cf">if</span> (<span class="kw">length</span>(window) <span class="op">&gt;</span><span class="st">  </span>w) {</a>
+<a class="sourceLine" id="cb45-18" title="18">    sum &lt;-<span class="st"> </span>sum <span class="op">-</span><span class="st"> </span>window[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>alpha <span class="op">^</span><span class="st"> </span>(w<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb45-19" title="19">    n &lt;-<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>alpha <span class="op">^</span><span class="st"> </span>(w<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb45-20" title="20">    window &lt;-<span class="st"> </span>window[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb45-21" title="21">  }</a>
+<a class="sourceLine" id="cb45-22" title="22">  </a>
+<a class="sourceLine" id="cb45-23" title="23">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>xi, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">1</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb45-24" title="24">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>sum <span class="op">/</span><span class="st"> </span>n, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb45-25" title="25">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><strong>keep sample mean over a alpha fading sliding window</strong></p>
+<p>definitions</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">w &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb46-2" title="2">eps &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb46-3" title="3">alpha &lt;-<span class="st"> </span>eps<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>w)</a>
+<a class="sourceLine" id="cb46-4" title="4"></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb46-6" title="6">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">0</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb46-7" title="7">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">sigma=</span><span class="dv">2</span>)</a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb47-2" title="2">n &lt;-<span class="st"> </span>sum &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb47-4" title="4">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>), <span class="dt">main=</span><span class="st">&quot;Fading Sliding Mean&quot;</span>)</a>
+<a class="sourceLine" id="cb47-5" title="5">window &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb47-6" title="6"></a>
+<a class="sourceLine" id="cb47-7" title="7"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb47-8" title="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb47-9" title="9">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb47-10" title="10">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb47-11" title="11">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb47-12" title="12">  sum &lt;-<span class="st"> </span>sum <span class="op">*</span><span class="st"> </span>alpha <span class="op">+</span><span class="st"> </span>xi</a>
+<a class="sourceLine" id="cb47-13" title="13">  n &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>alpha <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb47-14" title="14"></a>
+<a class="sourceLine" id="cb47-15" title="15">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>xi, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">1</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb47-16" title="16">  <span class="kw">points</span>(<span class="dt">x=</span>i, <span class="dt">y=</span>sum <span class="op">/</span><span class="st"> </span>n, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb47-17" title="17">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="lesson-1-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="learn.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-histogram-lesson-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
