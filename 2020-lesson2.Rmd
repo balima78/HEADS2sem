@@ -1,0 +1,163 @@
+## Lesson 2
+
+2020-02-10
+
+**Classe Exercises** (code given by the professor)
+
+```{r}
+library(stream)
+#par(mfrow=c(2,2))
+```
+
+**keep sample mean**
+
+definitions
+```{r}
+itera <- 2000
+lbound <- -3
+ubound <- 8
+mu1 <- 0
+mu2 <- 5
+
+set.seed(523)
+stream1 <- DSD_Gaussians(k=1, d=1, mu=0, sigma=2)
+stream2 <- DSD_Gaussians(k=1, d=1, mu=10, sigma=2)
+```
+
+iteration
+```{r}
+# initialization
+n <- sum <- 0
+plot(NULL, xlab="Iteration",ylab="Value", xlim=c(0,itera), 
+     ylim=c(-3,13), main="Sample Mean")
+
+# iterative step
+for (i in 1:itera){
+  xi <- ifelse(i<=1000,
+               get_points(stream1)[1,1],
+               get_points(stream2)[1,1])
+  sum <- sum + xi
+  n <- n + 1
+  points(x=i, y=xi, pch=20, cex=.1, col="black")
+  points(x=i, y=sum / n, pch=20, cex=.5, col="red")
+}
+```
+
+**keep sample mean over a sliding window**
+
+definitions
+```{r}
+w <- 100
+
+set.seed(523)
+stream1 <- DSD_Gaussians(k=1, d=1, mu=0, sigma=2)
+stream2 <- DSD_Gaussians(k=1, d=1, mu=10, sigma=2)
+```
+
+iteration
+```{r}
+# initialization
+n <- sum <- 0
+plot(NULL, xlab="Iteration",ylab="Value", xlim=c(0,itera), 
+     ylim=c(-3,13), main="Sliding Mean")
+window <- NULL
+
+# iterative step
+for (i in 1:itera){
+  xi <- ifelse(i<=1000,
+               get_points(stream1)[1,1],
+               get_points(stream2)[1,1])
+  sum <- sum + xi
+  n <- n + 1
+  
+  window <- c(window, xi)
+  
+  if (length(window) >  w) {
+    sum <- sum - window[1]
+    n <- n - 1
+    window <- window[-1]
+  }
+  
+  points(x=i, y=xi, pch=20, cex=.1, col="black")
+  points(x=i, y=sum / n, pch=20, cex=.5, col="red")
+}
+```
+
+**keep sample mean over a alpha weighted sliding window**
+
+definitions
+```{r}
+w <- 100
+eps <- 0.05
+alpha <- eps^(1/w)
+
+set.seed(523)
+stream1 <- DSD_Gaussians(k=1, d=1, mu=0, sigma=2)
+stream2 <- DSD_Gaussians(k=1, d=1, mu=10, sigma=2)
+
+```
+
+iteration
+```{r}
+# initialization
+n <- sum <- 0
+plot(NULL, xlab="Iteration",ylab="Value", xlim=c(0,itera), 
+     ylim=c(-3,13), main="Weighted Sliding Mean")
+window <- NULL
+
+# iterative step
+for (i in 1:itera){
+  xi <- ifelse(i<=1000,
+               get_points(stream1)[1,1],
+               get_points(stream2)[1,1])
+  sum <- sum * alpha + xi
+  n <- n * alpha + 1
+  
+  window <- c(window, xi)
+  
+  if (length(window) >  w) {
+    sum <- sum - window[1] * alpha ^ (w-1)
+    n <- n - 1 * alpha ^ (w-1)
+    window <- window[-1]
+  }
+  
+  points(x=i, y=xi, pch=20, cex=.1, col="black")
+  points(x=i, y=sum / n, pch=20, cex=.5, col="red")
+}
+```
+
+**keep sample mean over a alpha fading sliding window**
+
+definitions
+```{r}
+w <- 100
+eps <- 0.05
+alpha <- eps^(1/w)
+
+set.seed(523)
+stream1 <- DSD_Gaussians(k=1, d=1, mu=0, sigma=2)
+stream2 <- DSD_Gaussians(k=1, d=1, mu=10, sigma=2)
+
+```
+
+iteration
+```{r}
+# initialization
+n <- sum <- 0
+plot(NULL, xlab="Iteration",ylab="Value", xlim=c(0,itera), 
+     ylim=c(-3,13), main="Fading Sliding Mean")
+window <- NULL
+
+# iterative step
+for (i in 1:itera){
+  xi <- ifelse(i<=1000,
+               get_points(stream1)[1,1],
+               get_points(stream2)[1,1])
+  sum <- sum * alpha + xi
+  n <- n * alpha + 1
+
+  points(x=i, y=xi, pch=20, cex=.1, col="black")
+  points(x=i, y=sum / n, pch=20, cex=.5, col="red")
+}
+```
+
