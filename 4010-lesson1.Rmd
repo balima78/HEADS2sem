@@ -92,6 +92,7 @@ plot(y)
 
 scatterplot matrix
 ```{r}
+scales <- list(x=list(relation="free"), y=list(relation="free"))
 featurePlot(x=x, y=y, plot="ellipse")
 ```
 
