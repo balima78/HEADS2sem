@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.3 assignment Histogram | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.3 assignment Histogram | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.3 assignment Histogram | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-02-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lesson-2.html"/>
+<link rel="next" href="stats.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="2.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="3.2" data-path="lesson-2-1.html"><a href="lesson-2-1.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
+<li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a></li>
+<li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assignment-histogram" class="section level2">
+<h2><span class="header-section-number">2.3</span> assignment Histogram</h2>
+<p>lesson 2 (cont.) professor’s solution</p>
+<p>2020-02-13</p>
+<p>Using the <em>stream</em> package in R, keep current sample histogram of a 1-dimensional data stream using different window models.</p>
+<p><strong>keep sample histogram</strong></p>
+<p>defenitions</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">library</span>(stream)</a>
+<a class="sourceLine" id="cb48-2" title="2"></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="co">#par(mfrow=c(2,2))</span></a>
+<a class="sourceLine" id="cb48-4" title="4"></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="co"># definitions</span></a>
+<a class="sourceLine" id="cb48-6" title="6">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb48-7" title="7">lbound &lt;-<span class="st"> </span><span class="dv">-3</span></a>
+<a class="sourceLine" id="cb48-8" title="8">ubound &lt;-<span class="st"> </span><span class="dv">8</span></a>
+<a class="sourceLine" id="cb48-9" title="9">nbins &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb48-10" title="10">mu1 &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb48-11" title="11">mu2 &lt;-<span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb49-3" title="3">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu1, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb49-4" title="4">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu2, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb49-5" title="5">splits &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>lbound, <span class="dt">to=</span>ubound, <span class="dt">by=</span>(ubound<span class="op">-</span>lbound)<span class="op">/</span>nbins)</a>
+<a class="sourceLine" id="cb49-6" title="6">splits &lt;-<span class="st"> </span><span class="kw">c</span>(splits, <span class="op">+</span><span class="ot">Inf</span>) <span class="co"># extra split for comparison</span></a>
+<a class="sourceLine" id="cb49-7" title="7">bins &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(splits))</a>
+<a class="sourceLine" id="cb49-8" title="8"><span class="kw">names</span>(bins) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;&lt;=&quot;</span>,splits,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb49-9" title="9"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb49-10" title="10">     <span class="dt">ylim=</span><span class="kw">c</span>(lbound,ubound), <span class="dt">main=</span><span class="st">&quot;Sample Distribution Heat Map&quot;</span>)</a>
+<a class="sourceLine" id="cb49-11" title="11"></a>
+<a class="sourceLine" id="cb49-12" title="12"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">*************************</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Sample Distribution&quot;</span>,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+## *************************
+##  Sample Distribution</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb51-3" title="3">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb51-4" title="4">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb51-5" title="5">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb51-6" title="6">  </a>
+<a class="sourceLine" id="cb51-7" title="7">  bin &lt;-<span class="st"> </span><span class="kw">which</span>(xi <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb51-8" title="8">  </a>
+<a class="sourceLine" id="cb51-9" title="9">  bins[bin] &lt;-<span class="st"> </span>bins[bin] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb51-10" title="10">  </a>
+<a class="sourceLine" id="cb51-11" title="11">  <span class="kw">sapply</span>(<span class="dv">2</span><span class="op">:</span>(<span class="kw">length</span>(splits)<span class="op">-</span><span class="dv">1</span>), <span class="cf">function</span>(u){</a>
+<a class="sourceLine" id="cb51-12" title="12">    upper &lt;-<span class="st"> </span>splits[u]</a>
+<a class="sourceLine" id="cb51-13" title="13">    lower &lt;-<span class="st"> </span>splits[u<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb51-14" title="14">    <span class="kw">lines</span>(<span class="dt">x=</span><span class="kw">c</span>(i,i), <span class="dt">y=</span><span class="kw">c</span>(lower,upper), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">gray</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>bins[u] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(bins)))</a>
+<a class="sourceLine" id="cb51-15" title="15">  })</a>
+<a class="sourceLine" id="cb51-16" title="16">  <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">500</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb51-17" title="17">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> ### Iteration&quot;</span>,i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb51-18" title="18">    <span class="kw">print</span>(bins)</a>
+<a class="sourceLine" id="cb51-19" title="19">  }</a>
+<a class="sourceLine" id="cb51-20" title="20">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<pre><code>## 
+##  ### Iteration 500 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##     13     43     90    141    137     66      9      1      0      0 
+##    &lt;=8  &lt;=Inf 
+##      0      0 
+## 
+##  ### Iteration 1000 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##     19     64    184    311    279    123     18      2      0      0 
+##    &lt;=8  &lt;=Inf 
+##      0      0 
+## 
+##  ### Iteration 1500 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##     19     65    184    311    281    142     73    135    158     85 
+##    &lt;=8  &lt;=Inf 
+##     36     11 
+## 
+##  ### Iteration 2000 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##     19     65    184    311    284    159    121    262    309    198 
+##    &lt;=8  &lt;=Inf 
+##     71     17</code></pre>
+<p><strong>keep sample histogram over a sliding window</strong></p>
+<p>definitions and iteration</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># definitions</span></a>
+<a class="sourceLine" id="cb53-2" title="2">w &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb53-3" title="3"></a>
+<a class="sourceLine" id="cb53-4" title="4"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb53-5" title="5"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb53-6" title="6">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu1, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb53-7" title="7">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu2, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb53-8" title="8">splits &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>lbound, <span class="dt">to=</span>ubound, <span class="dt">by=</span>(ubound<span class="op">-</span>lbound)<span class="op">/</span>nbins)</a>
+<a class="sourceLine" id="cb53-9" title="9">splits &lt;-<span class="st"> </span><span class="kw">c</span>(splits, <span class="op">+</span><span class="ot">Inf</span>) <span class="co"># extra split for comparison</span></a>
+<a class="sourceLine" id="cb53-10" title="10">bins &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(splits))</a>
+<a class="sourceLine" id="cb53-11" title="11"><span class="kw">names</span>(bins) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;&lt;=&quot;</span>,splits,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb53-12" title="12">window &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb53-13" title="13"></a>
+<a class="sourceLine" id="cb53-14" title="14"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb53-15" title="15">     <span class="dt">ylim=</span><span class="kw">c</span>(lbound,ubound), <span class="dt">main=</span><span class="st">&quot;Sliding Distribution Heat Map&quot;</span>)</a>
+<a class="sourceLine" id="cb53-16" title="16"></a>
+<a class="sourceLine" id="cb53-17" title="17"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">*************************</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Sliding Distribution&quot;</span>,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+## *************************
+##  Sliding Distribution</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb55-3" title="3">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb55-4" title="4">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb55-5" title="5">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb55-6" title="6">  </a>
+<a class="sourceLine" id="cb55-7" title="7">  bin &lt;-<span class="st"> </span><span class="kw">which</span>(xi <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb55-8" title="8">  </a>
+<a class="sourceLine" id="cb55-9" title="9">  bins[bin] &lt;-<span class="st"> </span>bins[bin] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb55-10" title="10">  </a>
+<a class="sourceLine" id="cb55-11" title="11">  window &lt;-<span class="st"> </span><span class="kw">c</span>(window, xi)</a>
+<a class="sourceLine" id="cb55-12" title="12">  </a>
+<a class="sourceLine" id="cb55-13" title="13">  <span class="cf">if</span> (<span class="kw">length</span>(window) <span class="op">&gt;</span><span class="st">  </span>w) {</a>
+<a class="sourceLine" id="cb55-14" title="14">    oldbin &lt;-<span class="st"> </span><span class="kw">which</span>(window[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb55-15" title="15">    bins[oldbin] &lt;-<span class="st"> </span>bins[oldbin] <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb55-16" title="16">    window &lt;-<span class="st"> </span>window[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb55-17" title="17">  }</a>
+<a class="sourceLine" id="cb55-18" title="18">  </a>
+<a class="sourceLine" id="cb55-19" title="19">  <span class="kw">sapply</span>(<span class="dv">2</span><span class="op">:</span>(<span class="kw">length</span>(splits)<span class="op">-</span><span class="dv">1</span>), <span class="cf">function</span>(u){</a>
+<a class="sourceLine" id="cb55-20" title="20">    upper &lt;-<span class="st"> </span>splits[u]</a>
+<a class="sourceLine" id="cb55-21" title="21">    lower &lt;-<span class="st"> </span>splits[u<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb55-22" title="22">    <span class="kw">lines</span>(<span class="dt">x=</span><span class="kw">c</span>(i,i), <span class="dt">y=</span><span class="kw">c</span>(lower,upper), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">gray</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>bins[u] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(bins)))</a>
+<a class="sourceLine" id="cb55-23" title="23">  })</a>
+<a class="sourceLine" id="cb55-24" title="24">  <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">500</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb55-25" title="25">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> ### Iteration&quot;</span>,i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb55-26" title="26">    <span class="kw">print</span>(bins)</a>
+<a class="sourceLine" id="cb55-27" title="27">  }</a>
+<a class="sourceLine" id="cb55-28" title="28">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<pre><code>## 
+##  ### Iteration 500 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##     13     43     90    141    137     66      9      1      0      0 
+##    &lt;=8  &lt;=Inf 
+##      0      0 
+## 
+##  ### Iteration 1000 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##      6     21     94    170    142     57      9      1      0      0 
+##    &lt;=8  &lt;=Inf 
+##      0      0 
+## 
+##  ### Iteration 1500 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##      0      1      0      0      2     19     55    133    158     85 
+##    &lt;=8  &lt;=Inf 
+##     36     11 
+## 
+##  ### Iteration 2000 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
+##      0      0      0      0      3     17     48    127    151    113 
+##    &lt;=8  &lt;=Inf 
+##     35      6</code></pre>
+<p><strong>keep sample histogram over a alpha weighted sliding window</strong></p>
+<p>definitions</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">w &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb57-2" title="2">eps &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb57-3" title="3">alpha &lt;-<span class="st"> </span>eps<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>w)</a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb58-3" title="3">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu1, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb58-4" title="4">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu2, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb58-5" title="5">splits &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>lbound, <span class="dt">to=</span>ubound, <span class="dt">by=</span>(ubound<span class="op">-</span>lbound)<span class="op">/</span>nbins)</a>
+<a class="sourceLine" id="cb58-6" title="6">splits &lt;-<span class="st"> </span><span class="kw">c</span>(splits, <span class="op">+</span><span class="ot">Inf</span>) <span class="co"># extra split for comparison</span></a>
+<a class="sourceLine" id="cb58-7" title="7">bins &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(splits))</a>
+<a class="sourceLine" id="cb58-8" title="8"><span class="kw">names</span>(bins) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;&lt;=&quot;</span>,splits,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb58-9" title="9">window &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb58-10" title="10"></a>
+<a class="sourceLine" id="cb58-11" title="11"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb58-12" title="12">     <span class="dt">ylim=</span><span class="kw">c</span>(lbound,ubound), <span class="dt">main=</span><span class="st">&quot;Weighted Distribution Heat Map&quot;</span>)</a>
+<a class="sourceLine" id="cb58-13" title="13"></a>
+<a class="sourceLine" id="cb58-14" title="14"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">*************************</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Weighted Distribution&quot;</span>,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+## *************************
+##  Weighted Distribution</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb60-3" title="3">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb60-4" title="4">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb60-5" title="5">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb60-6" title="6">  </a>
+<a class="sourceLine" id="cb60-7" title="7">  bin &lt;-<span class="st"> </span><span class="kw">which</span>(xi <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb60-8" title="8">  </a>
+<a class="sourceLine" id="cb60-9" title="9">  bins &lt;-<span class="st"> </span>bins <span class="op">*</span><span class="st"> </span>alpha</a>
+<a class="sourceLine" id="cb60-10" title="10">  bins[bin] &lt;-<span class="st"> </span>bins[bin] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb60-11" title="11">  </a>
+<a class="sourceLine" id="cb60-12" title="12">  window &lt;-<span class="st"> </span><span class="kw">c</span>(window, xi)</a>
+<a class="sourceLine" id="cb60-13" title="13">  </a>
+<a class="sourceLine" id="cb60-14" title="14">  <span class="cf">if</span> (<span class="kw">length</span>(window) <span class="op">&gt;</span><span class="st">  </span>w) {</a>
+<a class="sourceLine" id="cb60-15" title="15">    oldbin &lt;-<span class="st"> </span><span class="kw">which</span>(window[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb60-16" title="16">    bins[oldbin] &lt;-<span class="st"> </span>bins[oldbin] <span class="op">-</span><span class="st"> </span>alpha<span class="op">^</span>w</a>
+<a class="sourceLine" id="cb60-17" title="17">    window &lt;-<span class="st"> </span>window[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb60-18" title="18">  }</a>
+<a class="sourceLine" id="cb60-19" title="19">  </a>
+<a class="sourceLine" id="cb60-20" title="20">  <span class="kw">sapply</span>(<span class="dv">2</span><span class="op">:</span>(<span class="kw">length</span>(splits)<span class="op">-</span><span class="dv">1</span>), <span class="cf">function</span>(u){</a>
+<a class="sourceLine" id="cb60-21" title="21">    upper &lt;-<span class="st"> </span>splits[u]</a>
+<a class="sourceLine" id="cb60-22" title="22">    lower &lt;-<span class="st"> </span>splits[u<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb60-23" title="23">    <span class="kw">lines</span>(<span class="dt">x=</span><span class="kw">c</span>(i,i), <span class="dt">y=</span><span class="kw">c</span>(lower,upper), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">gray</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>bins[u] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(bins)))</a>
+<a class="sourceLine" id="cb60-24" title="24">  })</a>
+<a class="sourceLine" id="cb60-25" title="25">  <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">500</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb60-26" title="26">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> ### Iteration&quot;</span>,i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb60-27" title="27">    <span class="kw">print</span>(bins)</a>
+<a class="sourceLine" id="cb60-28" title="28">  }</a>
+<a class="sourceLine" id="cb60-29" title="29">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<pre><code>## 
+##  ### Iteration 500 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
+##  3.2949751 16.9824961 29.3163498 44.6117439 41.4464742 19.9554876 
+##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  3.2883843  0.1384587  0.0000000  0.0000000  0.0000000  0.0000000 
+## 
+##  ### Iteration 1000 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
+##  1.8919283  5.7544636 34.7204532 49.2432118 47.7857598 15.7306842 
+##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  3.7872339  0.1206349  0.0000000  0.0000000  0.0000000  0.0000000 
+## 
+##  ### Iteration 1500 
+##          &lt;=-3        &lt;=-1.9        &lt;=-0.8         &lt;=0.3         &lt;=1.4 
+##  2.536993e-17  1.959926e-01 -2.532696e-15  3.832639e-15  5.080926e-01 
+##         &lt;=2.5         &lt;=3.6         &lt;=4.7         &lt;=5.8         &lt;=6.9 
+##  7.867248e+00  1.678585e+01  3.859057e+01  5.039598e+01  2.697502e+01 
+##           &lt;=8         &lt;=Inf 
+##  1.327758e+01  4.438031e+00 
+## 
+##  ### Iteration 2000 
+##          &lt;=-3        &lt;=-1.9        &lt;=-0.8         &lt;=0.3         &lt;=1.4 
+##  1.268497e-18 -1.087978e-17 -1.266348e-16  1.916320e-16  6.979810e-01 
+##         &lt;=2.5         &lt;=3.6         &lt;=4.7         &lt;=5.8         &lt;=6.9 
+##  5.225829e+00  1.513803e+01  4.131708e+01  5.152468e+01  3.188672e+01 
+##           &lt;=8         &lt;=Inf 
+##  1.020274e+01  3.041313e+00</code></pre>
+<p><strong>keep sample histogram over a alpha fading window</strong></p>
+<p>definitions</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">w &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb62-2" title="2">eps &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb62-3" title="3">alpha &lt;-<span class="st"> </span>eps<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>w)</a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="co"># initialization</span></a>
+<a class="sourceLine" id="cb63-2" title="2"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb63-3" title="3">stream1 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu1, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb63-4" title="4">stream2 &lt;-<span class="st"> </span><span class="kw">DSD_Gaussians</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">d=</span><span class="dv">1</span>, <span class="dt">mu=</span>mu2, <span class="dt">sigma=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb63-5" title="5">splits &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>lbound, <span class="dt">to=</span>ubound, <span class="dt">by=</span>(ubound<span class="op">-</span>lbound)<span class="op">/</span>nbins)</a>
+<a class="sourceLine" id="cb63-6" title="6">splits &lt;-<span class="st"> </span><span class="kw">c</span>(splits, <span class="op">+</span><span class="ot">Inf</span>) <span class="co"># extra split for comparison</span></a>
+<a class="sourceLine" id="cb63-7" title="7">bins &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(splits))</a>
+<a class="sourceLine" id="cb63-8" title="8"><span class="kw">names</span>(bins) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;&lt;=&quot;</span>,splits,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb63-9" title="9"><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Value&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,itera), </a>
+<a class="sourceLine" id="cb63-10" title="10">     <span class="dt">ylim=</span><span class="kw">c</span>(lbound,ubound), <span class="dt">main=</span><span class="st">&quot;Fading Distribution Heat Map&quot;</span>)</a>
+<a class="sourceLine" id="cb63-11" title="11"></a>
+<a class="sourceLine" id="cb63-12" title="12"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">*************************</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Fading Distribution&quot;</span>,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+## *************************
+##  Fading Distribution</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb65-3" title="3">  xi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb65-4" title="4">               <span class="kw">get_points</span>(stream1)[<span class="dv">1</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb65-5" title="5">               <span class="kw">get_points</span>(stream2)[<span class="dv">1</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb65-6" title="6">  </a>
+<a class="sourceLine" id="cb65-7" title="7">  bin &lt;-<span class="st"> </span><span class="kw">which</span>(xi <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb65-8" title="8">  </a>
+<a class="sourceLine" id="cb65-9" title="9">  bins &lt;-<span class="st"> </span>bins <span class="op">*</span><span class="st"> </span>alpha</a>
+<a class="sourceLine" id="cb65-10" title="10">  bins[bin] &lt;-<span class="st"> </span>bins[bin] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb65-11" title="11">  </a>
+<a class="sourceLine" id="cb65-12" title="12">  <span class="kw">sapply</span>(<span class="dv">2</span><span class="op">:</span>(<span class="kw">length</span>(splits)<span class="op">-</span><span class="dv">1</span>), <span class="cf">function</span>(u){</a>
+<a class="sourceLine" id="cb65-13" title="13">    upper &lt;-<span class="st"> </span>splits[u]</a>
+<a class="sourceLine" id="cb65-14" title="14">    lower &lt;-<span class="st"> </span>splits[u<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb65-15" title="15">    <span class="kw">lines</span>(<span class="dt">x=</span><span class="kw">c</span>(i,i), <span class="dt">y=</span><span class="kw">c</span>(lower,upper), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">gray</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>bins[u] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(bins)))</a>
+<a class="sourceLine" id="cb65-16" title="16">  })</a>
+<a class="sourceLine" id="cb65-17" title="17">  <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">500</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb65-18" title="18">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> ### Iteration&quot;</span>,i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb65-19" title="19">    <span class="kw">print</span>(bins)</a>
+<a class="sourceLine" id="cb65-20" title="20">  }</a>
+<a class="sourceLine" id="cb65-21" title="21">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre><code>## 
+##  ### Iteration 500 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
+##  3.2949751 16.9824961 29.3163498 44.6117439 41.4464742 19.9554876 
+##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  3.2883843  0.1384587  0.0000000  0.0000000  0.0000000  0.0000000 
+## 
+##  ### Iteration 1000 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
+##  2.0566770  6.6035884 36.1862707 51.4737990 49.8580835 16.7284586 
+##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  3.9516531  0.1275578  0.0000000  0.0000000  0.0000000  0.0000000 
+## 
+##  ### Iteration 1500 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
+##  0.1028339  0.5261720  1.8093135  2.5736899  3.0009968  8.7036712 
+##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+## 16.9834370 38.5969517 50.3959783 26.9750167 13.2775825  4.4380306 
+## 
+##  ### Iteration 2000 
+##         &lt;=-3       &lt;=-1.9       &lt;=-0.8        &lt;=0.3        &lt;=1.4 
+##  0.005141693  0.026308601  0.090465677  0.128684497  0.848030834 
+##        &lt;=2.5        &lt;=3.6        &lt;=4.7        &lt;=5.8        &lt;=6.9 
+##  5.661012898 15.987200946 43.246924516 54.044482016 33.235467534 
+##          &lt;=8        &lt;=Inf 
+## 10.866619313  3.263214833</code></pre>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lesson-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
