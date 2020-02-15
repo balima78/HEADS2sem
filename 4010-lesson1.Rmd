@@ -98,7 +98,8 @@ featurePlot(x=x, y=y, plot="ellipse")
 
 box and whisker plots for each attribute
 ```{r}
-featurePlot(x=x, y=y, plot="box")
+scales <- list(x=list(relation="free"), y=list(relation="free"))
+featurePlot(x=x, y=y, plot="box", scales=scales)
 ```
 
 density plots for each attribute by class value

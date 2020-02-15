@@ -1,0 +1,290 @@
+## assignment Matrix 
+
+Assignment 1 (deadline Feb 17)
+
+2020-02-15
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+Using R, keep counters of equal-width grid-cells (base counters for micro-cluster definitions) of a 2-dimensional continuous data stream using different window models (landmark, sliding, weighted, fading).
+
+The code should work with an evolving stream from a single record of the PhysioNet Challenge https://physionetchallenges.github.io/2020/
+
+This training set consists of 6,877 (male: 3,699; female: 3,178) 12-ECG recordings lasting from 6 seconds to 60 seconds. Each recording was sampled at 500 Hz. All data is provided in WFDB format with a MATLAB v4 file and a header containing patient sex, age, and diagnosis (Dx) information at the end of the header file. The code should be applicable to one 12-dimensional record file.
+
+
+```{r}
+library(stream)
+library(R.matlab)
+
+# after unzip the files, I took the first file 
+fA1<-readMat("2.UploadedData/A0001.mat")$val
+fA1<-t(fA1)
+```
+
+I selected two columns (4 and 5) corresponding to the readings and make the streams
+```{r}
+# select columns
+a<-4
+b<-5
+# data stream
+strA1<-DSD_Memory(fA1[,c(a,b)], loop = T)
+```
+
+definitions
+```{r}
+set.seed(1)
+reset_stream(strA1)
+# number of iterations
+itera <- 2000
+#defining bounds for matrix
+lbound <- min(strA1[[2]])
+ubound <- max(strA1[[2]])
+nbins <- 10
+
+# first we create two equal size vectors
+splits <- seq(from=lbound, to=ubound, by=(ubound-lbound)/nbins)
+splits <- c(splits)[-1] # drop first value
+binsA <- rep(0, length(splits))
+names(binsA) <- paste("<=",splits,sep="")
+
+binsB <- rep(0, length(splits))
+names(binsB) <- paste("<=",splits,sep="")
+
+# and then a matrix 10x10
+mx<-matrix(0,10,10)
+rownames(mx)<-colnames(mx)<-names(binsA)
+
+```
+
+### keep sample matrix
+
+iteration
+```{r}
+# iterative step
+for (i in 1:itera){
+  
+  ai <- get_points(strA1)[1,1]
+  bi <- get_points(strA1)[1,2]
+  
+  binA <- which(ai <= splits)[1]
+  binsA[binA] <- binsA[binA] + 1
+  
+  binB <- which(bi <= splits)[1]
+  binsB[binB] <- binsB[binB] + 1
+  
+  mx[binA,binB]<-mx[binA,binB] + 1 # with the vectors positions, we update the matrix counts
+  
+  # printing the two vectors just for control
+  if (i %% 500 == 0){
+    cat("\n ### Iteration",i, "\n")
+    print(binsA)
+    print(binsB)
+  }
+}
+```
+
+heat map with the values of the matrix
+
+```{r}
+heatmap(mx, Colv = NA, Rowv = NA, scale="none", symm = F, revC = T,
+        main = "Sample Distribution Heat Map")
+```
+
+### keep sample matrix over a sliding window
+
+definitions and initialization
+```{r}
+set.seed(1)
+reset_stream(strA1)
+w <- 500
+
+binsA <- rep(0, length(splits))
+names(binsA) <- paste("<=",splits,sep="")
+
+binsB <- rep(0, length(splits))
+names(binsB) <- paste("<=",splits,sep="")
+
+mx<-matrix(0,10,10)
+rownames(mx)<-colnames(mx)<-names(binsA)
+
+windowA <- windowB <- NULL
+```
+
+iteration
+```{r}
+# iterative step
+for (i in 1:itera){
+  ai <- get_points(strA1)[1,1]
+  bi <- get_points(strA1)[1,2]
+  
+  binA <- which(ai <= splits)[1]
+  binsA[binA] <- binsA[binA] + 1
+  
+  binB <- which(bi <= splits)[1]
+  binsB[binB] <- binsB[binB] + 1
+  
+  mx[binA,binB]<-mx[binA,binB] + 1
+  
+  windowA <- c(windowA, ai) # defining two windows
+  windowB <- c(windowB, bi) # one for each stream
+  
+    if (length(windowA) >  w) {
+    oldbinA <- which(windowA[1] <= splits)[1]
+    binsA[oldbinA] <- binsA[oldbinA] - 1
+    windowA <- windowA[-1]
+    
+    oldbinB <- which(windowB[1] <= splits)[1]
+    binsB[oldbinB] <- binsB[oldbinB] - 1
+    windowB <- windowB[-1]
+    
+    mx[oldbinA,oldbinB]<-mx[oldbinA,oldbinB] - 1 # droping the first value from the window
+    }
+  
+  # printing the two vectors just for control
+  if (i %% 500 == 0){
+    cat("\n ### Iteration",i, "\n")
+    print(binsA)
+    print(binsB)
+  }
+}
+```
+
+heat map with the values of the matrix
+```{r}
+heatmap(mx, Colv = NA, Rowv = NA, scale="none", symm = F, revC = T,
+        main = "Sliding Distribution Heat Map")
+```
+
+### keep sample matrix over a alpha weighted sliding window
+
+definitions and initialization
+```{r}
+set.seed(1)
+reset_stream(strA1)
+
+w <- 500
+eps <- 0.05
+alpha <- eps^(1/w) # defining an alpha value
+
+# initialization
+set.seed(1)
+binsA <- rep(0, length(splits))
+names(binsA) <- paste("<=",splits,sep="")
+
+binsB <- rep(0, length(splits))
+names(binsB) <- paste("<=",splits,sep="")
+
+mx<-matrix(0,10,10)
+rownames(mx)<-colnames(mx)<-names(binsA)
+
+windowA <- windowB <- NULL
+```
+
+iteration
+```{r}
+# iterative step
+for (i in 1:itera){
+  ai <- get_points(strA1)[1,1]
+  bi <- get_points(strA1)[1,2]
+  
+  binA <- which(ai <= splits)[1]
+  binsA <-binsA * alpha
+  binsA[binA] <- binsA[binA] + 1
+  
+  binB <- which(bi <= splits)[1]
+  binsB <-binsB * alpha
+  binsB[binB] <- binsB[binB] + 1
+  
+  mx<-mx * alpha #multiplying the matrix by alpha before updating it 
+  mx[binA,binB]<-mx[binA,binB] + 1 # updating the matrix with a new count
+  
+  windowA <- c(windowA, ai)
+  windowB <- c(windowB, bi)
+  
+  if (length(window) >  w) {
+    oldbinA <- which(windowA[1] <= splits)[1]
+    binsA[oldbinA] <- binsA[oldbinA] - 1
+    windowA <- windowA[-1]
+    
+    oldbinB <- which(windowB[1] <= splits)[1]
+    binsB[oldbinB] <- binsB[oldbinB] - 1
+    windowB <- windowB[-1]
+    
+    mx[oldbinA,oldbinB]<-mx[oldbinA,oldbinB] - alpha^w
+  }
+  
+    if (i %% 500 == 0){
+    cat("\n ### Iteration",i, "\n")
+    print(binsA)
+    print(binsB)
+  }
+}
+```
+
+heat map with the values of the matrix
+```{r}
+heatmap(mx, Colv = NA, Rowv = NA, scale="none", symm = F, revC = T,
+        main = "Weighted Distribution")
+```
+
+### keep sample matrix over a alpha fading window
+
+definitions and initialization
+```{r}
+set.seed(1)
+reset_stream(strA1)
+
+w <- 500
+eps <- 0.05
+alpha <- eps^(1/w)
+
+binsA <- rep(0, length(splits))
+names(binsA) <- paste("<=",splits,sep="")
+
+binsB <- rep(0, length(splits))
+names(binsB) <- paste("<=",splits,sep="")
+
+mx<-matrix(0,10,10)
+rownames(mx)<-colnames(mx)<-names(binsA)
+```
+
+iteration
+```{r}
+# iterative step
+for (i in 1:itera){
+  ai <- get_points(strA1)[1,1]
+  bi <- get_points(strA1)[1,2]
+  
+  binA <- which(ai <= splits)[1]
+  binsA[binA] <- binsA[binA] + 1
+  
+  binB <- which(bi <= splits)[1]
+  binsB[binB] <- binsB[binB] + 1
+  
+  mx<-mx * alpha # multiplying the matrix by alpha before updating it
+  mx[binA,binB]<-mx[binA,binB] + 1 # updating the matix
+  
+    if (i %% 500 == 0){
+    cat("\n ### Iteration",i, "\n")
+    print(binsA)
+    print(binsB)
+  }
+}
+  
+```
+
+heat map with the values of the matrix
+```{r}
+
+heatmap(mx, Colv = NA, Rowv = NA, scale="none", symm = F, revC = T,
+        main = "Fading Distribution")
+```
+
+
+### Bonus
+for a diferent solution
+
+https://rpubs.com/franzbischoff/hida_assign1

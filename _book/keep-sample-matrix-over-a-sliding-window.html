@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 keep sample matrix over a sliding window | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 keep sample matrix over a sliding window | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 keep sample matrix over a sliding window | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-02-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="keep-sample-matrix.html"/>
+<link rel="next" href="keep-sample-matrix-over-a-alpha-weighted-sliding-window.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="2.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+<li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="keep-sample-matrix.html"><a href="keep-sample-matrix.html"><i class="fa fa-check"></i><b>3</b> keep sample matrix</a></li>
+<li class="chapter" data-level="4" data-path="keep-sample-matrix-over-a-sliding-window.html"><a href="keep-sample-matrix-over-a-sliding-window.html"><i class="fa fa-check"></i><b>4</b> keep sample matrix over a sliding window</a></li>
+<li class="chapter" data-level="5" data-path="keep-sample-matrix-over-a-alpha-weighted-sliding-window.html"><a href="keep-sample-matrix-over-a-alpha-weighted-sliding-window.html"><i class="fa fa-check"></i><b>5</b> keep sample matrix over a alpha weighted sliding window</a></li>
+<li class="chapter" data-level="6" data-path="keep-sample-matrix-over-a-alpha-fading-window.html"><a href="keep-sample-matrix-over-a-alpha-fading-window.html"><i class="fa fa-check"></i><b>6</b> keep sample matrix over a alpha fading window</a></li>
+<li class="chapter" data-level="7" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>7</b> STATS</a><ul>
+<li class="chapter" data-level="7.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>7.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="7.2" data-path="lesson-2-1.html"><a href="lesson-2-1.html"><i class="fa fa-check"></i><b>7.2</b> Lesson 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>8</b> LEARN</a><ul>
+<li class="chapter" data-level="8.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>8.1</b> Lesson 1</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>9</b> BAYES</a></li>
+<li class="chapter" data-level="10" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>10</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="10.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>10.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>10.1.1</b> Bruno Lima</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="keep-sample-matrix-over-a-sliding-window" class="section level1">
+<h1><span class="header-section-number">4</span> keep sample matrix over a sliding window</h1>
+<p>definitions and initialization</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb78-2" title="2"><span class="kw">reset_stream</span>(strA1)</a>
+<a class="sourceLine" id="cb78-3" title="3">w &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb78-4" title="4"></a>
+<a class="sourceLine" id="cb78-5" title="5">binsA &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(splits))</a>
+<a class="sourceLine" id="cb78-6" title="6"><span class="kw">names</span>(binsA) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;&lt;=&quot;</span>,splits,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb78-7" title="7"></a>
+<a class="sourceLine" id="cb78-8" title="8">binsB &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(splits))</a>
+<a class="sourceLine" id="cb78-9" title="9"><span class="kw">names</span>(binsB) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;&lt;=&quot;</span>,splits,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb78-10" title="10"></a>
+<a class="sourceLine" id="cb78-11" title="11">mx&lt;-<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb78-12" title="12"><span class="kw">rownames</span>(mx)&lt;-<span class="kw">colnames</span>(mx)&lt;-<span class="kw">names</span>(binsA)</a>
+<a class="sourceLine" id="cb78-13" title="13"></a>
+<a class="sourceLine" id="cb78-14" title="14">windowA &lt;-<span class="st"> </span>windowB &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
+<p>iteration</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="co"># iterative step</span></a>
+<a class="sourceLine" id="cb79-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb79-3" title="3">  ai &lt;-<span class="st"> </span><span class="kw">get_points</span>(strA1)[<span class="dv">1</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-4" title="4">  bi &lt;-<span class="st"> </span><span class="kw">get_points</span>(strA1)[<span class="dv">1</span>,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb79-5" title="5">  </a>
+<a class="sourceLine" id="cb79-6" title="6">  binA &lt;-<span class="st"> </span><span class="kw">which</span>(ai <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-7" title="7">  binsA[binA] &lt;-<span class="st"> </span>binsA[binA] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb79-8" title="8">  </a>
+<a class="sourceLine" id="cb79-9" title="9">  binB &lt;-<span class="st"> </span><span class="kw">which</span>(bi <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-10" title="10">  binsB[binB] &lt;-<span class="st"> </span>binsB[binB] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb79-11" title="11">  </a>
+<a class="sourceLine" id="cb79-12" title="12">  mx[binA,binB]&lt;-mx[binA,binB] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb79-13" title="13">  </a>
+<a class="sourceLine" id="cb79-14" title="14">  windowA &lt;-<span class="st"> </span><span class="kw">c</span>(windowA, ai) <span class="co"># defining two windows</span></a>
+<a class="sourceLine" id="cb79-15" title="15">  windowB &lt;-<span class="st"> </span><span class="kw">c</span>(windowB, bi) <span class="co"># one for each stream</span></a>
+<a class="sourceLine" id="cb79-16" title="16">  </a>
+<a class="sourceLine" id="cb79-17" title="17">    <span class="cf">if</span> (<span class="kw">length</span>(windowA) <span class="op">&gt;</span><span class="st">  </span>w) {</a>
+<a class="sourceLine" id="cb79-18" title="18">    oldbinA &lt;-<span class="st"> </span><span class="kw">which</span>(windowA[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-19" title="19">    binsA[oldbinA] &lt;-<span class="st"> </span>binsA[oldbinA] <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb79-20" title="20">    windowA &lt;-<span class="st"> </span>windowA[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-21" title="21">    </a>
+<a class="sourceLine" id="cb79-22" title="22">    oldbinB &lt;-<span class="st"> </span><span class="kw">which</span>(windowB[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>splits)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-23" title="23">    binsB[oldbinB] &lt;-<span class="st"> </span>binsB[oldbinB] <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb79-24" title="24">    windowB &lt;-<span class="st"> </span>windowB[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb79-25" title="25">    </a>
+<a class="sourceLine" id="cb79-26" title="26">    mx[oldbinA,oldbinB]&lt;-mx[oldbinA,oldbinB] <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="co"># droping the first value from the window</span></a>
+<a class="sourceLine" id="cb79-27" title="27">    }</a>
+<a class="sourceLine" id="cb79-28" title="28">  </a>
+<a class="sourceLine" id="cb79-29" title="29">  <span class="co"># printing the two vectors just for control</span></a>
+<a class="sourceLine" id="cb79-30" title="30">  <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">500</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb79-31" title="31">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> ### Iteration&quot;</span>,i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb79-32" title="32">    <span class="kw">print</span>(binsA)</a>
+<a class="sourceLine" id="cb79-33" title="33">    <span class="kw">print</span>(binsB)</a>
+<a class="sourceLine" id="cb79-34" title="34">  }</a>
+<a class="sourceLine" id="cb79-35" title="35">}</a></code></pre></div>
+<pre><code>## 
+##  ### Iteration 500 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       55       53      117      186       26       12       22       11 
+##  &lt;=464.6    &lt;=547 
+##        8       10 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       28       24       65      268       90       14        9        2 
+##  &lt;=464.6    &lt;=547 
+##        0        0 
+## 
+##  ### Iteration 1000 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       47       43      108      176       63       16       20        8 
+##  &lt;=464.6    &lt;=547 
+##       10        9 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       35       17       68      287       68       12       10        3 
+##  &lt;=464.6    &lt;=547 
+##        0        0 
+## 
+##  ### Iteration 1500 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       56       46      111      155       48       18       29       13 
+##  &lt;=464.6    &lt;=547 
+##       13       11 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       39       29       37      275       87       19       11        3 
+##  &lt;=464.6    &lt;=547 
+##        0        0 
+## 
+##  ### Iteration 2000 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       62       42       98      180       55       14       22        8 
+##  &lt;=464.6    &lt;=547 
+##        9       10 
+## &lt;=-194.6 &lt;=-112.2  &lt;=-29.8   &lt;=52.6    &lt;=135  &lt;=217.4  &lt;=299.8  &lt;=382.2 
+##       31       20       51      283       86       19        8        2 
+##  &lt;=464.6    &lt;=547 
+##        0        0</code></pre>
+<p>heat map with the values of the matrix</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">heatmap</span>(mx, <span class="dt">Colv =</span> <span class="ot">NA</span>, <span class="dt">Rowv =</span> <span class="ot">NA</span>, <span class="dt">scale=</span><span class="st">&quot;none&quot;</span>, <span class="dt">symm =</span> F, <span class="dt">revC =</span> T,</a>
+<a class="sourceLine" id="cb81-2" title="2">        <span class="dt">main =</span> <span class="st">&quot;Sliding Distribution Heat Map&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="keep-sample-matrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="keep-sample-matrix-over-a-alpha-weighted-sliding-window.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
