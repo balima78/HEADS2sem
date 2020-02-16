@@ -65,9 +65,10 @@ iteration
 ```{r}
 # iterative step
 for (i in 1:itera){
-  
-  ai <- get_points(strA1)[1,1]
-  bi <- get_points(strA1)[1,2]
+  str<-get_points(strA1)
+
+  ai <- str[1,1]
+  bi <- str[1,2]
   
   binA <- which(ai <= splits)[1]
   binsA[binA] <- binsA[binA] + 1
@@ -117,8 +118,10 @@ iteration
 ```{r}
 # iterative step
 for (i in 1:itera){
-  ai <- get_points(strA1)[1,1]
-  bi <- get_points(strA1)[1,2]
+  str<-get_points(strA1)
+
+  ai <- str[1,1]
+  bi <- str[1,2]
   
   binA <- which(ai <= splits)[1]
   binsA[binA] <- binsA[binA] + 1
@@ -187,8 +190,10 @@ iteration
 ```{r}
 # iterative step
 for (i in 1:itera){
-  ai <- get_points(strA1)[1,1]
-  bi <- get_points(strA1)[1,2]
+  str<-get_points(strA1)
+
+  ai <- str[1,1]
+  bi <- str[1,2]
   
   binA <- which(ai <= splits)[1]
   binsA <-binsA * alpha
@@ -255,8 +260,10 @@ iteration
 ```{r}
 # iterative step
 for (i in 1:itera){
-  ai <- get_points(strA1)[1,1]
-  bi <- get_points(strA1)[1,2]
+  str<-get_points(strA1)
+
+  ai <- str[1,1]
+  bi <- str[1,2]
   
   binA <- which(ai <= splits)[1]
   binsA[binA] <- binsA[binA] + 1
