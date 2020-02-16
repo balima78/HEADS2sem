@@ -1,0 +1,266 @@
+## Lesson 2
+
+2020-02-11
+
+
+```{r}
+# Load package 'caret'
+library(caret)
+# Load package 'pROC'
+library(pROC)
+```
+
+continuation of the previous classe. All the code was provided by the professor.
+
+```{r}
+# loading and preparing the data
+dataset <- read.csv("2.UploadedData/dataR2.csv")
+
+# Define Classification as factor
+dataset$Classification <- factor(dataset$Classification, levels=1:2, labels=c("Control", "Patient"))
+
+# Holdout a validation set, by defining the indices of the training set
+training.index <- createDataPartition(dataset$Classification, p=0.8, list=FALSE)
+validation <- dataset[-training.index,]
+dataset <- dataset[training.index,]
+
+```
+
+Dimensions (should be 116 observations and 10 variables)
+```{r}
+dim(dataset)
+```
+
+
+```{r}
+# Split input and output
+input <- dataset[,-10]
+output <- dataset[,10]
+```
+
+### Test harness
+
+- Define the metric
+- `metric <- "ROC"`
+- Define the estimation method
+- `control <- trainControl(...)`
+- Train the model with chosen metric and method (output is factor with "Yes" or "No")
+- `fit.model <- train(output ~ ., data=dataset, method="nnet", metric=metric, trControl=control)`
+- Plot ROC curve
+- `plot.roc(fit.model$pred$obs,fit.model$pred$Yes, main=fit.model$method, print.auc=T)`
+
+```{r}
+# Run algorithm using different validation approaches
+metric <- "ROC"
+```
+
+#### Run algorithm using 20% hold-out validation
+```{r}
+control <- trainControl(method="LGOCV", p=0.8, number=1,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE)
+
+set.seed(7)
+fit.cart.hold <- train(Classification ~ ., data=dataset, method="rpart", metric=metric, trControl=control)
+
+set.seed(7)
+fit.nb.hold <- train(Classification ~ ., data=dataset, method="naive_bayes", metric=metric, trControl=control)
+
+```
+
+Summarize accuracy of models
+```{r}
+fit.models <- list(rpart=fit.cart.hold, nb=fit.nb.hold)
+results <- resamples(fit.models)
+summary(results)
+```
+
+ROC curves for models
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patient, main=paste("20% Hold-out -",fit$method), debug=F, print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+#### Run algorithm using multiple 20% hold-out validation
+```{r}
+control <- trainControl(method="LGOCV", p=0.8, number=25,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE)
+
+set.seed(7)
+fit.cart.mhold <- train(Classification ~ ., data=dataset, method="rpart", metric=metric, trControl=control)
+
+set.seed(7)
+fit.nb.mhold <- train(Classification ~ ., data=dataset, method="naive_bayes", metric=metric, trControl=control)
+
+```
+
+Summarize accuracy of models
+```{r}
+fit.models <- list(rpart=fit.cart.mhold, nb=fit.nb.mhold)
+results <- resamples(fit.models)
+summary(results)
+```
+
+ROC curves for models
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patient, main=paste("25 x 20% Hold-out -",fit$method), debug=F, print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+#### Run algorithm using 10-fold cross validation
+```{r}
+control <- trainControl(method="cv", number=10,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE, repeats = 1)
+
+set.seed(7)
+fit.cart.cv <- train(Classification ~ ., data=dataset, method="rpart", metric=metric, trControl=control)
+
+set.seed(7)
+fit.nb.cv <- train(Classification ~ ., data=dataset, method="naive_bayes", metric=metric, trControl=control)
+```
+
+Summarize accuracy of models
+```{r}
+fit.models <- list(rpart=fit.cart.cv, nb=fit.nb.cv)
+results <- resamples(fit.models)
+summary(results)
+```
+
+ROC curves for models
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patient, main=paste("10-fold CV -",fit$method), debug=F, print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+#### Run algorithm using 25 times 10-fold cross validation
+```{r}
+control <- trainControl(method="repeatedcv", number=10,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE, repeats = 25)
+
+set.seed(7)
+fit.cart.rcv <- train(Classification ~ ., data=dataset, method="rpart", metric=metric, trControl=control)
+
+set.seed(7)
+fit.nb.rcv <- train(Classification ~ ., data=dataset, method="naive_bayes", metric=metric, trControl=control)
+```
+
+Summarize accuracy of models
+```{r}
+fit.models <- list(rpart=fit.cart.rcv, nb=fit.nb.rcv)
+results <- resamples(fit.models)
+summary(results)
+```
+
+ROC curves for models
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patient, main=paste("25 x 10-fold CV -",fit$method), debug=F, print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+#### Run algorithm using leave-one-out validation
+```{r}
+control <- trainControl(method="LOOCV",
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE)
+
+set.seed(7)
+fit.cart.loo <- train(Classification ~ ., data=dataset, method="rpart", metric=metric, trControl=control)
+
+set.seed(7)
+fit.nb.loo <- train(Classification ~ ., data=dataset, method="naive_bayes", metric=metric, trControl=control)
+```
+
+Summarize accuracy of models
+```{r}
+fit.models <- list(rpart=fit.cart.loo, nb=fit.nb.loo)
+#results <- resamples(fit.models)
+#summary(results)
+summary(fit.models)
+```
+
+ROC curves for models
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patient, main=paste("Leave-One-Out -",fit$method), debug=F, print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+#### Run algorithm using bootstrap validation
+```{r}
+control <- trainControl(method="boot_all", number=25,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE)
+
+set.seed(7)
+fit.cart.boot <- train(Classification ~ ., data=dataset, method="rpart", metric=metric, trControl=control)
+
+set.seed(7)
+fit.nb.boot <- train(Classification ~ ., data=dataset, method="naive_bayes", metric=metric, trControl=control)
+```
+
+Summarize accuracy of models
+```{r}
+fit.models <- list(rpart=fit.cart.boot, nb=fit.nb.boot)
+results <- resamples(fit.models)
+summary(results)
+```
+
+ROC curves for models
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patient, main=paste("25 x Bootstrap -",fit$method), debug=F, print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+
+### Make predictions
+
+Estimate skill of GLM Step AIC on the validation dataset
+```{r}
+par(mfrow=c(1,1))
+
+predictions.prob <- predict(fit.nb.boot, validation, type="prob")
+predictions <- predict(fit.nb.boot, validation, type="raw")
+confusionMatrix(predictions, validation$Classification)
+plot.roc(validation$Classification, predictions.prob$Patient, print.auc=T)
+
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
