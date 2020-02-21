@@ -1,0 +1,202 @@
+## Assignment Trees 
+
+2020-02-21
+
+Compare a decision tree with a random forest in the Cervical Cancer (Risk Factors) data set (available from UCI repository), trying to accurately classify Dx.Cancer
+
+```{r }
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### load data
+
+```{r}
+library(tidyverse)
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(pROC)
+
+data <- read.csv("2.UploadedData/risk_factors_cervical_cancer.csv", na.strings = "?")
+
+## select columns 0/1
+colMax <- function(data) sapply(data, max, na.rm = TRUE)
+
+cols<-colMax(data) %>% data.frame(max=.) %>% rownames_to_column("cols") %>% 
+  filter(max==1) %>% .$cols
+
+# factorize columns 0/1
+data<-data %>% mutate_at(cols, ~factor(.,levels = 0:1, labels = c("no","yes")))
+
+# excluded columns only with zeros and Dxs
+data<-data %>% select(-STDs.AIDS,-STDs.cervical.condylomatosis,
+                      -Dx.CIN, -Dx.HPV, -Dx)
+```
+
+summarize the data
+```{r}
+summary(data)
+table(data$Dx.Cancer)
+```
+
+missing data
+```{r}
+library(Amelia)
+missmap(data)
+```
+
+new data
+```{r}
+# variables with a low number of missings
+vars<-c("Age","Hinselmann","Schiller","Citology","Biopsy","Number.of.sexual.partners"
+        ,"Smokes..packs.year.","Smokes..years.","Smokes", "First.sexual.intercourse",
+        "STDs..Number.of.diagnosis", "Dx.Cancer")
+data.new<-data %>% select(vars)
+```
+
+### Classification tree
+```{r}
+model1 <- rpart(Dx.Cancer ~ ., data = data.new,
+               method="class", control =rpart.control(minsplit =1,minbucket=3, cp=0)
+               )
+par(xpd = NA) # otherwise on some devices the text is clipped
+plot(model1)
+text(model1, digits = 3)
+
+print(model1, digits = 2)
+
+```
+
+```{r}
+## accuracy on train data
+predicted.classes <- model1 %>% 
+  predict(data.new, type = "class")
+
+# Compute model accuracy
+mean(predicted.classes == data.new$Dx.Cancer)
+```
+
+train model Tree with repeated 3*10-fold CV
+```{r}
+# set definitions
+metric <- "ROC"
+
+control <- trainControl(method="repeatedcv", number=10,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE, repeats=3)
+
+# regression tree with repeated 3*10-fold CV
+set.seed(1)
+model2 <- train(
+  Dx.Cancer ~ ., 
+  data = data.new, 
+  method = "rpart",
+  trControl = control,
+  metric = metric,
+  na.action=na.exclude
+  #tuneLength = 10
+)
+
+```
+
+Accuracy of the model2
+```{r}
+predicted.prob <- model2 %>% 
+  predict(data, type = "prob")
+pred.class<-ifelse(predicted.prob$yes < 0.5, "no", "yes")
+mean(pred.class == data.new[complete.cases(data.new),]$Dx.Cancer)
+```
+
+### Random forest with repeated 3*10-fold CV
+```{r}
+set.seed(1)
+model3 <- train(
+  Dx.Cancer ~ ., 
+  data = data.new, 
+  method = "rf",
+  trControl = control,
+  metric = metric,
+  na.action=na.exclude
+)
+```
+
+compare models
+```{r}
+fit.models <- list(rpart=model2, rf=model3)
+results <- resamples(fit.models)
+summary(results)
+```
+
+plot ROC
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, 
+                                                  main=paste("3x10-fold-CV",fit$method), 
+                                                  debug=F, print.auc=T)})
+```
+
+compare accuracy  of models
+```{r}
+dotplot(results)
+```
+
+Inspect model Tree
+```{r}
+print(model2)
+```
+
+inspect model Random Forest
+```{r}
+print(model3)
+```
+
+ROC / complexity for models
+Tree
+```{r}
+#plot(model2)
+```
+
+RF
+```{r}
+plot(model3)
+```
+
+### Improve Random Forest
+```{r}
+myGrid<-expand.grid(mtry=1:11) # number of independent variables
+
+set.seed(1)
+model3.tune <- train(Dx.Cancer ~ ., data=data.new, 
+                         method="rf", metric=metric, 
+                         trControl=control,
+                        na.action=na.exclude,
+                         tuneGrid = myGrid)
+```
+
+compare models
+```{r}
+fit.models<-list(rpart=model2,rf=model3,rf.tune=model3.tune)
+results<-resamples(fit.models)
+summary(results)
+```
+
+ROC curves
+```{r}
+par(mfrow=c(1,3))
+rocs<-lapply(fit.models,
+             function(fit){plot.roc(fit$pred$obs,
+                                    fit$pred$yes,
+                                    main=paste("3x10-fold CV-",fit$method),debug=F,print.auc=T)})
+```
+
+ROC, sens and spec
+```{r}
+dotplot(results)
+```
+
+
+http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials
+https://bradleyboehmke.github.io/HOML/DT.html
+https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/
+

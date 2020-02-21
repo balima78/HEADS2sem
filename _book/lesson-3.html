@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-19" />
+<meta name="date" content="2020-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="lesson-2-2.html"/>
-<link rel="next" href="bayes.html"/>
+<link rel="next" href="assignment-trees.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -156,7 +156,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="lesson-2-2.html"><a href="lesson-2-2.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
 <li class="chapter" data-level="4.2.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a></li>
+<li class="chapter" data-level="4.3" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="lesson-3.html"><a href="lesson-3.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="lesson-3.html"><a href="lesson-3.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="lesson-3.html"><a href="lesson-3.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="assignment-trees.html"><a href="assignment-trees.html#load-data"><i class="fa fa-check"></i><b>4.4.1</b> load data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="assignment-trees.html"><a href="assignment-trees.html#classification-tree"><i class="fa fa-check"></i><b>4.4.2</b> Classification tree</a></li>
+<li class="chapter" data-level="4.4.3" data-path="assignment-trees.html"><a href="assignment-trees.html#random-forest-with-repeated-310-fold-cv"><i class="fa fa-check"></i><b>4.4.3</b> Random forest with repeated 3*10-fold CV</a></li>
+<li class="chapter" data-level="4.4.4" data-path="assignment-trees.html"><a href="assignment-trees.html#improve-random-forest-1"><i class="fa fa-check"></i><b>4.4.4</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#load-data-1"><i class="fa fa-check"></i><b>4.5.1</b> load data</a></li>
+<li class="chapter" data-level="4.5.2" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#up-sample-data"><i class="fa fa-check"></i><b>4.5.2</b> Up sample data</a></li>
+<li class="chapter" data-level="4.5.3" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#classification-tree-by-two-methods"><i class="fa fa-check"></i><b>4.5.3</b> Classification tree by two methods</a></li>
+<li class="chapter" data-level="4.5.4" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#train-models-cart-and-rf-with-repeated-310-fold-cv"><i class="fa fa-check"></i><b>4.5.4</b> train models CART and RF with repeated 3*10-fold CV</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
@@ -188,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lesson-3" class="section level2">
 <h2><span class="header-section-number">4.3</span> Lesson 3</h2>
 <p>2020-02-18</p>
-<div id="using-rpart-and-the-breast-cancer-coimbra-data-set" class="section level4">
-<h4><span class="header-section-number">4.3.0.1</span> Using ‘rpart’ and the Breast Cancer Coimbra data set</h4>
+<div id="using-rpart-and-the-breast-cancer-coimbra-data-set" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Using ‘rpart’ and the Breast Cancer Coimbra data set</h3>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1"><span class="co"># Define the filename</span></a>
 <a class="sourceLine" id="cb261-2" title="2">filename &lt;-<span class="st"> &quot;2.UploadedData/dataR2.csv&quot;</span></a>
 <a class="sourceLine" id="cb261-3" title="3"></a>
@@ -524,8 +540,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb267-5" title="5"><span class="kw">text</span>(tree.gini)</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 </div>
-<div id="random-forest" class="section level4">
-<h4><span class="header-section-number">4.3.0.2</span> Random Forest</h4>
+<div id="random-forest" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Random Forest</h3>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1"><span class="kw">library</span>(caret)</a>
 <a class="sourceLine" id="cb268-2" title="2"><span class="kw">library</span>(pROC)</a></code></pre></div>
 <p>Run algorithms using 3 times 10-fold cross validation</p>
@@ -636,8 +652,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="kw">plot</span>(fit.rf.rcv)</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-146-2.png" width="672" /></p>
 </div>
-<div id="improve-random-forest" class="section level4">
-<h4><span class="header-section-number">4.3.0.3</span> Improve Random Forest</h4>
+<div id="improve-random-forest" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Improve Random Forest</h3>
 <div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1">myGrid&lt;-<span class="kw">expand.grid</span>(<span class="dt">mtry=</span><span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># numero de variaveis/colunas a considerar na RF</span></a>
 <a class="sourceLine" id="cb289-2" title="2"></a>
 <a class="sourceLine" id="cb289-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
@@ -697,14 +713,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="lesson-2-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="assignment-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

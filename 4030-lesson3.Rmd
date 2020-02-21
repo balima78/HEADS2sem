@@ -2,7 +2,7 @@
 
 2020-02-18
 
-#### Using ‘rpart’ and the Breast Cancer Coimbra data set
+### Using ‘rpart’ and the Breast Cancer Coimbra data set
 
 ```{r}
 # Define the filename
@@ -44,7 +44,7 @@ plot(tree.gini, main="Gini")
 text(tree.gini)
 ```
 
-#### Random Forest
+### Random Forest
 ```{r}
 library(caret)
 library(pROC)
@@ -113,7 +113,7 @@ plot(fit.cart.rcv)
 plot(fit.rf.rcv)
 ```
 
-#### Improve Random Forest
+### Improve Random Forest
 ```{r}
 myGrid<-expand.grid(mtry=1:9) # numero de variaveis/colunas a considerar na RF
 

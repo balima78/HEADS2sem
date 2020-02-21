@@ -1,0 +1,164 @@
+## Assignment Trees - Up Sampling
+
+In this excercise we have a disparity in the frequencies of the observed classes we want to predict.  For resolving such a class imbalance we can up sampling our data as described elsewhere:
+https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques
+
+```{r }
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### load data
+
+```{r}
+library(tidyverse)
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(pROC)
+
+data <- read.csv("2.UploadedData/risk_factors_cervical_cancer.csv", na.strings = "?")
+
+## select columns 0/1
+colMax <- function(data) sapply(data, max, na.rm = TRUE)
+
+cols<-colMax(data) %>% data.frame(max=.) %>% rownames_to_column("cols") %>% 
+  filter(max==1) %>% .$cols
+
+# factorize columns 0/1
+data<-data %>% mutate_at(cols, ~factor(.,levels = 0:1, labels = c("no","yes")))
+
+# excluded columns only with zeros and Dxs
+data<-data %>% select(-STDs.AIDS,-STDs.cervical.condylomatosis,
+                      -Dx.CIN, -Dx.HPV, -Dx)
+```
+
+summarize the data
+```{r}
+summary(data)
+table(data$Dx.Cancer)
+```
+
+### Up sample data
+```{r}
+# upsample data
+set.seed(1)
+up_data <- upSample(x = data[, !colnames(data) %in% "Dx.Cancer"],
+                     y = data$Dx.Cancer)
+# sumarize it
+# now the dependent variable is named 'Class'
+table(up_data$Class)
+```
+
+
+missing data
+```{r}
+library(Amelia)
+# missings on original data
+missmap(data)
+```
+
+new data
+```{r}
+# select only variable with low number of missings
+vars<-c("Age","Hinselmann","Schiller","Citology","Biopsy","Number.of.sexual.partners"
+        ,"Smokes..packs.year.","Smokes..years.","Smokes", "First.sexual.intercourse",
+        "STDs..Number.of.diagnosis", "Class")
+up_data<-up_data %>% select(vars)
+```
+
+
+### Classification tree by two methods
+```{r}
+# learn tree with Gini impurity
+tree.gini<-rpart(Class~.,data = up_data, cp = 0.1)
+
+# learn tree with information gain
+tree.information<-rpart(Class~., data=up_data,
+                        parms=list(split="information"))
+
+par(mfrow=c(1,2))
+plot(tree.information,main="Information")
+text(tree.information)
+plot(tree.gini, main="Gini")
+text(tree.gini)
+
+```
+
+### train models CART and RF with repeated 3*10-fold CV
+```{r}
+# 
+# set definitions
+metric <- "ROC"
+control <- trainControl(method="repeatedcv", number=10,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=T,
+                        savePredictions = TRUE, repeats=3)
+
+set.seed(7)
+fit.cart.rcv <- train(Class ~ ., data=up_data, method="rpart", metric=metric, trControl=control,
+                      na.action=na.exclude)
+
+set.seed(7)
+fit.rf.rcv <- train(Class ~ ., data=up_data, method="rf", metric=metric, trControl=control,
+                    na.action=na.exclude)
+```
+
+compare CART with RF 
+```{r}
+fit.models <- list(rpart=fit.cart.rcv, rf=fit.rf.rcv)
+results <- resamples(fit.models)
+summary(results)
+
+par(mfrow=c(1,2))
+rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, 
+                                                  main=paste("3x10-fold-CV",fit$method), 
+                                                  debug=F, print.auc=T)})
+
+dotplot(results)
+print(fit.cart.rcv)
+print(fit.rf.rcv)
+
+plot(fit.cart.rcv)
+plot(fit.rf.rcv)
+```
+
+tunning RF model
+```{r}
+myGrid<-expand.grid(mtry=1:11) # number of variables  when constructing the RF
+
+set.seed(7)
+fit.rf.rcv.tune <- train(Class ~ ., data=up_data, 
+                         method="rf", metric=metric, 
+                         trControl=control,
+                         tuneGrid = myGrid,
+                         na.action=na.exclude)
+```
+
+compare the 3 models
+```{r}
+fit.models<-list(rpart=fit.cart.rcv,rf = fit.rf.rcv, rf.tune=fit.rf.rcv.tune)
+
+results<-resamples(fit.models)
+summary(results)
+```
+
+ROCs from models
+```{r}
+par(mfrow=c(1,3))
+rocs<-lapply(fit.models,
+             function(fit){plot.roc(fit$pred$obs,
+                                    fit$pred$yes,
+                                    main=paste("3x10-fold CV-",fit$method),debug=F,print.auc=T)})
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+
+http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials
+https://bradleyboehmke.github.io/HOML/DT.html
+https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques
+https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/
+
