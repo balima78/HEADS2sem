@@ -1,0 +1,160 @@
+## Lesson 3
+
+2020-02-17
+
+**Classe Exercises** (almost all code given by the professor)
+
+```{r }
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### Kernel density estimation
+```{r}
+data(faithful)
+hist(faithful$waiting, density = 10,
+     main="wainting time to next eruption",
+     xlab="minutes", freq=F)
+lines(density(faithful$waiting),lwd=2,col=4)
+lines(density(faithful$waiting, bw = 5),lwd=2,col=5) # defining a banwith = 5 in density function
+lines(density(faithful$waiting, bw = 10),lwd=2,col=6) # defining a banwith = 10 in density function
+
+```
+
+### Conditional density
+With data from Coimbra Breast Cancer (Glucose | Classification)
+```{r}
+breast<-read.csv("2.UploadedData/dataR2.csv")
+
+hist(breast$Glucose, density = 10,
+     main="Glucose level",
+     xlab="", freq=F, ylim = c(0,0.05))
+lines(density(breast$Glucose),
+      lwd=2,col="black")
+lines(density(subset(breast,Classification == 1)$Glucose),
+      lwd=2,col="green")
+lines(density(subset(breast,Classification == 2)$Glucose),
+      lwd=2,col="red")
+legend(130,0.03, 
+       legend=c("P(Glucose)","P(Glucose|Control)","P(Glucose|Patient)"), 
+       col=c("black","green","red"),
+       lty = 1,
+       cex = 0.8
+       )
+```
+
+### Expectation Maximization for the two latent variables
+Example with Age distribution in the breast cancer data set
+```{r}
+# read data
+breast<-read.csv("2.UploadedData/dataR2.csv")
+
+# Expectation Maximization for the two latent variables (clusters)
+m<-2 # the total number of clusters (m)
+set.seed(0)
+param.mean<-sample(breast$Age,m) # initial parameters
+param.sd<-rep(sd(breast$Age)/m,m) # initial parameters
+
+# E-step (Expectation): that estimates the probability of each point belonging to each cluster
+xx<-breast$Age
+
+## definition of M-step method
+alternative <- 1
+
+## iteraction process
+itera <-10 # maximum number of iterations
+eps<-0.01 # minimum error to convergence
+for (k in 1:itera) {
+densities<-sapply(1:m, 
+                  function(i){dnorm(xx,
+                                    mean=param.mean[i],
+                                    sd=param.sd[i])})
+relevance<-t(apply(densities,1,function(l){l/sum(l)}))
+
+attrib<-t(apply(relevance,1,
+                function(l){replace(rep(0,m),which.max(l)[1],1)}))
+
+# Re-estimates the parameters of the probability distribution of each class
+if (alternative == 1) {
+## M-step (alternative 1: crisp)
+  param.mean.new<-sapply(1:m,
+                         function(j){mean(breast$Age[attrib[,j]==1])})
+  param.sd.new<-sapply(1:m,
+                       function(j){sqrt(sum(relevance[,j]*(breast$Age-param.mean[j])^2)/sum(relevance[,j]))})
+} else {
+## M-step (alternative 2: soft)
+  param.mean.new<-sapply(1:m,
+                         function(j){sum(breast$Age*relevance[,j])/sum(relevance[,j])})
+  param.sd.new<-sapply(1:m,
+                       function(j){sqrt(sum(relevance[,j]*(breast$Age-param.mean[j])^2)/sum(relevance[,j]))})
+  
+}
+
+# convergence the maximum number of iterations (k).
+cat("iteration", itera, "evolution:", 
+    dif<-sum(abs(param.mean.new - param.mean)), "\n")
+if(dif < eps) break # the accepted error to converge (e)
+param.mean<-param.mean.new
+param.sd<-param.sd.new
+}
+```
+
+Print the two new density lines with a large banwith
+```{r}
+# plot histogram and density function for Age
+hist(breast$Age, density = 20,
+     main="Glucose level",
+     xlab="", freq=F, ylim = c(0,0.03))
+lines(density(breast$Age),
+      lwd=2,col="black")
+
+set.seed(0)
+lines(density(rnorm(100, param.mean[1], param.sd[1]), bw = 12),lwd=2,col=5)
+lines(density(rnorm(100, param.mean[2], param.sd[2]), bw = 12),lwd=2,col=4)
+```
+
+### Data Generation
+Comparing the distribution from data generated from 3 different ways
+```{r}
+## length of data set generation
+n<-100
+
+# original sample data set
+sample<-breast$Age
+
+# bootstrapped sample data set
+sample.obs<-sample(breast$Age, size=n, replace = TRUE)
+
+# gaussian generated data set
+sample.simple<-rnorm(n,mean=mean(breast$Age), sd=sd(breast$Age))
+
+# EM model generated data set
+classes<-apply(attrib, 1, which.max) # using attrib define previously, to calculate the number of observations in each class
+class.prop<-prop.table(table(classes)) # calculate percentage of each class
+set.seed(523)
+sample.classes<-sample(1:m, size=n, replace=TRUE, prob=class.prop)
+sample.prop<-prop.table(table(sample.classes))
+sample.values<-round(unlist(sapply(1:m,
+                                   function(j){
+                                     rnorm(n*sample.prop[j], # generating number with the proportions of the two classes we identified previously
+                                           mean=param.mean[j], # parameters defined previously
+                                           sd=param.sd[j]) # parameters defined previously
+                                   })),0)
+```
+
+Printing the distribution of the 4 data samples
+```{r}
+par(mfrow=c(2,2))
+
+hist(breast$Age, freq = F, main = "Observed data")
+lines(density(breast$Age))
+
+hist(sample.obs, freq = F, main = "data points sampled from observed data")
+lines(density(sample.obs))
+
+hist(sample.simple, freq = F, main = "data points generated from sample distribution")
+lines(density(sample.simple))
+
+hist(sample.values, freq = F, main = "data points generated from EM (m=2)")
+lines(density(sample.values))
+```
+

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-21" />
+<meta name="date" content="2020-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
 <li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
 </ul></li>
+<li class="chapter" data-level="2.5" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>2.5</b> Lesson 3</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="lesson-3.html"><a href="lesson-3.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lesson-3.html"><a href="lesson-3.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lesson-3.html"><a href="lesson-3.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lesson-3.html"><a href="lesson-3.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -156,10 +162,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="lesson-2-2.html"><a href="lesson-2-2.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
 <li class="chapter" data-level="4.2.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="lesson-3.html"><a href="lesson-3.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
-<li class="chapter" data-level="4.3.2" data-path="lesson-3.html"><a href="lesson-3.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
-<li class="chapter" data-level="4.3.3" data-path="lesson-3.html"><a href="lesson-3.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+<li class="chapter" data-level="4.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="lesson-3-1.html"><a href="lesson-3-1.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="assignment-trees.html"><a href="assignment-trees.html#load-data"><i class="fa fa-check"></i><b>4.4.1</b> load data</a></li>
@@ -208,132 +214,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>but using a data set from:
 <a href="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Coimbra#" class="uri">https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Coimbra#</a></p>
 <p>Read the data</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/dataR2.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/dataR2.csv&quot;</span>)</a></code></pre></div>
 <p>Factor variable <em>Classification</em></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">dataset<span class="op">$</span>Classification&lt;-<span class="kw">as.factor</span>(dataset<span class="op">$</span>Classification)</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1">dataset<span class="op">$</span>Classification&lt;-<span class="kw">as.factor</span>(dataset<span class="op">$</span>Classification)</a></code></pre></div>
 <p><strong>NOTE</strong>: in order to use the caret packages in all its’ capabilities you must do <code>install.packages("caret", dependencies = T)</code></p>
 <p>create a validation dataset and use the remaing for training</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1"><span class="kw">library</span>(caret)</a></code></pre></div>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="co"># create a list of 80% of the rows in the original dataset we can use for training</span></a>
-<a class="sourceLine" id="cb164-2" title="2">validation_index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(dataset<span class="op">$</span>Classification, <span class="dt">p=</span><span class="fl">0.80</span>, <span class="dt">list=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb164-3" title="3"><span class="co"># select 20% of the data for validation</span></a>
-<a class="sourceLine" id="cb164-4" title="4">validation &lt;-<span class="st"> </span>dataset[<span class="op">-</span>validation_index,]</a>
-<a class="sourceLine" id="cb164-5" title="5"><span class="co"># use the remaining 80% of data to training and testing the models</span></a>
-<a class="sourceLine" id="cb164-6" title="6">dataset &lt;-<span class="st"> </span>dataset[validation_index,]</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb153-2" title="2"></a>
+<a class="sourceLine" id="cb153-3" title="3"><span class="co"># create a list of 80% of the rows in the original dataset we can use for training</span></a>
+<a class="sourceLine" id="cb153-4" title="4">validation_index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(dataset<span class="op">$</span>Classification, <span class="dt">p=</span><span class="fl">0.80</span>, <span class="dt">list=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb153-5" title="5"><span class="co"># select 20% of the data for validation</span></a>
+<a class="sourceLine" id="cb153-6" title="6">validation &lt;-<span class="st"> </span>dataset[<span class="op">-</span>validation_index,]</a>
+<a class="sourceLine" id="cb153-7" title="7"><span class="co"># use the remaining 80% of data to training and testing the models</span></a>
+<a class="sourceLine" id="cb153-8" title="8">dataset &lt;-<span class="st"> </span>dataset[validation_index,]</a></code></pre></div>
 <p>dimensions of the new dataset</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="kw">dim</span>(dataset)</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="kw">dim</span>(dataset)</a></code></pre></div>
 <pre><code>## [1] 94 10</code></pre>
 <p>list types for each attribute</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">sapply</span>(dataset, class)</a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">sapply</span>(dataset, class)</a></code></pre></div>
 <pre><code>##            Age            BMI        Glucose        Insulin           HOMA 
 ##      &quot;integer&quot;      &quot;numeric&quot;      &quot;integer&quot;      &quot;numeric&quot;      &quot;numeric&quot; 
 ##         Leptin    Adiponectin       Resistin          MCP.1 Classification 
 ##      &quot;numeric&quot;      &quot;numeric&quot;      &quot;numeric&quot;      &quot;numeric&quot;       &quot;factor&quot;</code></pre>
 <p>take a peek at the first 5 rows of the data</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">head</span>(dataset)</a></code></pre></div>
-<pre><code>##   Age      BMI Glucose Insulin      HOMA  Leptin Adiponectin Resistin
-## 1  48 23.50000      70   2.707 0.4674087  8.8071    9.702400  7.99585
-## 2  83 20.69049      92   3.115 0.7068973  8.8438    5.429285  4.06405
-## 3  82 23.12467      91   4.498 1.0096511 17.9393   22.432040  9.27715
-## 4  68 21.36752      77   3.226 0.6127249  9.8827    7.169560 12.76600
-## 6  49 22.85446      92   3.226 0.7320869  6.8317   13.679750 10.31760
-## 7  89 22.70000      77   4.690 0.8907873  6.9640    5.589865 12.93610
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="kw">head</span>(dataset)</a></code></pre></div>
+<pre><code>##   Age      BMI Glucose Insulin      HOMA Leptin Adiponectin Resistin
+## 1  48 23.50000      70   2.707 0.4674087 8.8071    9.702400  7.99585
+## 2  83 20.69049      92   3.115 0.7068973 8.8438    5.429285  4.06405
+## 4  68 21.36752      77   3.226 0.6127249 9.8827    7.169560 12.76600
+## 5  86 21.11111      92   3.549 0.8053864 6.6994    4.819240 10.57635
+## 6  49 22.85446      92   3.226 0.7320869 6.8317   13.679750 10.31760
+## 7  89 22.70000      77   4.690 0.8907873 6.9640    5.589865 12.93610
 ##      MCP.1 Classification
 ## 1  417.114              1
 ## 2  468.786              1
-## 3  554.697              1
 ## 4  928.220              1
+## 5  773.920              1
 ## 6  530.410              1
 ## 7 1256.083              1</code></pre>
 <p>list the levels for the class</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">levels</span>(dataset<span class="op">$</span>Classification)</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">levels</span>(dataset<span class="op">$</span>Classification)</a></code></pre></div>
 <pre><code>## [1] &quot;1&quot; &quot;2&quot;</code></pre>
 <p>summarize the class distribution</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">percentage &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Classification)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb173-2" title="2"><span class="kw">cbind</span>(<span class="dt">freq=</span><span class="kw">table</span>(dataset<span class="op">$</span>Classification), <span class="dt">percentage=</span>percentage)</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">percentage &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Classification)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="kw">cbind</span>(<span class="dt">freq=</span><span class="kw">table</span>(dataset<span class="op">$</span>Classification), <span class="dt">percentage=</span>percentage)</a></code></pre></div>
 <pre><code>##   freq percentage
 ## 1   42   44.68085
 ## 2   52   55.31915</code></pre>
 <p>summarize attribute distributions</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">summary</span>(dataset)</a></code></pre></div>
-<pre><code>##       Age            BMI           Glucose          Insulin      
-##  Min.   :24.0   Min.   :18.37   Min.   : 60.00   Min.   : 2.432  
-##  1st Qu.:45.0   1st Qu.:23.19   1st Qu.: 86.00   1st Qu.: 4.436  
-##  Median :57.5   Median :28.51   Median : 92.00   Median : 5.925  
-##  Mean   :57.4   Mean   :27.97   Mean   : 96.03   Mean   : 9.934  
-##  3rd Qu.:69.0   3rd Qu.:31.59   3rd Qu.:101.75   3rd Qu.:10.888  
-##  Max.   :89.0   Max.   :38.58   Max.   :196.00   Max.   :58.460  
-##       HOMA             Leptin        Adiponectin        Resistin     
-##  Min.   : 0.4674   Min.   : 4.311   Min.   : 1.656   Min.   : 3.210  
-##  1st Qu.: 1.0088   1st Qu.:12.208   1st Qu.: 5.644   1st Qu.: 6.745  
-##  Median : 1.3809   Median :21.783   Median : 8.262   Median :11.345  
-##  Mean   : 2.5703   Mean   :27.985   Mean   : 9.684   Mean   :14.753  
-##  3rd Qu.: 2.6326   3rd Qu.:39.788   3rd Qu.:11.439   3rd Qu.:18.156  
-##  Max.   :25.0503   Max.   :90.280   Max.   :36.060   Max.   :82.100  
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">summary</span>(dataset)</a></code></pre></div>
+<pre><code>##       Age             BMI           Glucose          Insulin      
+##  Min.   :24.00   Min.   :18.37   Min.   : 60.00   Min.   : 2.432  
+##  1st Qu.:44.25   1st Qu.:23.00   1st Qu.: 86.00   1st Qu.: 4.387  
+##  Median :54.50   Median :28.61   Median : 92.00   Median : 5.814  
+##  Mean   :56.26   Mean   :27.93   Mean   : 96.35   Mean   : 9.714  
+##  3rd Qu.:69.00   3rd Qu.:31.59   3rd Qu.:102.00   3rd Qu.:10.888  
+##  Max.   :89.00   Max.   :38.58   Max.   :199.00   Max.   :58.460  
+##       HOMA             Leptin       Adiponectin        Resistin     
+##  Min.   : 0.4674   Min.   : 4.47   Min.   : 1.656   Min.   : 3.210  
+##  1st Qu.: 0.9794   1st Qu.:12.36   1st Qu.: 5.468   1st Qu.: 6.899  
+##  Median : 1.3933   Median :21.78   Median : 8.262   Median :10.636  
+##  Mean   : 2.4309   Mean   :26.77   Mean   : 9.767   Mean   :14.849  
+##  3rd Qu.: 2.8122   3rd Qu.:37.69   3rd Qu.:11.182   3rd Qu.:18.156  
+##  Max.   :15.2853   Max.   :89.27   Max.   :36.060   Max.   :82.100  
 ##      MCP.1         Classification
-##  Min.   :  90.09   1:42          
-##  1st Qu.: 268.54   2:52          
-##  Median : 476.08                 
-##  Mean   : 529.46                 
-##  3rd Qu.: 691.07                 
+##  Min.   :  45.84   1:42          
+##  1st Qu.: 269.65   2:52          
+##  Median : 477.90                 
+##  Mean   : 529.20                 
+##  3rd Qu.: 702.68                 
 ##  Max.   :1698.44</code></pre>
 <p>split input and output</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">x &lt;-<span class="st"> </span>dataset[,<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>]</a>
-<a class="sourceLine" id="cb177-2" title="2">y &lt;-<span class="st"> </span>dataset[,<span class="dv">10</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">x &lt;-<span class="st"> </span>dataset[,<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb166-2" title="2">y &lt;-<span class="st"> </span>dataset[,<span class="dv">10</span>]</a></code></pre></div>
 <p>boxplot for each attribute on one image</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb178-2" title="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) {</a>
-<a class="sourceLine" id="cb178-3" title="3">  <span class="kw">boxplot</span>(x[,i], <span class="dt">main=</span><span class="kw">names</span>(dataset)[i])</a>
-<a class="sourceLine" id="cb178-4" title="4">}</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb167-2" title="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) {</a>
+<a class="sourceLine" id="cb167-3" title="3">  <span class="kw">boxplot</span>(x[,i], <span class="dt">main=</span><span class="kw">names</span>(dataset)[i])</a>
+<a class="sourceLine" id="cb167-4" title="4">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
 <p>barplot for class breakdown</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb179-2" title="2"></a>
-<a class="sourceLine" id="cb179-3" title="3"><span class="kw">plot</span>(y)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb168-2" title="2"></a>
+<a class="sourceLine" id="cb168-3" title="3"><span class="kw">plot</span>(y)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 <p>scatterplot matrix</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">scales &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>), <span class="dt">y=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>))</a>
-<a class="sourceLine" id="cb180-2" title="2"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;ellipse&quot;</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1">scales &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>), <span class="dt">y=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>))</a>
+<a class="sourceLine" id="cb169-2" title="2"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;ellipse&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 <p>box and whisker plots for each attribute</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1">scales &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>), <span class="dt">y=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>))</a>
-<a class="sourceLine" id="cb181-2" title="2"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;box&quot;</span>, <span class="dt">scales=</span>scales)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">scales &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>), <span class="dt">y=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>))</a>
+<a class="sourceLine" id="cb170-2" title="2"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;box&quot;</span>, <span class="dt">scales=</span>scales)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
 <p>density plots for each attribute by class value</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1">scales &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>), <span class="dt">y=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>))</a>
-<a class="sourceLine" id="cb182-2" title="2"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;density&quot;</span>, <span class="dt">scales=</span>scales)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">scales &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>), <span class="dt">y=</span><span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>))</a>
+<a class="sourceLine" id="cb171-2" title="2"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;density&quot;</span>, <span class="dt">scales=</span>scales)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 <p>Run algorithms using 10-fold cross validation</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb183-2" title="2">metric &lt;-<span class="st"> &quot;Accuracy&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb172-2" title="2">metric &lt;-<span class="st"> &quot;Accuracy&quot;</span></a></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li>linear algorithms</li>
 </ol>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb184-2" title="2">fit.lda &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;lda&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb173-2" title="2">fit.lda &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;lda&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>nonlinear algorithms
 CART</li>
 </ol>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb185-2" title="2">fit.cart &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb174-2" title="2">fit.cart &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>kNN</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb186-2" title="2">fit.knn &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;knn&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb175-2" title="2">fit.knn &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;knn&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>advanced algorithms
 SVM</li>
 </ol>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb187-2" title="2">fit.svm &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb176-2" title="2">fit.svm &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Random Forest</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb188-2" title="2">fit.rf &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb177-2" title="2">fit.rf &lt;-<span class="st"> </span><span class="kw">train</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>summarize accuracy of models</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(<span class="kw">list</span>(<span class="dt">lda=</span>fit.lda, <span class="dt">cart=</span>fit.cart, <span class="dt">knn=</span>fit.knn, <span class="dt">svm=</span>fit.svm, <span class="dt">rf=</span>fit.rf))</a>
-<a class="sourceLine" id="cb189-2" title="2"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(<span class="kw">list</span>(<span class="dt">lda=</span>fit.lda, <span class="dt">cart=</span>fit.cart, <span class="dt">knn=</span>fit.knn, <span class="dt">svm=</span>fit.svm, <span class="dt">rf=</span>fit.rf))</a>
+<a class="sourceLine" id="cb178-2" title="2"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -343,24 +348,30 @@ SVM</li>
 ## 
 ## Accuracy 
 ##           Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
-## lda  0.4444444 0.4583333 0.7333333 0.7077778 0.8888889 1.0000000    0
-## cart 0.3333333 0.6750000 0.7777778 0.7025253 0.7777778 0.8000000    0
-## knn  0.2222222 0.4722222 0.6515152 0.5625253 0.6666667 0.7000000    0
-## svm  0.5555556 0.6666667 0.7388889 0.7207071 0.7944444 0.8888889    0
-## rf   0.3333333 0.7068182 0.7888889 0.7560606 0.8888889 0.8888889    0
+## lda  0.3333333 0.5666667 0.6666667 0.6653535 0.7583333 1.0000000    0
+## cart 0.5000000 0.5555556 0.5555556 0.6191919 0.6590909 0.8888889    0
+## knn  0.2222222 0.3750000 0.5505051 0.4856566 0.5555556 0.7000000    0
+## svm  0.5555556 0.6666667 0.7136364 0.7338384 0.7944444 0.8888889    0
+## rf   0.4444444 0.5757576 0.6833333 0.6591919 0.7583333 0.7777778    0
 ## 
 ## Kappa 
-##            Min.     1st Qu.    Median       Mean   3rd Qu.      Max. NA&#39;s
-## lda  -0.1538462 -0.07684530 0.4707317 0.41063067 0.7776735 1.0000000    0
-## cart -0.3500000  0.30270270 0.5263158 0.38642812 0.5500000 0.6000000    0
-## knn  -0.6153846 -0.06001284 0.2558248 0.09919547 0.3330206 0.4000000    0
-## svm   0.1000000  0.31613508 0.4631579 0.43029648 0.5815789 0.7804878    0
-## rf   -0.4210526  0.40526316 0.5708502 0.49488299 0.7692308 0.7804878    0</code></pre>
+##            Min.     1st Qu.     Median        Mean    3rd Qu.      Max.
+## lda  -0.2857143  0.16483516 0.34146341  0.33568679 0.49473684 1.0000000
+## cart  0.0000000  0.08055556 0.10000000  0.23062651 0.29111406 0.7804878
+## knn  -0.6153846 -0.31578947 0.05263158 -0.06589085 0.09959016 0.3478261
+## svm   0.1000000  0.31613508 0.44256121  0.46416890 0.58750000 0.7804878
+## rf   -0.1538462  0.13534483 0.37073171  0.30287042 0.50584795 0.5500000
+##      NA&#39;s
+## lda     0
+## cart    0
+## knn     0
+## svm     0
+## rf      0</code></pre>
 <p>compare accuracy of models</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>summarize Best Model</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">print</span>(fit.rf)</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">print</span>(fit.rf)</a></code></pre></div>
 <pre><code>## Random Forest 
 ## 
 ## 94 samples
@@ -373,39 +384,39 @@ SVM</li>
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy   Kappa    
-##   2     0.7116162  0.4152202
-##   5     0.7560606  0.4948830
-##   9     0.7538384  0.4924010
+##   2     0.6269697  0.2366603
+##   5     0.6269697  0.2355627
+##   9     0.6591919  0.3028704
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final value used for the model was mtry = 5.</code></pre>
+## The final value used for the model was mtry = 9.</code></pre>
 <p>estimate skill of LDA on the validation dataset</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.rf, validation)</a>
-<a class="sourceLine" id="cb194-2" title="2"><span class="kw">confusionMatrix</span>(predictions, validation<span class="op">$</span>Classification)</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.rf, validation)</a>
+<a class="sourceLine" id="cb183-2" title="2"><span class="kw">confusionMatrix</span>(predictions, validation<span class="op">$</span>Classification)</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction  1  2
-##          1  6  2
-##          2  4 10
+##          1  7  1
+##          2  3 11
 ##                                           
-##                Accuracy : 0.7273          
-##                  95% CI : (0.4978, 0.8927)
+##                Accuracy : 0.8182          
+##                  95% CI : (0.5972, 0.9481)
 ##     No Information Rate : 0.5455          
-##     P-Value [Acc &gt; NIR] : 0.06495         
+##     P-Value [Acc &gt; NIR] : 0.007436        
 ##                                           
-##                   Kappa : 0.4407          
+##                   Kappa : 0.6271          
 ##                                           
-##  Mcnemar&#39;s Test P-Value : 0.68309         
+##  Mcnemar&#39;s Test P-Value : 0.617075        
 ##                                           
-##             Sensitivity : 0.6000          
-##             Specificity : 0.8333          
-##          Pos Pred Value : 0.7500          
-##          Neg Pred Value : 0.7143          
+##             Sensitivity : 0.7000          
+##             Specificity : 0.9167          
+##          Pos Pred Value : 0.8750          
+##          Neg Pred Value : 0.7857          
 ##              Prevalence : 0.4545          
-##          Detection Rate : 0.2727          
+##          Detection Rate : 0.3182          
 ##    Detection Prevalence : 0.3636          
-##       Balanced Accuracy : 0.7167          
+##       Balanced Accuracy : 0.8083          
 ##                                           
 ##        &#39;Positive&#39; Class : 1               
 ## </code></pre>

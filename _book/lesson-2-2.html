@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-21" />
+<meta name="date" content="2020-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="lesson-1-2.html"/>
-<link rel="next" href="lesson-3.html"/>
+<link rel="next" href="lesson-3-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -145,6 +145,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
 <li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
 </ul></li>
+<li class="chapter" data-level="2.5" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>2.5</b> Lesson 3</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="lesson-3.html"><a href="lesson-3.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lesson-3.html"><a href="lesson-3.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lesson-3.html"><a href="lesson-3.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lesson-3.html"><a href="lesson-3.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -156,10 +162,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="lesson-2-2.html"><a href="lesson-2-2.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
 <li class="chapter" data-level="4.2.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="lesson-3.html"><a href="lesson-3.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
-<li class="chapter" data-level="4.3.2" data-path="lesson-3.html"><a href="lesson-3.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
-<li class="chapter" data-level="4.3.3" data-path="lesson-3.html"><a href="lesson-3.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+<li class="chapter" data-level="4.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="lesson-3-1.html"><a href="lesson-3-1.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="assignment-trees.html"><a href="assignment-trees.html#load-data"><i class="fa fa-check"></i><b>4.4.1</b> load data</a></li>
@@ -204,27 +210,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lesson-2-2" class="section level2">
 <h2><span class="header-section-number">4.2</span> Lesson 2</h2>
 <p>2020-02-11</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1"><span class="co"># Load package &#39;caret&#39;</span></a>
-<a class="sourceLine" id="cb196-2" title="2"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb196-3" title="3"><span class="co"># Load package &#39;pROC&#39;</span></a>
-<a class="sourceLine" id="cb196-4" title="4"><span class="kw">library</span>(pROC)</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="co"># Load package &#39;caret&#39;</span></a>
+<a class="sourceLine" id="cb185-2" title="2"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb185-3" title="3"><span class="co"># Load package &#39;pROC&#39;</span></a>
+<a class="sourceLine" id="cb185-4" title="4"><span class="kw">library</span>(pROC)</a></code></pre></div>
 <p>continuation of the previous classe. All the code was provided by the professor.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1"><span class="co"># loading and preparing the data</span></a>
-<a class="sourceLine" id="cb197-2" title="2">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/dataR2.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb197-3" title="3"></a>
-<a class="sourceLine" id="cb197-4" title="4"><span class="co"># Define Classification as factor</span></a>
-<a class="sourceLine" id="cb197-5" title="5">dataset<span class="op">$</span>Classification &lt;-<span class="st"> </span><span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Patient&quot;</span>))</a>
-<a class="sourceLine" id="cb197-6" title="6"></a>
-<a class="sourceLine" id="cb197-7" title="7"><span class="co"># Holdout a validation set, by defining the indices of the training set</span></a>
-<a class="sourceLine" id="cb197-8" title="8">training.index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(dataset<span class="op">$</span>Classification, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">list=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb197-9" title="9">validation &lt;-<span class="st"> </span>dataset[<span class="op">-</span>training.index,]</a>
-<a class="sourceLine" id="cb197-10" title="10">dataset &lt;-<span class="st"> </span>dataset[training.index,]</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="co"># loading and preparing the data</span></a>
+<a class="sourceLine" id="cb186-2" title="2">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/dataR2.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb186-3" title="3"></a>
+<a class="sourceLine" id="cb186-4" title="4"><span class="co"># Define Classification as factor</span></a>
+<a class="sourceLine" id="cb186-5" title="5">dataset<span class="op">$</span>Classification &lt;-<span class="st"> </span><span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Patient&quot;</span>))</a>
+<a class="sourceLine" id="cb186-6" title="6"></a>
+<a class="sourceLine" id="cb186-7" title="7"><span class="co"># Holdout a validation set, by defining the indices of the training set</span></a>
+<a class="sourceLine" id="cb186-8" title="8">training.index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(dataset<span class="op">$</span>Classification, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">list=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb186-9" title="9">validation &lt;-<span class="st"> </span>dataset[<span class="op">-</span>training.index,]</a>
+<a class="sourceLine" id="cb186-10" title="10">dataset &lt;-<span class="st"> </span>dataset[training.index,]</a></code></pre></div>
 <p>Dimensions (should be 116 observations and 10 variables)</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="kw">dim</span>(dataset)</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="kw">dim</span>(dataset)</a></code></pre></div>
 <pre><code>## [1] 94 10</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1"><span class="co"># Split input and output</span></a>
-<a class="sourceLine" id="cb200-2" title="2">input &lt;-<span class="st"> </span>dataset[,<span class="op">-</span><span class="dv">10</span>]</a>
-<a class="sourceLine" id="cb200-3" title="3">output &lt;-<span class="st"> </span>dataset[,<span class="dv">10</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1"><span class="co"># Split input and output</span></a>
+<a class="sourceLine" id="cb189-2" title="2">input &lt;-<span class="st"> </span>dataset[,<span class="op">-</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb189-3" title="3">output &lt;-<span class="st"> </span>dataset[,<span class="dv">10</span>]</a></code></pre></div>
 <div id="test-harness" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Test harness</h3>
 <ul>
@@ -237,24 +243,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Plot ROC curve</li>
 <li><code>plot.roc(fit.model$pred$obs,fit.model$pred$Yes, main=fit.model$method, print.auc=T)</code></li>
 </ul>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1"><span class="co"># Run algorithm using different validation approaches</span></a>
-<a class="sourceLine" id="cb201-2" title="2">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1"><span class="co"># Run algorithm using different validation approaches</span></a>
+<a class="sourceLine" id="cb190-2" title="2">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a></code></pre></div>
 <div id="run-algorithm-using-20-hold-out-validation" class="section level4">
 <h4><span class="header-section-number">4.2.1.1</span> Run algorithm using 20% hold-out validation</h4>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;LGOCV&quot;</span>, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">number=</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb202-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb202-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb202-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb202-5" title="5"></a>
-<a class="sourceLine" id="cb202-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb202-7" title="7">fit.cart.hold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb202-8" title="8"></a>
-<a class="sourceLine" id="cb202-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb202-10" title="10">fit.nb.hold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;LGOCV&quot;</span>, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">number=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb191-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb191-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb191-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb191-5" title="5"></a>
+<a class="sourceLine" id="cb191-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb191-7" title="7">fit.cart.hold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb191-8" title="8"></a>
+<a class="sourceLine" id="cb191-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb191-10" title="10">fit.nb.hold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.hold, <span class="dt">nb=</span>fit.nb.hold)</a>
-<a class="sourceLine" id="cb203-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb203-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.hold, <span class="dt">nb=</span>fit.nb.hold)</a>
+<a class="sourceLine" id="cb192-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb192-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -264,46 +270,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## ROC 
 ##         Min. 1st Qu. Median   Mean 3rd Qu.   Max. NA&#39;s
-## rpart 0.5000  0.5000 0.5000 0.5000  0.5000 0.5000    0
-## nb    0.5125  0.5125 0.5125 0.5125  0.5125 0.5125    0
+## rpart 0.5875  0.5875 0.5875 0.5875  0.5875 0.5875    0
+## nb    0.7875  0.7875 0.7875 0.7875  0.7875 0.7875    0
 ## 
 ## Sens 
 ##        Min. 1st Qu. Median  Mean 3rd Qu.  Max. NA&#39;s
-## rpart 0.000   0.000  0.000 0.000   0.000 0.000    0
-## nb    0.625   0.625  0.625 0.625   0.625 0.625    0
+## rpart 0.375   0.375  0.375 0.375   0.375 0.375    0
+## nb    0.875   0.875  0.875 0.875   0.875 0.875    0
 ## 
 ## Spec 
 ##       Min. 1st Qu. Median Mean 3rd Qu. Max. NA&#39;s
-## rpart  1.0     1.0    1.0  1.0     1.0  1.0    0
-## nb     0.3     0.3    0.3  0.3     0.3  0.3    0</code></pre>
+## rpart  0.8     0.8    0.8  0.8     0.8  0.8    0
+## nb     0.5     0.5    0.5  0.5     0.5  0.5    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb205-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;20% Hold-out -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &gt; cases</code></pre>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb194-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;20% Hold-out -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 </div>
 <div id="run-algorithm-using-multiple-20-hold-out-validation" class="section level4">
 <h4><span class="header-section-number">4.2.1.2</span> Run algorithm using multiple 20% hold-out validation</h4>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;LGOCV&quot;</span>, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">number=</span><span class="dv">25</span>,</a>
-<a class="sourceLine" id="cb211-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb211-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb211-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb211-5" title="5"></a>
-<a class="sourceLine" id="cb211-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb211-7" title="7">fit.cart.mhold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb211-8" title="8"></a>
-<a class="sourceLine" id="cb211-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb211-10" title="10">fit.nb.mhold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;LGOCV&quot;</span>, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">number=</span><span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb196-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb196-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb196-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb196-5" title="5"></a>
+<a class="sourceLine" id="cb196-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb196-7" title="7">fit.cart.mhold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb196-8" title="8"></a>
+<a class="sourceLine" id="cb196-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb196-10" title="10">fit.nb.mhold &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.mhold, <span class="dt">nb=</span>fit.nb.mhold)</a>
-<a class="sourceLine" id="cb212-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb212-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.mhold, <span class="dt">nb=</span>fit.nb.mhold)</a>
+<a class="sourceLine" id="cb197-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb197-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -312,47 +314,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of resamples: 25 
 ## 
 ## ROC 
-##          Min. 1st Qu.  Median   Mean 3rd Qu.    Max. NA&#39;s
-## rpart 0.33125 0.56875 0.64375 0.6405  0.7375 0.84375    0
-## nb    0.51250 0.67500 0.72500 0.7225  0.7875 0.85000    0
+##          Min. 1st Qu. Median    Mean 3rd Qu.    Max. NA&#39;s
+## rpart 0.36875 0.54375  0.600 0.61425  0.6625 0.91875    0
+## nb    0.48750 0.66250  0.725 0.73300  0.8000 0.95000    0
 ## 
 ## Sens 
-##        Min. 1st Qu. Median Mean 3rd Qu.  Max. NA&#39;s
-## rpart 0.125   0.375  0.625 0.54   0.625 0.875    0
-## nb    0.500   0.625  0.750 0.71   0.750 0.875    0
+##        Min. 1st Qu. Median  Mean 3rd Qu. Max. NA&#39;s
+## rpart 0.125   0.375  0.500 0.565    0.75    1    0
+## nb    0.375   0.625  0.625 0.660    0.75    1    0
 ## 
 ## Spec 
 ##       Min. 1st Qu. Median  Mean 3rd Qu. Max. NA&#39;s
-## rpart  0.2     0.6    0.8 0.732     1.0    1    0
-## nb     0.3     0.4    0.5 0.540     0.6    1    0</code></pre>
+## rpart  0.4     0.5    0.7 0.660     0.8  1.0    0
+## nb     0.4     0.5    0.7 0.616     0.7  0.8    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb214-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;25 x 20% Hold-out -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb199-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;25 x 20% Hold-out -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 </div>
 <div id="run-algorithm-using-10-fold-cross-validation" class="section level4">
 <h4><span class="header-section-number">4.2.1.3</span> Run algorithm using 10-fold cross validation</h4>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb220-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb220-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb220-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb220-5" title="5"></a>
-<a class="sourceLine" id="cb220-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb220-7" title="7">fit.cart.cv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb220-8" title="8"></a>
-<a class="sourceLine" id="cb220-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb220-10" title="10">fit.nb.cv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb201-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb201-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb201-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb201-5" title="5"></a>
+<a class="sourceLine" id="cb201-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb201-7" title="7">fit.cart.cv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb201-8" title="8"></a>
+<a class="sourceLine" id="cb201-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb201-10" title="10">fit.nb.cv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.cv, <span class="dt">nb=</span>fit.nb.cv)</a>
-<a class="sourceLine" id="cb221-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb221-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.cv, <span class="dt">nb=</span>fit.nb.cv)</a>
+<a class="sourceLine" id="cb202-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb202-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -361,47 +359,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of resamples: 10 
 ## 
 ## ROC 
-##        Min. 1st Qu.    Median      Mean 3rd Qu.      Max. NA&#39;s
-## rpart 0.375 0.50625 0.7000000 0.6870833 0.85625 0.9666667    0
-## nb    0.500 0.63750 0.8166667 0.7483333 0.85000 0.8500000    0
+##        Min. 1st Qu.    Median      Mean 3rd Qu. Max. NA&#39;s
+## rpart 0.225 0.50625 0.6291667 0.5916667 0.69375  0.8    0
+## nb    0.550 0.66250 0.8250000 0.7880000 0.89500  1.0    0
 ## 
 ## Sens 
 ##       Min. 1st Qu. Median  Mean 3rd Qu. Max. NA&#39;s
-## rpart  0.0  0.3125   0.50 0.490  0.5750    1    0
-## nb     0.5  0.7500   0.75 0.735  0.7875    1    0
+## rpart 0.25    0.25   0.55 0.535  0.7500    1    0
+## nb    0.40    0.50   0.75 0.715  0.9375    1    0
 ## 
 ## Spec 
-##       Min.   1st Qu. Median      Mean 3rd Qu. Max. NA&#39;s
-## rpart  0.2 0.6166667    0.8 0.7266667    0.95    1    0
-## nb     0.0 0.5250000    0.6 0.5733333    0.75    1    0</code></pre>
+##       Min.   1st Qu.    Median      Mean 3rd Qu. Max. NA&#39;s
+## rpart  0.0 0.6166667 0.7333333 0.7133333    0.95    1    0
+## nb     0.2 0.4500000 0.6333333 0.6300000    0.80    1    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb223-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;10-fold CV -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb204-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;10-fold CV -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
 </div>
 <div id="run-algorithm-using-25-times-10-fold-cross-validation" class="section level4">
 <h4><span class="header-section-number">4.2.1.4</span> Run algorithm using 25 times 10-fold cross validation</h4>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb229-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb229-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb229-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb229-5" title="5"></a>
-<a class="sourceLine" id="cb229-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb229-7" title="7">fit.cart.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb229-8" title="8"></a>
-<a class="sourceLine" id="cb229-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb229-10" title="10">fit.nb.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb206-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb206-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb206-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb206-5" title="5"></a>
+<a class="sourceLine" id="cb206-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb206-7" title="7">fit.cart.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb206-8" title="8"></a>
+<a class="sourceLine" id="cb206-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb206-10" title="10">fit.nb.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv, <span class="dt">nb=</span>fit.nb.rcv)</a>
-<a class="sourceLine" id="cb230-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb230-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv, <span class="dt">nb=</span>fit.nb.rcv)</a>
+<a class="sourceLine" id="cb207-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb207-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -410,79 +404,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of resamples: 250 
 ## 
 ## ROC 
-##       Min.   1st Qu. Median      Mean   3rd Qu. Max. NA&#39;s
-## rpart 0.00 0.5500000  0.655 0.6612767 0.8000000    1    0
-## nb    0.25 0.6333333  0.750 0.7446533 0.8729167    1    0
+##        Min. 1st Qu.    Median      Mean 3rd Qu.      Max. NA&#39;s
+## rpart 0.125  0.5175 0.6200000 0.6062067    0.70 0.9583333    0
+## nb    0.250  0.6850 0.7916667 0.7721933    0.88 1.0000000    0
 ## 
 ## Sens 
 ##       Min. 1st Qu. Median   Mean 3rd Qu. Max. NA&#39;s
-## rpart    0    0.25   0.50 0.5238    0.75    1    0
-## nb       0    0.50   0.75 0.7196    0.95    1    0
+## rpart 0.00    0.25   0.50 0.5050    0.75    1    0
+## nb    0.25    0.50   0.75 0.7052    0.80    1    0
 ## 
 ## Spec 
-##       Min. 1st Qu. Median      Mean   3rd Qu. Max. NA&#39;s
-## rpart    0     0.6    0.8 0.7064000 0.8000000    1    0
-## nb       0     0.4    0.6 0.5621333 0.6666667    1    0</code></pre>
+##       Min. 1st Qu.    Median   Mean 3rd Qu. Max. NA&#39;s
+## rpart    0     0.6 0.6666667 0.6892     0.8    1    0
+## nb       0     0.5 0.6000000 0.6168     0.8    1    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb232-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;25 x 10-fold CV -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb209-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;25 x 10-fold CV -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
 </div>
 <div id="run-algorithm-using-leave-one-out-validation" class="section level4">
 <h4><span class="header-section-number">4.2.1.5</span> Run algorithm using leave-one-out validation</h4>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;LOOCV&quot;</span>,</a>
-<a class="sourceLine" id="cb238-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb238-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb238-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb238-5" title="5"></a>
-<a class="sourceLine" id="cb238-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb238-7" title="7">fit.cart.loo &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb238-8" title="8"></a>
-<a class="sourceLine" id="cb238-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb238-10" title="10">fit.nb.loo &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;LOOCV&quot;</span>,</a>
+<a class="sourceLine" id="cb211-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb211-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb211-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb211-5" title="5"></a>
+<a class="sourceLine" id="cb211-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb211-7" title="7">fit.cart.loo &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb211-8" title="8"></a>
+<a class="sourceLine" id="cb211-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb211-10" title="10">fit.nb.loo &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.loo, <span class="dt">nb=</span>fit.nb.loo)</a>
-<a class="sourceLine" id="cb239-2" title="2"><span class="co">#results &lt;- resamples(fit.models)</span></a>
-<a class="sourceLine" id="cb239-3" title="3"><span class="co">#summary(results)</span></a>
-<a class="sourceLine" id="cb239-4" title="4"><span class="kw">summary</span>(fit.models)</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.loo, <span class="dt">nb=</span>fit.nb.loo)</a>
+<a class="sourceLine" id="cb212-2" title="2"><span class="co">#results &lt;- resamples(fit.models)</span></a>
+<a class="sourceLine" id="cb212-3" title="3"><span class="co">#summary(results)</span></a>
+<a class="sourceLine" id="cb212-4" title="4"><span class="kw">summary</span>(fit.models)</a></code></pre></div>
 <pre><code>##       Length Class Mode
 ## rpart 23     train list
 ## nb    23     train list</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb241-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Leave-One-Out -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &gt; cases</code></pre>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb214-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Leave-One-Out -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 </div>
 <div id="run-algorithm-using-bootstrap-validation" class="section level4">
 <h4><span class="header-section-number">4.2.1.6</span> Run algorithm using bootstrap validation</h4>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;boot_all&quot;</span>, <span class="dt">number=</span><span class="dv">25</span>,</a>
-<a class="sourceLine" id="cb247-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb247-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb247-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb247-5" title="5"></a>
-<a class="sourceLine" id="cb247-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb247-7" title="7">fit.cart.boot &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb247-8" title="8"></a>
-<a class="sourceLine" id="cb247-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb247-10" title="10">fit.nb.boot &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;boot_all&quot;</span>, <span class="dt">number=</span><span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb216-2" title="2">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb216-3" title="3">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb216-4" title="4">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb216-5" title="5"></a>
+<a class="sourceLine" id="cb216-6" title="6"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb216-7" title="7">fit.cart.boot &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb216-8" title="8"></a>
+<a class="sourceLine" id="cb216-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb216-10" title="10">fit.nb.boot &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;naive_bayes&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.boot, <span class="dt">nb=</span>fit.nb.boot)</a>
-<a class="sourceLine" id="cb248-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb248-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.boot, <span class="dt">nb=</span>fit.nb.boot)</a>
+<a class="sourceLine" id="cb217-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb217-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -492,70 +478,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## ROC 
 ##            Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
-## rpart 0.5244361 0.5673913 0.6282895 0.6394554 0.7024291 0.8438914    0
-## nb    0.5250000 0.6608696 0.7083333 0.7194091 0.7857143 0.8571429    0
+## rpart 0.4638158 0.5634921 0.6458333 0.6268948 0.6898496 0.7913043    0
+## nb    0.5986842 0.6805556 0.7189542 0.7278811 0.7647059 0.8655462    0
 ## 
 ## Sens 
-##            Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
-## rpart 0.3571429 0.4705882 0.5555556 0.5807573 0.6470588 0.9285714    0
-## nb    0.5789474 0.6470588 0.7222222 0.7257046 0.7857143 0.9230769    0
+##            Min.   1st Qu. Median      Mean   3rd Qu.      Max. NA&#39;s
+## rpart 0.3846154 0.5294118 0.6250 0.6090791 0.7222222 0.7857143    0
+## nb    0.4666667 0.7692308 0.8125 0.8148761 0.8571429 1.0000000    0
 ## 
 ## Spec 
-##            Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
-## rpart 0.3181818 0.5333333 0.6666667 0.6519263 0.7391304 0.9411765    0
-## nb    0.3888889 0.5263158 0.5714286 0.5944812 0.6666667 0.7894737    0</code></pre>
+##        Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## rpart 0.375 0.5652174 0.6470588 0.6466178 0.7222222 0.8571429    0
+## nb    0.250 0.4000000 0.4500000 0.4614179 0.5238095 0.7142857    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb250-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;25 x Bootstrap -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb219-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;25 x Bootstrap -&quot;</span>,fit<span class="op">$</span>method), <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
 </div>
 </div>
 <div id="make-predictions" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Make predictions</h3>
 <p>Estimate skill of GLM Step AIC on the validation dataset</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb256-2" title="2"></a>
-<a class="sourceLine" id="cb256-3" title="3">predictions.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.nb.boot, validation, <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)</a>
-<a class="sourceLine" id="cb256-4" title="4">predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.nb.boot, validation, <span class="dt">type=</span><span class="st">&quot;raw&quot;</span>)</a>
-<a class="sourceLine" id="cb256-5" title="5"><span class="kw">confusionMatrix</span>(predictions, validation<span class="op">$</span>Classification)</a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb221-2" title="2"></a>
+<a class="sourceLine" id="cb221-3" title="3">predictions.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.nb.boot, validation, <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)</a>
+<a class="sourceLine" id="cb221-4" title="4">predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.nb.boot, validation, <span class="dt">type=</span><span class="st">&quot;raw&quot;</span>)</a>
+<a class="sourceLine" id="cb221-5" title="5"><span class="kw">confusionMatrix</span>(predictions, validation<span class="op">$</span>Classification)</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction Control Patient
-##    Control       7       4
-##    Patient       3       8
+##    Control      10      10
+##    Patient       0       2
 ##                                           
-##                Accuracy : 0.6818          
-##                  95% CI : (0.4513, 0.8614)
+##                Accuracy : 0.5455          
+##                  95% CI : (0.3221, 0.7561)
 ##     No Information Rate : 0.5455          
-##     P-Value [Acc &gt; NIR] : 0.1419          
+##     P-Value [Acc &gt; NIR] : 0.586899        
 ##                                           
-##                   Kappa : 0.3636          
+##                   Kappa : 0.1538          
 ##                                           
-##  Mcnemar&#39;s Test P-Value : 1.0000          
+##  Mcnemar&#39;s Test P-Value : 0.004427        
 ##                                           
-##             Sensitivity : 0.7000          
-##             Specificity : 0.6667          
-##          Pos Pred Value : 0.6364          
-##          Neg Pred Value : 0.7273          
+##             Sensitivity : 1.0000          
+##             Specificity : 0.1667          
+##          Pos Pred Value : 0.5000          
+##          Neg Pred Value : 1.0000          
 ##              Prevalence : 0.4545          
-##          Detection Rate : 0.3182          
-##    Detection Prevalence : 0.5000          
-##       Balanced Accuracy : 0.6833          
+##          Detection Rate : 0.4545          
+##    Detection Prevalence : 0.9091          
+##       Balanced Accuracy : 0.5833          
 ##                                           
 ##        &#39;Positive&#39; Class : Control         
 ## </code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" title="1"><span class="kw">plot.roc</span>(validation<span class="op">$</span>Classification, predictions.prob<span class="op">$</span>Patient, <span class="dt">print.auc=</span>T)</a></code></pre></div>
-<pre><code>## Setting levels: control = Control, case = Patient</code></pre>
-<pre><code>## Setting direction: controls &lt; cases</code></pre>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="kw">plot.roc</span>(validation<span class="op">$</span>Classification, predictions.prob<span class="op">$</span>Patient, <span class="dt">print.auc=</span>T)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
@@ -566,7 +546,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="lesson-1-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lesson-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-3-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
