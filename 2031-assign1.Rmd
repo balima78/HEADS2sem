@@ -1,0 +1,134 @@
+## assignment Glucose 
+
+Assignment from lesson 3
+
+2020-02-26
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+Using only the base and stats packages in R, define the iterative steps of ExpectationMaximization applied to the Glucose variable of the Breast Cancer Coimbra data set,
+searching for 2 or more latent classes.
+
+### Defining a function for Expectation-Maximization algorithm
+```{r}
+# function for E-M algorithm
+emf<-function(xx = vv, # a vector with the data
+              m = 2, # number of clustres
+              method = "crisp", # method used for parameters estimation in each class; options: "crisp" or "soft"
+              itera = 10, # number of iterations
+              eps = 0.01, # the accepted error to converge (e)
+              params = "random", # initial parameters, if "random" 'm' values from 'xx' are randomly select, or we can input a vector with 'm' values
+              main="Glucose level", # histogram title
+              seed = 0 # value for set.seed()
+              ){
+  medias=NA
+  desvpadrao=NA
+  if (params == "random") {
+  set.seed(seed)
+  param.mean<-sample(xx,m)
+  param.sd<-rep(sd(xx)/m,m)
+  } else {
+    param.mean<-params
+    param.sd<-rep(sd(xx)/m,m)
+  }
+  
+  for (k in 1:itera){
+    densities<-sapply(1:m, 
+                      function(i){dnorm(xx,
+                                        mean=param.mean[i],
+                                        sd=param.sd[i])})
+    relevance<-t(apply(densities,1,function(l){l/sum(l)}))
+    
+    attrib<-t(apply(relevance,1,
+                    function(l){replace(rep(0,m),which.max(l)[1],1)}))
+    
+    # Re-estimates the parameters of the probability distribution of each class
+    if (method == "crisp") {
+      ## M-step (alternative 1: crisp)
+      param.mean.new<-sapply(1:m,
+                             function(j){mean(xx[attrib[,j]==1])})
+      param.sd.new<-sapply(1:m,
+                           function(j){sqrt(sum(relevance[,j]*(xx-param.mean[j])^2)/sum(relevance[,j]))})
+    } else {
+      ## M-step (alternative 2: soft)
+      param.mean.new<-sapply(1:m,
+                             function(j){sum(xx*relevance[,j])/sum(relevance[,j])})
+      param.sd.new<-sapply(1:m,
+                           function(j){sqrt(sum(relevance[,j]*(xx-param.mean[j])^2)/sum(relevance[,j]))})
+      
+    }
+    
+    # convergence the maximum number of iterations (k).
+    cat("iteration", k, "evolution:", 
+        dif<-sum(abs(param.mean.new - param.mean)), "\n")
+    if(dif < eps) break # the accepted error to converge (e)
+    param.mean<-param.mean.new
+    param.sd<-param.sd.new
+  }
+  
+  ## ploting the histogram and density curve for the vector of data
+  hist(xx, density = 20,
+       main=main,
+       xlab="", freq=F)
+  lines(density(xx),
+        lwd=2,col="black")
+  
+  ## save means, std deviations and classes' attributes on a list
+  result<-list(medias = param.mean,
+               desvpadrao = param.sd,
+               classe = as.data.frame(attrib))
+
+}
+```
+
+### 2 clusters density curves
+```{r}
+# reading the data
+breast<-read.csv("2.UploadedData/dataR2.csv")
+
+par(mfrow=c(1,2))
+
+# run the EM function for Glucose with 2 clusters and max 20 iterations
+res<-emf(xx = breast$Glucose, itera = 20, m=2, method = "crisp", main = "Glucose values", seed = 0)
+
+# add density curves for each class
+lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 12),lwd=2,col=5)
+lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 12),lwd=2,col=6)
+
+## column with 2 classes
+attach(res$classe)
+classe2<-ifelse(V1 == 1, 5 , 6) # create 'm' classes
+detach()
+
+# Plot the values in which each point has a color corresponding to the class to which it belongs
+plot(1:length(breast$Glucose), breast$Glucose, col=classe2, pch=20,
+     xlab="index", ylab="Glucose values",
+     main = " Glucose colored by class (m=2)")
+```
+
+### 3 clusters density curves
+```{r}
+par(mfrow=c(1,2))
+
+# run the EM function for Glucose with 3 clusters and max 20 iterations
+res<-emf(xx = breast$Glucose, itera = 20, m=3, method = "crisp", main = "Glucose values", seed = 0)
+
+# add density curves for each class
+lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 12),lwd=2,col=5)
+lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 12),lwd=2,col=6)
+lines(density(rnorm(100, res$medias[3], res$desvpadrao[3]), bw = 12),lwd=2,col=7)
+
+## column with 3 classes
+attach(res$classe)
+classe3<-ifelse(V1 == 1, 5,
+               ifelse(V2 == 1, 6,
+                      7)) # create 'm' classes
+detach()
+
+plot(1:length(breast$Glucose), breast$Glucose, col=classe3, pch=20,
+     xlab="index", ylab="Glucose values",
+     main = " Glucose colored by class (m=3)")
+```
+
