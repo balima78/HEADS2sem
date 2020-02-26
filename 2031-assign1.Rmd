@@ -94,12 +94,12 @@ par(mfrow=c(1,2))
 res<-emf(xx = breast$Glucose, itera = 20, m=2, method = "crisp", main = "Glucose values", seed = 0)
 
 # add density curves for each class
-lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 12),lwd=2,col=5)
-lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 12),lwd=2,col=6)
+lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 12),lwd=2,col=3)
+lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 12),lwd=2,col=4)
 
 ## column with 2 classes
 attach(res$classe)
-classe2<-ifelse(V1 == 1, 5 , 6) # create 'm' classes
+classe2<-ifelse(V1 == 1, 3 , 4) # create 'm' classes
 detach()
 
 # Plot the values in which each point has a color corresponding to the class to which it belongs
@@ -116,15 +116,15 @@ par(mfrow=c(1,2))
 res<-emf(xx = breast$Glucose, itera = 20, m=3, method = "crisp", main = "Glucose values", seed = 0)
 
 # add density curves for each class
-lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 12),lwd=2,col=5)
-lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 12),lwd=2,col=6)
-lines(density(rnorm(100, res$medias[3], res$desvpadrao[3]), bw = 12),lwd=2,col=7)
+lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 12),lwd=2,col=3)
+lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 12),lwd=2,col=4)
+lines(density(rnorm(100, res$medias[3], res$desvpadrao[3]), bw = 12),lwd=2,col=5)
 
 ## column with 3 classes
 attach(res$classe)
-classe3<-ifelse(V1 == 1, 5,
-               ifelse(V2 == 1, 6,
-                      7)) # create 'm' classes
+classe3<-ifelse(V1 == 1, 3,
+               ifelse(V2 == 1, 4,
+                      5)) # create 'm' classes
 detach()
 
 plot(1:length(breast$Glucose), breast$Glucose, col=classe3, pch=20,
