@@ -102,7 +102,7 @@ Print the two new density lines with a large banwith
 ```{r}
 # plot histogram and density function for Age
 hist(breast$Age, density = 20,
-     main="Glucose level",
+     main="Age distribution",
      xlab="", freq=F, ylim = c(0,0.03))
 lines(density(breast$Age),
       lwd=2,col="black")

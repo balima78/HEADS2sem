@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-26" />
+<meta name="date" content="2020-02-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,18 +172,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
 <li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="assignment-trees.html"><a href="assignment-trees.html#load-data"><i class="fa fa-check"></i><b>4.4.1</b> load data</a></li>
-<li class="chapter" data-level="4.4.2" data-path="assignment-trees.html"><a href="assignment-trees.html#classification-tree"><i class="fa fa-check"></i><b>4.4.2</b> Classification tree</a></li>
-<li class="chapter" data-level="4.4.3" data-path="assignment-trees.html"><a href="assignment-trees.html#random-forest-with-repeated-310-fold-cv"><i class="fa fa-check"></i><b>4.4.3</b> Random forest with repeated 3*10-fold CV</a></li>
-<li class="chapter" data-level="4.4.4" data-path="assignment-trees.html"><a href="assignment-trees.html#improve-random-forest-1"><i class="fa fa-check"></i><b>4.4.4</b> Improve Random Forest</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#load-data-1"><i class="fa fa-check"></i><b>4.5.1</b> load data</a></li>
-<li class="chapter" data-level="4.5.2" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#up-sample-data"><i class="fa fa-check"></i><b>4.5.2</b> Up sample data</a></li>
-<li class="chapter" data-level="4.5.3" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#classification-tree-by-two-methods"><i class="fa fa-check"></i><b>4.5.3</b> Classification tree by two methods</a></li>
-<li class="chapter" data-level="4.5.4" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#train-models-cart-and-rf-with-repeated-310-fold-cv"><i class="fa fa-check"></i><b>4.5.4</b> train models CART and RF with repeated 3*10-fold CV</a></li>
-</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
@@ -313,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Print the two new density lines with a large banwith</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="co"># plot histogram and density function for Age</span></a>
 <a class="sourceLine" id="cb95-2" title="2"><span class="kw">hist</span>(breast<span class="op">$</span>Age, <span class="dt">density =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb95-3" title="3">     <span class="dt">main=</span><span class="st">&quot;Glucose level&quot;</span>,</a>
+<a class="sourceLine" id="cb95-3" title="3">     <span class="dt">main=</span><span class="st">&quot;Age distribution&quot;</span>,</a>
 <a class="sourceLine" id="cb95-4" title="4">     <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">freq=</span>F, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.03</span>))</a>
 <a class="sourceLine" id="cb95-5" title="5"><span class="kw">lines</span>(<span class="kw">density</span>(breast<span class="op">$</span>Age),</a>
 <a class="sourceLine" id="cb95-6" title="6">      <span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-26" />
+<meta name="date" content="2020-02-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,7 +132,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
@@ -172,18 +171,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
 <li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="assignment-trees.html"><a href="assignment-trees.html#load-data"><i class="fa fa-check"></i><b>4.4.1</b> load data</a></li>
-<li class="chapter" data-level="4.4.2" data-path="assignment-trees.html"><a href="assignment-trees.html#classification-tree"><i class="fa fa-check"></i><b>4.4.2</b> Classification tree</a></li>
-<li class="chapter" data-level="4.4.3" data-path="assignment-trees.html"><a href="assignment-trees.html#random-forest-with-repeated-310-fold-cv"><i class="fa fa-check"></i><b>4.4.3</b> Random forest with repeated 3*10-fold CV</a></li>
-<li class="chapter" data-level="4.4.4" data-path="assignment-trees.html"><a href="assignment-trees.html#improve-random-forest-1"><i class="fa fa-check"></i><b>4.4.4</b> Improve Random Forest</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#load-data-1"><i class="fa fa-check"></i><b>4.5.1</b> load data</a></li>
-<li class="chapter" data-level="4.5.2" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#up-sample-data"><i class="fa fa-check"></i><b>4.5.2</b> Up sample data</a></li>
-<li class="chapter" data-level="4.5.3" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#classification-tree-by-two-methods"><i class="fa fa-check"></i><b>4.5.3</b> Classification tree by two methods</a></li>
-<li class="chapter" data-level="4.5.4" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html#train-models-cart-and-rf-with-repeated-310-fold-cv"><i class="fa fa-check"></i><b>4.5.4</b> train models CART and RF with repeated 3*10-fold CV</a></li>
-</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
@@ -214,303 +203,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="assignment-trees---up-sampling" class="section level2">
 <h2><span class="header-section-number">4.5</span> Assignment Trees - Up Sampling</h2>
-<p>In this excercise we have a disparity in the frequencies of the observed classes we want to predict. For resolving such a class imbalance we can up sampling our data as described elsewhere:
-<a href="https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques" class="uri">https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques</a></p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning =</span> F, <span class="dt">message =</span> F)</a></code></pre></div>
-<div id="load-data-1" class="section level3">
-<h3><span class="header-section-number">4.5.1</span> load data</h3>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb295-2" title="2"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb295-3" title="3"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb295-4" title="4"><span class="kw">library</span>(rpart.plot)</a>
-<a class="sourceLine" id="cb295-5" title="5"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb295-6" title="6"></a>
-<a class="sourceLine" id="cb295-7" title="7">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/risk_factors_cervical_cancer.csv&quot;</span>, <span class="dt">na.strings =</span> <span class="st">&quot;?&quot;</span>)</a>
-<a class="sourceLine" id="cb295-8" title="8"></a>
-<a class="sourceLine" id="cb295-9" title="9"><span class="co">## select columns 0/1</span></a>
-<a class="sourceLine" id="cb295-10" title="10">colMax &lt;-<span class="st"> </span><span class="cf">function</span>(data) <span class="kw">sapply</span>(data, max, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb295-11" title="11"></a>
-<a class="sourceLine" id="cb295-12" title="12">cols&lt;-<span class="kw">colMax</span>(data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">max=</span>.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="st">&quot;cols&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb295-13" title="13"><span class="st">  </span><span class="kw">filter</span>(max<span class="op">==</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>.<span class="op">$</span>cols</a>
-<a class="sourceLine" id="cb295-14" title="14"></a>
-<a class="sourceLine" id="cb295-15" title="15"><span class="co"># factorize columns 0/1</span></a>
-<a class="sourceLine" id="cb295-16" title="16">data&lt;-data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(cols, <span class="op">~</span><span class="kw">factor</span>(.,<span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)))</a>
-<a class="sourceLine" id="cb295-17" title="17"></a>
-<a class="sourceLine" id="cb295-18" title="18"><span class="co"># excluded columns only with zeros and Dxs</span></a>
-<a class="sourceLine" id="cb295-19" title="19">data&lt;-data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs.AIDS,<span class="op">-</span>STDs.cervical.condylomatosis,</a>
-<a class="sourceLine" id="cb295-20" title="20">                      <span class="op">-</span>Dx.CIN, <span class="op">-</span>Dx.HPV, <span class="op">-</span>Dx)</a></code></pre></div>
-<p>summarize the data</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1"><span class="kw">summary</span>(data)</a></code></pre></div>
-<pre><code>##       Age        Number.of.sexual.partners First.sexual.intercourse
-##  Min.   :13.00   Min.   : 1.000            Min.   :10              
-##  1st Qu.:20.00   1st Qu.: 2.000            1st Qu.:15              
-##  Median :25.00   Median : 2.000            Median :17              
-##  Mean   :26.82   Mean   : 2.528            Mean   :17              
-##  3rd Qu.:32.00   3rd Qu.: 3.000            3rd Qu.:18              
-##  Max.   :84.00   Max.   :28.000            Max.   :32              
-##                  NA&#39;s   :26                NA&#39;s   :7               
-##  Num.of.pregnancies  Smokes    Smokes..years.  Smokes..packs.year.
-##  Min.   : 0.000     no  :722   Min.   : 0.00   Min.   : 0.0000    
-##  1st Qu.: 1.000     yes :123   1st Qu.: 0.00   1st Qu.: 0.0000    
-##  Median : 2.000     NA&#39;s: 13   Median : 0.00   Median : 0.0000    
-##  Mean   : 2.276                Mean   : 1.22   Mean   : 0.4531    
-##  3rd Qu.: 3.000                3rd Qu.: 0.00   3rd Qu.: 0.0000    
-##  Max.   :11.000                Max.   :37.00   Max.   :37.0000    
-##  NA&#39;s   :56                    NA&#39;s   :13      NA&#39;s   :13         
-##  Hormonal.Contraceptives Hormonal.Contraceptives..years.   IUD     
-##  no  :269                Min.   : 0.000                  no  :658  
-##  yes :481                1st Qu.: 0.000                  yes : 83  
-##  NA&#39;s:108                Median : 0.500                  NA&#39;s:117  
-##                          Mean   : 2.256                            
-##                          3rd Qu.: 3.000                            
-##                          Max.   :30.000                            
-##                          NA&#39;s   :108                               
-##   IUD..years.        STDs     STDs..number.    STDs.condylomatosis
-##  Min.   : 0.0000   no  :674   Min.   :0.0000   no  :709           
-##  1st Qu.: 0.0000   yes : 79   1st Qu.:0.0000   yes : 44           
-##  Median : 0.0000   NA&#39;s:105   Median :0.0000   NA&#39;s:105           
-##  Mean   : 0.5148              Mean   :0.1766                      
-##  3rd Qu.: 0.0000              3rd Qu.:0.0000                      
-##  Max.   :19.0000              Max.   :4.0000                      
-##  NA&#39;s   :117                  NA&#39;s   :105                         
-##  STDs.vaginal.condylomatosis STDs.vulvo.perineal.condylomatosis
-##  no  :749                    no  :710                          
-##  yes :  4                    yes : 43                          
-##  NA&#39;s:105                    NA&#39;s:105                          
-##                                                                
-##                                                                
-##                                                                
-##                                                                
-##  STDs.syphilis STDs.pelvic.inflammatory.disease STDs.genital.herpes
-##  no  :735      no  :752                         no  :752           
-##  yes : 18      yes :  1                         yes :  1           
-##  NA&#39;s:105      NA&#39;s:105                         NA&#39;s:105           
-##                                                                    
-##                                                                    
-##                                                                    
-##                                                                    
-##  STDs.molluscum.contagiosum STDs.HIV   STDs.Hepatitis.B STDs.HPV  
-##  no  :752                   no  :735   no  :752         no  :751  
-##  yes :  1                   yes : 18   yes :  1         yes :  2  
-##  NA&#39;s:105                   NA&#39;s:105   NA&#39;s:105         NA&#39;s:105  
-##                                                                   
-##                                                                   
-##                                                                   
-##                                                                   
-##  STDs..Number.of.diagnosis STDs..Time.since.first.diagnosis
-##  Min.   :0.00000           Min.   : 1.000                  
-##  1st Qu.:0.00000           1st Qu.: 2.000                  
-##  Median :0.00000           Median : 4.000                  
-##  Mean   :0.08741           Mean   : 6.141                  
-##  3rd Qu.:0.00000           3rd Qu.: 8.000                  
-##  Max.   :3.00000           Max.   :22.000                  
-##                            NA&#39;s   :787                     
-##  STDs..Time.since.last.diagnosis Dx.Cancer Hinselmann Schiller  Citology 
-##  Min.   : 1.000                  no :840   no :823    no :784   no :814  
-##  1st Qu.: 2.000                  yes: 18   yes: 35    yes: 74   yes: 44  
-##  Median : 3.000                                                          
-##  Mean   : 5.817                                                          
-##  3rd Qu.: 7.500                                                          
-##  Max.   :22.000                                                          
-##  NA&#39;s   :787                                                             
-##  Biopsy   
-##  no :803  
-##  yes: 55  
-##           
-##           
-##           
-##           
-## </code></pre>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1"><span class="kw">table</span>(data<span class="op">$</span>Dx.Cancer)</a></code></pre></div>
-<pre><code>## 
-##  no yes 
-## 840  18</code></pre>
-</div>
-<div id="up-sample-data" class="section level3">
-<h3><span class="header-section-number">4.5.2</span> Up sample data</h3>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1"><span class="co"># upsample data</span></a>
-<a class="sourceLine" id="cb300-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb300-3" title="3">up_data &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> data[, <span class="op">!</span><span class="kw">colnames</span>(data) <span class="op">%in%</span><span class="st"> &quot;Dx.Cancer&quot;</span>],</a>
-<a class="sourceLine" id="cb300-4" title="4">                     <span class="dt">y =</span> data<span class="op">$</span>Dx.Cancer)</a>
-<a class="sourceLine" id="cb300-5" title="5"><span class="co"># sumarize it</span></a>
-<a class="sourceLine" id="cb300-6" title="6"><span class="co"># now the dependent variable is named &#39;Class&#39;</span></a>
-<a class="sourceLine" id="cb300-7" title="7"><span class="kw">table</span>(up_data<span class="op">$</span>Class)</a></code></pre></div>
-<pre><code>## 
-##  no yes 
-## 840 840</code></pre>
-<p>missing data</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" title="1"><span class="kw">library</span>(Amelia)</a>
-<a class="sourceLine" id="cb302-2" title="2"><span class="co"># missings on original data</span></a>
-<a class="sourceLine" id="cb302-3" title="3"><span class="kw">missmap</span>(data)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
-<p>new data</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1"><span class="co"># select only variable with low number of missings</span></a>
-<a class="sourceLine" id="cb303-2" title="2">vars&lt;-<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Hinselmann&quot;</span>,<span class="st">&quot;Schiller&quot;</span>,<span class="st">&quot;Citology&quot;</span>,<span class="st">&quot;Biopsy&quot;</span>,<span class="st">&quot;Number.of.sexual.partners&quot;</span></a>
-<a class="sourceLine" id="cb303-3" title="3">        ,<span class="st">&quot;Smokes..packs.year.&quot;</span>,<span class="st">&quot;Smokes..years.&quot;</span>,<span class="st">&quot;Smokes&quot;</span>, <span class="st">&quot;First.sexual.intercourse&quot;</span>,</a>
-<a class="sourceLine" id="cb303-4" title="4">        <span class="st">&quot;STDs..Number.of.diagnosis&quot;</span>, <span class="st">&quot;Class&quot;</span>)</a>
-<a class="sourceLine" id="cb303-5" title="5">up_data&lt;-up_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(vars)</a></code></pre></div>
-</div>
-<div id="classification-tree-by-two-methods" class="section level3">
-<h3><span class="header-section-number">4.5.3</span> Classification tree by two methods</h3>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1"><span class="co"># learn tree with Gini impurity</span></a>
-<a class="sourceLine" id="cb304-2" title="2">tree.gini&lt;-<span class="kw">rpart</span>(Class<span class="op">~</span>.,<span class="dt">data =</span> up_data, <span class="dt">cp =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb304-3" title="3"></a>
-<a class="sourceLine" id="cb304-4" title="4"><span class="co"># learn tree with information gain</span></a>
-<a class="sourceLine" id="cb304-5" title="5">tree.information&lt;-<span class="kw">rpart</span>(Class<span class="op">~</span>., <span class="dt">data=</span>up_data,</a>
-<a class="sourceLine" id="cb304-6" title="6">                        <span class="dt">parms=</span><span class="kw">list</span>(<span class="dt">split=</span><span class="st">&quot;information&quot;</span>))</a>
-<a class="sourceLine" id="cb304-7" title="7"></a>
-<a class="sourceLine" id="cb304-8" title="8"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb304-9" title="9"><span class="kw">plot</span>(tree.information,<span class="dt">main=</span><span class="st">&quot;Information&quot;</span>)</a>
-<a class="sourceLine" id="cb304-10" title="10"><span class="kw">text</span>(tree.information)</a>
-<a class="sourceLine" id="cb304-11" title="11"><span class="kw">plot</span>(tree.gini, <span class="dt">main=</span><span class="st">&quot;Gini&quot;</span>)</a>
-<a class="sourceLine" id="cb304-12" title="12"><span class="kw">text</span>(tree.gini)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-190-1.png" width="672" /></p>
-</div>
-<div id="train-models-cart-and-rf-with-repeated-310-fold-cv" class="section level3">
-<h3><span class="header-section-number">4.5.4</span> train models CART and RF with repeated 3*10-fold CV</h3>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1"><span class="co"># </span></a>
-<a class="sourceLine" id="cb305-2" title="2"><span class="co"># set definitions</span></a>
-<a class="sourceLine" id="cb305-3" title="3">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
-<a class="sourceLine" id="cb305-4" title="4">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb305-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb305-6" title="6">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb305-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats=</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb305-8" title="8"></a>
-<a class="sourceLine" id="cb305-9" title="9"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb305-10" title="10">fit.cart.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>up_data, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb305-11" title="11">                      <span class="dt">na.action=</span>na.exclude)</a>
-<a class="sourceLine" id="cb305-12" title="12"></a>
-<a class="sourceLine" id="cb305-13" title="13"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb305-14" title="14">fit.rf.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>up_data, <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb305-15" title="15">                    <span class="dt">na.action=</span>na.exclude)</a></code></pre></div>
-<p>compare CART with RF</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv, <span class="dt">rf=</span>fit.rf.rcv)</a>
-<a class="sourceLine" id="cb306-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb306-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
-<pre><code>## 
-## Call:
-## summary.resamples(object = results)
-## 
-## Models: rpart, rf 
-## Number of resamples: 30 
-## 
-## ROC 
-##            Min.   1st Qu.   Median      Mean   3rd Qu.      Max. NA&#39;s
-## rpart 0.7135285 0.7658426 0.802456 0.7964733 0.8246275 0.8639241    0
-## rf    0.9937500 1.0000000 1.000000 0.9997116 1.0000000 1.0000000    0
-## 
-## Sens 
-##         Min. 1st Qu.  Median      Mean  3rd Qu.  Max. NA&#39;s
-## rpart 0.4125 0.49375 0.55625 0.5578270 0.621875 0.725    0
-## rf    0.9500 0.97500 0.98750 0.9841086 0.996875 1.000    0
-## 
-## Spec 
-##       Min. 1st Qu. Median Mean 3rd Qu. Max. NA&#39;s
-## rpart    1       1      1    1       1    1    0
-## rf       1       1      1    1       1    1    0</code></pre>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb308-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>yes, </a>
-<a class="sourceLine" id="cb308-3" title="3">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold-CV&quot;</span>,fit<span class="op">$</span>method), </a>
-<a class="sourceLine" id="cb308-4" title="4">                                                  <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-192-2.png" width="672" /></p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1"><span class="kw">print</span>(fit.cart.rcv)</a></code></pre></div>
-<pre><code>## CART 
-## 
-## 1680 samples
-##   11 predictor
-##    2 classes: &#39;no&#39;, &#39;yes&#39; 
-## 
-## No pre-processing
-## Resampling: Cross-Validated (10 fold, repeated 3 times) 
-## Summary of sample sizes: 1428, 1428, 1428, 1428, 1428, 1429, ... 
-## Resampling results across tuning parameters:
-## 
-##   cp          ROC        Sens       Spec     
-##   0.07341772  0.7964733  0.5578270  1.0000000
-##   0.10632911  0.7422564  0.5414926  0.9299578
-##   0.42405063  0.6123734  0.7104008  0.5143460
-## 
-## ROC was used to select the optimal model using the largest value.
-## The final value used for the model was cp = 0.07341772.</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="kw">print</span>(fit.rf.rcv)</a></code></pre></div>
-<pre><code>## Random Forest 
-## 
-## 1680 samples
-##   11 predictor
-##    2 classes: &#39;no&#39;, &#39;yes&#39; 
-## 
-## No pre-processing
-## Resampling: Cross-Validated (10 fold, repeated 3 times) 
-## Summary of sample sizes: 1428, 1428, 1428, 1428, 1428, 1429, ... 
-## Resampling results across tuning parameters:
-## 
-##   mtry  ROC        Sens       Spec
-##    2    0.9953841  0.9259124  1   
-##    6    0.9997116  0.9841086  1   
-##   11    0.9993697  0.9811709  1   
-## 
-## ROC was used to select the optimal model using the largest value.
-## The final value used for the model was mtry = 6.</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1"><span class="kw">plot</span>(fit.cart.rcv)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-192-3.png" width="672" /></p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="kw">plot</span>(fit.rf.rcv)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-192-4.png" width="672" /></p>
-<p>tunning RF model</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1">myGrid&lt;-<span class="kw">expand.grid</span>(<span class="dt">mtry=</span><span class="dv">1</span><span class="op">:</span><span class="dv">11</span>) <span class="co"># number of variables  when constructing the RF</span></a>
-<a class="sourceLine" id="cb316-2" title="2"></a>
-<a class="sourceLine" id="cb316-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb316-4" title="4">fit.rf.rcv.tune &lt;-<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>up_data, </a>
-<a class="sourceLine" id="cb316-5" title="5">                         <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, </a>
-<a class="sourceLine" id="cb316-6" title="6">                         <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb316-7" title="7">                         <span class="dt">tuneGrid =</span> myGrid,</a>
-<a class="sourceLine" id="cb316-8" title="8">                         <span class="dt">na.action=</span>na.exclude)</a></code></pre></div>
-<p>compare the 3 models</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1">fit.models&lt;-<span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv,<span class="dt">rf =</span> fit.rf.rcv, <span class="dt">rf.tune=</span>fit.rf.rcv.tune)</a>
-<a class="sourceLine" id="cb317-2" title="2"></a>
-<a class="sourceLine" id="cb317-3" title="3">results&lt;-<span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb317-4" title="4"><span class="kw">summary</span>(results)</a></code></pre></div>
-<pre><code>## 
-## Call:
-## summary.resamples(object = results)
-## 
-## Models: rpart, rf, rf.tune 
-## Number of resamples: 30 
-## 
-## ROC 
-##              Min.   1st Qu.   Median      Mean   3rd Qu.      Max. NA&#39;s
-## rpart   0.7135285 0.7658426 0.802456 0.7964733 0.8246275 0.8639241    0
-## rf      0.9937500 1.0000000 1.000000 0.9997116 1.0000000 1.0000000    0
-## rf.tune 0.9978369 1.0000000 1.000000 0.9998749 1.0000000 1.0000000    0
-## 
-## Sens 
-##              Min. 1st Qu.  Median      Mean   3rd Qu.  Max. NA&#39;s
-## rpart   0.4125000 0.49375 0.55625 0.5578270 0.6218750 0.725    0
-## rf      0.9500000 0.97500 0.98750 0.9841086 0.9968750 1.000    0
-## rf.tune 0.9240506 0.96250 0.97500 0.9719673 0.9873418 1.000    0
-## 
-## Spec 
-##         Min. 1st Qu. Median Mean 3rd Qu. Max. NA&#39;s
-## rpart      1       1      1    1       1    1    0
-## rf         1       1      1    1       1    1    0
-## rf.tune    1       1      1    1       1    1    0</code></pre>
-<p>ROCs from models</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb319-2" title="2">rocs&lt;-<span class="kw">lapply</span>(fit.models,</a>
-<a class="sourceLine" id="cb319-3" title="3">             <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,</a>
-<a class="sourceLine" id="cb319-4" title="4">                                    fit<span class="op">$</span>pred<span class="op">$</span>yes,</a>
-<a class="sourceLine" id="cb319-5" title="5">                                    <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold CV-&quot;</span>,fit<span class="op">$</span>method),<span class="dt">debug=</span>F,<span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
-<p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
-<p><a href="http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials" class="uri">http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials</a>
-<a href="https://bradleyboehmke.github.io/HOML/DT.html" class="uri">https://bradleyboehmke.github.io/HOML/DT.html</a>
-<a href="https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques" class="uri">https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques</a>
-<a href="https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/" class="uri">https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/</a></p>
+<p>Taking in consideration the fact that the data is unbalanced regarding the outcome variable, we try another solution:</p>
+<p><a href="https://rpubs.com/balima78/learn_4032_assign1" class="uri">https://rpubs.com/balima78/learn_4032_assign1</a></p>
+<hr />
+<p><em>some references:</em></p>
+<p><a href="http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials" class="uri">http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials</a></p>
+<p><a href="https://bradleyboehmke.github.io/HOML/DT.html" class="uri">https://bradleyboehmke.github.io/HOML/DT.html</a></p>
+<p><a href="https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques" class="uri">https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques</a></p>
+<p><a href="https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/" class="uri">https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/</a></p>
+<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
-</div>
 </div>
 <!-- </div> -->
             </section>
