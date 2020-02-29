@@ -156,6 +156,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.2" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves"><i class="fa fa-check"></i><b>2.6.2</b> 2 clusters density curves</a></li>
 <li class="chapter" data-level="2.6.3" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves-1"><i class="fa fa-check"></i><b>2.6.3</b> 3 clusters density curves</a></li>
 </ul></li>
+<li class="chapter" data-level="2.7" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html"><i class="fa fa-check"></i><b>2.7</b> assignment Second Lead from ECG</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#defining-a-function-for-expectation-maximization-em-algorithm"><i class="fa fa-check"></i><b>2.7.1</b> Defining a function for expectation-maximization (EM) algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#reading-the-data-and-ploting-the-leads-distribution"><i class="fa fa-check"></i><b>2.7.2</b> reading the data and ploting the leads distribution</a></li>
+<li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
+<li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
+<li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -205,11 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lesson-2-1" class="section level2">
 <h2><span class="header-section-number">3.2</span> Lesson 2</h2>
 <p>Length of stay is an important indicator used in health care assessment. The UCIP_PRISM.sav database contains the record of 812 pediatric admissions in 3 intensive care units (Variable P1: Coimbra, Lisboa and Porto). We want to compare the hospitalization time (Variable tempoint) of the three units. However, we must take into account that the units may receive patients with different levels of severity. The PRISM variable is an indicator of the patient’s severity at the date of admission.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1"><span class="kw">library</span>(foreign)</a>
-<a class="sourceLine" id="cb142-2" title="2"></a>
-<a class="sourceLine" id="cb142-3" title="3">aula2 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/UCIP_PRISM HEADS.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb142-4" title="4">    </a>
-<a class="sourceLine" id="cb142-5" title="5"><span class="kw">summary</span>(aula2)</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb153-2" title="2"></a>
+<a class="sourceLine" id="cb153-3" title="3">aula2 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/UCIP_PRISM HEADS.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb153-4" title="4">    </a>
+<a class="sourceLine" id="cb153-5" title="5"><span class="kw">summary</span>(aula2)</a></code></pre></div>
 <pre><code>##          Length Class  Mode   
 ## P1       812    factor numeric
 ## PRISM    812    -none- numeric
@@ -217,11 +224,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Make a histogram of the length of stay</li>
 </ol>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">hist</span>(aula2<span class="op">$</span>tempoint)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1"><span class="kw">hist</span>(aula2<span class="op">$</span>tempoint)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 <p>2.Make a linear regression model with the dependent variable length of stay (tempoint), and the intensive care unit (P1) and PRISM variables as independent variables.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1">regressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> tempoint <span class="op">~</span><span class="st"> </span>P1 <span class="op">+</span><span class="st"> </span>PRISM, <span class="dt">data=</span>aula2)</a>
-<a class="sourceLine" id="cb145-2" title="2"><span class="kw">summary</span>(regressao)</a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">regressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> tempoint <span class="op">~</span><span class="st"> </span>P1 <span class="op">+</span><span class="st"> </span>PRISM, <span class="dt">data=</span>aula2)</a>
+<a class="sourceLine" id="cb156-2" title="2"><span class="kw">summary</span>(regressao)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = tempoint ~ P1 + PRISM, data = aula2)
@@ -243,18 +250,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.01558,    Adjusted R-squared:  0.01192 
 ## F-statistic: 4.261 on 3 and 808 DF,  p-value: 0.005353</code></pre>
 <p>3.Check that the model assumptions in question b) are not satisfied.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"><span class="kw">plot</span>(regressao<span class="op">$</span>fitted.values, regressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="kw">hist</span>(regressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-81-2.png" width="672" /></p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="kw">plot</span>(regressao<span class="op">$</span>fitted.values, regressao<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="kw">hist</span>(regressao<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-87-2.png" width="672" /></p>
 <p>or you can plot everything</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">plot</span>(regressao)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-82-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-82-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-82-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-82-4.png" width="672" /></p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">plot</span>(regressao)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-88-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-88-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-88-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-88-4.png" width="672" /></p>
 <p>4.Transform the length of stay variable into the Neperian logarithm of length of stay (tempoint -&gt; logtempoint).</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">aula2<span class="op">$</span>logtempoint &lt;-<span class="st"> </span><span class="kw">log</span>(aula2<span class="op">$</span>tempoint)</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">aula2<span class="op">$</span>logtempoint &lt;-<span class="st"> </span><span class="kw">log</span>(aula2<span class="op">$</span>tempoint)</a></code></pre></div>
 <p>5.Analyze the differences in the logarithm of length of stay between the 3 units, adjusting to the severity of the patients, ie, remake the model in question b) but with the logarithm of length of stay as dependent variable.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1">logregressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> logtempoint <span class="op">~</span><span class="st"> </span>P1 <span class="op">+</span><span class="st"> </span>PRISM, <span class="dt">data=</span>aula2)</a>
-<a class="sourceLine" id="cb151-2" title="2"><span class="kw">summary</span>(logregressao)</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">logregressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> logtempoint <span class="op">~</span><span class="st"> </span>P1 <span class="op">+</span><span class="st"> </span>PRISM, <span class="dt">data=</span>aula2)</a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="kw">summary</span>(logregressao)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logtempoint ~ P1 + PRISM, data = aula2)
@@ -276,17 +283,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.05785,    Adjusted R-squared:  0.05435 
 ## F-statistic: 16.54 on 3 and 808 DF,  p-value: 1.954e-10</code></pre>
 <p>Geometric mean ratio (percentage value)</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1">(<span class="kw">exp</span>(logregressao<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">(<span class="kw">exp</span>(logregressao<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
 <pre><code>## (Intercept)    P1Lisboa     P1Porto       PRISM 
 ##  108.451271   48.612650   37.595032    2.721276</code></pre>
 <p>6.Check that the model assumptions in question e) are satisfied.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1"><span class="kw">plot</span>(logregressao<span class="op">$</span>fitted.values, logregressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">hist</span>(logregressao<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-86-2.png" width="672" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">plot</span>(logregressao<span class="op">$</span>fitted.values, logregressao<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">hist</span>(logregressao<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-92-2.png" width="672" /></p>
 <p>or you can plot everything</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">plot</span>(logregressao)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-87-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-87-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-87-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-87-4.png" width="672" /></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="kw">plot</span>(logregressao)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-93-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-93-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-93-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-93-4.png" width="672" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>

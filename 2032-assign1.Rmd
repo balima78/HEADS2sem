@@ -1,0 +1,217 @@
+## assignment Second Lead from ECG
+
+Assignment from Lesson 3
+
+2020-02-29
+
+Consider the file A0001.mat from the PhysioNet Challenge https://physionetchallenges.github.io/2020/. Using R:
+
+a) Plot the histogram of all the 12 ECG leads with the respective density curve.
+
+b) Using the second lead inverted, apply the expectation-maximization algorithm with 2 and 3 latent classes.
+
+c) Plot the densities for each of the latent classes. 
+
+d) Which point in the ECG belongs to each latent class? Plot the ECG in which each point has a color corresponding to the class to which it belongs.
+
+e) Use the difference between the averages of class distribution as the convergence criterion.
+
+f) Generate 1000 data points at random according to a single distribution fitted to the original data.
+
+g) Generate 1000 data points at random according to a mixture of distributions fitted using one of the previous EM computed in line b. 
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Defining a function for expectation-maximization (EM) algorithm
+```{r}
+# function for Expectation-Maximization algorithm
+emf<-function(xx = vv, # a vector with the data
+              m = 2, # number of clusters
+              method = "crisp", # method used for parameters estimation in each class; options: "crisp" or "soft"
+              itera = 10, # number of iterations
+              eps = 0.01, # the accepted error to converge (e)
+              params = "random", # initial parameters, if "random" 'm' values from 'xx' are randomly select, or we can input a vector with 'm' values
+              main="ECG", # histogram title
+              seed = 0 # value for set.seed()
+){
+  medias=NA
+  desvpadrao=NA
+  if (params == "random") {
+    set.seed(seed)
+    param.mean<-sample(xx,m)
+    param.sd<-rep(sd(xx)/m,m)
+  } else {
+    param.mean<-params
+    param.sd<-rep(sd(xx)/m,m)
+  }
+  
+  for (k in 1:itera){
+    densities<-sapply(1:m, 
+                      function(i){dnorm(xx,
+                                        mean=param.mean[i],
+                                        sd=param.sd[i])})
+    relevance<-t(apply(densities,1,function(l){l/sum(l)}))
+    
+    attrib<-t(apply(relevance,1,
+                    function(l){replace(rep(0,m),which.max(l)[1],1)}))
+    
+    # Re-estimates the parameters of the probability distribution of each class
+    if (method == "crisp") {
+      ## M-step (alternative 1: crisp)
+      param.mean.new<-sapply(1:m,
+                             function(j){mean(xx[attrib[,j]==1])})
+      param.sd.new<-sapply(1:m,
+                           function(j){sqrt(sum(relevance[,j]*(xx-param.mean[j])^2)/sum(relevance[,j]))})
+    } else {
+      ## M-step (alternative 2: soft)
+      param.mean.new<-sapply(1:m,
+                             function(j){sum(xx*relevance[,j])/sum(relevance[,j])})
+      param.sd.new<-sapply(1:m,
+                           function(j){sqrt(sum(relevance[,j]*(xx-param.mean[j])^2)/sum(relevance[,j]))})
+      
+    }
+    
+    # convergence the maximum number of iterations (k).
+    cat("iteration", k, "evolution:", 
+        dif<-sum(abs(param.mean.new - param.mean)), "\n") # using the difference between the averages of class distribution as the convergence criterion.
+    if(dif < eps) break # the accepted error to converge (e)
+    param.mean<-param.mean.new
+    param.sd<-param.sd.new
+  }
+  
+  ## ploting the histogram and density curve for the vector of data
+  hist(xx, density = 20,
+       main=main,
+       xlab="", freq=F, ylim = c(0,0.005))
+  lines(density(xx),
+        lwd=2,col="black")
+  
+  # plot(xx, col=apply(-densities,1,which.max), 
+  #      xlab = "Index", 
+  #      ylab = "ECG Values", main = "Colored by class") #plot colours according to vector densities
+  
+  
+  ## save means, std deviations and classes' attributes on a list
+  result<-list(medias = param.mean,
+               desvpadrao = param.sd,
+               classe = as.data.frame(attrib))
+  
+}
+```
+
+### reading the data and ploting the leads distribution
+```{r}
+library(R.matlab)
+
+# after unzip the files, I took the first file 
+fA1<-readMat("2.UploadedData/A0001.mat")$val
+fA1<-t(fA1)
+
+par(mfrow=c(3,4))
+
+# Ploting the histogram of all the 12 ECG leads with the respective density curve.
+for(i in 1:12){
+hist(fA1[,i], density = 10,
+     main=paste("ECG lead",i, sep = " "),
+     freq=F,
+     xlab="ECG values")
+lines(density(fA1[,i]),
+      lwd=2,col="black")
+}
+```
+
+### EM algorithm for 2 latent classes
+```{r}
+par(mfrow=c(1,1))
+
+# expectation-maximization algorithm with 2 latent classes and a maximum 50 iterations.
+res<-emf(xx = fA1[,2]*(-1), itera = 50, m=2, method = "crisp", main = "second lead inverted", seed = 10)
+
+# adding density curves from the 2 clusters
+lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 40),lwd=2,col=3)
+lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 40),lwd=2,col=4)
+
+## column with 2 classes to classified data from each cluster
+attach(res$classe)
+classe2<-ifelse(V1 == 1, 3 ,4) # create 'm' classes
+detach()
+
+# ploting ECG inverted points according with the latent class it belongs to
+plot(1:length(fA1[,2]), fA1[,2]*(-1), col=classe2, pch=20,
+     xlab="index", ylab="2nd lead ECG",
+     main = " ECG colored by class (m=2)")
+```
+
+### EM algorithm for 3 latent classes
+```{r}
+par(mfrow=c(1,1))
+
+# expectation-maximization algorithm with 3 latent classes and a maximum 50 iterations.
+res<-emf(xx = fA1[,2]*(-1), itera = 50, m=3, method = "crisp", main = "second lead inverted", seed = 10)
+# adding density curves from the 3 clusters
+lines(density(rnorm(100, res$medias[1], res$desvpadrao[1]), bw = 40),lwd=2,col=3)
+lines(density(rnorm(100, res$medias[2], res$desvpadrao[2]), bw = 40),lwd=2,col=4)
+lines(density(rnorm(100, res$medias[3], res$desvpadrao[3]), bw = 40),lwd=2,col=5)
+
+## column with 3 classes to classified data from each cluster
+attach(res$classe)
+classe3<-ifelse(V1 == 1, 3 ,
+               ifelse(V2 == 1, 4, 5)) # create 'm' classes
+detach()
+
+# ploting ECG inverted points according with the latent class it belongs to
+plot(1:length(fA1[,2]), fA1[,2]*(-1), col=classe3, pch=20,
+     xlab="index", ylab="2nd lead ECG",
+     main = " ECG colored by class (m=3)")
+
+```
+
+### Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.
+```{r}
+## length of data set generation
+n<-1000
+
+# original sample data set
+sample<-fA1[,2]*(-1)
+
+# bootstrapped sample data set
+sample.obs<-sample(fA1[,2]*(-1), size=n, replace = TRUE)
+
+# gaussian generated data set
+sample.simple<-rnorm(n,mean=mean(fA1[,2]*(-1)), sd=sd(fA1[,2]))
+
+
+# EM model generated data set
+#classes<-apply(attrib, 1, which.max) # using attrib define previously, to calculate the number of observations in each class
+class.prop<-prop.table(table(classe3)) # calculate percentage of each class
+m<-3
+set.seed(523)
+sample.classes<-sample(1:m, size=n, replace=TRUE, prob=class.prop)
+sample.prop<-prop.table(table(sample.classes))
+sample.values<-round(unlist(sapply(1:m,
+                                   function(j){
+                                     rnorm(n*sample.prop[j], # generating number with the proportions of the two classes we identified previously
+                                           mean=res$medias[j], # parameters defined previously
+                                           sd=res$desvpadrao[j]) # parameters defined previously
+                                   })),0)
+
+# Plotting results
+par(mfrow=c(2,2))
+
+hist(sample, freq = F, main = "Observed data", ylim = c(0,0.004))
+lines(density(sample))
+
+hist(sample.obs, freq = F, main = "data points sampled from observed data", ylim = c(0,0.004))
+lines(density(sample.obs))
+
+hist(sample.simple, freq = F, main = "data points generated from sample distribution", ylim = c(0,0.004))
+lines(density(sample.simple))
+
+hist(sample.values, freq = F, main = "data points generated from EM (m=3)", ylim = c(0,0.004))
+lines(density(sample.values))
+
+```
+
+

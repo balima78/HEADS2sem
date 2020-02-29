@@ -1,4 +1,16 @@
+---
+title: "LEARN assignment Trees and RF (up sampling)"
+author: "Bruno A Lima"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
 ## Assignment Trees - Up Sampling
+
+Compare a decision tree with a random forest in the Cervical Cancer (Risk Factors) data set (available from UCI repository), trying to accurately classify Dx.Cancer
 
 In this excercise we have a disparity in the frequencies of the observed classes we want to predict.  For resolving such a class imbalance we can up sampling our data as described elsewhere:
 https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques
@@ -15,18 +27,13 @@ library(caret)
 library(rpart)
 library(rpart.plot)
 library(pROC)
-
-data <- read.csv("2.UploadedData/risk_factors_cervical_cancer.csv", na.strings = "?")
-
+data <- read.csv("risk_factors_cervical_cancer.csv", na.strings = "?")
 ## select columns 0/1
 colMax <- function(data) sapply(data, max, na.rm = TRUE)
-
 cols<-colMax(data) %>% data.frame(max=.) %>% rownames_to_column("cols") %>% 
   filter(max==1) %>% .$cols
-
 # factorize columns 0/1
 data<-data %>% mutate_at(cols, ~factor(.,levels = 0:1, labels = c("no","yes")))
-
 # excluded columns only with zeros and Dxs
 data<-data %>% select(-STDs.AIDS,-STDs.cervical.condylomatosis,
                       -Dx.CIN, -Dx.HPV, -Dx)
@@ -71,17 +78,14 @@ up_data<-up_data %>% select(vars)
 ```{r}
 # learn tree with Gini impurity
 tree.gini<-rpart(Class~.,data = up_data, cp = 0.1)
-
 # learn tree with information gain
 tree.information<-rpart(Class~., data=up_data,
                         parms=list(split="information"))
-
 par(mfrow=c(1,2))
 plot(tree.information,main="Information")
 text(tree.information)
 plot(tree.gini, main="Gini")
 text(tree.gini)
-
 ```
 
 ### train models CART and RF with repeated 3*10-fold CV
@@ -93,11 +97,9 @@ control <- trainControl(method="repeatedcv", number=10,
                         summaryFunction=twoClassSummary, 
                         classProbs=T,
                         savePredictions = TRUE, repeats=3)
-
 set.seed(7)
 fit.cart.rcv <- train(Class ~ ., data=up_data, method="rpart", metric=metric, trControl=control,
                       na.action=na.exclude)
-
 set.seed(7)
 fit.rf.rcv <- train(Class ~ ., data=up_data, method="rf", metric=metric, trControl=control,
                     na.action=na.exclude)
@@ -108,16 +110,13 @@ compare CART with RF
 fit.models <- list(rpart=fit.cart.rcv, rf=fit.rf.rcv)
 results <- resamples(fit.models)
 summary(results)
-
 par(mfrow=c(1,2))
 rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, 
                                                   main=paste("3x10-fold-CV",fit$method), 
                                                   debug=F, print.auc=T)})
-
 dotplot(results)
 print(fit.cart.rcv)
 print(fit.rf.rcv)
-
 plot(fit.cart.rcv)
 plot(fit.rf.rcv)
 ```
@@ -125,7 +124,6 @@ plot(fit.rf.rcv)
 tunning RF model
 ```{r}
 myGrid<-expand.grid(mtry=1:11) # number of variables  when constructing the RF
-
 set.seed(7)
 fit.rf.rcv.tune <- train(Class ~ ., data=up_data, 
                          method="rf", metric=metric, 
@@ -137,7 +135,6 @@ fit.rf.rcv.tune <- train(Class ~ ., data=up_data,
 compare the 3 models
 ```{r}
 fit.models<-list(rpart=fit.cart.rcv,rf = fit.rf.rcv, rf.tune=fit.rf.rcv.tune)
-
 results<-resamples(fit.models)
 summary(results)
 ```
@@ -155,10 +152,4 @@ Compare accuracy of models
 ```{r}
 dotplot(results)
 ```
-
-
-http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials
-https://bradleyboehmke.github.io/HOML/DT.html
-https://topepo.github.io/caret/subsampling-for-class-imbalances.html#subsampling-techniques
-https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/
 
