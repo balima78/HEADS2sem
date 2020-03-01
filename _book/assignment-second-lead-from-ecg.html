@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-29" />
+<meta name="date" content="2020-03-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -415,10 +415,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb17-5" title="5">sample&lt;-fA1[,<span class="dv">2</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb17-6" title="6"></a>
 <a class="sourceLine" id="cb17-7" title="7"><span class="co"># bootstrapped sample data set</span></a>
-<a class="sourceLine" id="cb17-8" title="8">sample.obs&lt;-<span class="kw">sample</span>(fA1[,<span class="dv">2</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>), <span class="dt">size=</span>n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb17-8" title="8">sample.obs&lt;-<span class="kw">sample</span>(sample, <span class="dt">size=</span>n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb17-9" title="9"></a>
 <a class="sourceLine" id="cb17-10" title="10"><span class="co"># gaussian generated data set</span></a>
-<a class="sourceLine" id="cb17-11" title="11">sample.simple&lt;-<span class="kw">rnorm</span>(n,<span class="dt">mean=</span><span class="kw">mean</span>(fA1[,<span class="dv">2</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>)), <span class="dt">sd=</span><span class="kw">sd</span>(fA1[,<span class="dv">2</span>]))</a>
+<a class="sourceLine" id="cb17-11" title="11">sample.simple&lt;-<span class="kw">rnorm</span>(n,<span class="dt">mean=</span><span class="kw">mean</span>(sample), <span class="dt">sd=</span><span class="kw">sd</span>(sample))</a>
 <a class="sourceLine" id="cb17-12" title="12"></a>
 <a class="sourceLine" id="cb17-13" title="13"></a>
 <a class="sourceLine" id="cb17-14" title="14"><span class="co"># EM model generated data set</span></a>

@@ -178,10 +178,10 @@ n<-1000
 sample<-fA1[,2]*(-1)
 
 # bootstrapped sample data set
-sample.obs<-sample(fA1[,2]*(-1), size=n, replace = TRUE)
+sample.obs<-sample(sample, size=n, replace = TRUE)
 
 # gaussian generated data set
-sample.simple<-rnorm(n,mean=mean(fA1[,2]*(-1)), sd=sd(fA1[,2]))
+sample.simple<-rnorm(n,mean=mean(sample), sd=sd(sample))
 
 
 # EM model generated data set
