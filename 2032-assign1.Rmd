@@ -215,4 +215,10 @@ lines(density(sample.values))
 
 ```
 
+### Bonus
 
+for a diferent solution:
+
+https://rpubs.com/franzbischoff/assignment2
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

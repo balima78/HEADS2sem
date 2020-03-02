@@ -161,3 +161,5 @@ for (i in 1:itera){
 }
 ```
 
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
