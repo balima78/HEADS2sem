@@ -215,7 +215,7 @@ lines(density(sample.values))
 
 ```
 
-### Bonus
+### Bonus 
 
 for a diferent solution:
 

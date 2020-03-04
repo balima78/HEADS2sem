@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-02-29" />
+<meta name="date" content="2020-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,6 +162,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
 <li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
 <li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+<li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="lesson-4.html"><a href="lesson-4.html"><i class="fa fa-check"></i><b>2.8</b> Lesson 4</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="lesson-4.html"><a href="lesson-4.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="lesson-4.html"><a href="lesson-4.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
@@ -214,22 +220,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>2020-02-18</p>
 <div id="using-rpart-and-the-breast-cancer-coimbra-data-set" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Using ‘rpart’ and the Breast Cancer Coimbra data set</h3>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="co"># Define the filename</span></a>
-<a class="sourceLine" id="cb242-2" title="2">filename &lt;-<span class="st"> &quot;2.UploadedData/dataR2.csv&quot;</span></a>
-<a class="sourceLine" id="cb242-3" title="3"></a>
-<a class="sourceLine" id="cb242-4" title="4"><span class="co"># Load the CSV file from the local directory</span></a>
-<a class="sourceLine" id="cb242-5" title="5">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(filename, <span class="dt">header=</span>T)</a>
-<a class="sourceLine" id="cb242-6" title="6">dataset<span class="op">$</span>Classification&lt;-<span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Controls&quot;</span>,<span class="st">&quot;Patients&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb243-2" title="2"></a>
-<a class="sourceLine" id="cb243-3" title="3"><span class="co"># learn tree with Gini impurity</span></a>
-<a class="sourceLine" id="cb243-4" title="4">tree.gini&lt;-<span class="kw">rpart</span>(Classification<span class="op">~</span>.,<span class="dt">data =</span> dataset)</a>
-<a class="sourceLine" id="cb243-5" title="5"></a>
-<a class="sourceLine" id="cb243-6" title="6"><span class="co"># learn tree with information gain</span></a>
-<a class="sourceLine" id="cb243-7" title="7">tree.information&lt;-<span class="kw">rpart</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset,</a>
-<a class="sourceLine" id="cb243-8" title="8">                        <span class="dt">parms=</span><span class="kw">list</span>(<span class="dt">split=</span><span class="st">&quot;information&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="co"># Define the filename</span></a>
+<a class="sourceLine" id="cb243-2" title="2">filename &lt;-<span class="st"> &quot;2.UploadedData/dataR2.csv&quot;</span></a>
+<a class="sourceLine" id="cb243-3" title="3"></a>
+<a class="sourceLine" id="cb243-4" title="4"><span class="co"># Load the CSV file from the local directory</span></a>
+<a class="sourceLine" id="cb243-5" title="5">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(filename, <span class="dt">header=</span>T)</a>
+<a class="sourceLine" id="cb243-6" title="6">dataset<span class="op">$</span>Classification&lt;-<span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Controls&quot;</span>,<span class="st">&quot;Patients&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb244-2" title="2"></a>
+<a class="sourceLine" id="cb244-3" title="3"><span class="co"># learn tree with Gini impurity</span></a>
+<a class="sourceLine" id="cb244-4" title="4">tree.gini&lt;-<span class="kw">rpart</span>(Classification<span class="op">~</span>.,<span class="dt">data =</span> dataset)</a>
+<a class="sourceLine" id="cb244-5" title="5"></a>
+<a class="sourceLine" id="cb244-6" title="6"><span class="co"># learn tree with information gain</span></a>
+<a class="sourceLine" id="cb244-7" title="7">tree.information&lt;-<span class="kw">rpart</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset,</a>
+<a class="sourceLine" id="cb244-8" title="8">                        <span class="dt">parms=</span><span class="kw">list</span>(<span class="dt">split=</span><span class="st">&quot;information&quot;</span>))</a></code></pre></div>
 <p>Summary Information</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1"><span class="kw">summary</span>(tree.information)</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1"><span class="kw">summary</span>(tree.information)</a></code></pre></div>
 <pre><code>## Call:
 ## rpart(formula = Classification ~ ., data = dataset, parms = list(split = &quot;information&quot;))
 ##   n= 116 
@@ -405,7 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     class counts:     3    17
 ##    probabilities: 0.150 0.850</code></pre>
 <p>Summary Gini</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="kw">summary</span>(tree.gini)</a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1"><span class="kw">summary</span>(tree.gini)</a></code></pre></div>
 <pre><code>## Call:
 ## rpart(formula = Classification ~ ., data = dataset)
 ##   n= 116 
@@ -541,35 +547,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     class counts:     5    14
 ##    probabilities: 0.263 0.737</code></pre>
 <p>Plot</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb248-2" title="2"><span class="kw">plot</span>(tree.information,<span class="dt">main=</span><span class="st">&quot;Information&quot;</span>)</a>
-<a class="sourceLine" id="cb248-3" title="3"><span class="kw">text</span>(tree.information)</a>
-<a class="sourceLine" id="cb248-4" title="4"><span class="kw">plot</span>(tree.gini, <span class="dt">main=</span><span class="st">&quot;Gini&quot;</span>)</a>
-<a class="sourceLine" id="cb248-5" title="5"><span class="kw">text</span>(tree.gini)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb249-2" title="2"><span class="kw">plot</span>(tree.information,<span class="dt">main=</span><span class="st">&quot;Information&quot;</span>)</a>
+<a class="sourceLine" id="cb249-3" title="3"><span class="kw">text</span>(tree.information)</a>
+<a class="sourceLine" id="cb249-4" title="4"><span class="kw">plot</span>(tree.gini, <span class="dt">main=</span><span class="st">&quot;Gini&quot;</span>)</a>
+<a class="sourceLine" id="cb249-5" title="5"><span class="kw">text</span>(tree.gini)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 </div>
 <div id="random-forest" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Random Forest</h3>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb249-2" title="2"><span class="kw">library</span>(pROC)</a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb250-2" title="2"><span class="kw">library</span>(pROC)</a></code></pre></div>
 <p>Run algorithms using 3 times 10-fold cross validation</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="co"># set definitions</span></a>
-<a class="sourceLine" id="cb250-2" title="2">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
-<a class="sourceLine" id="cb250-3" title="3"></a>
-<a class="sourceLine" id="cb250-4" title="4">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb250-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb250-6" title="6">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb250-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats=</span><span class="dv">3</span>)</a></code></pre></div>
-<p>train Tree and RF</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb251-2" title="2">fit.cart.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="co"># set definitions</span></a>
+<a class="sourceLine" id="cb251-2" title="2">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
 <a class="sourceLine" id="cb251-3" title="3"></a>
-<a class="sourceLine" id="cb251-4" title="4"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb251-5" title="5">fit.rf.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<a class="sourceLine" id="cb251-4" title="4">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb251-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb251-6" title="6">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb251-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats=</span><span class="dv">3</span>)</a></code></pre></div>
+<p>train Tree and RF</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb252-2" title="2">fit.cart.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb252-3" title="3"></a>
+<a class="sourceLine" id="cb252-4" title="4"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb252-5" title="5">fit.rf.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
 <p>summarize accuracy of models</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv, <span class="dt">rf=</span>fit.rf.rcv)</a>
-<a class="sourceLine" id="cb252-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb252-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv, <span class="dt">rf=</span>fit.rf.rcv)</a>
+<a class="sourceLine" id="cb253-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb253-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -592,16 +598,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## rpart 0.2857143 0.6666667 0.7142857 0.7341270 0.8333333    1    0
 ## rf    0.3333333 0.6666667 0.8333333 0.7642857 0.8511905    1    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb254-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>P, </a>
-<a class="sourceLine" id="cb254-3" title="3">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold-CV&quot;</span>,fit<span class="op">$</span>method), </a>
-<a class="sourceLine" id="cb254-4" title="4">                                                  <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb255-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>P, </a>
+<a class="sourceLine" id="cb255-3" title="3">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold-CV&quot;</span>,fit<span class="op">$</span>method), </a>
+<a class="sourceLine" id="cb255-4" title="4">                                                  <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
 <p>Inspect models</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">print</span>(fit.cart.rcv)</a></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1"><span class="kw">print</span>(fit.cart.rcv)</a></code></pre></div>
 <pre><code>## CART 
 ## 
 ## 116 samples
@@ -620,11 +626,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## ROC was used to select the optimal model using the largest value.
 ## The final value used for the model was cp = 0.1057692.</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" title="1"><span class="co">#getModelInfo(fit.cart.rcv)</span></a>
-<a class="sourceLine" id="cb258-2" title="2"><span class="co">#getModelInfo(fit.cart.rcv)$rpart</span></a>
-<a class="sourceLine" id="cb258-3" title="3"><span class="kw">getModelInfo</span>(fit.cart.rcv)<span class="op">$</span>rpart<span class="op">$</span>parameters</a></code></pre></div>
-<pre><code>##   parameter   class                label
-## 1        cp numeric Complexity Parameter</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1"><span class="co">#getModelInfo(fit.cart.rcv)</span></a>
+<a class="sourceLine" id="cb259-2" title="2"><span class="co">#getModelInfo(fit.cart.rcv)$rpart</span></a>
+<a class="sourceLine" id="cb259-3" title="3"><span class="kw">getModelInfo</span>(fit.cart.rcv)<span class="op">$</span>rpart<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cp</td>
+<td align="left">numeric</td>
+<td align="left">Complexity Parameter</td>
+</tr>
+</tbody>
+</table>
 <p>Inspect models</p>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" title="1"><span class="kw">print</span>(fit.rf.rcv)</a></code></pre></div>
 <pre><code>## Random Forest 
@@ -648,28 +668,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1"><span class="co">#getModelInfo(fit.rf.rcv)</span></a>
 <a class="sourceLine" id="cb262-2" title="2"><span class="co">#getModelInfo(fit.rf.rcv)$rf</span></a>
 <a class="sourceLine" id="cb262-3" title="3"><span class="kw">getModelInfo</span>(fit.rf.rcv)<span class="op">$</span>rf<span class="op">$</span>parameters</a></code></pre></div>
-<pre><code>##   parameter   class                         label
-## 1      mtry numeric #Randomly Selected Predictors</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mtry</td>
+<td align="left">numeric</td>
+<td align="left">#Randomly Selected Predictors</td>
+</tr>
+</tbody>
+</table>
 <p>ROC complexity for models</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">plot</span>(fit.cart.rcv)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1"><span class="kw">plot</span>(fit.rf.rcv)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-163-2.png" width="672" /></p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1"><span class="kw">plot</span>(fit.cart.rcv)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">plot</span>(fit.rf.rcv)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-174-2.png" width="672" /></p>
 </div>
 <div id="improve-random-forest" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Improve Random Forest</h3>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">myGrid&lt;-<span class="kw">expand.grid</span>(<span class="dt">mtry=</span><span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># numero de variaveis/colunas a considerar na RF</span></a>
-<a class="sourceLine" id="cb266-2" title="2"></a>
-<a class="sourceLine" id="cb266-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb266-4" title="4">fit.rf.rcv.tune &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
-<a class="sourceLine" id="cb266-5" title="5">                         <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, </a>
-<a class="sourceLine" id="cb266-6" title="6">                         <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb266-7" title="7">                         <span class="dt">tuneGrid =</span> myGrid)</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1">myGrid&lt;-<span class="kw">expand.grid</span>(<span class="dt">mtry=</span><span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># numero de variaveis/colunas a considerar na RF</span></a>
+<a class="sourceLine" id="cb265-2" title="2"></a>
+<a class="sourceLine" id="cb265-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb265-4" title="4">fit.rf.rcv.tune &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
+<a class="sourceLine" id="cb265-5" title="5">                         <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, </a>
+<a class="sourceLine" id="cb265-6" title="6">                         <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb265-7" title="7">                         <span class="dt">tuneGrid =</span> myGrid)</a></code></pre></div>
 <p>summarize accuracy of models</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">fit.models&lt;-<span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv,<span class="dt">rf =</span> fit.rf.rcv, <span class="dt">rf.tune=</span>fit.rf.rcv.tune)</a>
-<a class="sourceLine" id="cb267-2" title="2"></a>
-<a class="sourceLine" id="cb267-3" title="3">results&lt;-<span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb267-4" title="4"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">fit.models&lt;-<span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv,<span class="dt">rf =</span> fit.rf.rcv, <span class="dt">rf.tune=</span>fit.rf.rcv.tune)</a>
+<a class="sourceLine" id="cb266-2" title="2"></a>
+<a class="sourceLine" id="cb266-3" title="3">results&lt;-<span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb266-4" title="4"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -695,19 +729,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## rf      0.3333333 0.6666667 0.8333333 0.7642857 0.8511905    1    0
 ## rf.tune 0.3333333 0.6666667 0.8333333 0.7706349 0.8571429    1    0</code></pre>
 <p>Roc curves for models</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb269-2" title="2">rocs&lt;-<span class="kw">lapply</span>(fit.models,</a>
-<a class="sourceLine" id="cb269-3" title="3">             <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,</a>
-<a class="sourceLine" id="cb269-4" title="4">                                    fit<span class="op">$</span>pred<span class="op">$</span>P,</a>
-<a class="sourceLine" id="cb269-5" title="5">                                    <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold CV-&quot;</span>,fit<span class="op">$</span>method),<span class="dt">debug=</span>F,<span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb268-2" title="2">rocs&lt;-<span class="kw">lapply</span>(fit.models,</a>
+<a class="sourceLine" id="cb268-3" title="3">             <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,</a>
+<a class="sourceLine" id="cb268-4" title="4">                                    fit<span class="op">$</span>pred<span class="op">$</span>P,</a>
+<a class="sourceLine" id="cb268-5" title="5">                                    <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold CV-&quot;</span>,fit<span class="op">$</span>method),<span class="dt">debug=</span>F,<span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
 <p>Inspect models</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1"><span class="kw">getModelInfo</span>(fit.rf.rcv.tune)<span class="op">$</span>rf<span class="op">$</span>parameters</a></code></pre></div>
-<pre><code>##   parameter   class                         label
-## 1      mtry numeric #Randomly Selected Predictors</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1"><span class="kw">getModelInfo</span>(fit.rf.rcv.tune)<span class="op">$</span>rf<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mtry</td>
+<td align="left">numeric</td>
+<td align="left">#Randomly Selected Predictors</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
@@ -764,6 +812,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

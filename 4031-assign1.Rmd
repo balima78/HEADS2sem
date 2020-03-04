@@ -30,6 +30,8 @@ https://rpubs.com/balima78/learn_4032_assign1
 
 *some references:*
 
+https://shiring.github.io/machine_learning/2017/04/02/unbalanced
+
 http://www.sthda.com/english/articles/35-statistical-machine-learning-essentials/141-cart-model-decision-tree-essentials
 
 https://bradleyboehmke.github.io/HOML/DT.html
