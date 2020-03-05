@@ -7,7 +7,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
 
-## Representing a Beta(a,b) distribution:
+### Representing a Beta(a,b) distribution:
 ```{r}
 # define the function
 pl.beta <- function(a,b, asp = if(isLim) 1, ylim = if(isLim) c(0,1.1)) {
@@ -43,7 +43,7 @@ $B(12,528)$
 pl.beta(12,528)
 ```
 
-## Functions to work with Beta distributions
+### Functions to work with Beta distributions
 `dbeta(x, a, b)`  Gives you the density at x of the distribution function Beta(a,b)
 
 `pbeta(x, a, b)`  Gives you the probability of observing a value lower than or equal to x (P[X ??? x]) for the distribution function Beta(a,b)
