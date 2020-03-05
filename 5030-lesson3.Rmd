@@ -54,3 +54,4 @@ pl.beta(12,528)
 
 `rbeta(n, a, b)` Gives you n randomly chosen observations from the distribution function Beta(a,b)
 
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
