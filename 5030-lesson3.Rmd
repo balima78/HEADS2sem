@@ -1,0 +1,56 @@
+## Lesson 4
+
+2020-03-03
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+
+## Representing a Beta(a,b) distribution:
+```{r}
+# define the function
+pl.beta <- function(a,b, asp = if(isLim) 1, ylim = if(isLim) c(0,1.1)) {
+  if(isLim <- a == 0 || b == 0 || a == Inf || b == Inf) {
+    eps <- 1e-10
+    x <- c(0, eps, (1:7)/16, 1/2+c(-eps,0,eps), (9:15)/16, 1-eps, 1)
+  } else {
+    x <- seq(0, 1, length = 1025)
+  }
+  Mean_dbeta<-round(a/(a+b), digits=4)
+  Variance_dbeta<-round((a*b)/((a+b)^2*(a+b+1)), digits=4)
+  Mode_dbeta<-round((a-1)/(a+b-2), digits=4)
+  P_50_0_percent_0<-qbeta(0.5, a, b)
+  P_50_0_percent<-round(P_50_0_percent_0, digits=4)
+  P_2_5_percent_0<-qbeta(0.025, a, b)
+  P_2_5_percent<-round(P_2_5_percent_0, digits=4)
+  P_97_5_percent_0<-qbeta(0.975, a, b)
+  P_97_5_percent<-round(P_97_5_percent_0, digits=4)
+  fx <- cbind(dbeta(x, a,b))
+  f <- fx; f[fx == Inf] <- 1e100
+  matplot(x, f, ylab="", type="l", ylim=ylim, asp=asp,
+          main = paste0 (sprintf("Beta(a=%g, b=%g)", a,b)))
+  print(paste0 ("Distribution: ", sprintf("Beta(a=%g, b=%g)", a,b)))
+  print(paste0 ("Mean=", Mean_dbeta, "; Variance=", Variance_dbeta,"; Median=", P_50_0_percent, "; Mode=", Mode_dbeta))
+  print(paste0 ("Perc(2.5%)=", P_2_5_percent, "; Perc(97.5%)=", P_97_5_percent))
+}
+```
+
+$B(12,528)$
+
+```{r}
+# plot density
+pl.beta(12,528)
+```
+
+## Functions to work with Beta distributions
+`dbeta(x, a, b)`  Gives you the density at x of the distribution function Beta(a,b)
+
+`pbeta(x, a, b)`  Gives you the probability of observing a value lower than or equal to x (P[X ??? x]) for the distribution function Beta(a,b)
+
+`pbeta(x, a, b, lower.tail=FALSE)`  Gives you the probability of observing a value larger than x (P[X > x]) for the distribution function Beta(a,b)
+
+`qbeta(x, a, b)` Gives you the percentile x of the distribution function Beta(a,b)
+
+`rbeta(n, a, b)` Gives you n randomly chosen observations from the distribution function Beta(a,b)
+

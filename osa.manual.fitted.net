@@ -1,0 +1,59 @@
+net 
+{ 
+}
+node gender 
+{
+  states = ( "Female" "Male" );
+}
+node ac 
+{
+  states = ( "Abnormal" "Normal" );
+}
+node nc 
+{
+  states = ( "Abnormal" "Normal" );
+}
+node alcohol 
+{
+  states = ( "No" "Yes" );
+}
+node osa 
+{
+  states = ( "No" "Yes" );
+}
+node bmi 
+{
+  states = ( "NotObese" "Obese" );
+}
+node wa 
+{
+  states = ( "No" "Yes" );
+}
+potential ( gender | osa ) 
+{
+  data = ((0.656051 0.343949)(0.4137931 0.5862069)) ;
+}
+potential ( ac | bmi ) 
+{
+  data = ((0.8333333 0.1666667)(1.0 0.0)) ;
+}
+potential ( nc | bmi ) 
+{
+  data = ((0.1964286 0.8035714)(0.7904762 0.2095238)) ;
+}
+potential ( alcohol | gender nc ) 
+{
+  data = (((0.3823529 0.6176471)(0.4358974 0.5641026))((0.2560976 0.7439024)(0.25 0.75))) ;
+}
+potential ( osa | nc ) 
+{
+  data = ((0.4051724 0.5948276)(0.7006369 0.2993631)) ;
+}
+potential ( bmi ) 
+{
+  data = ( 0.6153846 0.3846154 );
+}
+potential ( wa | gender ) 
+{
+  data = ((0.3443709 0.6556291)(0.07377049 0.92622951)) ;
+}

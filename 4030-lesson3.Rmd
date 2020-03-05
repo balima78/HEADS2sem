@@ -151,3 +151,4 @@ Inspect models
 getModelInfo(fit.rf.rcv.tune)$rf$parameters
 ```
 
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

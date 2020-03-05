@@ -1,0 +1,128 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@20abe7cd";
+	huginenginegenerator3061656038650325130L = "edu.ucla.belief.inference.JoinTreeSettings@5b9fa3b0";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@75ff547c";
+	node_size = (130.0 55.0);
+}
+
+node gender
+{
+	states = ("Female" "Male" );
+	position = (235 -321);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable5";
+	label = "Gender";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node ac
+{
+	states = ("Normal" "Abnormal" );
+	position = (408 -279);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable2";
+	label = "Abdominal Circunference";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node nc
+{
+	states = ("Normal" "Abnormal" );
+	position = (601 -299);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable1";
+	label = "Neck Circunference";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node alcohol
+{
+	states = ("No" "Yes" );
+	position = (311 -580);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable4";
+	label = "Alcohol before sleep";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node osa
+{
+	states = ("No" "Yes" );
+	position = (558 -595);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable3";
+	label = "OSA";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node bmi
+{
+	states = ("NotObese" "Obese" );
+	position = (688 -465);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable0";
+	label = "BodyMassIndex";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node wa
+{
+	states = ("No" "Yes" );
+	position = (178 -474);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable6";
+	label = "Witnessed Apneas";
+	DSLxSUBMODEL = "Root Submodel";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+potential ( gender | osa )
+{
+	data = ((	0.35	0.65	)
+		(	0.07	0.93	));
+}
+potential ( ac | bmi )
+{
+	data = ((	0.15	0.85	)
+		(	0.0	1.0	));
+}
+potential ( nc | bmi )
+{
+	data = ((	0.81	0.19	)
+		(	0.16	0.84	));
+}
+potential ( alcohol | nc gender )
+{
+	data = (((	0.91	0.09	)
+		(	0.64	0.36	))
+		((	1.0	0.0	)
+		(	0.27	0.73	)));
+}
+potential ( osa | nc )
+{
+	data = ((	0.66	0.34	)
+		(	0.25	0.75	));
+}
+potential ( bmi | )
+{
+	data = (	0.63	0.37	);
+}
+potential ( wa | gender )
+{
+	data = ((	0.71	0.29	)
+		(	0.26	0.74	));
+}

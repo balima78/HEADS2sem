@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 TOP.HIDA | HEADS 2nd semester</title>
+  <title>5.2 Representing a Beta(a,b) distribution: | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 TOP.HIDA | HEADS 2nd semester" />
+  <meta property="og:title" content="5.2 Representing a Beta(a,b) distribution: | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 TOP.HIDA | HEADS 2nd semester" />
+  <meta name="twitter:title" content="5.2 Representing a Beta(a,b) distribution: | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="functions-to-work-with-beta-distributions.html"/>
-<link rel="next" href="seminar1.html"/>
+<link rel="prev" href="lesson-4-2.html"/>
+<link rel="next" href="functions-to-work-with-beta-distributions.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -224,21 +224,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="top" class="section level1">
-<h1><span class="header-section-number">6</span> TOP.HIDA</h1>
-<p><em>Tópicos avançados em HIDA</em></p>
-<p><strong>Conteúdos programáticos</strong></p>
-<p>Os conteúdos abrangerão as diversas áreas da análise inteligente de dados, nomeadamente metodologias de visualização, pré-processamento, exploração e classificação de dados, proporcionando também a expansão dos conteúdos de outras UC relacionadas. A escolha dos tópicos será feita em cada edição desta unidade curricular, tendo em consideração não só o perfil e interesses dos alunos, como também os tópicos que no momento se considerem ser os mais relevantes na área.</p>
-<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
-<!--chapter:end:6000-tophida.Rmd--> 
+<div id="representing-a-betaab-distribution" class="section level2">
+<h2><span class="header-section-number">5.2</span> Representing a Beta(a,b) distribution:</h2>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1"><span class="co"># define the function</span></a>
+<a class="sourceLine" id="cb292-2" title="2">pl.beta &lt;-<span class="st"> </span><span class="cf">function</span>(a,b, <span class="dt">asp =</span> <span class="cf">if</span>(isLim) <span class="dv">1</span>, <span class="dt">ylim =</span> <span class="cf">if</span>(isLim) <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">1.1</span>)) {</a>
+<a class="sourceLine" id="cb292-3" title="3">  <span class="cf">if</span>(isLim &lt;-<span class="st"> </span>a <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span>b <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span>a <span class="op">==</span><span class="st"> </span><span class="ot">Inf</span> <span class="op">||</span><span class="st"> </span>b <span class="op">==</span><span class="st"> </span><span class="ot">Inf</span>) {</a>
+<a class="sourceLine" id="cb292-4" title="4">    eps &lt;-<span class="st"> </span><span class="fl">1e-10</span></a>
+<a class="sourceLine" id="cb292-5" title="5">    x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, eps, (<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)<span class="op">/</span><span class="dv">16</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="kw">c</span>(<span class="op">-</span>eps,<span class="dv">0</span>,eps), (<span class="dv">9</span><span class="op">:</span><span class="dv">15</span>)<span class="op">/</span><span class="dv">16</span>, <span class="dv">1</span><span class="op">-</span>eps, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb292-6" title="6">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb292-7" title="7">    x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">1025</span>)</a>
+<a class="sourceLine" id="cb292-8" title="8">  }</a>
+<a class="sourceLine" id="cb292-9" title="9">  Mean_dbeta&lt;-<span class="kw">round</span>(a<span class="op">/</span>(a<span class="op">+</span>b), <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-10" title="10">  Variance_dbeta&lt;-<span class="kw">round</span>((a<span class="op">*</span>b)<span class="op">/</span>((a<span class="op">+</span>b)<span class="op">^</span><span class="dv">2</span><span class="op">*</span>(a<span class="op">+</span>b<span class="op">+</span><span class="dv">1</span>)), <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-11" title="11">  Mode_dbeta&lt;-<span class="kw">round</span>((a<span class="dv">-1</span>)<span class="op">/</span>(a<span class="op">+</span>b<span class="dv">-2</span>), <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-12" title="12">  P_<span class="dv">50</span>_<span class="dv">0</span>_percent_<span class="dv">0</span>&lt;-<span class="kw">qbeta</span>(<span class="fl">0.5</span>, a, b)</a>
+<a class="sourceLine" id="cb292-13" title="13">  P_<span class="dv">50</span>_<span class="dv">0</span>_percent&lt;-<span class="kw">round</span>(P_<span class="dv">50</span>_<span class="dv">0</span>_percent_<span class="dv">0</span>, <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-14" title="14">  P_<span class="dv">2</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>&lt;-<span class="kw">qbeta</span>(<span class="fl">0.025</span>, a, b)</a>
+<a class="sourceLine" id="cb292-15" title="15">  P_<span class="dv">2</span>_<span class="dv">5</span>_percent&lt;-<span class="kw">round</span>(P_<span class="dv">2</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>, <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-16" title="16">  P_<span class="dv">97</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>&lt;-<span class="kw">qbeta</span>(<span class="fl">0.975</span>, a, b)</a>
+<a class="sourceLine" id="cb292-17" title="17">  P_<span class="dv">97</span>_<span class="dv">5</span>_percent&lt;-<span class="kw">round</span>(P_<span class="dv">97</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>, <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-18" title="18">  fx &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">dbeta</span>(x, a,b))</a>
+<a class="sourceLine" id="cb292-19" title="19">  f &lt;-<span class="st"> </span>fx; f[fx <span class="op">==</span><span class="st"> </span><span class="ot">Inf</span>] &lt;-<span class="st"> </span><span class="fl">1e100</span></a>
+<a class="sourceLine" id="cb292-20" title="20">  <span class="kw">matplot</span>(x, f, <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylim=</span>ylim, <span class="dt">asp=</span>asp,</a>
+<a class="sourceLine" id="cb292-21" title="21">          <span class="dt">main =</span> <span class="kw">paste0</span> (<span class="kw">sprintf</span>(<span class="st">&quot;Beta(a=%g, b=%g)&quot;</span>, a,b)))</a>
+<a class="sourceLine" id="cb292-22" title="22">  <span class="kw">print</span>(<span class="kw">paste0</span> (<span class="st">&quot;Distribution: &quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;Beta(a=%g, b=%g)&quot;</span>, a,b)))</a>
+<a class="sourceLine" id="cb292-23" title="23">  <span class="kw">print</span>(<span class="kw">paste0</span> (<span class="st">&quot;Mean=&quot;</span>, Mean_dbeta, <span class="st">&quot;; Variance=&quot;</span>, Variance_dbeta,<span class="st">&quot;; Median=&quot;</span>, P_<span class="dv">50</span>_<span class="dv">0</span>_percent, <span class="st">&quot;; Mode=&quot;</span>, Mode_dbeta))</a>
+<a class="sourceLine" id="cb292-24" title="24">  <span class="kw">print</span>(<span class="kw">paste0</span> (<span class="st">&quot;Perc(2.5%)=&quot;</span>, P_<span class="dv">2</span>_<span class="dv">5</span>_percent, <span class="st">&quot;; Perc(97.5%)=&quot;</span>, P_<span class="dv">97</span>_<span class="dv">5</span>_percent))</a>
+<a class="sourceLine" id="cb292-25" title="25">}</a></code></pre></div>
+<p><span class="math inline">\(B(12,528)\)</span></p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="co"># plot density</span></a>
+<a class="sourceLine" id="cb293-2" title="2"><span class="kw">pl.beta</span>(<span class="dv">12</span>,<span class="dv">528</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<pre><code>## [1] &quot;Distribution: Beta(a=12, b=528)&quot;
+## [1] &quot;Mean=0.0222; Variance=0; Median=0.0216; Mode=0.0204&quot;
+## [1] &quot;Perc(2.5%)=0.0116; Perc(97.5%)=0.0362&quot;</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="functions-to-work-with-beta-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="seminar1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-4-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions-to-work-with-beta-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

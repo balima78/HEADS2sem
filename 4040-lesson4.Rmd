@@ -1,0 +1,128 @@
+## Lesson 4
+
+2020-03-03
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### Build network from data using naive bayes
+
+```{r}
+# get the library
+require(bnlearn)
+
+# read data from CSV file, telling R that the first line contains headers
+osa.data <- read.csv("2.UploadedData/osa.csv", header=T)
+
+# check the data
+print(str(osa.data))
+```
+
+Learn a Bayes Network from the data using two naive bayes
+```{r}
+# naive Bayes
+osa.nb.net <- naive.bayes(osa.data, training="osa") # osa is the outcome of interest
+# TAN
+osa.tan.net <- tree.bayes(osa.data, training="osa") # osa is the outcome of interest
+
+# plot network
+par(mfrow=c(1,2))
+plot(osa.nb.net, main = "naive Bayes")
+plot(osa.tan.net, main = "Tree-Augmented naive Bayes")
+```
+
+split training and testing data sets
+```{r}
+# define training set
+set.seed(523)
+training <- sample(1:nrow(osa.data), size=200)
+
+# define training set
+testing <- (1:nrow(osa.data))[-training]
+```
+
+fit the defined networks with the train data itself
+```{r}
+osa.nb.fit <- bn.fit(osa.nb.net, osa.data[training,])
+osa.tan.fit <- bn.fit(osa.tan.net, osa.data[training,])
+```
+
+predict outcome for test data
+```{r}
+pred.nb <- predict(osa.nb.fit, osa.data[testing,])
+pred.tan <- predict(osa.tan.fit, osa.data[testing,])
+
+```
+
+compute confusion matrix for each network
+```{r}
+table(pred.nb, osa.data$osa[testing])
+table(pred.tan, osa.data$osa[testing])
+```
+
+### Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search
+
+```{r}
+# learn the BNs from the data using hill-climbing
+osa.hc.net <- hc(osa.data, debug=F) # hill-climbing
+osa.tabu.net <- tabu(osa.data, debug=F) # Tabu greedy search
+
+# plot network
+par(mfrow=c(1,2))
+plot(osa.hc.net)
+plot(osa.tabu.net)
+```
+
+describe the HC model
+```{r}
+print(osa.hc.net)
+```
+
+describe the TABU model
+```{r}
+print(osa.tabu.net)
+```
+
+after you have the grapfs, fit the networks with the data itself
+```{r}
+osa.hc.fit <- bn.fit(osa.hc.net, osa.data)
+osa.tabu.fit <- bn.fit(osa.tabu.net, osa.data)
+```
+
+print the conditional probability tables for HC
+```{r}
+print(osa.hc.fit)
+```
+
+print the conditional probability tables for TABU
+```{r}
+print(osa.tabu.fit)
+```
+
+### Fit existing network using data
+
+read network from file
+```{r}
+osa.manual.fit <- read.net("2.UploadedData/osa_hc.net")
+```
+
+transform the object (fit) into a unfitted network and plot it
+```{r}
+# transform the object (fit) into a unfitted network
+osa.manual.net <- bn.net(osa.manual.fit)
+
+# plot network
+plot(osa.manual.net)
+```
+
+fit the network with the data itself and save it as a .net file
+```{r}
+# fit the network with the data itself
+osa.manual.fit <- bn.fit(osa.manual.net, osa.data)
+
+# save the network in a file to open later in SamIam
+write.net(osa.manual.fit, file="osa.manual.fitted.net")
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
