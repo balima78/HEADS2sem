@@ -172,10 +172,11 @@ library(tidyverse)
 data<-data %>% mutate(taxa.mort.20y = case_when(age == "+65" ~ (-log(1-p.m.65))/20,
                       TRUE ~ (-log(1-p.m.64))/20), # calculo da taxa de mortalidade a 20 anos
                       prob.mort.1y = 1-exp(-taxa.mort.20y * 1), # calculo da probabilidade anual de morte
-                      taxa.dx.20y = case_when(sex == "m" & age == "+65" ~ (-log(1-p.d.m))/20 + (-log(1-p.d.65))/20,
-                                              sex == "m" & age == "-65" ~ (-log(1-p.d.m))/20 + (-log(1-p.d.64))/20,
-                                              sex == "f" & age == "+65" ~ (-log(1-p.d.f))/20 + (-log(1-p.d.65))/20,
-                                              sex == "f" & age == "-65" ~ (-log(1-p.d.f))/20 + (-log(1-p.d.64))/20), # cálculo da taxa de doença a 20 anos
+                      taxa.dx.20y = case_when(sex == "m" & age == "+65" ~ (-log(1-p.d.m*p.d.65))/20,
+                                              sex == "m" & age == "-65" ~ (-log(1-p.d.m*p.d.64))/20,
+                                              sex == "f" & age == "+65" ~ (-log(1-p.d.f*p.d.65))/20,
+                                              sex == "f" & age == "-65" ~ (-log(1-p.d.f*p.d.64))/20 
+                                              ), # cálculo da taxa de doença a 20 anos
                       prob.dx.1y = 1-exp(-taxa.dx.20y * 1) # calculo da probabilidade anual de doença
                       ) %>% 
   select(-taxa.mort.20y, -taxa.dx.20y) 
