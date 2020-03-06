@@ -6,7 +6,6 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-
 ### Representing a Beta(a,b) distribution:
 ```{r}
 # define the function
@@ -36,17 +35,34 @@ pl.beta <- function(a,b, asp = if(isLim) 1, ylim = if(isLim) c(0,1.1)) {
 }
 ```
 
-$B(12,528)$
+#### Exercise
+You are performing a study to estimate the Case Fatality Rate of the new Corona Virus in a rural community in China. You observed that among the 119 people formally diagnosed with the disease, three have died and 116 have recovered. The case Fatality Rate is an estimate of the probability of dying among those affected by a disease and the proportion of deaths among affected subjects is used to estimate it.
+
+a) Use the Bayesian statistical inference approach to estimate the Case Fatality Rate for this community. Assuming an uninformative prior calculate the likelihood and the posterior distribution for the parameter of interest.
+
+Likelihood x Prior = Posterior
+
+$Bin(x,n)$ x $Beta(a,b)$ = $Beta(x+a,n-x+b)$
+
+$Bin(3,119)$ x $Beta(1,1)$ = $Beta(4,117)$
+
+b) Use the R software to draw the density of the posterior distribution and to calculate its mean, median, mode and the 95% credible interval for the parameter of interest.
 
 ```{r}
+library(printr)
 # plot density
-pl.beta(12,528)
+pl.beta(4,117)
 ```
 
-### Functions to work with Beta distributions
+c) Based on the available evidence regarding the parameter of interest, what is the probability of the Case Fatality Rate of the new Corona Virus being higher than 5%? And being higher than 10%?
+
+Use the following R functions that allow calculating densities, probabilities and percentiles associated with Beta distributions:
+
+*Functions to work with Beta distributions*
+
 `dbeta(x, a, b)`  Gives you the density at x of the distribution function Beta(a,b)
 
-`pbeta(x, a, b)`  Gives you the probability of observing a value lower than or equal to x (P[X ??? x]) for the distribution function Beta(a,b)
+`pbeta(x, a, b)`  Gives you the probability of observing a value lower than or equal to x (P[X =< x]) for the distribution function Beta(a,b)
 
 `pbeta(x, a, b, lower.tail=FALSE)`  Gives you the probability of observing a value larger than x (P[X > x]) for the distribution function Beta(a,b)
 
@@ -54,4 +70,49 @@ pl.beta(12,528)
 
 `rbeta(n, a, b)` Gives you n randomly chosen observations from the distribution function Beta(a,b)
 
-<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+```{r}
+p5.a <- pbeta(0.05, 4, 117, lower.tail=FALSE)
+p10.a <- pbeta(0.1, 4, 117, lower.tail=FALSE)
+```
+
+P[X > 0.05] = `r round(p5.a,5)`
+
+P[X > 0.1] = `r round(p10.a,5)`
+
+d) Some days later, you perform an identical study in neighbouring community. In this community, you observed that among the 419 people formally diagnosed with the disease, eight have died and 411 have recovered. Using a Bayesian inference approach, estimate the Case Fatality Rate of the new Corona Virus taking into account the available data for this community and the previous knowledge regarding the parameter of interest. Calculate the new likelihood and the new posterior distribution for the parameter of interest.
+
+$Bin(x,n)$ x $Beta(a,b)$ = $Beta(x+a,n-x+b)$
+
+$Bin(8,419)$ x $Beta(4,117)$ = $Beta(12, 528)$
+
+e) Use the R software to draw the density of the new posterior distribution and to calculate its mean, median, mode and the 95% credible interval for the parameter of interest. Use the R function previously presented.
+
+```{r}
+# plot density
+pl.beta(12,528)
+```
+
+f) Based on all the available evidence regarding the parameter of interest after performing this second study, what is the probability of the Case Fatality Rate of the new Corona Virus being higher than 5%? And being higher than 10%? Use the R functions previously presented.
+
+```{r}
+p5.b <- pbeta(0.05, 12, 528, lower.tail=FALSE)
+p10.b <- pbeta(0.1, 12, 528, lower.tail=FALSE)
+
+options(scipen=999)
+```
+
+P[X > 0.05] = `r round(p5.b,5)`
+
+P[X > 0.1] = `r round(p10.b,5)`
+
+g) Consider an alternative situation where you use all the observations of the first and second studies as if they were obtained in a single study. Assuming an uninformative prior calculate, in this case, the likelihood and the posterior distribution for the parameter of interest. Use the R software to draw the density of the posterior distribution and to calculate its mean, median, mode and the 95% credible interval for the parameter of interest. Use the R functions previously presented.
+
+$Bin(x,n)$ x $Beta(a,b)$ = $Beta(x+a,n-x+b)$
+
+$Bin(3+8,119+419)$ x $Beta(1,1)$ = $Beta(12, 528)$
+
+```{r}
+# plot density
+pl.beta(12,528)
+```
+

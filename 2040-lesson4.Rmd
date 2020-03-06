@@ -198,7 +198,7 @@ total de doentes no primeiro ano: `r round(sum(doentes1$nr.doentes),0)`
 
 **How many of the patients died in the first year?**
 ```{r}
-mortos1<-data %>% count(sex,age,prob.mort.1y) %>% mutate(nr.mortos = n*prob.mort.1y)
+mortos1<-data %>% count(age,prob.mort.1y) %>% mutate(nr.mortos = n*prob.mort.1y)
 mortos1
 ```
 

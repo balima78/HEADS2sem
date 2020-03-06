@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-03-05" />
+<meta name="date" content="2020-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="bayes.html"/>
-<link rel="next" href="representing-a-betaab-distribution.html"/>
+<link rel="next" href="top.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -194,9 +194,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
-<li class="chapter" data-level="5.1" data-path="lesson-4-2.html"><a href="lesson-4-2.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a></li>
-<li class="chapter" data-level="5.2" data-path="representing-a-betaab-distribution.html"><a href="representing-a-betaab-distribution.html"><i class="fa fa-check"></i><b>5.2</b> Representing a Beta(a,b) distribution:</a></li>
-<li class="chapter" data-level="5.3" data-path="functions-to-work-with-beta-distributions.html"><a href="functions-to-work-with-beta-distributions.html"><i class="fa fa-check"></i><b>5.3</b> Functions to work with Beta distributions</a></li>
+<li class="chapter" data-level="5.1" data-path="lesson-4-2.html"><a href="lesson-4-2.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="lesson-4-2.html"><a href="lesson-4-2.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
 <li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
@@ -227,14 +227,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lesson-4-2" class="section level2">
 <h2><span class="header-section-number">5.1</span> Lesson 4</h2>
 <p>2020-03-03</p>
+<div id="representing-a-betaab-distribution" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Representing a Beta(a,b) distribution:</h3>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1"><span class="co"># define the function</span></a>
+<a class="sourceLine" id="cb292-2" title="2">pl.beta &lt;-<span class="st"> </span><span class="cf">function</span>(a,b, <span class="dt">asp =</span> <span class="cf">if</span>(isLim) <span class="dv">1</span>, <span class="dt">ylim =</span> <span class="cf">if</span>(isLim) <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">1.1</span>)) {</a>
+<a class="sourceLine" id="cb292-3" title="3">  <span class="cf">if</span>(isLim &lt;-<span class="st"> </span>a <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span>b <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span>a <span class="op">==</span><span class="st"> </span><span class="ot">Inf</span> <span class="op">||</span><span class="st"> </span>b <span class="op">==</span><span class="st"> </span><span class="ot">Inf</span>) {</a>
+<a class="sourceLine" id="cb292-4" title="4">    eps &lt;-<span class="st"> </span><span class="fl">1e-10</span></a>
+<a class="sourceLine" id="cb292-5" title="5">    x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, eps, (<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)<span class="op">/</span><span class="dv">16</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="kw">c</span>(<span class="op">-</span>eps,<span class="dv">0</span>,eps), (<span class="dv">9</span><span class="op">:</span><span class="dv">15</span>)<span class="op">/</span><span class="dv">16</span>, <span class="dv">1</span><span class="op">-</span>eps, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb292-6" title="6">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb292-7" title="7">    x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">1025</span>)</a>
+<a class="sourceLine" id="cb292-8" title="8">  }</a>
+<a class="sourceLine" id="cb292-9" title="9">  Mean_dbeta&lt;-<span class="kw">round</span>(a<span class="op">/</span>(a<span class="op">+</span>b), <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-10" title="10">  Variance_dbeta&lt;-<span class="kw">round</span>((a<span class="op">*</span>b)<span class="op">/</span>((a<span class="op">+</span>b)<span class="op">^</span><span class="dv">2</span><span class="op">*</span>(a<span class="op">+</span>b<span class="op">+</span><span class="dv">1</span>)), <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-11" title="11">  Mode_dbeta&lt;-<span class="kw">round</span>((a<span class="dv">-1</span>)<span class="op">/</span>(a<span class="op">+</span>b<span class="dv">-2</span>), <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-12" title="12">  P_<span class="dv">50</span>_<span class="dv">0</span>_percent_<span class="dv">0</span>&lt;-<span class="kw">qbeta</span>(<span class="fl">0.5</span>, a, b)</a>
+<a class="sourceLine" id="cb292-13" title="13">  P_<span class="dv">50</span>_<span class="dv">0</span>_percent&lt;-<span class="kw">round</span>(P_<span class="dv">50</span>_<span class="dv">0</span>_percent_<span class="dv">0</span>, <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-14" title="14">  P_<span class="dv">2</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>&lt;-<span class="kw">qbeta</span>(<span class="fl">0.025</span>, a, b)</a>
+<a class="sourceLine" id="cb292-15" title="15">  P_<span class="dv">2</span>_<span class="dv">5</span>_percent&lt;-<span class="kw">round</span>(P_<span class="dv">2</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>, <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-16" title="16">  P_<span class="dv">97</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>&lt;-<span class="kw">qbeta</span>(<span class="fl">0.975</span>, a, b)</a>
+<a class="sourceLine" id="cb292-17" title="17">  P_<span class="dv">97</span>_<span class="dv">5</span>_percent&lt;-<span class="kw">round</span>(P_<span class="dv">97</span>_<span class="dv">5</span>_percent_<span class="dv">0</span>, <span class="dt">digits=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-18" title="18">  fx &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">dbeta</span>(x, a,b))</a>
+<a class="sourceLine" id="cb292-19" title="19">  f &lt;-<span class="st"> </span>fx; f[fx <span class="op">==</span><span class="st"> </span><span class="ot">Inf</span>] &lt;-<span class="st"> </span><span class="fl">1e100</span></a>
+<a class="sourceLine" id="cb292-20" title="20">  <span class="kw">matplot</span>(x, f, <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylim=</span>ylim, <span class="dt">asp=</span>asp,</a>
+<a class="sourceLine" id="cb292-21" title="21">          <span class="dt">main =</span> <span class="kw">paste0</span> (<span class="kw">sprintf</span>(<span class="st">&quot;Beta(a=%g, b=%g)&quot;</span>, a,b)))</a>
+<a class="sourceLine" id="cb292-22" title="22">  <span class="kw">print</span>(<span class="kw">paste0</span> (<span class="st">&quot;Distribution: &quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;Beta(a=%g, b=%g)&quot;</span>, a,b)))</a>
+<a class="sourceLine" id="cb292-23" title="23">  <span class="kw">print</span>(<span class="kw">paste0</span> (<span class="st">&quot;Mean=&quot;</span>, Mean_dbeta, <span class="st">&quot;; Variance=&quot;</span>, Variance_dbeta,<span class="st">&quot;; Median=&quot;</span>, P_<span class="dv">50</span>_<span class="dv">0</span>_percent, <span class="st">&quot;; Mode=&quot;</span>, Mode_dbeta))</a>
+<a class="sourceLine" id="cb292-24" title="24">  <span class="kw">print</span>(<span class="kw">paste0</span> (<span class="st">&quot;Perc(2.5%)=&quot;</span>, P_<span class="dv">2</span>_<span class="dv">5</span>_percent, <span class="st">&quot;; Perc(97.5%)=&quot;</span>, P_<span class="dv">97</span>_<span class="dv">5</span>_percent))</a>
+<a class="sourceLine" id="cb292-25" title="25">}</a></code></pre></div>
+<div id="exercise" class="section level4">
+<h4><span class="header-section-number">5.1.1.1</span> Exercise</h4>
+<p>You are performing a study to estimate the Case Fatality Rate of the new Corona Virus in a rural community in China. You observed that among the 119 people formally diagnosed with the disease, three have died and 116 have recovered. The case Fatality Rate is an estimate of the probability of dying among those affected by a disease and the proportion of deaths among affected subjects is used to estimate it.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Use the Bayesian statistical inference approach to estimate the Case Fatality Rate for this community. Assuming an uninformative prior calculate the likelihood and the posterior distribution for the parameter of interest.</li>
+</ol>
+<p>Likelihood x Prior = Posterior</p>
+<p><span class="math inline">\(Bin(x,n)\)</span> x <span class="math inline">\(Beta(a,b)\)</span> = <span class="math inline">\(Beta(x+a,n-x+b)\)</span></p>
+<p><span class="math inline">\(Bin(3,119)\)</span> x <span class="math inline">\(Beta(1,1)\)</span> = <span class="math inline">\(Beta(4,117)\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Use the R software to draw the density of the posterior distribution and to calculate its mean, median, mode and the 95% credible interval for the parameter of interest.</li>
+</ol>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="kw">library</span>(printr)</a>
+<a class="sourceLine" id="cb293-2" title="2"><span class="co"># plot density</span></a>
+<a class="sourceLine" id="cb293-3" title="3"><span class="kw">pl.beta</span>(<span class="dv">4</span>,<span class="dv">117</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<pre><code>## [1] &quot;Distribution: Beta(a=4, b=117)&quot;
+## [1] &quot;Mean=0.0331; Variance=0.0003; Median=0.0305; Mode=0.0252&quot;
+## [1] &quot;Perc(2.5%)=0.0092; Perc(97.5%)=0.0713&quot;</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Based on the available evidence regarding the parameter of interest, what is the probability of the Case Fatality Rate of the new Corona Virus being higher than 5%? And being higher than 10%?</li>
+</ol>
+<p>Use the following R functions that allow calculating densities, probabilities and percentiles associated with Beta distributions:</p>
+<p><em>Functions to work with Beta distributions</em></p>
+<p><code>dbeta(x, a, b)</code> Gives you the density at x of the distribution function Beta(a,b)</p>
+<p><code>pbeta(x, a, b)</code> Gives you the probability of observing a value lower than or equal to x (P[X =&lt; x]) for the distribution function Beta(a,b)</p>
+<p><code>pbeta(x, a, b, lower.tail=FALSE)</code> Gives you the probability of observing a value larger than x (P[X &gt; x]) for the distribution function Beta(a,b)</p>
+<p><code>qbeta(x, a, b)</code> Gives you the percentile x of the distribution function Beta(a,b)</p>
+<p><code>rbeta(n, a, b)</code> Gives you n randomly chosen observations from the distribution function Beta(a,b)</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1">p5.a &lt;-<span class="st"> </span><span class="kw">pbeta</span>(<span class="fl">0.05</span>, <span class="dv">4</span>, <span class="dv">117</span>, <span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb295-2" title="2">p10.a &lt;-<span class="st"> </span><span class="kw">pbeta</span>(<span class="fl">0.1</span>, <span class="dv">4</span>, <span class="dv">117</span>, <span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<p>P[X &gt; 0.05] = 0.14441</p>
+<p>P[X &gt; 0.1] = 0.00157</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Some days later, you perform an identical study in neighbouring community. In this community, you observed that among the 419 people formally diagnosed with the disease, eight have died and 411 have recovered. Using a Bayesian inference approach, estimate the Case Fatality Rate of the new Corona Virus taking into account the available data for this community and the previous knowledge regarding the parameter of interest. Calculate the new likelihood and the new posterior distribution for the parameter of interest.</li>
+</ol>
+<p><span class="math inline">\(Bin(x,n)\)</span> x <span class="math inline">\(Beta(a,b)\)</span> = <span class="math inline">\(Beta(x+a,n-x+b)\)</span></p>
+<p><span class="math inline">\(Bin(8,419)\)</span> x <span class="math inline">\(Beta(4,117)\)</span> = <span class="math inline">\(Beta(12, 528)\)</span></p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Use the R software to draw the density of the new posterior distribution and to calculate its mean, median, mode and the 95% credible interval for the parameter of interest. Use the R function previously presented.</li>
+</ol>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1"><span class="co"># plot density</span></a>
+<a class="sourceLine" id="cb296-2" title="2"><span class="kw">pl.beta</span>(<span class="dv">12</span>,<span class="dv">528</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
+<pre><code>## [1] &quot;Distribution: Beta(a=12, b=528)&quot;
+## [1] &quot;Mean=0.0222; Variance=0; Median=0.0216; Mode=0.0204&quot;
+## [1] &quot;Perc(2.5%)=0.0116; Perc(97.5%)=0.0362&quot;</code></pre>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Based on all the available evidence regarding the parameter of interest after performing this second study, what is the probability of the Case Fatality Rate of the new Corona Virus being higher than 5%? And being higher than 10%? Use the R functions previously presented.</li>
+</ol>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1">p5.b &lt;-<span class="st"> </span><span class="kw">pbeta</span>(<span class="fl">0.05</span>, <span class="dv">12</span>, <span class="dv">528</span>, <span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb298-2" title="2">p10.b &lt;-<span class="st"> </span><span class="kw">pbeta</span>(<span class="fl">0.1</span>, <span class="dv">12</span>, <span class="dv">528</span>, <span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb298-3" title="3"></a>
+<a class="sourceLine" id="cb298-4" title="4"><span class="kw">options</span>(<span class="dt">scipen=</span><span class="dv">999</span>)</a></code></pre></div>
+<p>P[X &gt; 0.05] = 0.00034</p>
+<p>P[X &gt; 0.1] = 0</p>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Consider an alternative situation where you use all the observations of the first and second studies as if they were obtained in a single study. Assuming an uninformative prior calculate, in this case, the likelihood and the posterior distribution for the parameter of interest. Use the R software to draw the density of the posterior distribution and to calculate its mean, median, mode and the 95% credible interval for the parameter of interest. Use the R functions previously presented.</li>
+</ol>
+<p><span class="math inline">\(Bin(x,n)\)</span> x <span class="math inline">\(Beta(a,b)\)</span> = <span class="math inline">\(Beta(x+a,n-x+b)\)</span></p>
+<p><span class="math inline">\(Bin(3+8,119+419)\)</span> x <span class="math inline">\(Beta(1,1)\)</span> = <span class="math inline">\(Beta(12, 528)\)</span></p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="co"># plot density</span></a>
+<a class="sourceLine" id="cb299-2" title="2"><span class="kw">pl.beta</span>(<span class="dv">12</span>,<span class="dv">528</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
+<pre><code>## [1] &quot;Distribution: Beta(a=12, b=528)&quot;
+## [1] &quot;Mean=0.0222; Variance=0; Median=0.0216; Mode=0.0204&quot;
+## [1] &quot;Perc(2.5%)=0.0116; Perc(97.5%)=0.0362&quot;</code></pre>
+
 </div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="bayes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="representing-a-betaab-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="top.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
