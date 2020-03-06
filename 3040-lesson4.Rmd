@@ -1,0 +1,40 @@
+## Lesson 4
+
+2020-03-02
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Generalized Linear Models (GLM)
+
+#### GLM - Poisson regression
+
+```{r}
+library(foreign)
+# ler os dados
+datapoisson <- read.spss(file="2.UploadedData/epilepsy.sav", use.missing=TRUE, to.data.frame = T)
+```
+
+sumário dos dados
+```{r}
+summary(datapoisson)
+```
+
+modelo de regressão de poisson
+```{r}
+poisson <- glm(datapoisson$seizures ~ datapoisson$age + datapoisson$group, data =
+                 datapoisson, family = "poisson")
+
+summary(poisson)
+```
+
+Risco Relativo e intervalos de confiança
+```{r}
+library(printr)
+
+exp(cbind(RR = coef(poisson), confint(poisson)))
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+

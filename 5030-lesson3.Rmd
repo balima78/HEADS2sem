@@ -116,3 +116,4 @@ $Bin(3+8,119+419)$ x $Beta(1,1)$ = $Beta(12, 528)$
 pl.beta(12,528)
 ```
 
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

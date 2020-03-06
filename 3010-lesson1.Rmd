@@ -1,5 +1,7 @@
 ## Lesson 1
 
+2020-02-03
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
