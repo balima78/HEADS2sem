@@ -1,0 +1,10 @@
+## Lesson 5
+
+2020-03-10
+
+All the code was given by the professor and is available from here:
+
+https://rpubs.com/balima78/learn_4050_lesson5
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+

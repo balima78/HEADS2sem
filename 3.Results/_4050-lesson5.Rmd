@@ -1,0 +1,225 @@
+---
+title: "LEARN - lesson5"
+author: "Bruno A Lima"
+date: "2020-03-10"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+## Use 'caret' package to model Naive Bayes from 3 diferent ways
+Packages
+```{r}
+# Load package 'caret'
+library(caret)
+# Load package 'ellipse'
+library(ellipse)
+# Load package 'bnclassify'
+library(bnclassify)
+# Load package 'pROC'
+library(pROC)
+```
+
+Using multiple cores
+```{r}
+# Load package 'parallel'
+library(parallel)
+# Load package 'doMC'
+library(doMC)
+
+# Get the number of cores available
+numCores <- detectCores()
+
+# Register the number of cores available
+registerDoMC(cores = numCores)
+```
+
+Get data set from UCI repository - Breast Cancer Coimbra - available from https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Coimbra
+
+Load the data
+```{r}
+# Define the filename
+filename <- "dataR2.csv"
+
+# Load the CSV file from the local directory
+dataset <- read.csv(filename, header=T)
+
+# Define Classification as factor
+dataset$Classification <- factor(dataset$Classification, levels=1:2, 
+                                 labels=c("Control", "Patient"))
+```
+
+Holdout a validation set, by defining the indices of the training set
+```{r}
+set.seed(523)
+training.index <- createDataPartition(dataset$Classification, p=0.8, list=FALSE)
+validation <- dataset[-training.index,]
+dataset <- dataset[training.index,]
+```
+
+summary of the data
+```{r}
+# Levels of the class
+levels(dataset$Classification)
+
+# Class distribution
+proportions <- prop.table(table(dataset$Classification))
+cbind(Frequency=table(dataset$Classification), Proportion=round(proportions*100,2))
+
+# Statistical Summary
+summary(dataset)
+```
+
+Run algorithms using 3 times 10-fold cross validation
+```{r}
+metric <- "ROC"
+control <- trainControl(method="repeatedcv", number=10,
+                        classProbs=T,
+                        summaryFunction=twoClassSummary,
+                        savePredictions = T, repeats = 3)
+```
+
+### train a Naive Bayes model and compute its accuracy
+```{r}
+set.seed(7)
+fit.nb.rcv <- train(Classification ~ ., data=dataset, method="nb", 
+                    metric=metric, trControl=control)
+confusionMatrix(fit.nb.rcv)
+```
+
+### Tune Naive Bayes and compute its accuracy
+```{r}
+myGrid <- expand.grid(usekernel=c(T,F), # use kernel density instead of Gaussian
+                      adjust=1:5, # adjust kernel density bandwidth (larger means more flexible) 
+                      fL=0:5) # Laplace smoother
+set.seed(7)
+fit.nb.rcv.tuned <- train(Classification ~ ., data=dataset, method="nb", 
+                          metric=metric, trControl=control, tuneGrid=myGrid)
+confusionMatrix(fit.nb.rcv.tuned)
+```
+
+### Pre processing continuos variables
+
+Are continuous variables normally distributed?
+```{r}
+features <- setdiff(names(dataset), "Classification")
+par(mfrow=c(3,3))
+silence <- lapply(features, function(var)
+{
+  hist(dataset[,var], col="lightgrey", main=var, freq=FALSE)
+  lines(density(dataset[,var]), col=2, lwd=2)
+}
+)
+```
+
+apply a Box Cox transformation to continuos variables and plot the new densities
+```{r}
+dataset.trans <- data.frame(apply(dataset[,features], 2, 
+                                  function(v) {
+                                    predict(BoxCoxTrans(v), v)
+                                  }), Classification=dataset$Classification)
+par(mfrow=c(3,3))
+silence <- lapply(features, function(var)
+{
+  hist(dataset.trans[,var], col="lightgrey", main=var, freq=FALSE)
+  lines(density(dataset.trans[,var]), col=2, lwd=2)
+}
+)
+```
+
+scale and center transformed variables and plot the new density curves
+```{r}
+dataset.trans.scaled <- dataset.trans
+pproc <- preProcess(dataset.trans.scaled[,features], method = c("center", "scale"))
+dataset.trans.scaled[,features] <- predict(pproc, dataset.trans.scaled[,features])
+par(mfrow=c(3,3))
+silence <- lapply(features, function(var)
+{
+  hist(dataset.trans.scaled[,var], col="lightgrey", main=var, freq=FALSE)
+  lines(density(dataset.trans.scaled[,var]), col=2, lwd=2)
+}
+)
+```
+
+### Add preprocessing of continuos variables to the training of the Naive Bayes model and print accuracy
+```{r}
+set.seed(7)
+fit.nb.rcv.tuned.preproc <- train(Classification ~ ., data=dataset, method="nb", 
+                                  metric=metric, trControl=control, tuneGrid=myGrid,
+                                  preProc = c("BoxCox", "center", "scale"))
+confusionMatrix(fit.nb.rcv.tuned.preproc)
+```
+
+## Summarize accuracy of models
+```{r}
+fit.models <- list(nb=fit.nb.rcv, nb.tuned=fit.nb.rcv.tuned, nb.tuned.preproc=fit.nb.rcv.tuned.preproc)
+results <- resamples(fit.models)
+summary(results)
+```
+
+Compare accuracy of models
+```{r}
+dotplot(results)
+```
+
+Inspect models
+```{r}
+print(fit.nb.rcv)
+print(fit.nb.rcv.tuned)
+print(fit.nb.rcv.tuned.preproc)
+```
+
+Plot models
+```{r}
+plot(fit.nb.rcv)
+plot(fit.nb.rcv.tuned)
+plot(fit.nb.rcv.tuned.preproc)
+
+```
+
+## Make predictions
+Estimate skill of NB on the validation dataset
+```{r}
+par(mfrow=c(1,1))
+# 
+par(mfrow=c(1,3))
+# predict for NB
+predictions.prob <- predict(fit.nb.rcv, validation, type="prob")
+predictions <- predict(fit.nb.rcv, validation, type="raw")
+confusionMatrix(predictions, validation$Classification)
+plot.roc(validation$Classification, predictions.prob$Patient, print.auc=T, axes=F, 
+         #main=paste("3 x 10-fold CV -",fit.nb.rcv$method), 
+         main="3 x 10-fold CV - NB", 
+         debug=F)
+axis(1)
+axis(2)
+
+# predict for tuned NB
+predictions.prob <- predict(fit.nb.rcv.tuned, validation, type="prob")
+predictions <- predict(fit.nb.rcv.tuned, validation, type="raw")
+confusionMatrix(predictions, validation$Classification)
+plot.roc(validation$Classification, predictions.prob$Patient, print.auc=T, axes=F, 
+         #main=paste("3 x 10-fold CV -",fit.nb.rcv.tuned$method), 
+         main="3 x 10-fold CV - tuned NB",
+         debug=F)
+axis(1)
+axis(2)
+
+# predict for pre-processed and tuned NB
+predictions.prob <- predict(fit.nb.rcv.tuned.preproc, validation, type="prob")
+predictions <- predict(fit.nb.rcv.tuned.preproc, validation, type="raw")
+confusionMatrix(predictions, validation$Classification)
+plot.roc(validation$Classification, predictions.prob$Patient, print.auc=T, axes=F, 
+         # main=paste("3 x 10-fold CV -",fit.nb.rcv.tuned.preproc$method), 
+         main="3 x 10-fold CV - preproc tuned NB",
+         debug=F)
+axis(1)
+axis(2)
+```
+
