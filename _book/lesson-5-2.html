@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.5 Assignment cancer | HEADS 2nd semester</title>
+  <title>4.7 Lesson 5 | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.5 Assignment cancer | HEADS 2nd semester" />
+  <meta property="og:title" content="4.7 Lesson 5 | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.5 Assignment cancer | HEADS 2nd semester" />
+  <meta name="twitter:title" content="4.7 Lesson 5 | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lesson-5-1.html"/>
-<link rel="next" href="learn.html"/>
+<link rel="prev" href="lesson-4-2.html"/>
+<link rel="next" href="bayes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -233,74 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="assignment-cancer" class="section level2">
-<h2><span class="header-section-number">3.5</span> Assignment <em>cancer</em></h2>
-<p>2020-03-20</p>
-<p>The file <code>cancer.csv</code> contains data of 1207 women who were diagnosed with breast cancer [event: death -&gt; variable: <code>status</code>].</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
-<a class="sourceLine" id="cb194-2" title="2"><span class="kw">library</span>(splines)</a>
-<a class="sourceLine" id="cb194-3" title="3"><span class="kw">library</span>(survival)</a>
-<a class="sourceLine" id="cb194-4" title="4"><span class="co">#Read data</span></a>
-<a class="sourceLine" id="cb194-5" title="5">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/cancer.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
-<p>Variables included in the dataset:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    1207 obs. of  11 variables:
-##  $ id      : int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ age     : int  60 79 82 66 52 58 50 83 46 54 ...
-##  $ pathsize: num  99 99 99 99 99 99 99 99 99 99 ...
-##  $ lnpos   : int  0 0 0 0 0 0 0 0 17 6 ...
-##  $ histgrad: int  3 4 2 2 3 4 2 3 4 2 ...
-##  $ er      : int  0 2 2 1 2 2 1 0 2 1 ...
-##  $ pr      : int  0 2 2 1 2 2 0 0 2 1 ...
-##  $ status  : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ pathscat: int  99 99 99 99 99 99 99 99 99 99 ...
-##  $ ln_yesno: int  0 0 0 0 0 0 0 0 1 1 ...
-##  $ time    : num  9.47 8.6 19.33 16.33 8.5 ...</code></pre>
-<ol style="list-style-type: lower-alpha">
-<li>Produce a Kaplan-Meier curve for the data presented in the file.</li>
-</ol>
-<p>Kaplan-Meier survival curve</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">km&lt;-<span class="kw">survfit</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time,data<span class="op">$</span>status)<span class="op">~</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb197-2" title="2"></a>
-<a class="sourceLine" id="cb197-3" title="3">km</a></code></pre></div>
-<pre><code>## Call: survfit(formula = Surv(data$time, data$status) ~ 1)
-## 
-##       n  events  median 0.95LCL 0.95UCL 
-##    1207      72      NA      NA      NA</code></pre>
-<p>Plot survival curve with confidence intervals</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1"><span class="kw">plot</span>(km, <span class="dt">mark.time =</span> F)</a>
-<a class="sourceLine" id="cb199-2" title="2"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Obtain a Kaplan-Meier curve, separating women according to the variable <code>ln_yesno</code> (Lymph nodes) and test whether the survival of the two groups is significantly different (Log-rank test).</li>
-</ol>
-<p>Kaplan-Meier survival according to Lymph nodes:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">km.ln&lt;-<span class="kw">survfit</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time,data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>ln_yesno)</a>
-<a class="sourceLine" id="cb200-2" title="2"></a>
-<a class="sourceLine" id="cb200-3" title="3">km.ln</a></code></pre></div>
-<pre><code>## Call: survfit(formula = Surv(data$time, data$status) ~ data$ln_yesno)
-## 
-##                   n events median 0.95LCL 0.95UCL
-## data$ln_yesno=0 929     42     NA      NA      NA
-## data$ln_yesno=1 278     30     NA      NA      NA</code></pre>
-<p>Plot survival curve according to Lymph nodes:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1"><span class="kw">plot</span>(km.ln, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dt">mark.time =</span> F,</a>
-<a class="sourceLine" id="cb202-2" title="2">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab=</span><span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Survival&quot;</span>)</a>
-<a class="sourceLine" id="cb202-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Lymph nodes&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>),</a>
-<a class="sourceLine" id="cb202-4" title="4">       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
-<p><strong>Log-rank test</strong></p>
-<p>H0: No difference between the groups.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="kw">survdiff</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>ln_yesno, <span class="dt">rho =</span> <span class="dv">0</span>)</a></code></pre></div>
-<pre><code>## Call:
-## survdiff(formula = Surv(data$time, data$status) ~ data$ln_yesno, 
-##     rho = 0)
-## 
-##                   N Observed Expected (O-E)^2/E (O-E)^2/V
-## data$ln_yesno=0 929       42     56.1      3.53        16
-## data$ln_yesno=1 278       30     15.9     12.45        16
-## 
-##  Chisq= 16  on 1 degrees of freedom, p= 0.00006</code></pre>
+<div id="lesson-5-2" class="section level2">
+<h2><span class="header-section-number">4.7</span> Lesson 5</h2>
+<p>2020-03-10</p>
+<p>All the code was given by the professor and is available from here:</p>
+<p><a href="https://rpubs.com/balima78/learn_4050_lesson5" class="uri">https://rpubs.com/balima78/learn_4050_lesson5</a></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
@@ -310,8 +247,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="lesson-5-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="learn.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-4-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

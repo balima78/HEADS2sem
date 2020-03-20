@@ -1,0 +1,104 @@
+---
+title: "COMSTATS - lesson5"
+author: "Bruno A Lima"
+date: "2020-03-16"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+## Estimate the value of pi through simulation
+
+### function to compute euclidean distances
+```{r}
+euclid <- function(a, b) sqrt (sum((a-b)^2))
+```
+
+### function to compute pi from simulation
+```{r}
+pi.run <- function(nsamples, square) {
+  # compute the radio as half of a side
+  r <- (square[2] - square[1]) / 2
+  # center of the circle
+  zero <- rep((square[2] + square[1]) / 2, 2)
+  # data frame with points x and y, uniforme distributed between begin and end of the square
+  xy <- data.frame(xx=runif(nsamples, min=square[1], max=square[2]), 
+                   yy=runif(nsamples, min=square[1], max=square[2]))
+  # add column with T/F if distance of xy to zero lower than r (i.e xy is inside the circle)
+  xy <- cbind(xy, inside=apply(xy, 1, function(p) {euclid(p, c(0,0))}) <= r)
+  # add column with the cumulative Trues divided by number of the iteration 
+  xy <- cbind(xy, prop = cumsum(xy$inside) / 1:nsamples)
+  # compute the aproximation of pi at each iteration
+  xy <- cbind(xy, pi = 4 * xy$prop)
+  xy
+}
+```
+
+### prepare plot with a empty square 
+```{r}
+preparePlot <- function(square) {
+  plot(NULL, xlim=square, ylim=square, axes=F, xlab="x", ylab="y")
+  axis(1)
+  axis(2)
+  axis(3)
+  axis(4)
+  lines(x=c(square[1],square[1]), y=c(square[1],square[2]))
+  lines(x=c(square[1],square[2]), y=c(square[1],square[1]))
+  lines(x=c(square[1],square[2]), y=c(square[2],square[2]))
+  lines(x=c(square[2],square[2]), y=c(square[1],square[2]))
+}
+```
+
+### define the sizes of a square centered at zero (i.e a vector with simetric values)
+```{r}
+square <- c(-1,1)
+```
+
+### define the number of iterations
+```{r}
+nsamples <- 100000 #1e5
+```
+
+### par(mfrow=c(1,3))
+```{r}
+set.seed(523)
+xy <- pi.run(nsamples,square)
+```
+
+### plot the circle
+```{r}
+preparePlot(square)
+points(x=xy$xx, y=xy$yy, col=ifelse(xy$inside,2,1), pch=".", cex = 2)
+```
+
+### plot the convergence to pi
+```{r}
+plot(xy$pi, axes=F, main="PI Estimate Evolution - Single Monte Carlo", xlab="Iteration", ylab="pi", type="l", ylim=mean(xy$pi)+3*c(-sd(xy$pi),sd(xy$pi)))
+axis(1)
+axis(2)
+lines(c(0,nsamples), rep(pi,2), lty="dashed")
+```
+
+### define number of Monte Carlo runs
+```{r}
+mc.runs <- 1e3 / 2
+```
+
+### compute pi the defined number of runs, keeping the last value of the column pi from pi.run each time
+```{r}
+pi.est <- unlist(lapply((1:mc.runs), function(a) pi.run(nsamples,square)$pi[nsamples]))
+
+```
+
+### plot an histogram with obtained aproximations of pi
+```{r}
+hist(pi.est, main=paste("Distribution of PI Estimates (",mc.runs, " runs of ", nsamples," samples)",sep=""))
+text(x=3.155, y=250, labels=paste("mu = ", round(mean(pi.est),5),sep=""))
+```
+

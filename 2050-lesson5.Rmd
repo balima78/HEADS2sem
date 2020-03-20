@@ -1,0 +1,10 @@
+## Lesson 5
+
+2020-03-16
+
+**Estimate the value of pi through simulation** (code given by the professor)
+
+https://rpubs.com/balima78/compstat_2050_lesson5
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
