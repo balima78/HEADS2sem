@@ -1,0 +1,65 @@
+## Assignment *cancer*
+
+2020-03-20
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+The file `cancer.csv` contains data of 1207 women who were diagnosed with breast cancer [event: death -> variable: `status`].
+
+```{r}
+#Load the library required for a survival analysis
+library(splines)
+library(survival)
+#Read data
+data<-read.csv("2.UploadedData/cancer.csv",sep=";",dec=",")
+```
+
+Variables included in the dataset:
+```{r}
+str(data)
+```
+
+a) Produce a Kaplan-Meier curve for the data presented in the file.
+
+Kaplan-Meier survival curve
+```{r}
+km<-survfit(Surv(data$time,data$status)~1)
+
+km
+```
+
+Plot survival curve with confidence intervals
+```{r}
+plot(km, mark.time = F)
+abline(h = 0.5)
+```
+
+b) Obtain a Kaplan-Meier curve, separating women according to the variable `ln_yesno` (Lymph nodes) and test whether the survival of the two groups is significantly different (Log-rank test).
+
+Kaplan-Meier survival according to Lymph nodes: 
+```{r}
+km.ln<-survfit(Surv(data$time,data$status) ~ data$ln_yesno)
+
+km.ln
+```
+
+Plot survival curve according to Lymph nodes:
+```{r}
+plot(km.ln, col = c("red", "blue"), mark.time = F,
+     ylim=c(0,1), xlab="time", ylab = "Survival")
+legend("topright", title="Lymph nodes", legend=c("No","Yes"),
+       col=c("red","blue"), lty=1:1, cex=0.8)
+```
+
+**Log-rank test**
+
+H0: No difference between the groups.
+```{r}
+survdiff(Surv(data$time, data$status) ~ data$ln_yesno, rho = 0)
+```
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+

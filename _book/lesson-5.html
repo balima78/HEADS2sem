@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.7 Lesson 5 | HEADS 2nd semester</title>
+  <title>3.4 Lesson 5 | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.7 Lesson 5 | HEADS 2nd semester" />
+  <meta property="og:title" content="3.4 Lesson 5 | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.7 Lesson 5 | HEADS 2nd semester" />
+  <meta name="twitter:title" content="3.4 Lesson 5 | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-03-12" />
+<meta name="date" content="2020-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lesson-4-2.html"/>
-<link rel="next" href="bayes.html"/>
+<link rel="prev" href="lesson-4-1.html"/>
+<link rel="next" href="assignment-cancer.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -176,6 +176,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="lesson-4-1.html"><a href="lesson-4-1.html"><i class="fa fa-check"></i><b>3.3</b> Lesson 4</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="lesson-4-1.html"><a href="lesson-4-1.html#generalized-linear-models-glm"><i class="fa fa-check"></i><b>3.3.1</b> Generalized Linear Models (GLM)</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>3.4</b> Lesson 5</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="lesson-5.html"><a href="lesson-5.html#survival-analysis"><i class="fa fa-check"></i><b>3.4.1</b> Survival Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
@@ -195,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6.2" data-path="lesson-4-2.html"><a href="lesson-4-2.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
 <li class="chapter" data-level="4.6.3" data-path="lesson-4-2.html"><a href="lesson-4-2.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>4.7</b> Lesson 5</a></li>
+<li class="chapter" data-level="4.7" data-path="lesson-5-1.html"><a href="lesson-5-1.html"><i class="fa fa-check"></i><b>4.7</b> Lesson 5</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
@@ -229,21 +233,144 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="lesson-5" class="section level2">
-<h2><span class="header-section-number">4.7</span> Lesson 5</h2>
-<p>2020-03-10</p>
-<p>All the code was given by the professor and is available from here:</p>
-<p><a href="https://rpubs.com/balima78/learn_4050_lesson5" class="uri">https://rpubs.com/balima78/learn_4050_lesson5</a></p>
+<h2><span class="header-section-number">3.4</span> Lesson 5</h2>
+<p>2020-03-16</p>
+<div id="survival-analysis" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Survival Analysis</h3>
+<div id="example-from-classe-code-from-the-professor" class="section level4">
+<h4><span class="header-section-number">3.4.1.1</span> Example from classe (code from the professor)</h4>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
+<a class="sourceLine" id="cb179-2" title="2"><span class="kw">library</span>(splines)</a>
+<a class="sourceLine" id="cb179-3" title="3"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb179-4" title="4"><span class="co">#Read data</span></a>
+<a class="sourceLine" id="cb179-5" title="5">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/data2.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
+<p>Variables included in the dataset:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    274 obs. of  11 variables:
+##  $ id         : int  1 3 7 9 11 13 15 17 19 21 ...
+##  $ fu         : num  7 22 13 42 5 13 70 51 25 5 ...
+##  $ event      : int  1 0 0 1 0 1 0 1 0 0 ...
+##  $ event_HD   : int  0 0 0 0 1 0 0 0 1 1 ...
+##  $ event_RT   : int  0 1 1 0 0 0 1 0 0 0 ...
+##  $ event_CR   : int  1 3 3 1 2 1 3 1 2 2 ...
+##  $ peritonitis: int  0 1 1 1 1 0 1 0 1 1 ...
+##  $ sex        : int  1 1 0 0 0 0 1 0 1 1 ...
+##  $ age        : int  60 41 38 46 51 36 43 71 31 50 ...
+##  $ diab       : int  1 1 0 0 0 0 0 1 0 0 ...
+##  $ first      : int  0 0 1 0 0 1 1 0 0 1 ...</code></pre>
+<p>Kaplan-Meier survival curve</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1">KM_<span class="dv">1</span>&lt;-<span class="kw">survfit</span>(<span class="kw">Surv</span>(data<span class="op">$</span>fu,data<span class="op">$</span>event)<span class="op">~</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb182-2" title="2"></a>
+<a class="sourceLine" id="cb182-3" title="3">KM_<span class="dv">1</span></a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ 1)
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##     274      62      NA      51      NA</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">summary</span>(KM_<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ 1)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    274       2    0.993 0.00514        0.983        1.000
+##     2    266       6    0.970 0.01034        0.950        0.991
+##     5    242       2    0.962 0.01171        0.940        0.986
+##     6    232       2    0.954 0.01299        0.929        0.980
+##     7    220       2    0.945 0.01425        0.918        0.974
+##     8    210       2    0.936 0.01547        0.906        0.967
+##     9    198       4    0.917 0.01782        0.883        0.953
+##    10    190       2    0.908 0.01889        0.871        0.946
+##    12    176       2    0.897 0.02004        0.859        0.938
+##    13    174       6    0.866 0.02299        0.823        0.913
+##    14    166       2    0.856 0.02386        0.811        0.904
+##    17    150       2    0.845 0.02487        0.797        0.895
+##    18    144       2    0.833 0.02587        0.784        0.885
+##    22    128       2    0.820 0.02706        0.769        0.875
+##    23    114       2    0.806 0.02843        0.752        0.863
+##    24    110       2    0.791 0.02974        0.735        0.851
+##    27     94       2    0.774 0.03140        0.715        0.838
+##    35     62       4    0.724 0.03802        0.653        0.803
+##    36     58       2    0.699 0.04061        0.624        0.783
+##    37     54       4    0.647 0.04510        0.565        0.742
+##    38     50       2    0.621 0.04687        0.536        0.720
+##    42     46       2    0.594 0.04857        0.506        0.698
+##    51     36       2    0.561 0.05118        0.470        0.671
+##    60     28       2    0.521 0.05482        0.424        0.641</code></pre>
+<p>Plot survival curve with confidence intervals</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="kw">plot</span>(KM_<span class="dv">1</span>, <span class="dt">mark.time =</span> F)</a>
+<a class="sourceLine" id="cb186-2" title="2"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p>Kaplan-Meier survival according to diabetes</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">KM.diab&lt;-<span class="kw">survfit</span>(<span class="kw">Surv</span>(data<span class="op">$</span>fu,data<span class="op">$</span>event) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>diab)</a>
+<a class="sourceLine" id="cb187-2" title="2"></a>
+<a class="sourceLine" id="cb187-3" title="3">KM.diab</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ data$diab)
+## 
+##               n events median 0.95LCL 0.95UCL
+## data$diab=0 206     38     NA      NA      NA
+## data$diab=1  68     24     37      36      NA</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1"><span class="kw">summary</span>(KM.diab)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ data$diab)
+## 
+##                 data$diab=0 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    206       2    0.990 0.00683        0.977        1.000
+##     2    202       4    0.971 0.01179        0.948        0.994
+##     6    178       2    0.960 0.01396        0.933        0.988
+##     8    160       2    0.948 0.01616        0.917        0.980
+##     9    148       2    0.935 0.01830        0.900        0.972
+##    10    146       2    0.922 0.02017        0.883        0.963
+##    12    132       2    0.908 0.02215        0.866        0.953
+##    13    130       6    0.866 0.02694        0.815        0.921
+##    17    110       2    0.851 0.02866        0.796        0.909
+##    23     88       2    0.831 0.03110        0.772        0.894
+##    27     72       2    0.808 0.03425        0.744        0.878
+##    35     48       4    0.741 0.04500        0.658        0.834
+##    37     42       2    0.705 0.04929        0.615        0.809
+##    38     40       2    0.670 0.05276        0.574        0.782
+##    42     36       2    0.633 0.05601        0.532        0.753
+## 
+##                 data$diab=1 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     2     64       2    0.969  0.0217       0.9270        1.000
+##     5     56       2    0.934  0.0319       0.8737        0.999
+##     7     52       2    0.898  0.0395       0.8240        0.979
+##     9     50       2    0.862  0.0454       0.7778        0.956
+##    14     44       2    0.823  0.0511       0.7288        0.930
+##    18     38       2    0.780  0.0568       0.6760        0.900
+##    22     34       2    0.734  0.0621       0.6218        0.866
+##    24     24       2    0.673  0.0704       0.5481        0.826
+##    36     14       2    0.577  0.0872       0.4288        0.775
+##    37     12       2    0.481  0.0955       0.3255        0.709
+##    51      6       2    0.320  0.1123       0.1612        0.637
+##    60      4       2    0.160  0.0978       0.0484        0.530</code></pre>
+<p>Plot survival curve according to diabetes</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="kw">plot</span>(KM.diab, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dt">mark.time =</span> F,</a>
+<a class="sourceLine" id="cb191-2" title="2">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab=</span><span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;S&quot;</span>)</a>
+<a class="sourceLine" id="cb191-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Diabetes&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>),</a>
+<a class="sourceLine" id="cb191-4" title="4">       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p><strong>Log-rank test</strong></p>
+<p>H0: No difference between the groups.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">survdiff</span>(<span class="kw">Surv</span>(data<span class="op">$</span>fu, data<span class="op">$</span>event) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>diab, <span class="dt">rho =</span> <span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(data$fu, data$event) ~ data$diab, rho = 0)
+## 
+##               N Observed Expected (O-E)^2/E (O-E)^2/V
+## data$diab=0 206       38     47.5      1.89      8.27
+## data$diab=1  68       24     14.5      6.19      8.27
+## 
+##  Chisq= 8.3  on 1 degrees of freedom, p= 0.004</code></pre>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
-<!-- </div> -->
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="lesson-4-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-4-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-cancer.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

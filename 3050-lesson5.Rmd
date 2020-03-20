@@ -1,0 +1,65 @@
+## Lesson 5
+
+2020-03-16
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Survival Analysis
+
+#### Example from classe (code from the professor)
+
+```{r}
+#Load the library required for a survival analysis
+library(splines)
+library(survival)
+#Read data
+data<-read.csv("2.UploadedData/data2.csv",sep=";",dec=",")
+```
+
+Variables included in the dataset:
+```{r}
+str(data)
+```
+
+Kaplan-Meier survival curve
+```{r}
+KM_1<-survfit(Surv(data$fu,data$event)~1)
+
+KM_1
+summary(KM_1)
+```
+
+Plot survival curve with confidence intervals
+```{r}
+plot(KM_1, mark.time = F)
+abline(h = 0.5)
+```
+
+Kaplan-Meier survival according to diabetes
+```{r}
+KM.diab<-survfit(Surv(data$fu,data$event) ~ data$diab)
+
+KM.diab
+summary(KM.diab)
+```
+
+Plot survival curve according to diabetes
+```{r}
+plot(KM.diab, col = c("red", "blue"), mark.time = F,
+     ylim=c(0,1), xlab="time", ylab = "S")
+legend("topright", title="Diabetes", legend=c("No","Yes"),
+       col=c("red","blue"), lty=1:1, cex=0.8)
+```
+
+**Log-rank test**
+
+H0: No difference between the groups.
+```{r}
+survdiff(Surv(data$fu, data$event) ~ data$diab, rho = 0)
+```
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
