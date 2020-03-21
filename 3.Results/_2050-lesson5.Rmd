@@ -13,7 +13,17 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 ```
 
-## Estimate the value of pi through simulation
+## Estimate the value of $\pi$ through a Monte Carlo simulation
+
+star info:
+
+- the area of a square of side $2R$: $A_s = 4R^2$
+- the area of a circle with radius $R: A_c = \pi R^2$
+- if we know the areas of both forms, $A_s$ and $A_c$, then
+
+$A_s/4 = A_c/ \pi$ or $\pi = 4A_c/A_s$
+
+- a point $p$ is inside a circle of radius $R$ if $D(0,p) < R$ 
 
 ### function to compute euclidean distances
 ```{r}
@@ -23,7 +33,7 @@ euclid <- function(a, b) sqrt (sum((a-b)^2))
 ### function to compute pi from simulation
 ```{r}
 pi.run <- function(nsamples, square) {
-  # compute the radio as half of a side
+  # compute the radius as half of a side
   r <- (square[2] - square[1]) / 2
   # center of the circle
   zero <- rep((square[2] + square[1]) / 2, 2)
@@ -31,7 +41,7 @@ pi.run <- function(nsamples, square) {
   xy <- data.frame(xx=runif(nsamples, min=square[1], max=square[2]), 
                    yy=runif(nsamples, min=square[1], max=square[2]))
   # add column with T/F if distance of xy to zero lower than r (i.e xy is inside the circle)
-  xy <- cbind(xy, inside=apply(xy, 1, function(p) {euclid(p, c(0,0))}) <= r)
+  xy <- cbind(xy, inside=apply(xy, 1, function(p) {euclid(p, zero)}) <= r)
   # add column with the cumulative Trues divided by number of the iteration 
   xy <- cbind(xy, prop = cumsum(xy$inside) / 1:nsamples)
   # compute the aproximation of pi at each iteration
@@ -100,5 +110,61 @@ pi.est <- unlist(lapply((1:mc.runs), function(a) pi.run(nsamples,square)$pi[nsam
 ```{r}
 hist(pi.est, main=paste("Distribution of PI Estimates (",mc.runs, " runs of ", nsamples," samples)",sep=""))
 text(x=3.155, y=250, labels=paste("mu = ", round(mean(pi.est),5),sep=""))
+```
+
+### and now FRANz's solution:
+
+define a funcion to compute pi
+```{r}
+random_area<-function(n=1e5, radius = 0.5){
+  x<-runif(n, -radius, radius)
+  y<-runif(n, -radius, radius)
+  
+  dist<-sqrt(x^2+y^2) < radius
+  
+  res<-sum(dist)/n * 4
+  
+  return(res)
+}
+```
+
+do the MC and plot the histogram with the results
+```{r}
+trails<-NULL
+
+for (i in 1:1000){
+  trails<-c(trails, random_area())
+}
+
+hist(trails)
+```
+
+### and also Seref's solution:
+
+define a function
+```{r}
+simulation = function(long){
+  c = rep(0,long)
+  numberIn = 0
+  for(i in 1:long){
+    x = runif(2,-1,1)
+    if(sqrt(x[1]*x[1]+x[2]*x[2])<=1){
+      numberIn = numberIn + 1
+    }
+    prop = numberIn / i
+    piHat = prop * 4
+    c[i] = piHat
+  }
+  return(c)
+}
+```
+
+and the Monte Carlo part in a plot
+```{r}
+size = 10000
+res = simulation(size)
+ini = 1
+plot(res[ini:size], type = "l")
+lines(rep(pi,size)[ini:size],col = "red")
 ```
 

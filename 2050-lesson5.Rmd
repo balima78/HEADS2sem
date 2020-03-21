@@ -2,7 +2,7 @@
 
 2020-03-16
 
-**Estimate the value of pi through simulation** (code given by the professor)
+**Estimate the value of $\pi$ through simulation** (code given by the professor)
 
 https://rpubs.com/balima78/compstat_2050_lesson5
 
