@@ -1,0 +1,77 @@
+## Assignment *cancer*
+
+2020-03-23
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+The file cancer.csv contains data of 1207 women who were diagnosed with breast
+cancer [event: death -> variable: status].
+
+```{r}
+#Load the library required for a survival analysis
+library(survival)
+#Read data
+data<-read.csv("2.UploadedData/cancer.csv",sep=";",dec=",")
+```
+
+Variables included in the dataset:
+```{r}
+str(data)
+```
+
+a) Produce unadjusted Cox regressions for the covariates: pathsize as
+covariates.
+
+Unadjusted Cox regression for age
+```{r}
+cox1 <- coxph(Surv(data$time, data$status) ~ data$age)
+summary(cox1)
+```
+
+Unadjusted Cox regression for ln_yesno
+```{r}
+cox2 <- coxph(Surv(data$time, data$status) ~ as.factor(data$ln_yesno))
+summary(cox2)
+```
+
+Unadjusted Cox regression for pathsize
+```{r}
+cox3 <- coxph(Surv(data$time, data$status) ~ data$pathsize)
+summary(cox3)
+```
+
+b) Produce adjusted Cox regression as the variables age,ln_yesno and pathsize as
+covariates.
+
+Adjusted Cox regression for age,ln_yesno and pathsize
+```{r}
+cox4 <- coxph(Surv(data$time, data$status) ~ data$age + 
+                as.factor(data$ln_yesno) + 
+                data$pathsize)
+summary(cox4)
+```
+
+**Proportional hazards assumptions**
+
+H0: independence between scaled Schoenfeld residuals and time.
+
+For each variable and for the global model.
+```{r}
+test.res <- cox.zph(cox4)
+test.res
+```
+
+Graphical diagnostic
+```{r}
+library(survminer)
+ggcoxzph(test.res)
+```
+
+These plots do not indicate obvious trends and are generally centered at zero.
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+
+

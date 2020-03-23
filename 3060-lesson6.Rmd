@@ -1,0 +1,63 @@
+## Lesson 6
+
+2020-03-23
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Cox Regression
+
+#### Example from classe (code from the professor)
+
+```{r}
+#Load the library required for a survival analysis
+library(survival)
+#Read data
+data<-read.csv("2.UploadedData/survival.csv",sep=";",dec=",")
+```
+
+Variables included in the dataset:
+```{r}
+str(data)
+```
+
+Unadjusted Cox regression for Group
+```{r}
+cox1 <- coxph(Surv(data$Time, data$Event) ~ as.factor(data$Group))
+summary(cox1)
+```
+
+Unadjusted Cox regression for Age
+```{r}
+cox2 <- coxph(Surv(data$Time, data$Event) ~ data$Age)
+summary(cox2)
+```
+
+Adjusted Cox regression for Group and Age
+```{r}
+cox3 <- coxph(Surv(data$Time, data$Event) ~ as.factor(data$Group) + data$Age)
+summary(cox3)
+```
+
+**Proportional hazards assumptions**
+
+H0: independence between scaled Schoenfeld residuals and time.
+
+For each variable and for the global model.
+```{r}
+test.res <- cox.zph(cox3)
+test.res
+```
+
+Graphical diagnostic
+```{r}
+library(survminer)
+ggcoxzph(test.res)
+```
+
+These plots do not indicate obvious trends and are generally centered at zero.
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+
