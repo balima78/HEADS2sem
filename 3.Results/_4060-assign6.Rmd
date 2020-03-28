@@ -1,0 +1,229 @@
+---
+title: "LEARN - lesson6"
+author: "Bruno A Lima & Seref Gunes"
+date: "2020-03-28"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### Build three ensemble classifiers for the Breast Cancer Coimbra data set (available from UCI repository) using the ‘caret’ package
+
+Packages
+```{r}
+library(caret)
+library(pROC) 
+library(Amelia)
+library(psych) 
+library(caretEnsemble)
+```
+
+read and look the data
+```{r}
+data <- read.csv("dataR2.csv", header=T)
+
+# factorize outcome variable
+data$Classification<-factor(data$Classification, levels=1:2, labels=c("Controls","Patients"))
+
+# look at the data structure
+str(data)
+
+```
+
+look for missing values
+```{r}
+missmap(data)
+```
+
+look at variable correlation
+```{r}
+pairs.panels(data)
+```
+
+## Bagging (treebag and rf)
+
+Building multiple models (typically of the same type) from different subsamples of the training dataset.
+
+setting up cross-validation
+```{r}
+cvcontrol <- trainControl(method="repeatedcv", 
+                          number=10,
+                          summaryFunction=twoClassSummary,
+                          classProbs=T,
+                          savePredictions = TRUE, repeats=3)
+```
+
+### Train treebag
+```{r}
+train.bagg <- train(Classification ~ ., 
+                    data=data,
+                    method="treebag",
+                    trControl=cvcontrol,
+                    importance=TRUE)
+
+train.bagg
+```
+
+variable importance
+```{r}
+plot(varImp(train.bagg))
+```
+
+### Train RF
+```{r}
+train.rf <- train(Classification ~ ., 
+                  data=data,
+                  method="rf",
+                  trControl=cvcontrol,
+                  tuneLength = 3,
+                  importance=TRUE)
+train.rf
+plot(train.rf)
+
+```
+
+variable importance
+```{r}
+plot(varImp(train.rf))
+```
+
+compare models
+```{r}
+bagg.models <- list(tbag=train.bagg, rf=train.rf)
+results1 <- resamples(bagg.models)
+summary(results1)
+
+dotplot(results1)
+```
+
+plot ROC 
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(bagg.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patients, 
+                                                  main=paste("Bagging -",fit$method), 
+                                                  debug=F, print.auc=T)})
+```
+
+## Boosting (C5.0 and gdm)
+Building multiple models (typically of the same type) each of which learns to fix the prediction errors of a prior model in the chain.
+
+### trainig C5.0
+```{r}
+train.c50 <- train(Classification ~ ., 
+                   data=data,
+                   method="C5.0",
+                   verbose=F,
+                   trControl=cvcontrol)
+
+train.c50
+plot(train.c50)
+```
+
+### Training with gradient boosting
+```{r}
+train.gbm <- train(Classification ~ ., 
+                   data=data,
+                   method="gbm",
+                   verbose=F,
+                   trControl=cvcontrol)
+train.gbm
+plot(train.gbm)
+```
+
+compare models
+```{r}
+boost.models <- list(boost.c50=train.c50, boost.gbm=train.gbm)
+results2 <- resamples(boost.models)
+summary(results2)
+
+dotplot(results2)
+```
+
+plot ROC
+```{r}
+par(mfrow=c(1,2))
+rocs <- lapply(boost.models, function(fit){plot.roc(fit$pred$obs,fit$pred$Patients, 
+                                                   main=paste("Boosting -",fit$method), 
+                                                   debug=F, print.auc=T)})
+```
+
+## Stacking (at least three models)
+Building multiple models (typically of differing types) and supervisor model that learns how to best combine the predictions of the primary models.
+
+Define a list of multiple types of models
+```{r}
+algorithmList <- c('lda', 'rpart', 'glm', 'knn', 'svmRadial')
+```
+
+train each one of the models
+```{r}
+stack.models <- caretList(Classification~., data=data, 
+                    trControl=cvcontrol, 
+                    methodList=algorithmList)
+```
+
+see the results
+```{r}
+results3 <- resamples(stack.models)
+summary(results3)
+dotplot(results3)
+```
+
+correlation between results
+```{r}
+modelCor(results3)
+splom(results3)
+```
+
+### stack using 'glm'
+```{r}
+set.seed(1)
+stack.glm <- caretStack(stack.models, method="glm", 
+                        trControl=cvcontrol)
+
+# print results
+print(stack.glm)
+```
+
+predict probabilities and plot ROC
+```{r}
+pred.stack.glm<-predict(stack.glm,newdata = data, type="prob")
+
+#Calculate ROC curve
+rocCurve.stack.glm <- roc(data$Classification,pred.stack.glm)
+#plot the ROC curve
+plot(rocCurve.stack.glm,col=c(4), print.auc=T)
+```
+
+### stack using 'random forest'
+```{r}
+set.seed(1)
+stack.rf <- caretStack(stack.models, method="rf", 
+                       trControl=cvcontrol)
+# print rersults
+print(stack.rf)
+```
+
+predict probabilities and plot ROC
+```{r}
+pred.stack.rf<-predict(stack.rf,newdata = data, type="prob")
+#Calculate ROC curve
+rocCurve.stack.rf <- roc(data$Classification,pred.stack.rf)
+#plot the ROC curve
+plot(rocCurve.stack.rf,col=c(4), print.auc=T)
+```
+
+
+sources:
+
+https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
+
+https://quantdev.ssri.psu.edu/sites/qdev/files/09_EnsembleMethods_2017_1127.html
+
+https://machinelearningmastery.com/machine-learning-ensembles-with-r/

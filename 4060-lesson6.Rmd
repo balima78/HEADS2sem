@@ -1,0 +1,16 @@
+## Lesson 6
+
+2020-03-24
+
+Build three ensemble classifiers for the Breast Cancer Coimbra data set (available from UCI repository) using the ‘caret’ package, using:
+
+• Bagging (treebag and rf)
+
+• Boosting (C5.0 and gdm)
+
+• Stacking (at least three models)
+
+https://rpubs.com/balima78/learn_4060_exercise
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
