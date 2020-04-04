@@ -1,0 +1,20 @@
+## Lesson 6
+
+2020-03-27
+
+Consider the SIR model discussed in class. Using and adapting the code provided, deliver a report on different scenarios simulated using parameters that could be estimated from :
+
+a) Portuguese data (all)
+
+b) Other countries' data (all)
+
+c) Selected periods of data (e.g. using landmark windows or sliding windows in data used to fit beta and gamma)
+
+https://balima.shinyapps.io/sir_shiny/
+
+All the code is available from here:
+
+https://github.com/balima78/covid19data/tree/master/sir_shiny
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

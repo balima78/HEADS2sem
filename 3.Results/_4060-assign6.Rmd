@@ -99,7 +99,7 @@ bagg.models <- list(tbag=train.bagg, rf=train.rf)
 results1 <- resamples(bagg.models)
 summary(results1)
 
-dotplot(results1)
+bwplot(results1)
 ```
 
 plot ROC 
