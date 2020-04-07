@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-04-04" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,7 +170,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
-<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a></li>
+<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
+<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -244,26 +248,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>2020-02-03</p>
 <p><strong>exercise 1</strong>
 The BMD_weight.sav database contains 190 densitometry records.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="kw">library</span>(foreign)</a>
-<a class="sourceLine" id="cb127-2" title="2"></a>
-<a class="sourceLine" id="cb127-3" title="3">data1 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/BMD_weight_new.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb153-2" title="2"></a>
+<a class="sourceLine" id="cb153-3" title="3">data1 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/BMD_weight_new.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li>Calculate the body mass index.</li>
 </ol>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1">data1<span class="op">$</span>IMC &lt;-<span class="st"> </span>((data1<span class="op">$</span>peso)<span class="op">/</span>((data1<span class="op">$</span>altura)<span class="op">/</span><span class="dv">100</span>)<span class="op">^</span><span class="dv">2</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">data1<span class="op">$</span>IMC &lt;-<span class="st"> </span>((data1<span class="op">$</span>peso)<span class="op">/</span>((data1<span class="op">$</span>altura)<span class="op">/</span><span class="dv">100</span>)<span class="op">^</span><span class="dv">2</span>) </a></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Calculate the mean and standard deviation of total bone mineral density</li>
 </ol>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">mean</span>(data1<span class="op">$</span>IMC)</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1"><span class="kw">mean</span>(data1<span class="op">$</span>IMC)</a></code></pre></div>
 <pre><code>## [1] 26.42143</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1"><span class="kw">sd</span>(data1<span class="op">$</span>IMC)</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">sd</span>(data1<span class="op">$</span>IMC)</a></code></pre></div>
 <pre><code>## [1] 4.299248</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Analyze the relationship between bone mineral density and BMI using linear regression.</li>
 </ol>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="kw">plot</span>(<span class="dt">x =</span> data1<span class="op">$</span>IMC, <span class="dt">y=</span>data1<span class="op">$</span>bmdtot)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="kw">cor.test</span>(data1<span class="op">$</span>IMC, data1<span class="op">$</span>bmdtot, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="kw">plot</span>(<span class="dt">x =</span> data1<span class="op">$</span>IMC, <span class="dt">y=</span>data1<span class="op">$</span>bmdtot)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">cor.test</span>(data1<span class="op">$</span>IMC, data1<span class="op">$</span>bmdtot, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</a></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -275,8 +279,8 @@ The BMD_weight.sav database contains 190 densitometry records.</p>
 ## sample estimates:
 ##       cor 
 ## 0.3084029</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">regressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> bmdtot <span class="op">~</span><span class="st"> </span>IMC, <span class="dt">data=</span>data1)</a>
-<a class="sourceLine" id="cb136-2" title="2"><span class="kw">summary</span>(regressao)</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">regressao &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> bmdtot <span class="op">~</span><span class="st"> </span>IMC, <span class="dt">data=</span>data1)</a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="kw">summary</span>(regressao)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = bmdtot ~ IMC, data = data1)
@@ -299,25 +303,25 @@ The BMD_weight.sav database contains 190 densitometry records.</p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Compare the BMDTOT average according to the type of medication, adjusting for BMI and age.</li>
 </ol>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1">regressaoM &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> bmdtot <span class="op">~</span><span class="st"> </span>Medication <span class="op">+</span><span class="st"> </span>IMC <span class="op">+</span><span class="st"> </span>idade, <span class="dt">data=</span>data1)</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">regressaoM &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> bmdtot <span class="op">~</span><span class="st"> </span>Medication <span class="op">+</span><span class="st"> </span>IMC <span class="op">+</span><span class="st"> </span>idade, <span class="dt">data=</span>data1)</a></code></pre></div>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Check the assumptions for the model used in d).</li>
 </ol>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="kw">plot</span>(regressaoM<span class="op">$</span>fitted.values, regressaoM<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="kw">hist</span>(regressaoM<span class="op">$</span>residuals)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-85-2.png" width="672" /></p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="kw">plot</span>(regressaoM<span class="op">$</span>fitted.values, regressaoM<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">hist</span>(regressaoM<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-105-2.png" width="672" /></p>
 <p>or we can plot everything</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="kw">plot</span>(regressaoM)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-86-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-86-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-86-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-86-4.png" width="672" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">plot</span>(regressaoM)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-106-1.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-106-2.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-106-3.png" width="672" /><img src="heads2sem_files/figure-html/unnamed-chunk-106-4.png" width="672" /></p>
 <p><strong>exercise 2</strong>
 The data in the score2013.sav file refer to 1768 admissions to pediatric intensive
 care units in several Portuguese hospital units.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">data2 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/score2013.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">data2 &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/score2013.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li>The minimum systolic tension of the first 12 hours of hospitalization and mechanical ventilation at some point in the first hour of hospitalization are potential predictors of mortality in the ICU.</li>
 </ol>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1"><span class="kw">summary</span>(data2)</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">summary</span>(data2)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -397,12 +401,12 @@ care units in several Portuguese hospital units.</p>
 </tbody>
 </table>
 <p>Study the individual association of each of them with mortality first.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1">data2<span class="op">$</span>TAS12 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(data2<span class="op">$</span>TAS12))</a>
-<a class="sourceLine" id="cb144-2" title="2"></a>
-<a class="sourceLine" id="cb144-3" title="3">logistic1 &lt;-<span class="st"> </span><span class="kw">glm</span>(outcome <span class="op">~</span><span class="st"> </span>TAS12, <span class="dt">data =</span> data2, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb144-4" title="4">logistic2 &lt;-<span class="st"> </span><span class="kw">glm</span>(outcome <span class="op">~</span><span class="st"> </span>ventil, <span class="dt">data =</span> data2, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb144-5" title="5"></a>
-<a class="sourceLine" id="cb144-6" title="6"><span class="kw">summary</span>(logistic1)</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">data2<span class="op">$</span>TAS12 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(data2<span class="op">$</span>TAS12))</a>
+<a class="sourceLine" id="cb170-2" title="2"></a>
+<a class="sourceLine" id="cb170-3" title="3">logistic1 &lt;-<span class="st"> </span><span class="kw">glm</span>(outcome <span class="op">~</span><span class="st"> </span>TAS12, <span class="dt">data =</span> data2, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb170-4" title="4">logistic2 &lt;-<span class="st"> </span><span class="kw">glm</span>(outcome <span class="op">~</span><span class="st"> </span>ventil, <span class="dt">data =</span> data2, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb170-5" title="5"></a>
+<a class="sourceLine" id="cb170-6" title="6"><span class="kw">summary</span>(logistic1)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = outcome ~ TAS12, family = &quot;binomial&quot;, data = data2)
@@ -425,7 +429,7 @@ care units in several Portuguese hospital units.</p>
 ## AIC: 829.01
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1"><span class="kw">summary</span>(logistic2)</a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">summary</span>(logistic2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = outcome ~ ventil, family = &quot;binomial&quot;, data = data2)
@@ -448,7 +452,7 @@ care units in several Portuguese hospital units.</p>
 ## AIC: 927.16
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic1), <span class="kw">confint</span>(logistic1)))</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic1), <span class="kw">confint</span>(logistic1)))</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -473,7 +477,7 @@ care units in several Portuguese hospital units.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic2), <span class="kw">confint</span>(logistic2)))</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic2), <span class="kw">confint</span>(logistic2)))</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -499,9 +503,9 @@ care units in several Portuguese hospital units.</p>
 </tbody>
 </table>
 <p>Then test the interaction of these two variables and interpret the results.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">logistic3 &lt;-<span class="st"> </span><span class="kw">glm</span>(outcome <span class="op">~</span><span class="st"> </span>ventil <span class="op">+</span><span class="st"> </span>TAS12 <span class="op">+</span><span class="st"> </span>ventil <span class="op">*</span><span class="st"> </span>TAS12, <span class="dt">data =</span> data2, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb150-2" title="2"></a>
-<a class="sourceLine" id="cb150-3" title="3"><span class="kw">summary</span>(logistic3)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">logistic3 &lt;-<span class="st"> </span><span class="kw">glm</span>(outcome <span class="op">~</span><span class="st"> </span>ventil <span class="op">+</span><span class="st"> </span>TAS12 <span class="op">+</span><span class="st"> </span>ventil <span class="op">*</span><span class="st"> </span>TAS12, <span class="dt">data =</span> data2, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb176-2" title="2"></a>
+<a class="sourceLine" id="cb176-3" title="3"><span class="kw">summary</span>(logistic3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = outcome ~ ventil + TAS12 + ventil * TAS12, family = &quot;binomial&quot;, 
@@ -527,7 +531,7 @@ care units in several Portuguese hospital units.</p>
 ## AIC: 819.29
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic3), <span class="kw">confint</span>(logistic3)))</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic3), <span class="kw">confint</span>(logistic3)))</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -568,12 +572,12 @@ care units in several Portuguese hospital units.</p>
 <li>Using all the variables in the database, build a model for mortality and study the model’s discrimination and calibration.</li>
 </ol>
 <p>accuracy</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1">pred&lt;-<span class="kw">predict</span>(logistic3, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb153-2" title="2"></a>
-<a class="sourceLine" id="cb153-3" title="3">pred01&lt;-<span class="kw">ifelse</span>(pred<span class="op">&lt;</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb153-4" title="4"></a>
-<a class="sourceLine" id="cb153-5" title="5"></a>
-<a class="sourceLine" id="cb153-6" title="6"><span class="kw">table</span>(pred01,data2<span class="op">$</span>outcome)</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">pred&lt;-<span class="kw">predict</span>(logistic3, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb179-2" title="2"></a>
+<a class="sourceLine" id="cb179-3" title="3">pred01&lt;-<span class="kw">ifelse</span>(pred<span class="op">&lt;</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb179-4" title="4"></a>
+<a class="sourceLine" id="cb179-5" title="5"></a>
+<a class="sourceLine" id="cb179-6" title="6"><span class="kw">table</span>(pred01,data2<span class="op">$</span>outcome)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -595,19 +599,19 @@ care units in several Portuguese hospital units.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">acc&lt;-(<span class="dv">1624</span><span class="op">+</span><span class="dv">13</span>)<span class="op">/</span>(<span class="dv">1624</span><span class="op">+</span><span class="dv">121</span><span class="op">+</span><span class="dv">10</span><span class="op">+</span><span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb154-2" title="2"></a>
-<a class="sourceLine" id="cb154-3" title="3">acc</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">acc&lt;-(<span class="dv">1624</span><span class="op">+</span><span class="dv">13</span>)<span class="op">/</span>(<span class="dv">1624</span><span class="op">+</span><span class="dv">121</span><span class="op">+</span><span class="dv">10</span><span class="op">+</span><span class="dv">13</span>)</a>
+<a class="sourceLine" id="cb180-2" title="2"></a>
+<a class="sourceLine" id="cb180-3" title="3">acc</a></code></pre></div>
 <pre><code>## [1] 0.925905</code></pre>
 <p>AUC</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb156-2" title="2">g &lt;-<span class="st"> </span><span class="kw">roc</span>(outcome <span class="op">~</span><span class="st"> </span>pred, <span class="dt">data =</span> data2)</a>
-<a class="sourceLine" id="cb156-3" title="3"><span class="kw">plot</span>(g)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb182-2" title="2">g &lt;-<span class="st"> </span><span class="kw">roc</span>(outcome <span class="op">~</span><span class="st"> </span>pred, <span class="dt">data =</span> data2)</a>
+<a class="sourceLine" id="cb182-3" title="3"><span class="kw">plot</span>(g)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <p>Goodness of fit test</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">library</span>(ResourceSelection)</a>
-<a class="sourceLine" id="cb157-2" title="2"></a>
-<a class="sourceLine" id="cb157-3" title="3"><span class="kw">hoslem.test</span>(data2<span class="op">$</span>outcome, pred01)</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">library</span>(ResourceSelection)</a>
+<a class="sourceLine" id="cb183-2" title="2"></a>
+<a class="sourceLine" id="cb183-3" title="3"><span class="kw">hoslem.test</span>(data2<span class="op">$</span>outcome, pred01)</a></code></pre></div>
 <pre><code>## 
 ##  Hosmer and Lemeshow goodness of fit (GOF) test
 ## 

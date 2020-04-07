@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-04-04" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,7 +170,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
-<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a></li>
+<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
+<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -244,12 +248,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>2020-03-23</p>
 <p>The file cancer.csv contains data of 1207 women who were diagnosed with breast
 cancer [event: death -&gt; variable: status].</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
-<a class="sourceLine" id="cb217-2" title="2"><span class="kw">library</span>(survival)</a>
-<a class="sourceLine" id="cb217-3" title="3"><span class="co">#Read data</span></a>
-<a class="sourceLine" id="cb217-4" title="4">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/cancer.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
+<a class="sourceLine" id="cb243-2" title="2"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb243-3" title="3"><span class="co">#Read data</span></a>
+<a class="sourceLine" id="cb243-4" title="4">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/cancer.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
 <p>Variables included in the dataset:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    1207 obs. of  11 variables:
 ##  $ id      : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ age     : int  60 79 82 66 52 58 50 83 46 54 ...
@@ -267,8 +271,8 @@ cancer [event: death -&gt; variable: status].</p>
 covariates.</li>
 </ol>
 <p>Unadjusted Cox regression for age</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">cox1 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>age)</a>
-<a class="sourceLine" id="cb220-2" title="2"><span class="kw">summary</span>(cox1)</a></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1">cox1 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>age)</a>
+<a class="sourceLine" id="cb246-2" title="2"><span class="kw">summary</span>(cox1)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$time, data$status) ~ data$age)
 ## 
@@ -287,8 +291,8 @@ covariates.</li>
 ## Wald test            = 4.98  on 1 df,   p=0.03
 ## Score (logrank) test = 5.02  on 1 df,   p=0.03</code></pre>
 <p>Unadjusted Cox regression for ln_yesno</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">cox2 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>ln_yesno))</a>
-<a class="sourceLine" id="cb222-2" title="2"><span class="kw">summary</span>(cox2)</a></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1">cox2 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>ln_yesno))</a>
+<a class="sourceLine" id="cb248-2" title="2"><span class="kw">summary</span>(cox2)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$time, data$status) ~ as.factor(data$ln_yesno))
 ## 
@@ -307,8 +311,8 @@ covariates.</li>
 ## Wald test            = 14.9  on 1 df,   p=0.0001
 ## Score (logrank) test = 15.98  on 1 df,   p=0.00006</code></pre>
 <p>Unadjusted Cox regression for pathsize</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1">cox3 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>pathsize)</a>
-<a class="sourceLine" id="cb224-2" title="2"><span class="kw">summary</span>(cox3)</a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1">cox3 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>pathsize)</a>
+<a class="sourceLine" id="cb250-2" title="2"><span class="kw">summary</span>(cox3)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$time, data$status) ~ data$pathsize)
 ## 
@@ -329,10 +333,10 @@ covariates.</li>
 covariates.</li>
 </ol>
 <p>Adjusted Cox regression for age,ln_yesno and pathsize</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1">cox4 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>age <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-2" title="2"><span class="st">                </span><span class="kw">as.factor</span>(data<span class="op">$</span>ln_yesno) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-3" title="3"><span class="st">                </span>data<span class="op">$</span>pathsize)</a>
-<a class="sourceLine" id="cb226-4" title="4"><span class="kw">summary</span>(cox4)</a></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1">cox4 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>time, data<span class="op">$</span>status) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>age <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb252-2" title="2"><span class="st">                </span><span class="kw">as.factor</span>(data<span class="op">$</span>ln_yesno) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb252-3" title="3"><span class="st">                </span>data<span class="op">$</span>pathsize)</a>
+<a class="sourceLine" id="cb252-4" title="4"><span class="kw">summary</span>(cox4)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$time, data$status) ~ data$age + as.factor(data$ln_yesno) + 
 ##     data$pathsize)
@@ -362,17 +366,17 @@ covariates.</li>
 <p><strong>Proportional hazards assumptions</strong></p>
 <p>H0: independence between scaled Schoenfeld residuals and time.</p>
 <p>For each variable and for the global model.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">test.res &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(cox4)</a>
-<a class="sourceLine" id="cb228-2" title="2">test.res</a></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1">test.res &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(cox4)</a>
+<a class="sourceLine" id="cb254-2" title="2">test.res</a></code></pre></div>
 <pre><code>##                               rho chisq     p
 ## data$age                   0.0522 0.247 0.619
 ## as.factor(data$ln_yesno)1 -0.1458 1.432 0.231
 ## data$pathsize              0.1480 1.464 0.226
 ## GLOBAL                         NA 3.389 0.335</code></pre>
 <p>Graphical diagnostic</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="kw">library</span>(survminer)</a>
-<a class="sourceLine" id="cb230-2" title="2"><span class="kw">ggcoxzph</span>(test.res)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">library</span>(survminer)</a>
+<a class="sourceLine" id="cb256-2" title="2"><span class="kw">ggcoxzph</span>(test.res)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 <p>These plots do not indicate obvious trends and are generally centered at zero.</p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 

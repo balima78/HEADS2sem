@@ -1,20 +1,189 @@
 ## Lesson 6
 
-2020-03-27
+2020-03-30
 
-Consider the SIR model discussed in class. Using and adapting the code provided, deliver a report on different scenarios simulated using parameters that could be estimated from :
+### SIR model
 
-a) Portuguese data (all)
+**The SIR MODEL** (code given by the professor)
 
-b) Other countries' data (all)
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
 
-c) Selected periods of data (e.g. using landmark windows or sliding windows in data used to fit beta and gamma)
+load the packages
+```{r}
+library(deSolve)
+library(lubridate)
+library(Hmisc)
+library(FME)
+library(printr)
+```
 
-https://balima.shinyapps.io/sir_shiny/
+read the data and set population for Portugal
+```{r}
+N = 10260906
+data = read.csv("2.UploadedData/CasesP.csv")
+data = data.frame(time=0:(dim(data)[1]-1),I = data[,1],R=data[,2],S=N-data[,1]-data[,2])
 
-All the code is available from here:
+str(data)
+```
 
-https://github.com/balima78/covid19data/tree/master/sir_shiny
+using 1st day with a recover as initial values
+```{r}
+iR = min(which(data[,3]>10))
+data=data[-(1:iR),]
+data[,1]=data[,1]-data[1,1]
+
+S0 = data$S[1]
+I0 = data$I[1]
+R0 = data$R[1]
+
+S1 = data$S[2]
+I1 = data$I[2]
+R1 = data$R[2]
+
+S0_ = S1-S0
+
+beta0 = -(S0_*N)/(I0*S0)
+
+I0_ = I1-I0
+
+R0_ = R1-R0
+
+gama0 = R0_/I0
+```
+
+the SIR model
+```{r}
+SIR <- function(time, state, pars) { # returns rate of change
+  with(as.list(c(state, pars)), {
+    dS <- -beta*S*I/N
+    dI <- beta *S*I/N - gama*I
+    dR <- gama*I
+    return(list(c(dS, dI,dR)))
+  })
+}
+```
+
+Initial Parameters
+```{r}
+state <- c(S = S0, I = I0,R = R0)
+pars <- list(beta = beta0, gama = gama0)
+
+time <- seq(0,200,by=1)
+```
+
+differential equations
+```{r}
+out <- ode(y = state, times = time, func = SIR, parms = pars)
+```
+
+plot the model
+```{r}
+matplot(out[,1], out[,-1], type = "l", lty = 1:3, lwd = 2,
+        col = 1:3, xlab = "time, days", ylab = "")
+legend("topright", c("S", "I", "R"),
+       lty = 1:3, lwd = 2,col=1:4)
+minor.tick(2,2,0.7)
+minor.tick(10,10,0.5)
+```
+
+Fitting the SIR model to data
+
+modCost - Calculates the discrepancy Of a model solution with observations
+```{r}
+tout <- seq(0,200,by=1) ## output times
+Objective <- function(x, parset = names(x)) {
+  pars[parset] <- x
+  tout <- seq(0,200,by=1) ## output times
+  
+  out <- ode(y = state, times = tout, func = SIR, parms = pars)
+  ## Model cost
+  return(modCost(obs = data, model = out))
+}
+```
+
+modFit - Constrained fitting Of a model to data
+```{r}
+Fit <- modFit(p = c(beta = beta0, gama = gama0),f = Objective)
+```
+
+fitted parameters and predicted data
+```{r}
+Fit$par
+
+out2 <- ode(y = state, times = tout, func = SIR, parms = Fit$par)
+```
+
+plot fitted model
+```{r}
+matplot(out2[,1], out2[,-1], type = "l", lty = 1:3, lwd = 2,
+        col = 1:3, xlab = "time, days", ylab = "")
+legend("topright", c("S", "I", "R"),
+       lty = 1:3, lwd = 2,col=1:3)
+minor.tick(10,10,0.5)
+minor.tick(2,2,0.7) 
+
+points(data$I,pch=16,col="red")
+points(data$R,pch=16,col="green")
+points(data$S,pch=16,col="black")
+```
+
+zoom in real data
+```{r}
+matplot(out2[,1], out2[,-1], type = "l", lty = 1:3, lwd = 2,
+        col = 1:3, xlab = "time, days", ylab = "",ylim=c(0,10000),xlim=c(0,50))
+legend("topright", c("S", "I", "R"),
+       lty = 1:3, lwd = 2,col=1:3)
+minor.tick(10,10,0.5)
+minor.tick(2,2,0.7) 
+
+points(data$I,pch=16,col="red")
+points(data$R,pch=16,col="green")
+points(data$S,pch=16,col="black")
+```
+
+### Markov chain Monte Carlo
+
+resume fitted model
+```{r}
+SF<-summary(Fit)
+SF 
+```
+
+see all the information on Fit
+```{r}
+SF[]
+```
+
+save initials values and run MCMC
+```{r}
+Var0 <- SF$modVariance
+covIni <- SF$cov.scaled *2.4^2/2
+MCMC <- modMCMC(p = coef(Fit), f = Objective, jump = covIni,var0 = Var0, wvar0 = 1)
+```
+
+plot iterations' results
+```{r}
+plot(MCMC, Full = TRUE)
+```
+
+and correlation between parameters
+```{r}
+pairs(MCMC)
+```
+
+plot of sample quantiles' evolution as a function of the number of iterations
+```{r}
+MC <- as.mcmc(MCMC$pars)
+cumuplot(MC)
+```
+
+compare the covariances based on generated parameters with the ones from the fit:
+```{r}
+cov(MCMC$pars)
+covIni
+```
 
 
 <img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

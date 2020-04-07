@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-04-04" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="lesson-5.html"/>
-<link rel="next" href="stats.html"/>
+<link rel="next" href="assignment-sir-model.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -170,7 +170,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
-<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a></li>
+<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
+<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -241,27 +245,251 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="lesson-6" class="section level2">
 <h2><span class="header-section-number">2.10</span> Lesson 6</h2>
-<p>2020-03-27</p>
-<p>Consider the SIR model discussed in class. Using and adapting the code provided, deliver a report on different scenarios simulated using parameters that could be estimated from :</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Portuguese data (all)</p></li>
-<li><p>Other countries’ data (all)</p></li>
-<li><p>Selected periods of data (e.g. using landmark windows or sliding windows in data used to fit beta and gamma)</p></li>
-</ol>
-<p><a href="https://balima.shinyapps.io/sir_shiny/" class="uri">https://balima.shinyapps.io/sir_shiny/</a></p>
-<p>All the code is available from here:</p>
-<p><a href="https://github.com/balima78/covid19data/tree/master/sir_shiny" class="uri">https://github.com/balima78/covid19data/tree/master/sir_shiny</a></p>
+<p>2020-03-30</p>
+<div id="sir-model" class="section level3">
+<h3><span class="header-section-number">2.10.1</span> SIR model</h3>
+<p><strong>The SIR MODEL</strong> (code given by the professor)</p>
+<p>load the packages</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="kw">library</span>(deSolve)</a>
+<a class="sourceLine" id="cb127-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb127-3" title="3"><span class="kw">library</span>(Hmisc)</a>
+<a class="sourceLine" id="cb127-4" title="4"><span class="kw">library</span>(FME)</a>
+<a class="sourceLine" id="cb127-5" title="5"><span class="kw">library</span>(printr)</a></code></pre></div>
+<p>read the data and set population for Portugal</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1">N =<span class="st"> </span><span class="dv">10260906</span></a>
+<a class="sourceLine" id="cb128-2" title="2">data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/CasesP.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb128-3" title="3">data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time=</span><span class="dv">0</span><span class="op">:</span>(<span class="kw">dim</span>(data)[<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>),<span class="dt">I =</span> data[,<span class="dv">1</span>],<span class="dt">R=</span>data[,<span class="dv">2</span>],<span class="dt">S=</span>N<span class="op">-</span>data[,<span class="dv">1</span>]<span class="op">-</span>data[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb128-4" title="4"></a>
+<a class="sourceLine" id="cb128-5" title="5"><span class="kw">str</span>(data)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    25 obs. of  4 variables:
+##  $ time: int  0 1 2 3 4 5 6 7 8 9 ...
+##  $ I   : int  2 4 6 9 13 21 30 39 41 59 ...
+##  $ R   : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ S   : num  10260904 10260902 10260900 10260897 10260893 ...</code></pre>
+<p>using 1st day with a recover as initial values</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">iR =<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(data[,<span class="dv">3</span>]<span class="op">&gt;</span><span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb130-2" title="2">data=data[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span>iR),]</a>
+<a class="sourceLine" id="cb130-3" title="3">data[,<span class="dv">1</span>]=data[,<span class="dv">1</span>]<span class="op">-</span>data[<span class="dv">1</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb130-4" title="4"></a>
+<a class="sourceLine" id="cb130-5" title="5">S0 =<span class="st"> </span>data<span class="op">$</span>S[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb130-6" title="6">I0 =<span class="st"> </span>data<span class="op">$</span>I[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb130-7" title="7">R0 =<span class="st"> </span>data<span class="op">$</span>R[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb130-8" title="8"></a>
+<a class="sourceLine" id="cb130-9" title="9">S1 =<span class="st"> </span>data<span class="op">$</span>S[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb130-10" title="10">I1 =<span class="st"> </span>data<span class="op">$</span>I[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb130-11" title="11">R1 =<span class="st"> </span>data<span class="op">$</span>R[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb130-12" title="12"></a>
+<a class="sourceLine" id="cb130-13" title="13">S0_ =<span class="st"> </span>S1<span class="op">-</span>S0</a>
+<a class="sourceLine" id="cb130-14" title="14"></a>
+<a class="sourceLine" id="cb130-15" title="15">beta0 =<span class="st"> </span><span class="op">-</span>(S0_<span class="op">*</span>N)<span class="op">/</span>(I0<span class="op">*</span>S0)</a>
+<a class="sourceLine" id="cb130-16" title="16"></a>
+<a class="sourceLine" id="cb130-17" title="17">I0_ =<span class="st"> </span>I1<span class="op">-</span>I0</a>
+<a class="sourceLine" id="cb130-18" title="18"></a>
+<a class="sourceLine" id="cb130-19" title="19">R0_ =<span class="st"> </span>R1<span class="op">-</span>R0</a>
+<a class="sourceLine" id="cb130-20" title="20"></a>
+<a class="sourceLine" id="cb130-21" title="21">gama0 =<span class="st"> </span>R0_<span class="op">/</span>I0</a></code></pre></div>
+<p>the SIR model</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">SIR &lt;-<span class="st"> </span><span class="cf">function</span>(time, state, pars) { <span class="co"># returns rate of change</span></a>
+<a class="sourceLine" id="cb131-2" title="2">  <span class="kw">with</span>(<span class="kw">as.list</span>(<span class="kw">c</span>(state, pars)), {</a>
+<a class="sourceLine" id="cb131-3" title="3">    dS &lt;-<span class="st"> </span><span class="op">-</span>beta<span class="op">*</span>S<span class="op">*</span>I<span class="op">/</span>N</a>
+<a class="sourceLine" id="cb131-4" title="4">    dI &lt;-<span class="st"> </span>beta <span class="op">*</span>S<span class="op">*</span>I<span class="op">/</span>N <span class="op">-</span><span class="st"> </span>gama<span class="op">*</span>I</a>
+<a class="sourceLine" id="cb131-5" title="5">    dR &lt;-<span class="st"> </span>gama<span class="op">*</span>I</a>
+<a class="sourceLine" id="cb131-6" title="6">    <span class="kw">return</span>(<span class="kw">list</span>(<span class="kw">c</span>(dS, dI,dR)))</a>
+<a class="sourceLine" id="cb131-7" title="7">  })</a>
+<a class="sourceLine" id="cb131-8" title="8">}</a></code></pre></div>
+<p>Initial Parameters</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">state &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">S =</span> S0, <span class="dt">I =</span> I0,<span class="dt">R =</span> R0)</a>
+<a class="sourceLine" id="cb132-2" title="2">pars &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">beta =</span> beta0, <span class="dt">gama =</span> gama0)</a>
+<a class="sourceLine" id="cb132-3" title="3"></a>
+<a class="sourceLine" id="cb132-4" title="4">time &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dt">by=</span><span class="dv">1</span>)</a></code></pre></div>
+<p>differential equations</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1">out &lt;-<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> state, <span class="dt">times =</span> time, <span class="dt">func =</span> SIR, <span class="dt">parms =</span> pars)</a></code></pre></div>
+<p>plot the model</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="kw">matplot</span>(out[,<span class="dv">1</span>], out[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb134-2" title="2">        <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">xlab =</span> <span class="st">&quot;time, days&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb134-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;S&quot;</span>, <span class="st">&quot;I&quot;</span>, <span class="st">&quot;R&quot;</span>),</a>
+<a class="sourceLine" id="cb134-4" title="4">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb134-5" title="5"><span class="kw">minor.tick</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb134-6" title="6"><span class="kw">minor.tick</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p>Fitting the SIR model to data</p>
+<p>modCost - Calculates the discrepancy Of a model solution with observations</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">tout &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dt">by=</span><span class="dv">1</span>) <span class="co">## output times</span></a>
+<a class="sourceLine" id="cb135-2" title="2">Objective &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">parset =</span> <span class="kw">names</span>(x)) {</a>
+<a class="sourceLine" id="cb135-3" title="3">  pars[parset] &lt;-<span class="st"> </span>x</a>
+<a class="sourceLine" id="cb135-4" title="4">  tout &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dt">by=</span><span class="dv">1</span>) <span class="co">## output times</span></a>
+<a class="sourceLine" id="cb135-5" title="5">  </a>
+<a class="sourceLine" id="cb135-6" title="6">  out &lt;-<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> state, <span class="dt">times =</span> tout, <span class="dt">func =</span> SIR, <span class="dt">parms =</span> pars)</a>
+<a class="sourceLine" id="cb135-7" title="7">  <span class="co">## Model cost</span></a>
+<a class="sourceLine" id="cb135-8" title="8">  <span class="kw">return</span>(<span class="kw">modCost</span>(<span class="dt">obs =</span> data, <span class="dt">model =</span> out))</a>
+<a class="sourceLine" id="cb135-9" title="9">}</a></code></pre></div>
+<p>modFit - Constrained fitting Of a model to data</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">Fit &lt;-<span class="st"> </span><span class="kw">modFit</span>(<span class="dt">p =</span> <span class="kw">c</span>(<span class="dt">beta =</span> beta0, <span class="dt">gama =</span> gama0),<span class="dt">f =</span> Objective)</a></code></pre></div>
+<p>fitted parameters and predicted data</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">Fit<span class="op">$</span>par</a></code></pre></div>
+<pre><code>##        beta        gama 
+## 0.214469189 0.007391927</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">out2 &lt;-<span class="st"> </span><span class="kw">ode</span>(<span class="dt">y =</span> state, <span class="dt">times =</span> tout, <span class="dt">func =</span> SIR, <span class="dt">parms =</span> Fit<span class="op">$</span>par)</a></code></pre></div>
+<p>plot fitted model</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="kw">matplot</span>(out2[,<span class="dv">1</span>], out2[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb140-2" title="2">        <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">xlab =</span> <span class="st">&quot;time, days&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb140-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;S&quot;</span>, <span class="st">&quot;I&quot;</span>, <span class="st">&quot;R&quot;</span>),</a>
+<a class="sourceLine" id="cb140-4" title="4">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb140-5" title="5"><span class="kw">minor.tick</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb140-6" title="6"><span class="kw">minor.tick</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.7</span>) </a>
+<a class="sourceLine" id="cb140-7" title="7"></a>
+<a class="sourceLine" id="cb140-8" title="8"><span class="kw">points</span>(data<span class="op">$</span>I,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb140-9" title="9"><span class="kw">points</span>(data<span class="op">$</span>R,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb140-10" title="10"><span class="kw">points</span>(data<span class="op">$</span>S,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>zoom in real data</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="kw">matplot</span>(out2[,<span class="dv">1</span>], out2[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb141-2" title="2">        <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">xlab =</span> <span class="st">&quot;time, days&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>))</a>
+<a class="sourceLine" id="cb141-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;S&quot;</span>, <span class="st">&quot;I&quot;</span>, <span class="st">&quot;R&quot;</span>),</a>
+<a class="sourceLine" id="cb141-4" title="4">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb141-5" title="5"><span class="kw">minor.tick</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb141-6" title="6"><span class="kw">minor.tick</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.7</span>) </a>
+<a class="sourceLine" id="cb141-7" title="7"></a>
+<a class="sourceLine" id="cb141-8" title="8"><span class="kw">points</span>(data<span class="op">$</span>I,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb141-9" title="9"><span class="kw">points</span>(data<span class="op">$</span>R,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb141-10" title="10"><span class="kw">points</span>(data<span class="op">$</span>S,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+</div>
+<div id="markov-chain-monte-carlo" class="section level3">
+<h3><span class="header-section-number">2.10.2</span> Markov chain Monte Carlo</h3>
+<p>resume fitted model</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">SF&lt;-<span class="kw">summary</span>(Fit)</a>
+<a class="sourceLine" id="cb142-2" title="2">SF </a></code></pre></div>
+<pre><code>## 
+## Parameters:
+##      Estimate Std. Error t value            Pr(&gt;|t|)    
+## beta 0.214469   0.002528  84.830 &lt;0.0000000000000002 ***
+## gama 0.007392   0.002891   2.557              0.0211 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 53.38 on 16 degrees of freedom
+## 
+## Parameter correlation:
+##        beta   gama
+## beta 1.0000 0.7647
+## gama 0.7647 1.0000</code></pre>
+<p>see all the information on Fit</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1">SF[]</a></code></pre></div>
+<pre><code>## $residuals
+##           I           I           I           I           I           I 
+##    0.000000  -25.547946 -123.374023   20.091494  -65.009195   59.864614 
+##           R           R           R           R           R           R 
+##    0.000000    8.512436    3.443102    1.348192   10.911638   -3.025298 
+##           S           S           S           S           S           S 
+##    0.000000   17.035510  119.930921  -21.439687   54.097556  -56.839315 
+## 
+## $residualVariance
+## [1] 2849.524
+## 
+## $sigma
+## [1] 53.38093
+## 
+## $modVariance
+## [1] 2532.91
+## 
+## $df
+## [1]  2 16
+## 
+## $cov.unscaled
+##                   beta              gama
+## beta 0.000000002243130 0.000000001961327
+## gama 0.000000001961327 0.000000002932503
+## 
+## $cov.scaled
+##                beta           gama
+## beta 0.000006391851 0.000005588849
+## gama 0.000005588849 0.000008356237
+## 
+## $info
+## [1] 1
+## 
+## $niter
+## [1] 4
+## 
+## $stopmess
+## [1] &quot;ok&quot;
+## 
+## $par
+##         Estimate  Std. Error   t value                       Pr(&gt;|t|)
+## beta 0.214469189 0.002528211 84.830412 0.0000000000000000000001153309
+## gama 0.007391927 0.002890716  2.557127 0.0210969571663339600098296955</code></pre>
+<p>save initials values and run MCMC</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1">Var0 &lt;-<span class="st"> </span>SF<span class="op">$</span>modVariance</a>
+<a class="sourceLine" id="cb146-2" title="2">covIni &lt;-<span class="st"> </span>SF<span class="op">$</span>cov.scaled <span class="op">*</span><span class="fl">2.4</span><span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb146-3" title="3">MCMC &lt;-<span class="st"> </span><span class="kw">modMCMC</span>(<span class="dt">p =</span> <span class="kw">coef</span>(Fit), <span class="dt">f =</span> Objective, <span class="dt">jump =</span> covIni,<span class="dt">var0 =</span> Var0, <span class="dt">wvar0 =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## number of accepted runs: 408 out of 1000 (40.8%)</code></pre>
+<p>plot iterations’ results</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="kw">plot</span>(MCMC, <span class="dt">Full =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>and correlation between parameters</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">pairs</span>(MCMC)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p>plot of sample quantiles’ evolution as a function of the number of iterations</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">MC &lt;-<span class="st"> </span><span class="kw">as.mcmc</span>(MCMC<span class="op">$</span>pars)</a>
+<a class="sourceLine" id="cb150-2" title="2"><span class="kw">cumuplot</span>(MC)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p>compare the covariances based on generated parameters with the ones from the fit:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">cov</span>(MCMC<span class="op">$</span>pars)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">beta</th>
+<th align="right">gama</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>beta</td>
+<td align="right">0.0000093</td>
+<td align="right">0.0000080</td>
+</tr>
+<tr class="even">
+<td>gama</td>
+<td align="right">0.0000080</td>
+<td align="right">0.0000115</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1">covIni</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">beta</th>
+<th align="right">gama</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>beta</td>
+<td align="right">0.0000184</td>
+<td align="right">0.0000161</td>
+</tr>
+<tr class="even">
+<td>gama</td>
+<td align="right">0.0000161</td>
+<td align="right">0.0000241</td>
+</tr>
+</tbody>
+</table>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
-<!-- </div> -->
+</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="lesson-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="stats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="assignment-sir-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

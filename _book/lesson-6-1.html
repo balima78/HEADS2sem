@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-04-04" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,7 +170,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
-<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a></li>
+<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
+<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
 <li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
@@ -246,12 +250,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.6.1</span> Cox Regression</h3>
 <div id="example-from-classe-code-from-the-professor-1" class="section level4">
 <h4><span class="header-section-number">3.6.1.1</span> Example from classe (code from the professor)</h4>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
-<a class="sourceLine" id="cb205-2" title="2"><span class="kw">library</span>(survival)</a>
-<a class="sourceLine" id="cb205-3" title="3"><span class="co">#Read data</span></a>
-<a class="sourceLine" id="cb205-4" title="4">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/survival.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
+<a class="sourceLine" id="cb231-2" title="2"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb231-3" title="3"><span class="co">#Read data</span></a>
+<a class="sourceLine" id="cb231-4" title="4">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/survival.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
 <p>Variables included in the dataset:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    16 obs. of  5 variables:
 ##  $ ID   : num  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ Event: num  1 0 1 1 0 1 1 0 1 1 ...
@@ -259,8 +263,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Group: num  1 1 1 1 1 1 1 1 2 2 ...
 ##  $ Age  : num  65 61 57 55 50 52 51 50 70 64 ...</code></pre>
 <p>Unadjusted Cox regression for Group</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">cox1 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>Time, data<span class="op">$</span>Event) <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>Group))</a>
-<a class="sourceLine" id="cb208-2" title="2"><span class="kw">summary</span>(cox1)</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">cox1 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>Time, data<span class="op">$</span>Event) <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>Group))</a>
+<a class="sourceLine" id="cb234-2" title="2"><span class="kw">summary</span>(cox1)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$Time, data$Event) ~ as.factor(data$Group))
 ## 
@@ -277,8 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Wald test            = 2.14  on 1 df,   p=0.1
 ## Score (logrank) test = 2.29  on 1 df,   p=0.1</code></pre>
 <p>Unadjusted Cox regression for Age</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">cox2 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>Time, data<span class="op">$</span>Event) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb210-2" title="2"><span class="kw">summary</span>(cox2)</a></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1">cox2 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>Time, data<span class="op">$</span>Event) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>Age)</a>
+<a class="sourceLine" id="cb236-2" title="2"><span class="kw">summary</span>(cox2)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$Time, data$Event) ~ data$Age)
 ## 
@@ -297,8 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Wald test            = 9.28  on 1 df,   p=0.002
 ## Score (logrank) test = 17.03  on 1 df,   p=0.00004</code></pre>
 <p>Adjusted Cox regression for Group and Age</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">cox3 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>Time, data<span class="op">$</span>Event) <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>Group) <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="kw">summary</span>(cox3)</a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">cox3 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(data<span class="op">$</span>Time, data<span class="op">$</span>Event) <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>Group) <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>Age)</a>
+<a class="sourceLine" id="cb238-2" title="2"><span class="kw">summary</span>(cox3)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(data$Time, data$Event) ~ as.factor(data$Group) + 
 ##     data$Age)
@@ -322,16 +326,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Proportional hazards assumptions</strong></p>
 <p>H0: independence between scaled Schoenfeld residuals and time.</p>
 <p>For each variable and for the global model.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">test.res &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(cox3)</a>
-<a class="sourceLine" id="cb214-2" title="2">test.res</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1">test.res &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(cox3)</a>
+<a class="sourceLine" id="cb240-2" title="2">test.res</a></code></pre></div>
 <pre><code>##                          rho chisq     p
 ## as.factor(data$Group)2 0.274 0.822 0.365
 ## data$Age               0.179 0.379 0.538
 ## GLOBAL                    NA 0.836 0.658</code></pre>
 <p>Graphical diagnostic</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="kw">library</span>(survminer)</a>
-<a class="sourceLine" id="cb216-2" title="2"><span class="kw">ggcoxzph</span>(test.res)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="kw">library</span>(survminer)</a>
+<a class="sourceLine" id="cb242-2" title="2"><span class="kw">ggcoxzph</span>(test.res)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>These plots do not indicate obvious trends and are generally centered at zero.</p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
