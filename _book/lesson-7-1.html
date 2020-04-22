@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Lesson 4 | HEADS 2nd semester</title>
+  <title>5.2 Lesson 7 | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Lesson 4 | HEADS 2nd semester" />
+  <meta property="og:title" content="5.2 Lesson 7 | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Lesson 4 | HEADS 2nd semester" />
+  <meta name="twitter:title" content="5.2 Lesson 7 | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lesson-2-1.html"/>
-<link rel="next" href="lesson-5-1.html"/>
+<link rel="prev" href="lesson-4-3.html"/>
+<link rel="next" href="top.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -250,148 +250,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lesson-4-1" class="section level2">
-<h2><span class="header-section-number">3.3</span> Lesson 4</h2>
-<p>2020-03-02</p>
-<div id="generalized-linear-models-glm" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Generalized Linear Models (GLM)</h3>
-<div id="glm---poisson-regression" class="section level4">
-<h4><span class="header-section-number">3.3.1.1</span> GLM - Poisson regression</h4>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1"><span class="kw">library</span>(foreign)</a>
-<a class="sourceLine" id="cb200-2" title="2"><span class="co"># ler os dados</span></a>
-<a class="sourceLine" id="cb200-3" title="3">datapoisson &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/epilepsy.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>, <span class="dt">to.data.frame =</span> T)</a></code></pre></div>
-<p>sumário dos dados</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1"><span class="kw">summary</span>(datapoisson)</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="center">ID</th>
-<th align="center">group</th>
-<th align="center">age</th>
-<th align="center">seizures</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td align="center">Min. : 1.00</td>
-<td align="center">old drug:25</td>
-<td align="center">Min. :20.0</td>
-<td align="center">Min. :0.00</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">1st Qu.:13.25</td>
-<td align="center">new drug:25</td>
-<td align="center">1st Qu.:27.0</td>
-<td align="center">1st Qu.:1.00</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">Median :25.50</td>
-<td align="center">NA</td>
-<td align="center">Median :31.0</td>
-<td align="center">Median :2.00</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">Mean :25.50</td>
-<td align="center">NA</td>
-<td align="center">Mean :30.3</td>
-<td align="center">Mean :2.14</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">3rd Qu.:37.75</td>
-<td align="center">NA</td>
-<td align="center">3rd Qu.:33.0</td>
-<td align="center">3rd Qu.:3.00</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">Max. :50.00</td>
-<td align="center">NA</td>
-<td align="center">Max. :40.0</td>
-<td align="center">Max. :7.00</td>
-</tr>
-</tbody>
-</table>
-<p>modelo de regressão de poisson</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">poisson &lt;-<span class="st"> </span><span class="kw">glm</span>(datapoisson<span class="op">$</span>seizures <span class="op">~</span><span class="st"> </span>datapoisson<span class="op">$</span>age <span class="op">+</span><span class="st"> </span>datapoisson<span class="op">$</span>group, <span class="dt">data =</span></a>
-<a class="sourceLine" id="cb202-2" title="2">                 datapoisson, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</a>
-<a class="sourceLine" id="cb202-3" title="3"></a>
-<a class="sourceLine" id="cb202-4" title="4"><span class="kw">summary</span>(poisson)</a></code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = datapoisson$seizures ~ datapoisson$age + datapoisson$group, 
-##     family = &quot;poisson&quot;, data = datapoisson)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.3308  -0.4922  -0.4563   0.3505   2.2198  
-## 
-## Coefficients:
-##                           Estimate Std. Error z value Pr(&gt;|z|)   
-## (Intercept)               0.347514   0.678376   0.512  0.60846   
-## datapoisson$age           0.003112   0.021099   0.148  0.88273   
-## datapoisson$groupnew drug 0.561495   0.204292   2.748  0.00599 **
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 61.808  on 49  degrees of freedom
-## Residual deviance: 53.827  on 47  degrees of freedom
-## AIC: 177.48
-## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<p>Risco Relativo e intervalos de confiança</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1"><span class="kw">library</span>(printr)</a>
-<a class="sourceLine" id="cb204-2" title="2"></a>
-<a class="sourceLine" id="cb204-3" title="3"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">RR =</span> <span class="kw">coef</span>(poisson), <span class="kw">confint</span>(poisson)))</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="right">RR</th>
-<th align="right">2.5 %</th>
-<th align="right">97.5 %</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td align="right">1.415545</td>
-<td align="right">0.3667683</td>
-<td align="right">5.258693</td>
-</tr>
-<tr class="even">
-<td>datapoisson$age</td>
-<td align="right">1.003117</td>
-<td align="right">0.9626480</td>
-<td align="right">1.045764</td>
-</tr>
-<tr class="odd">
-<td>datapoisson$groupnew drug</td>
-<td align="right">1.753292</td>
-<td align="right">1.1809467</td>
-<td align="right">2.637163</td>
-</tr>
-</tbody>
-</table>
+<div id="lesson-7-1" class="section level2">
+<h2><span class="header-section-number">5.2</span> Lesson 7</h2>
+<p>2020-03-24</p>
+<div id="a-dose-response-model" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> A dose-response model</h3>
+<p><a href="https://rpubs.com/balima78/bayes-5073-lesson7">Fit a logistic curve with ‘centred’ covariate <span class="math inline">\((x_i - \overline{x})\)</span></a>:</p>
+<p><span class="math inline">\(r_i \sim {\sf Binom}(p_i, n_i)\)</span></p>
+<p><span class="math inline">\(logit(p_i) = \alpha + \beta(x_i - \overline{x})\)</span></p>
+<p><span class="math inline">\(\alpha \sim N(0,10000)\)</span></p>
+<p><span class="math inline">\(\beta \sim N(0,10000)\)</span></p>
+<p><a href="https://rpubs.com/balima78/bayes-5072-lesson7">Fit a logistic curve with ‘un-centred’ covariate <span class="math inline">\(x\)</span></a>:</p>
+<p><span class="math inline">\(r_i \sim {\sf Binom}(p_i, n_i)\)</span></p>
+<p><span class="math inline">\(logit(p_i) = \alpha + \beta(x_i)\)</span></p>
+<p><span class="math inline">\(\alpha \sim N(0,10000)\)</span></p>
+<p><span class="math inline">\(\beta \sim N(0,10000)\)</span></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="lesson-2-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lesson-5-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-4-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="top.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,27 @@
+## Lesson 7
+
+2020-03-24
+
+### A dose-response model
+
+[Fit a logistic curve with ‘centred’ covariate $(x_i - \overline{x})$](https://rpubs.com/balima78/bayes-5073-lesson7):
+
+$r_i \sim {\sf Binom}(p_i, n_i)$
+
+$logit(p_i) = \alpha + \beta(x_i - \overline{x})$
+
+$\alpha \sim N(0,10000)$
+
+$\beta \sim N(0,10000)$
+
+[Fit a logistic curve with ‘un-centred’ covariate $x$](https://rpubs.com/balima78/bayes-5072-lesson7):
+
+$r_i \sim {\sf Binom}(p_i, n_i)$
+
+$logit(p_i) = \alpha + \beta(x_i)$
+
+$\alpha \sim N(0,10000)$
+
+$\beta \sim N(0,10000)$
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
