@@ -1,0 +1,60 @@
+## Lesson 8
+
+2020-04-28
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Limear Mixed Models
+
+Repeated measures designs: measurements are taken several times in each participant. 
+
+*Example: measure both arm lengths in each participant*  
+
+**Model assumptions:** Random intercept and slope are assumed independent
+
+
+Class exercise: Effect of sleep deprivation on cognitive performances.
+```{r}
+# Load the lme4 package
+library(lme4)
+# load the sleepstudy data set
+data(sleepstudy)
+
+```
+
+data dimensions:
+```{r}
+dim(sleepstudy)
+```
+
+variables:
+```{r}
+colnames(sleepstudy)
+```
+
+data visualisation
+```{r}
+plot(sleepstudy$Days,sleepstudy$Reaction)
+```
+
+```{r}
+plot(sleepstudy$Days,sleepstudy$Reaction)
+lines(sleepstudy$Days,sleepstudy$Reaction)
+```
+
+
+Define the model:
+```{r}
+model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+summary(model)
+```
+
+Model interpretation: an average reaction time at enrollment of 251.4 ms; increase of 10.5 ms/day of sleep deprivation.
+
+Also: low correlation between random slope and intercept (7%)
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+
