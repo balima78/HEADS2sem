@@ -1,0 +1,84 @@
+## Lesson 9
+
+2020-05-05
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### exercises
+
+#### Diet (diet.sav)
+
+- To evaluate weight loss diets, a sample of 60 overweight individuals was collected. 
+
+- The subjects were weighed before the diet (time = 0), three months after the begining (time = 1) and six months after the begining (time = 2) 
+
+- The subjects were randomized in two group (diet=1 and diet=2). The two groups had diferente diet plans.
+
+Read data
+```{r}
+library(foreign)
+data1 <- read.spss(file="2.UploadedData/diet.sav", use.missing=TRUE)
+data1<-as.data.frame(data1)
+
+# factorize variables
+data1$subject<-as.factor(data1$subject)
+data1$diet<-as.factor(data1$diet)
+
+str(data1)
+```
+
+Was there a significant weight loss in this sample of 60 subjects?
+
+Fit a Linear Mixed Model
+```{r}
+library(afex)
+modeld<-lmer(weigth ~ time + (time|subject) , data1)
+
+summary(modeld)
+```
+
+Was there a significant difference between diets?
+
+What is the best diet?
+```{r}
+modeldt<-lmer(weigth ~ diet + time + (time|subject) , data1)
+
+summary(modeldt)
+```
+
+#### Child development (dev3yrheads.sav)
+
+In a study on risk factors that affect child development, 1145 children were followed up to the third year of life.
+
+- At the age of three, a test was performed to assess the child's psycho-motor development, resulting in a global development score (DEVSCORE).
+
+- The dev3yr.sav database contains part of the information collected in the study.
+
+Read data
+```{r}
+data2 <- read.spss(file="2.UploadedData/Dev3yrheads.sav", use.missing=TRUE)
+
+data2<-as.data.frame(data2)
+
+str(data2)
+```
+
+Is the type of residence (urban, rural or degraded) a risk factor for psycho-motor development at the
+age of three when adjusted for the mother's age (mage) and for neurological neonatal Score (score)?
+
+Fit a linear model
+```{r}
+model1<-lm(devscore ~ mage + resid + score, data = data2)
+
+library(broom)
+tidy(model1)
+
+glance(model1)
+```
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+

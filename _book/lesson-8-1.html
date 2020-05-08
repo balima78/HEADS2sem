@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.10 Lesson 8 | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.10 Lesson 8 | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.10 Lesson 8 | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-05-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lesson-7-1.html"/>
+<link rel="next" href="bayes.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="2.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+<li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix"><i class="fa fa-check"></i><b>2.4.1</b> keep sample matrix</a></li>
+<li class="chapter" data-level="2.4.2" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-sliding-window"><i class="fa fa-check"></i><b>2.4.2</b> keep sample matrix over a sliding window</a></li>
+<li class="chapter" data-level="2.4.3" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-weighted-sliding-window"><i class="fa fa-check"></i><b>2.4.3</b> keep sample matrix over a alpha weighted sliding window</a></li>
+<li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
+<li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>2.5</b> Lesson 3</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="lesson-3.html"><a href="lesson-3.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lesson-3.html"><a href="lesson-3.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lesson-3.html"><a href="lesson-3.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lesson-3.html"><a href="lesson-3.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="assignment-glucose.html"><a href="assignment-glucose.html"><i class="fa fa-check"></i><b>2.6</b> assignment Glucose</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="assignment-glucose.html"><a href="assignment-glucose.html#defining-a-function-for-expectation-maximization-algorithm"><i class="fa fa-check"></i><b>2.6.1</b> Defining a function for Expectation-Maximization algorithm</a></li>
+<li class="chapter" data-level="2.6.2" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves"><i class="fa fa-check"></i><b>2.6.2</b> 2 clusters density curves</a></li>
+<li class="chapter" data-level="2.6.3" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves-1"><i class="fa fa-check"></i><b>2.6.3</b> 3 clusters density curves</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html"><i class="fa fa-check"></i><b>2.7</b> assignment Second Lead from ECG</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#defining-a-function-for-expectation-maximization-em-algorithm"><i class="fa fa-check"></i><b>2.7.1</b> Defining a function for expectation-maximization (EM) algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#reading-the-data-and-ploting-the-leads-distribution"><i class="fa fa-check"></i><b>2.7.2</b> reading the data and ploting the leads distribution</a></li>
+<li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
+<li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
+<li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+<li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="lesson-4.html"><a href="lesson-4.html"><i class="fa fa-check"></i><b>2.8</b> Lesson 4</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="lesson-4.html"><a href="lesson-4.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="lesson-4.html"><a href="lesson-4.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
+<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
+<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="3.2" data-path="lesson-2-1.html"><a href="lesson-2-1.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="3.3" data-path="lesson-4-1.html"><a href="lesson-4-1.html"><i class="fa fa-check"></i><b>3.3</b> Lesson 4</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="lesson-4-1.html"><a href="lesson-4-1.html#generalized-linear-models-glm"><i class="fa fa-check"></i><b>3.3.1</b> Generalized Linear Models (GLM)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="lesson-5-1.html"><a href="lesson-5-1.html"><i class="fa fa-check"></i><b>3.4</b> Lesson 5</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="lesson-5-1.html"><a href="lesson-5-1.html#survival-analysis"><i class="fa fa-check"></i><b>3.4.1</b> Survival Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.6" data-path="lesson-6-1.html"><a href="lesson-6-1.html"><i class="fa fa-check"></i><b>3.6</b> Lesson 6</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="lesson-6-1.html"><a href="lesson-6-1.html#cox-regression"><i class="fa fa-check"></i><b>3.6.1</b> Cox Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="assignment-cancer-1.html"><a href="assignment-cancer-1.html"><i class="fa fa-check"></i><b>3.7</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.8" data-path="lesson-7.html"><a href="lesson-7.html"><i class="fa fa-check"></i><b>3.8</b> Lesson 7</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="lesson-7.html"><a href="lesson-7.html#repeated-measures-anova"><i class="fa fa-check"></i><b>3.8.1</b> Repeated-measures ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="lesson-8.html"><a href="lesson-8.html"><i class="fa fa-check"></i><b>3.9</b> Lesson 8</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="lesson-8.html"><a href="lesson-8.html#limear-mixed-models"><i class="fa fa-check"></i><b>3.9.1</b> Limear Mixed Models</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="lesson-9.html"><a href="lesson-9.html"><i class="fa fa-check"></i><b>3.10</b> Lesson 9</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="lesson-9.html"><a href="lesson-9.html#exercises"><i class="fa fa-check"></i><b>3.10.1</b> exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
+<li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="4.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html"><i class="fa fa-check"></i><b>4.2</b> Lesson 2</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="lesson-2-2.html"><a href="lesson-2-2.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
+<li class="chapter" data-level="4.2.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="lesson-3-1.html"><a href="lesson-3-1.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
+<li class="chapter" data-level="4.6" data-path="lesson-4-2.html"><a href="lesson-4-2.html"><i class="fa fa-check"></i><b>4.6</b> Lesson 4</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="lesson-4-2.html"><a href="lesson-4-2.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
+<li class="chapter" data-level="4.6.2" data-path="lesson-4-2.html"><a href="lesson-4-2.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
+<li class="chapter" data-level="4.6.3" data-path="lesson-4-2.html"><a href="lesson-4-2.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="lesson-5-2.html"><a href="lesson-5-2.html"><i class="fa fa-check"></i><b>4.7</b> Lesson 5</a></li>
+<li class="chapter" data-level="4.8" data-path="lesson-6-2.html"><a href="lesson-6-2.html"><i class="fa fa-check"></i><b>4.8</b> Lesson 6</a></li>
+<li class="chapter" data-level="4.9" data-path="lesson-7-1.html"><a href="lesson-7-1.html"><i class="fa fa-check"></i><b>4.9</b> Lesson 7</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="lesson-7-1.html"><a href="lesson-7-1.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
+<li class="chapter" data-level="4.9.2" data-path="lesson-7-1.html"><a href="lesson-7-1.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="lesson-8-1.html"><a href="lesson-8-1.html"><i class="fa fa-check"></i><b>4.10</b> Lesson 8</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="lesson-8-1.html"><a href="lesson-8-1.html#unsupervised-machine-learning---clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Unsupervised Machine Learning - Clustering and Association Rules</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
+<li class="chapter" data-level="5.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="lesson-7-2.html"><a href="lesson-7-2.html"><i class="fa fa-check"></i><b>5.2</b> Lesson 7</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="lesson-7-2.html"><a href="lesson-7-2.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lesson-8-1" class="section level2">
+<h2><span class="header-section-number">4.10</span> Lesson 8</h2>
+<p>2020-05-05</p>
+<div id="unsupervised-machine-learning---clustering-and-association-rules" class="section level3">
+<h3><span class="header-section-number">4.10.1</span> Unsupervised Machine Learning - Clustering and Association Rules</h3>
+<p>Consider the the Cervical Cancer (Risk Factors) data set (available from UCI repository) and exploit the data using association rules (for binary variables) and clustering (for continuous variables).</p>
+<p>Read data</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb404-1" title="1"><span class="co"># factoriza variables</span></a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    858 obs. of  36 variables:
+##  $ Age                               : int  18 15 34 52 46 42 51 26 45 44 ...
+##  $ Number.of.sexual.partners         : num  4 1 1 5 3 3 3 1 1 3 ...
+##  $ First.sexual.intercourse          : num  15 14 NA 16 21 23 17 26 20 15 ...
+##  $ Num.of.pregnancies                : num  1 1 1 4 4 2 6 3 5 NA ...
+##  $ Smokes                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 1 1 2 1 1 2 ...
+##  $ Smokes..years.                    : num  0 0 0 37 0 ...
+##  $ Smokes..packs.year.               : num  0 0 0 37 0 0 3.4 0 0 2.8 ...
+##  $ Hormonal.Contraceptives           : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 2 1 1 2 1 1 ...
+##  $ Hormonal.Contraceptives..years.   : num  0 0 0 3 15 0 0 2 0 0 ...
+##  $ IUD                               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 2 1 NA ...
+##  $ IUD..years.                       : num  0 0 0 0 0 0 7 7 0 NA ...
+##  $ STDs                              : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs..number.                     : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ STDs.condylomatosis               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.cervical.condylomatosis      : Factor w/ 1 level &quot;0&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.vaginal.condylomatosis       : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ STDs.vulvo.perineal.condylomatosis: Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.syphilis                     : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.pelvic.inflammatory.disease  : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.genital.herpes               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.molluscum.contagiosum        : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.AIDS                         : Factor w/ 1 level &quot;0&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.HIV                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.Hepatitis.B                  : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs.HPV                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STDs..Number.of.diagnosis         : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ STDs..Time.since.first.diagnosis  : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ STDs..Time.since.last.diagnosis   : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Dx.Cancer                         : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 1 1 1 1 2 1 ...
+##  $ Dx.CIN                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Dx.HPV                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 1 1 1 1 2 1 ...
+##  $ Dx                                : int  0 0 0 0 0 0 0 0 1 0 ...
+##  $ Hinselmann                        : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 1 1 1 ...
+##  $ Schiller                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 1 1 1 ...
+##  $ Citology                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Biopsy                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 1 1 1 ...</code></pre>
+<div id="association-rules" class="section level4">
+<h4><span class="header-section-number">4.10.1.1</span> Association rules</h4>
+<pre><code>## [1] &quot;transactions&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;arules&quot;</code></pre>
+<pre><code>##     items          transactionID
+## [1] {Dx.Cancer=0,               
+##      Dx.CIN=0,                  
+##      Dx.HPV=0,                  
+##      Hinselmann=0,              
+##      Schiller=0,                
+##      Citology=0,                
+##      Biopsy=0}                 1
+## [2] {Dx.Cancer=0,               
+##      Dx.CIN=0,                  
+##      Dx.HPV=0,                  
+##      Hinselmann=0,              
+##      Schiller=0,                
+##      Citology=0,                
+##      Biopsy=0}                 2</code></pre>
+<p>model association rules (for binary variables)</p>
+<pre><code>## Apriori
+## 
+## Parameter specification:
+##  confidence minval smax arem  aval originalSupport maxtime support minlen
+##         0.5    0.1    1 none FALSE            TRUE       5     0.2      1
+##  maxlen target   ext
+##      10  rules FALSE
+## 
+## Algorithmic control:
+##  filter tree heap memopt load sort verbose
+##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+## 
+## Absolute minimum support count: 171 
+## 
+## set item appearances ...[0 item(s)] done [0.00s].
+## set transactions ...[14 item(s), 858 transaction(s)] done [0.00s].
+## sorting and recoding items ... [7 item(s)] done [0.00s].
+## creating transaction tree ... done [0.00s].
+## checking subsets of size 1 2 3 4 5 6 7 done [0.00s].
+## writing ... [448 rule(s)] done [0.02s].
+## creating S4 object  ... done [0.00s].</code></pre>
+<pre><code>##      lhs               rhs            support confidence     lift count
+## [1]  {Dx.HPV=0,                                                        
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8706294  0.9828947 1.075668   747
+## [2]  {Dx.Cancer=0,                                                     
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8706294  0.9828947 1.075668   747
+## [3]  {Dx.Cancer=0,                                                     
+##       Dx.HPV=0,                                                        
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8682984  0.9828496 1.075619   745
+## [4]  {Dx.CIN=0,                                                        
+##       Dx.HPV=0,                                                        
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8636364  0.9827586 1.075519   741
+## [5]  {Dx.Cancer=0,                                                     
+##       Dx.CIN=0,                                                        
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8636364  0.9827586 1.075519   741
+## [6]  {Dx.Cancer=0,                                                     
+##       Dx.CIN=0,                                                        
+##       Dx.HPV=0,                                                        
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8613054  0.9827128 1.075469   739
+## [7]  {Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8811189  0.9818182 1.074490   756
+## [8]  {Dx.CIN=0,                                                        
+##       Hinselmann=0,                                                    
+##       Citology=0,                                                      
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8741259  0.9816754 1.074334   750
+## [9]  {Dx.HPV=0,                                                        
+##       Hinselmann=0,                                                    
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8916084  0.9795134 1.071968   765
+## [10] {Dx.Cancer=0,                                                     
+##       Hinselmann=0,                                                    
+##       Biopsy=0}     =&gt; {Schiller=0} 0.8916084  0.9795134 1.071968   765</code></pre>
+<p>select rules where Dx.Cancer = 0 &amp; lift &gt;1</p>
+<pre><code>##      lhs               rhs             support confidence     lift count
+## [1]  {Schiller=0}   =&gt; {Dx.Cancer=0} 0.9009324  0.9859694 1.007097   773
+## [2]  {Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9219114  0.9850560 1.006164   791
+## [3]  {Citology=0}   =&gt; {Dx.Cancer=0} 0.9324009  0.9828010 1.003861   800
+## [4]  {Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9428904  0.9829891 1.004053   809
+## [5]  {Dx.HPV=0}     =&gt; {Dx.Cancer=0} 0.9766900  0.9976190 1.018997   838
+## [6]  {Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8927739  0.9858430 1.006968   766
+## [7]  {Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8787879  0.9882045 1.009380   754
+## [8]  {Hinselmann=0,                                                     
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8997669  0.9859515 1.007079   772
+## [9]  {Dx.HPV=0,                                                         
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8986014  0.9974127 1.018786   771
+## [10] {Dx.CIN=0,                                                         
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8916084  0.9858247 1.006950   765
+## [11] {Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8939394  0.9871300 1.008283   767
+## [12] {Hinselmann=0,                                                     
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9102564  0.9848676 1.005972   781
+## [13] {Dx.HPV=0,                                                         
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9195804  0.9974716 1.018846   789
+## [14] {Dx.CIN=0,                                                         
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9149184  0.9849435 1.006049   785
+## [15] {Hinselmann=0,                                                     
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9055944  0.9860406 1.007170   777
+## [16] {Dx.HPV=0,                                                         
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9300699  0.9975000 1.018875   798
+## [17] {Dx.CIN=0,                                                         
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9219114  0.9826087 1.003665   791
+## [18] {Dx.HPV=0,                                                         
+##       Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9405594  0.9975278 1.018903   807
+## [19] {Dx.CIN=0,                                                         
+##       Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9324009  0.9828010 1.003861   800
+## [20] {Dx.CIN=0,                                                         
+##       Dx.HPV=0}     =&gt; {Dx.Cancer=0} 0.9662005  0.9975933 1.018970   829
+## [21] {Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8717949  0.9881110 1.009285   748
+## [22] {Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8916084  0.9858247 1.006950   765
+## [23] {Dx.HPV=0,                                                         
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8904429  0.9973890 1.018762   764
+## [24] {Dx.CIN=0,                                                         
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8857809  0.9857328 1.006856   760
+## [25] {Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8776224  0.9881890 1.009364   753
+## [26] {Dx.HPV=0,                                                         
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8764569  0.9973475 1.018719   752
+## [27] {Dx.CIN=0,                                                         
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8694639  0.9880795 1.009253   746
+## [28] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8974359  0.9974093 1.018782   770
+## [29] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8904429  0.9858065 1.006931   764
+## [30] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8892774  0.9973856 1.018758   763
+## [31] {Hinselmann=0,                                                     
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8857809  0.9870130 1.008163   760
+## [32] {Dx.HPV=0,                                                         
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8916084  0.9973924 1.018765   765
+## [33] {Dx.CIN=0,                                                         
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8869464  0.9870298 1.008180   761
+## [34] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9079254  0.9974392 1.018813   779
+## [35] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9032634  0.9847522 1.005854   775
+## [36] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9125874  0.9974522 1.018826   783
+## [37] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9032634  0.9974260 1.018799   775
+## [38] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8951049  0.9858793 1.007005   768
+## [39] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9195804  0.9974716 1.018846   789
+## [40] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9300699  0.9975000 1.018875   798
+## [41] {Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8706294  0.9880952 1.009269   747
+## [42] {Dx.HPV=0,                                                         
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8694639  0.9973262 1.018697   746
+## [43] {Dx.CIN=0,                                                         
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8648019  0.9880160 1.009188   742
+## [44] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8892774  0.9973856 1.018758   763
+## [45] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8846154  0.9857143 1.006837   759
+## [46] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8834499  0.9973684 1.018741   758
+## [47] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8752914  0.9973440 1.018716   751
+## [48] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8682984  0.9880637 1.009236   745
+## [49] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8671329  0.9973190 1.018690   744
+## [50] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8881119  0.9973822 1.018755   762
+## [51] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8834499  0.9973684 1.018741   758
+## [52] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8787879  0.9869110 1.008059   754
+## [53] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8846154  0.9973719 1.018744   759
+## [54] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9009324  0.9974194 1.018793   773
+## [55] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8927739  0.9973958 1.018769   766
+## [56] {Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8682984  0.9973226 1.018694   745
+## [57] {Dx.CIN=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8636364  0.9880000 1.009171   741
+## [58] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8624709  0.9973046 1.018675   740
+## [59] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8822844  0.9973650 1.018737   757
+## [60] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8659674  0.9973154 1.018686   743
+## [61] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8764569  0.9973475 1.018719   752
+## [62] {Dx.CIN=0,                                                         
+##       Dx.HPV=0,                                                         
+##       Hinselmann=0,                                                     
+##       Schiller=0,                                                       
+##       Citology=0,                                                       
+##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8613054  0.9973009 1.018672   739</code></pre>
+</div>
+<div id="clustering-for-continuous-variables" class="section level4">
+<h4><span class="header-section-number">4.10.1.2</span> clustering (for continuous variables)</h4>
+<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lesson-7-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+## Lesson 8
+
+2020-05-05
+
+### Unsupervised Machine Learning - Clustering and Association Rules
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = T, message = F, warning = F, error = F)
+
+```
+
+
+Consider the the Cervical Cancer (Risk Factors) data set (available from UCI repository) and exploit the data using association rules (for binary variables) and clustering (for continuous variables).
+
+Read data
+```{r}
+library(tidyverse)
+
+dataset<-read.csv("2.UploadedData/risk_factors_cervical_cancer.csv",na.strings = c("NA","?",""))
+
+# idenfified categorical variables
+categorical<-c("Smokes", "Hormonal.Contraceptives", "IUD","STDs",
+               "STDs.condylomatosis","STDs.cervical.condylomatosis", 
+               "STDs.vulvo.perineal.condylomatosis", "STDs.syphilis",
+               "STDs.pelvic.inflammatory.disease",
+               "STDs.genital.herpes","STDs.molluscum.contagiosum",
+               "STDs.AIDS", "STDs.HIV", "STDs.Hepatitis.B", "STDs.HPV",
+               "Dx.Cancer", "Dx.CIN", "Dx.HPV", "Hinselmann", "Schiller",
+               "Citology", "Biopsy")
+
+# idenfified continuous variables
+continuos<-c("Age","Number.of.sexual.partners","First.sexual.intercourse",
+             "Num.of.pregnancies","Smokes..years.","Smokes..packs.year.",
+             "Hormonal.Contraceptives..years.","IUD..years.", "STDs..number.",
+             "STDs..Number.of.diagnosis","STDs..Time.since.first.diagnosis", 
+             "STDs..Time.since.last.diagnosis")
+
+# factoriza variables
+dataset[categorical] <- lapply(dataset[categorical], factor)
+
+str(dataset)
+```
+
+#### Association rules
+```{r}
+library(arules)
+transactions <- as(dataset[categorical[16:22]], "transactions")
+class(transactions)
+inspect(head(transactions, 2))
+```
+
+model association rules (for binary variables)
+```{r}
+rules <- apriori(transactions, parameter = list(supp = 0.2, conf = 0.5, target = "rules"))
+
+inspect(head(rules, 10, by = c("lift", "support")))
+```
+
+select rules where Dx.Cancer = 0 & lift >1
+```{r}
+rulesDx <- subset(rules,
+                  subset = rhs %in% c("Dx.Cancer=0") & lift > 1)
+inspect(rulesDx)
+```
+
+#### clustering (for continuous variables)
+
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
