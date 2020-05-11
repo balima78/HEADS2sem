@@ -1,0 +1,38 @@
+## Lesson 10
+
+2020-05-11
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Conditional Logistic Regression
+
+**Internet (internet.sav)**
+
+- To evaluate if Sense Age is associated with internet usage in the elderly adjusting for SHLT
+
+Read data
+```{r}
+library(foreign)
+
+data <- read.spss(file="2.UploadedData/internet.sav", use.missing=TRUE)
+
+data<-as.data.frame(data)
+
+str(data)
+```
+
+Conditional Logistic model
+```{r}
+library(survival)
+
+model<-clogit(INTERNET~SAGE+SHLT+strata(ID), data = data)
+
+summary(model)
+```
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+

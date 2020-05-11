@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.12 Assignment feature selection | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.12 Assignment feature selection | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.12 Assignment feature selection | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-05-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lesson-10.html"/>
+<link rel="next" href="learn.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="2.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+<li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix"><i class="fa fa-check"></i><b>2.4.1</b> keep sample matrix</a></li>
+<li class="chapter" data-level="2.4.2" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-sliding-window"><i class="fa fa-check"></i><b>2.4.2</b> keep sample matrix over a sliding window</a></li>
+<li class="chapter" data-level="2.4.3" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-weighted-sliding-window"><i class="fa fa-check"></i><b>2.4.3</b> keep sample matrix over a alpha weighted sliding window</a></li>
+<li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
+<li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>2.5</b> Lesson 3</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="lesson-3.html"><a href="lesson-3.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lesson-3.html"><a href="lesson-3.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lesson-3.html"><a href="lesson-3.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lesson-3.html"><a href="lesson-3.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="assignment-glucose.html"><a href="assignment-glucose.html"><i class="fa fa-check"></i><b>2.6</b> assignment Glucose</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="assignment-glucose.html"><a href="assignment-glucose.html#defining-a-function-for-expectation-maximization-algorithm"><i class="fa fa-check"></i><b>2.6.1</b> Defining a function for Expectation-Maximization algorithm</a></li>
+<li class="chapter" data-level="2.6.2" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves"><i class="fa fa-check"></i><b>2.6.2</b> 2 clusters density curves</a></li>
+<li class="chapter" data-level="2.6.3" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves-1"><i class="fa fa-check"></i><b>2.6.3</b> 3 clusters density curves</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html"><i class="fa fa-check"></i><b>2.7</b> assignment Second Lead from ECG</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#defining-a-function-for-expectation-maximization-em-algorithm"><i class="fa fa-check"></i><b>2.7.1</b> Defining a function for expectation-maximization (EM) algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#reading-the-data-and-ploting-the-leads-distribution"><i class="fa fa-check"></i><b>2.7.2</b> reading the data and ploting the leads distribution</a></li>
+<li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
+<li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
+<li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+<li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="lesson-4.html"><a href="lesson-4.html"><i class="fa fa-check"></i><b>2.8</b> Lesson 4</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="lesson-4.html"><a href="lesson-4.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="lesson-4.html"><a href="lesson-4.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
+<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
+<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="3.2" data-path="lesson-2-1.html"><a href="lesson-2-1.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="3.3" data-path="lesson-4-1.html"><a href="lesson-4-1.html"><i class="fa fa-check"></i><b>3.3</b> Lesson 4</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="lesson-4-1.html"><a href="lesson-4-1.html#generalized-linear-models-glm"><i class="fa fa-check"></i><b>3.3.1</b> Generalized Linear Models (GLM)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="lesson-5-1.html"><a href="lesson-5-1.html"><i class="fa fa-check"></i><b>3.4</b> Lesson 5</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="lesson-5-1.html"><a href="lesson-5-1.html#survival-analysis"><i class="fa fa-check"></i><b>3.4.1</b> Survival Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.6" data-path="lesson-6-1.html"><a href="lesson-6-1.html"><i class="fa fa-check"></i><b>3.6</b> Lesson 6</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="lesson-6-1.html"><a href="lesson-6-1.html#cox-regression"><i class="fa fa-check"></i><b>3.6.1</b> Cox Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="assignment-cancer-1.html"><a href="assignment-cancer-1.html"><i class="fa fa-check"></i><b>3.7</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.8" data-path="lesson-7.html"><a href="lesson-7.html"><i class="fa fa-check"></i><b>3.8</b> Lesson 7</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="lesson-7.html"><a href="lesson-7.html#repeated-measures-anova"><i class="fa fa-check"></i><b>3.8.1</b> Repeated-measures ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="lesson-8.html"><a href="lesson-8.html"><i class="fa fa-check"></i><b>3.9</b> Lesson 8</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="lesson-8.html"><a href="lesson-8.html#limear-mixed-models"><i class="fa fa-check"></i><b>3.9.1</b> Limear Mixed Models</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="lesson-9.html"><a href="lesson-9.html"><i class="fa fa-check"></i><b>3.10</b> Lesson 9</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="lesson-9.html"><a href="lesson-9.html#exercises"><i class="fa fa-check"></i><b>3.10.1</b> exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="lesson-10.html"><a href="lesson-10.html"><i class="fa fa-check"></i><b>3.11</b> Lesson 10</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="lesson-10.html"><a href="lesson-10.html#conditional-logistic-regression"><i class="fa fa-check"></i><b>3.11.1</b> Conditional Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.12</b> Assignment feature selection</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.12.1</b> Boruta Package in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
+<li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
+<li class="chapter" data-level="4.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html"><i class="fa fa-check"></i><b>4.2</b> Lesson 2</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="lesson-2-2.html"><a href="lesson-2-2.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
+<li class="chapter" data-level="4.2.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="lesson-3-1.html"><a href="lesson-3-1.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
+<li class="chapter" data-level="4.6" data-path="lesson-4-2.html"><a href="lesson-4-2.html"><i class="fa fa-check"></i><b>4.6</b> Lesson 4</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="lesson-4-2.html"><a href="lesson-4-2.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
+<li class="chapter" data-level="4.6.2" data-path="lesson-4-2.html"><a href="lesson-4-2.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
+<li class="chapter" data-level="4.6.3" data-path="lesson-4-2.html"><a href="lesson-4-2.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="lesson-5-2.html"><a href="lesson-5-2.html"><i class="fa fa-check"></i><b>4.7</b> Lesson 5</a></li>
+<li class="chapter" data-level="4.8" data-path="lesson-6-2.html"><a href="lesson-6-2.html"><i class="fa fa-check"></i><b>4.8</b> Lesson 6</a></li>
+<li class="chapter" data-level="4.9" data-path="lesson-7-1.html"><a href="lesson-7-1.html"><i class="fa fa-check"></i><b>4.9</b> Lesson 7</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="lesson-7-1.html"><a href="lesson-7-1.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
+<li class="chapter" data-level="4.9.2" data-path="lesson-7-1.html"><a href="lesson-7-1.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="lesson-8-1.html"><a href="lesson-8-1.html"><i class="fa fa-check"></i><b>4.10</b> Lesson 8</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="lesson-8-1.html"><a href="lesson-8-1.html#unsupervised-machine-learning---clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Unsupervised Machine Learning - Clustering and Association Rules</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
+<li class="chapter" data-level="5.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="lesson-7-2.html"><a href="lesson-7-2.html"><i class="fa fa-check"></i><b>5.2</b> Lesson 7</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="lesson-7-2.html"><a href="lesson-7-2.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assignment-feature-selection" class="section level2">
+<h2><span class="header-section-number">3.12</span> Assignment feature selection</h2>
+<p>2020-05-11</p>
+<div id="boruta-package-in-r" class="section level3">
+<h3><span class="header-section-number">3.12.1</span> Boruta Package in R</h3>
+<p><strong>113 patients at the Los Angeles County Hospital Shock Unit (afifi.sav)</strong></p>
+<p>Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HGB1, HCT1)</p>
+<p>Read data</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(haven)</a>
+<a class="sourceLine" id="cb3-2" title="2">data2 &lt;-<span class="st"> </span><span class="kw">read_sav</span>(<span class="st">&quot;2.UploadedData/afifi.sav&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3">data2&lt;-<span class="kw">as.data.frame</span>(data2)</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">str</span>(data2)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    113 obs. of  17 variables:
+##  $ IDNUM    : num  340 412 426 444 515 517 518 522 526 527 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 7
+##  $ AGE      : num  70 56 47 75 61 68 71 30 78 40 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 6
+##  $ SEX      : &#39;haven_labelled&#39; num  0 1 1 0 1 1 0 0 1 1 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F3.0&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 5
+##   ..- attr(*, &quot;labels&quot;)= Named num  0 1
+##   .. ..- attr(*, &quot;names&quot;)= chr  &quot;female&quot; &quot;male&quot;
+##  $ SBP1     : num  62 83 80 62 128 114 102 97 90 112 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 6
+##  $ MAP1     : num  38 66 64 51 91 88 74 71 60 61 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 6
+##  $ HEART1   : num  53 110 84 97 107 95 112 93 113 136 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##  $ DBP1     : num  29 60 55 43 71 73 65 55 46 48 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 6
+##  $ CVP1     : num  10 1 1 13 11.5 1.7 1.9 15.1 8.6 25.7 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 7
+##  $ BSA1     : num  1.87 1.82 1.8 1.3 NA 1.41 1.69 1.58 1.63 NA ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.2&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 7
+##  $ CARDIAC1 : num  0.9 1.26 1.1 0.6 2.3 0.66 1.33 2.86 3.3 1.2 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.2&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 10
+##  $ APPTIME1 : num  19 22.1 12 15 7.4 11.5 15.3 6 10 10.7 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 10
+##  $ CIRCTIME1: num  39 40.7 28 59 19.3 22.5 31.3 14.4 19.4 34.5 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 11
+##  $ URINE1   : num  0 110 80 5 140 110 80 10 21 1 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
+##  $ PLASVOL1 : num  39.4 36.2 37.3 33.5 74.7 56.2 32.1 55.7 65.3 70.9 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 10
+##  $ REDCELL1 : num  24.1 24 27.2 20.8 18.6 20.6 14.1 15.1 16.8 16.2 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 10
+##  $ HCT1     : num  40 50 49 43 24 34 40.3 30 27 42 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 7
+##  $ HGB2     : num  11.2 15.4 9.9 10.9 9.8 10 9.4 10 10 9.1 ...
+##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F5.1&quot;
+##   ..- attr(*, &quot;display_width&quot;)= int 7</code></pre>
+<p>Implement Boruta</p>
+<p>results from boruta</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(printr)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">print</span>(boruta)</a></code></pre></div>
+<pre><code>## Boruta performed 99 iterations in 13.35349 secs.
+##  6 attributes confirmed important: AGE, BSA1, CARDIAC1, CIRCTIME1,
+## HCT1 and 1 more;
+##  7 attributes confirmed unimportant: CVP1, HEART1, IDNUM,
+## PLASVOL1, SBP1 and 2 more;
+##  3 tentative attributes left: APPTIME1, DBP1, MAP1;</code></pre>
+<p>selected features</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">plot</span>(boruta, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3">lz&lt;-<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(boruta<span class="op">$</span>ImpHistory),<span class="cf">function</span>(i) boruta<span class="op">$</span>ImpHistory[<span class="kw">is.finite</span>(boruta<span class="op">$</span>ImpHistory[,i]),i])</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw">names</span>(lz) &lt;-<span class="st"> </span><span class="kw">colnames</span>(boruta<span class="op">$</span>ImpHistory)</a>
+<a class="sourceLine" id="cb7-5" title="5">Labels &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sapply</span>(lz,median))</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>,<span class="dt">las=</span><span class="dv">2</span>,<span class="dt">labels =</span> <span class="kw">names</span>(Labels),</a>
+<a class="sourceLine" id="cb7-7" title="7">     <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(boruta<span class="op">$</span>ImpHistory), <span class="dt">cex.axis =</span> <span class="fl">0.7</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">print</span>(<span class="kw">getSelectedAttributes</span>(boruta))</a></code></pre></div>
+<pre><code>## [1] &quot;AGE&quot;       &quot;BSA1&quot;      &quot;CARDIAC1&quot;  &quot;CIRCTIME1&quot; &quot;REDCELL1&quot;  &quot;HCT1&quot;</code></pre>
+<p>Extract attribute statistics</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">attStats</span>(boruta)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">meanImp</th>
+<th align="right">medianImp</th>
+<th align="right">minImp</th>
+<th align="right">maxImp</th>
+<th align="right">normHits</th>
+<th align="left">decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IDNUM</td>
+<td align="right">0.1517117</td>
+<td align="right">0.0803603</td>
+<td align="right">-1.4920616</td>
+<td align="right">1.900130</td>
+<td align="right">0.0000000</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="even">
+<td>AGE</td>
+<td align="right">4.1422943</td>
+<td align="right">4.0776834</td>
+<td align="right">1.0791020</td>
+<td align="right">7.379167</td>
+<td align="right">0.7575758</td>
+<td align="left">Confirmed</td>
+</tr>
+<tr class="odd">
+<td>SEX</td>
+<td align="right">-0.2607136</td>
+<td align="right">-0.8409850</td>
+<td align="right">-1.4101121</td>
+<td align="right">1.570998</td>
+<td align="right">0.0000000</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="even">
+<td>SBP1</td>
+<td align="right">1.8196701</td>
+<td align="right">1.9473977</td>
+<td align="right">-0.3593812</td>
+<td align="right">3.840676</td>
+<td align="right">0.1717172</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="odd">
+<td>MAP1</td>
+<td align="right">3.4778558</td>
+<td align="right">3.3648401</td>
+<td align="right">1.4097679</td>
+<td align="right">5.636677</td>
+<td align="right">0.6060606</td>
+<td align="left">Tentative</td>
+</tr>
+<tr class="even">
+<td>HEART1</td>
+<td align="right">0.2100310</td>
+<td align="right">-0.0000978</td>
+<td align="right">-1.0207458</td>
+<td align="right">3.300966</td>
+<td align="right">0.0000000</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="odd">
+<td>DBP1</td>
+<td align="right">2.4726025</td>
+<td align="right">2.5130919</td>
+<td align="right">0.2023409</td>
+<td align="right">6.169704</td>
+<td align="right">0.4545455</td>
+<td align="left">Tentative</td>
+</tr>
+<tr class="even">
+<td>CVP1</td>
+<td align="right">-0.9402480</td>
+<td align="right">-1.2262371</td>
+<td align="right">-2.5951477</td>
+<td align="right">1.887657</td>
+<td align="right">0.0000000</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="odd">
+<td>BSA1</td>
+<td align="right">3.4328202</td>
+<td align="right">3.4341716</td>
+<td align="right">0.7461243</td>
+<td align="right">6.264958</td>
+<td align="right">0.6464646</td>
+<td align="left">Confirmed</td>
+</tr>
+<tr class="even">
+<td>CARDIAC1</td>
+<td align="right">4.5280848</td>
+<td align="right">4.5563930</td>
+<td align="right">2.0821596</td>
+<td align="right">7.871692</td>
+<td align="right">0.8080808</td>
+<td align="left">Confirmed</td>
+</tr>
+<tr class="odd">
+<td>APPTIME1</td>
+<td align="right">2.6927184</td>
+<td align="right">2.5183289</td>
+<td align="right">-0.0123265</td>
+<td align="right">6.309094</td>
+<td align="right">0.4242424</td>
+<td align="left">Tentative</td>
+</tr>
+<tr class="even">
+<td>CIRCTIME1</td>
+<td align="right">7.7656487</td>
+<td align="right">7.7370969</td>
+<td align="right">5.3463866</td>
+<td align="right">9.907827</td>
+<td align="right">0.9797980</td>
+<td align="left">Confirmed</td>
+</tr>
+<tr class="odd">
+<td>URINE1</td>
+<td align="right">-0.2501776</td>
+<td align="right">-0.2991546</td>
+<td align="right">-1.3503917</td>
+<td align="right">1.069198</td>
+<td align="right">0.0000000</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="even">
+<td>PLASVOL1</td>
+<td align="right">0.9275072</td>
+<td align="right">0.9716013</td>
+<td align="right">-0.8665025</td>
+<td align="right">2.693182</td>
+<td align="right">0.0202020</td>
+<td align="left">Rejected</td>
+</tr>
+<tr class="odd">
+<td>REDCELL1</td>
+<td align="right">4.0883848</td>
+<td align="right">3.9670301</td>
+<td align="right">1.6512573</td>
+<td align="right">6.462257</td>
+<td align="right">0.7676768</td>
+<td align="left">Confirmed</td>
+</tr>
+<tr class="even">
+<td>HCT1</td>
+<td align="right">8.7798827</td>
+<td align="right">8.6758768</td>
+<td align="right">6.8505330</td>
+<td align="right">11.551838</td>
+<td align="right">0.9898990</td>
+<td align="left">Confirmed</td>
+</tr>
+</tbody>
+</table>
+<p>with the selected features, <strong>fit a linear model</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">#form&lt;-getConfirmedFormula(boruta)</span></a>
+<a class="sourceLine" id="cb11-2" title="2">form&lt;-<span class="kw">getNonRejectedFormula</span>(boruta)</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4">model&lt;-<span class="kw">lm</span>(form, <span class="dt">data =</span> data2)</a>
+<a class="sourceLine" id="cb11-5" title="5"></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="kw">tidy</span>(model)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">1.0223582</td>
+<td align="right">1.8418376</td>
+<td align="right">0.5550751</td>
+<td align="right">0.5801480</td>
+</tr>
+<tr class="even">
+<td align="left">AGE</td>
+<td align="right">0.0117378</td>
+<td align="right">0.0118097</td>
+<td align="right">0.9939077</td>
+<td align="right">0.3227926</td>
+</tr>
+<tr class="odd">
+<td align="left">MAP1</td>
+<td align="right">-0.0065953</td>
+<td align="right">0.0342614</td>
+<td align="right">-0.1925005</td>
+<td align="right">0.8477611</td>
+</tr>
+<tr class="even">
+<td align="left">DBP1</td>
+<td align="right">0.0261556</td>
+<td align="right">0.0429193</td>
+<td align="right">0.6094124</td>
+<td align="right">0.5437059</td>
+</tr>
+<tr class="odd">
+<td align="left">BSA1</td>
+<td align="right">2.2066938</td>
+<td align="right">0.8543697</td>
+<td align="right">2.5828324</td>
+<td align="right">0.0113252</td>
+</tr>
+<tr class="even">
+<td align="left">CARDIAC1</td>
+<td align="right">0.0361544</td>
+<td align="right">0.1477869</td>
+<td align="right">0.2446385</td>
+<td align="right">0.8072640</td>
+</tr>
+<tr class="odd">
+<td align="left">APPTIME1</td>
+<td align="right">0.0142515</td>
+<td align="right">0.0624277</td>
+<td align="right">0.2282883</td>
+<td align="right">0.8199128</td>
+</tr>
+<tr class="even">
+<td align="left">CIRCTIME1</td>
+<td align="right">0.0391994</td>
+<td align="right">0.0334208</td>
+<td align="right">1.1729034</td>
+<td align="right">0.2437671</td>
+</tr>
+<tr class="odd">
+<td align="left">REDCELL1</td>
+<td align="right">0.0370067</td>
+<td align="right">0.0185559</td>
+<td align="right">1.9943391</td>
+<td align="right">0.0489812</td>
+</tr>
+<tr class="even">
+<td align="left">HCT1</td>
+<td align="right">0.0604300</td>
+<td align="right">0.0275308</td>
+<td align="right">2.1950001</td>
+<td align="right">0.0306000</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">glance</span>(model)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">r.squared</th>
+<th align="right">adj.r.squared</th>
+<th align="right">sigma</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">df</th>
+<th align="right">logLik</th>
+<th align="right">AIC</th>
+<th align="right">BIC</th>
+<th align="right">deviance</th>
+<th align="right">df.residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.3512673</td>
+<td align="right">0.2898084</td>
+<td align="right">1.649498</td>
+<td align="right">5.715485</td>
+<td align="right">2.6e-06</td>
+<td align="right">10</td>
+<td align="right">-196.2836</td>
+<td align="right">414.5672</td>
+<td align="right">443.7608</td>
+<td align="right">258.4801</td>
+<td align="right">95</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">print</span>(form)</a></code></pre></div>
+<pre><code>## HGB2 ~ AGE + MAP1 + DBP1 + BSA1 + CARDIAC1 + APPTIME1 + CIRCTIME1 + 
+##     REDCELL1 + HCT1
+## &lt;environment: 0x000000001a0d3df8&gt;</code></pre>
+<p>plot model assumptions</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">plot</span>(model)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>references</p>
+<p><a href="https://www.analyticsvidhya.com/blog/2016/03/select-important-variables-boruta-package/" class="uri">https://www.analyticsvidhya.com/blog/2016/03/select-important-variables-boruta-package/</a></p>
+<p><a href="https://www.andreaperlato.com/mlpost/feature-selection-using-boruta-algorithm/" class="uri">https://www.andreaperlato.com/mlpost/feature-selection-using-boruta-algorithm/</a></p>
+<p><a href="https://earlglynn.github.io/RNotes/package/Boruta/index.html" class="uri">https://earlglynn.github.io/RNotes/package/Boruta/index.html</a></p>
+<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lesson-10.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="learn.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

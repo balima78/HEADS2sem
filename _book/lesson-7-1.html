@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-08" />
+<meta name="date" content="2020-05-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -199,6 +199,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="lesson-9.html"><a href="lesson-9.html"><i class="fa fa-check"></i><b>3.10</b> Lesson 9</a><ul>
 <li class="chapter" data-level="3.10.1" data-path="lesson-9.html"><a href="lesson-9.html#exercises"><i class="fa fa-check"></i><b>3.10.1</b> exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="3.11" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>3.11</b> Lesson 9</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#conditional-logistic-regression"><i class="fa fa-check"></i><b>3.11.1</b> Conditional Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.12</b> Assignment feature selection</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.12.1</b> Boruta Package in R</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
@@ -278,153 +284,153 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>pseudocodes on the article to R:</p>
 <div id="update-prequential-error-estimator" class="section level4">
 <h4><span class="header-section-number">4.9.2.1</span> Update prequential Error estimator</h4>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb400-2" title="2">Pe&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb400-3" title="3"></a>
-<a class="sourceLine" id="cb400-4" title="4"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
-<a class="sourceLine" id="cb400-5" title="5">     <span class="dt">ylab =</span> <span class="st">&quot;Prequential error&quot;</span>,</a>
-<a class="sourceLine" id="cb400-6" title="6">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
-<a class="sourceLine" id="cb400-7" title="7">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb400-8" title="8">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 1: Prequential Error Estimator&quot;</span>)</a>
-<a class="sourceLine" id="cb400-9" title="9"></a>
-<a class="sourceLine" id="cb400-10" title="10"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>itera){</a>
-<a class="sourceLine" id="cb400-11" title="11">  <span class="co">## Loss at example i ##</span></a>
-<a class="sourceLine" id="cb400-12" title="12">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb400-13" title="13">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb400-14" title="14">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb400-15" title="15">  </a>
-<a class="sourceLine" id="cb400-16" title="16">  Pe[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb400-17" title="17">  Pe[i]&lt;-(ei <span class="op">+</span><span class="st"> </span>(i<span class="dv">-1</span>)<span class="op">*</span>Pe[i<span class="dv">-1</span>]) <span class="op">/</span><span class="st"> </span>i</a>
-<a class="sourceLine" id="cb400-18" title="18">  </a>
-<a class="sourceLine" id="cb400-19" title="19">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>Pe[i],<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb400-20" title="20">}</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-273-1.png" width="672" /></p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" title="1">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb416-2" title="2">Pe&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb416-3" title="3"></a>
+<a class="sourceLine" id="cb416-4" title="4"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
+<a class="sourceLine" id="cb416-5" title="5">     <span class="dt">ylab =</span> <span class="st">&quot;Prequential error&quot;</span>,</a>
+<a class="sourceLine" id="cb416-6" title="6">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
+<a class="sourceLine" id="cb416-7" title="7">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb416-8" title="8">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 1: Prequential Error Estimator&quot;</span>)</a>
+<a class="sourceLine" id="cb416-9" title="9"></a>
+<a class="sourceLine" id="cb416-10" title="10"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb416-11" title="11">  <span class="co">## Loss at example i ##</span></a>
+<a class="sourceLine" id="cb416-12" title="12">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb416-13" title="13">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb416-14" title="14">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb416-15" title="15">  </a>
+<a class="sourceLine" id="cb416-16" title="16">  Pe[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb416-17" title="17">  Pe[i]&lt;-(ei <span class="op">+</span><span class="st"> </span>(i<span class="dv">-1</span>)<span class="op">*</span>Pe[i<span class="dv">-1</span>]) <span class="op">/</span><span class="st"> </span>i</a>
+<a class="sourceLine" id="cb416-18" title="18">  </a>
+<a class="sourceLine" id="cb416-19" title="19">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>Pe[i],<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb416-20" title="20">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-283-1.png" width="672" /></p>
 </div>
 <div id="update-prequential-error-estimator-in-sliding-window" class="section level4">
 <h4><span class="header-section-number">4.9.2.2</span> Update Prequential Error Estimator in sliding window</h4>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1">w&lt;-<span class="dv">50</span></a>
-<a class="sourceLine" id="cb401-2" title="2"></a>
-<a class="sourceLine" id="cb401-3" title="3">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb401-4" title="4">Pw&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb401-5" title="5">E&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb401-6" title="6"></a>
-<a class="sourceLine" id="cb401-7" title="7"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
-<a class="sourceLine" id="cb401-8" title="8">     <span class="dt">ylab =</span> <span class="st">&quot;Prequential error&quot;</span>,</a>
-<a class="sourceLine" id="cb401-9" title="9">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
-<a class="sourceLine" id="cb401-10" title="10">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb401-11" title="11">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 2: sliding window&quot;</span>)</a>
-<a class="sourceLine" id="cb401-12" title="12"></a>
-<a class="sourceLine" id="cb401-13" title="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
-<a class="sourceLine" id="cb401-14" title="14">  <span class="co">## Loss at example i ##</span></a>
-<a class="sourceLine" id="cb401-15" title="15">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb401-16" title="16">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb401-17" title="17">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb401-18" title="18">  </a>
-<a class="sourceLine" id="cb401-19" title="19">  S&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb401-20" title="20">  E[<span class="dv">1</span><span class="op">:</span>w]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb401-21" title="21">  </a>
-<a class="sourceLine" id="cb401-22" title="22">  p&lt;-((i<span class="dv">-1</span>) <span class="op">%%</span><span class="st"> </span>w) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb401-23" title="23">  S&lt;-S <span class="op">-</span><span class="st"> </span>E[p] <span class="op">+</span><span class="st"> </span>ei</a>
-<a class="sourceLine" id="cb401-24" title="24">  </a>
-<a class="sourceLine" id="cb401-25" title="25">  Pw[i]=S<span class="op">/</span><span class="kw">min</span>(w,i)</a>
-<a class="sourceLine" id="cb401-26" title="26">  </a>
-<a class="sourceLine" id="cb401-27" title="27">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>Pw[i],<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb401-28" title="28">}</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" title="1">w&lt;-<span class="dv">50</span></a>
+<a class="sourceLine" id="cb417-2" title="2"></a>
+<a class="sourceLine" id="cb417-3" title="3">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb417-4" title="4">Pw&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb417-5" title="5">E&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb417-6" title="6"></a>
+<a class="sourceLine" id="cb417-7" title="7"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
+<a class="sourceLine" id="cb417-8" title="8">     <span class="dt">ylab =</span> <span class="st">&quot;Prequential error&quot;</span>,</a>
+<a class="sourceLine" id="cb417-9" title="9">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
+<a class="sourceLine" id="cb417-10" title="10">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb417-11" title="11">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 2: sliding window&quot;</span>)</a>
+<a class="sourceLine" id="cb417-12" title="12"></a>
+<a class="sourceLine" id="cb417-13" title="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb417-14" title="14">  <span class="co">## Loss at example i ##</span></a>
+<a class="sourceLine" id="cb417-15" title="15">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb417-16" title="16">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb417-17" title="17">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb417-18" title="18">  </a>
+<a class="sourceLine" id="cb417-19" title="19">  S&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb417-20" title="20">  E[<span class="dv">1</span><span class="op">:</span>w]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb417-21" title="21">  </a>
+<a class="sourceLine" id="cb417-22" title="22">  p&lt;-((i<span class="dv">-1</span>) <span class="op">%%</span><span class="st"> </span>w) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb417-23" title="23">  S&lt;-S <span class="op">-</span><span class="st"> </span>E[p] <span class="op">+</span><span class="st"> </span>ei</a>
+<a class="sourceLine" id="cb417-24" title="24">  </a>
+<a class="sourceLine" id="cb417-25" title="25">  Pw[i]=S<span class="op">/</span><span class="kw">min</span>(w,i)</a>
+<a class="sourceLine" id="cb417-26" title="26">  </a>
+<a class="sourceLine" id="cb417-27" title="27">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>Pw[i],<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb417-28" title="28">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-284-1.png" width="672" /></p>
 </div>
 <div id="update-rule-for-prequential-error-estimator-using-fading-factors" class="section level4">
 <h4><span class="header-section-number">4.9.2.3</span> Update rule for Prequential error estimator using fading factors</h4>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1">a &lt;-<span class="st"> </span><span class="fl">0.999</span></a>
-<a class="sourceLine" id="cb402-2" title="2">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb402-3" title="3">Pa&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb402-4" title="4">Sa&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb402-5" title="5">Na&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb402-6" title="6"></a>
-<a class="sourceLine" id="cb402-7" title="7"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
-<a class="sourceLine" id="cb402-8" title="8">     <span class="dt">ylab =</span> <span class="st">&quot;Prequential error&quot;</span>,</a>
-<a class="sourceLine" id="cb402-9" title="9">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
-<a class="sourceLine" id="cb402-10" title="10">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb402-11" title="11">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 3: using fading factors&quot;</span>)</a>
-<a class="sourceLine" id="cb402-12" title="12"></a>
-<a class="sourceLine" id="cb402-13" title="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>itera){</a>
-<a class="sourceLine" id="cb402-14" title="14">  <span class="co">## Loss at example i ##</span></a>
-<a class="sourceLine" id="cb402-15" title="15">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb402-16" title="16">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb402-17" title="17">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb402-18" title="18">  </a>
-<a class="sourceLine" id="cb402-19" title="19">  Sa[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb402-20" title="20">  Na[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb402-21" title="21">  Pa[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb402-22" title="22">  </a>
-<a class="sourceLine" id="cb402-23" title="23">  Sa[i]&lt;-ei <span class="op">+</span><span class="st"> </span>a<span class="op">*</span>Sa[i<span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb402-24" title="24">  Na[i]&lt;-<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>a<span class="op">*</span>Na[i<span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb402-25" title="25">  Pa[i]&lt;-Sa[i]<span class="op">/</span>Na[i]</a>
-<a class="sourceLine" id="cb402-26" title="26">  </a>
-<a class="sourceLine" id="cb402-27" title="27">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>Pa[i],<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb402-28" title="28">  </a>
-<a class="sourceLine" id="cb402-29" title="29">}</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-275-1.png" width="672" /></p>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb418-1" title="1">a &lt;-<span class="st"> </span><span class="fl">0.999</span></a>
+<a class="sourceLine" id="cb418-2" title="2">itera &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb418-3" title="3">Pa&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb418-4" title="4">Sa&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb418-5" title="5">Na&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb418-6" title="6"></a>
+<a class="sourceLine" id="cb418-7" title="7"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
+<a class="sourceLine" id="cb418-8" title="8">     <span class="dt">ylab =</span> <span class="st">&quot;Prequential error&quot;</span>,</a>
+<a class="sourceLine" id="cb418-9" title="9">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
+<a class="sourceLine" id="cb418-10" title="10">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb418-11" title="11">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 3: using fading factors&quot;</span>)</a>
+<a class="sourceLine" id="cb418-12" title="12"></a>
+<a class="sourceLine" id="cb418-13" title="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb418-14" title="14">  <span class="co">## Loss at example i ##</span></a>
+<a class="sourceLine" id="cb418-15" title="15">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb418-16" title="16">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb418-17" title="17">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb418-18" title="18">  </a>
+<a class="sourceLine" id="cb418-19" title="19">  Sa[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb418-20" title="20">  Na[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb418-21" title="21">  Pa[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb418-22" title="22">  </a>
+<a class="sourceLine" id="cb418-23" title="23">  Sa[i]&lt;-ei <span class="op">+</span><span class="st"> </span>a<span class="op">*</span>Sa[i<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb418-24" title="24">  Na[i]&lt;-<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>a<span class="op">*</span>Na[i<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb418-25" title="25">  Pa[i]&lt;-Sa[i]<span class="op">/</span>Na[i]</a>
+<a class="sourceLine" id="cb418-26" title="26">  </a>
+<a class="sourceLine" id="cb418-27" title="27">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>Pa[i],<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb418-28" title="28">  </a>
+<a class="sourceLine" id="cb418-29" title="29">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-285-1.png" width="672" /></p>
 </div>
 <div id="drift-detector-based-on-the-ratio-of-two-fading-factors" class="section level4">
 <h4><span class="header-section-number">4.9.2.4</span> Drift detector based on the ratio of two fading factors</h4>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1"><span class="co"># required values</span></a>
-<a class="sourceLine" id="cb403-2" title="2">itera&lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb403-3" title="3">a1&lt;-<span class="fl">0.999</span></a>
-<a class="sourceLine" id="cb403-4" title="4">a2&lt;-<span class="fl">0.9</span></a>
-<a class="sourceLine" id="cb403-5" title="5">g&lt;-<span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb403-6" title="6">l&lt;-<span class="dv">10</span></a>
-<a class="sourceLine" id="cb403-7" title="7">drift&lt;-<span class="kw">logical</span>()</a>
-<a class="sourceLine" id="cb403-8" title="8"></a>
-<a class="sourceLine" id="cb403-9" title="9"><span class="co"># Initialize the error estimators</span></a>
-<a class="sourceLine" id="cb403-10" title="10">Sa1&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-11" title="11">Na1&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-12" title="12">Sa2&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-13" title="13">Na2&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-14" title="14">SR&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-15" title="15">mT&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-16" title="16">MT&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-17" title="17">R&lt;-<span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb403-18" title="18"></a>
-<a class="sourceLine" id="cb403-19" title="19"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
-<a class="sourceLine" id="cb403-20" title="20">     <span class="dt">ylab =</span> <span class="st">&quot;Drift&quot;</span>,</a>
-<a class="sourceLine" id="cb403-21" title="21">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
-<a class="sourceLine" id="cb403-22" title="22">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb403-23" title="23">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 4: Drift detector&quot;</span>)</a>
-<a class="sourceLine" id="cb403-24" title="24"></a>
-<a class="sourceLine" id="cb403-25" title="25"></a>
-<a class="sourceLine" id="cb403-26" title="26"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>itera){</a>
-<a class="sourceLine" id="cb403-27" title="27">  <span class="co">## Loss at example i ##</span></a>
-<a class="sourceLine" id="cb403-28" title="28">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb403-29" title="29">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb403-30" title="30">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb403-31" title="31">  </a>
-<a class="sourceLine" id="cb403-32" title="32">  R[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb403-33" title="33"></a>
-<a class="sourceLine" id="cb403-34" title="34">  Sa1[<span class="dv">1</span>]&lt;-<span class="dv">1</span></a>
-<a class="sourceLine" id="cb403-35" title="35">  Sa1[i]&lt;-ei <span class="op">+</span><span class="st"> </span>a1<span class="op">*</span>Sa1[i<span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb403-36" title="36">  Na1[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb403-37" title="37">  Na1[i]&lt;-<span class="dv">1</span><span class="op">+</span>a1<span class="op">*</span>Na1[i<span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb403-38" title="38">  Ma1&lt;-Sa1[i]<span class="op">/</span>Na1[i]</a>
-<a class="sourceLine" id="cb403-39" title="39">  Sa2[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb403-40" title="40">  Sa2[i]&lt;-ei <span class="op">+</span><span class="st"> </span>a2<span class="op">*</span>Sa2[i<span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb403-41" title="41">  Na2[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb403-42" title="42">  Na2[i]&lt;-<span class="dv">1</span><span class="op">+</span>a2<span class="op">*</span>Na2[i<span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb403-43" title="43">  Ma2&lt;-Sa2[i]<span class="op">/</span>Na2[i]</a>
-<a class="sourceLine" id="cb403-44" title="44">  R[i]&lt;-Ma2<span class="op">/</span>Ma1</a>
-<a class="sourceLine" id="cb403-45" title="45">  </a>
-<a class="sourceLine" id="cb403-46" title="46">  <span class="co">## PH test ##</span></a>
-<a class="sourceLine" id="cb403-47" title="47">  SR[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb403-48" title="48">  SR[i]&lt;-SR[i<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>R[i]</a>
-<a class="sourceLine" id="cb403-49" title="49">  mT[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
-<a class="sourceLine" id="cb403-50" title="50">  mT[i]&lt;-mT[i<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>R[i] <span class="op">-</span><span class="st"> </span>SR[i]<span class="op">/</span>i <span class="op">-</span><span class="st"> </span>g</a>
-<a class="sourceLine" id="cb403-51" title="51">  MT&lt;-<span class="kw">min</span>(<span class="kw">c</span>(MT,mT[i]))</a>
-<a class="sourceLine" id="cb403-52" title="52">  </a>
-<a class="sourceLine" id="cb403-53" title="53">  <span class="cf">if</span>(mT[i]<span class="op">-</span>MT <span class="op">&gt;=</span><span class="st"> </span>l)</a>
-<a class="sourceLine" id="cb403-54" title="54">  {drift =<span class="st"> </span><span class="ot">TRUE</span>} <span class="cf">else</span> {drift =<span class="st"> </span><span class="ot">FALSE</span>}</a>
-<a class="sourceLine" id="cb403-55" title="55">  </a>
-<a class="sourceLine" id="cb403-56" title="56">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>drift,<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb403-57" title="57">}</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-276-1.png" width="672" /></p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" title="1"><span class="co"># required values</span></a>
+<a class="sourceLine" id="cb419-2" title="2">itera&lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb419-3" title="3">a1&lt;-<span class="fl">0.999</span></a>
+<a class="sourceLine" id="cb419-4" title="4">a2&lt;-<span class="fl">0.9</span></a>
+<a class="sourceLine" id="cb419-5" title="5">g&lt;-<span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb419-6" title="6">l&lt;-<span class="dv">10</span></a>
+<a class="sourceLine" id="cb419-7" title="7">drift&lt;-<span class="kw">logical</span>()</a>
+<a class="sourceLine" id="cb419-8" title="8"></a>
+<a class="sourceLine" id="cb419-9" title="9"><span class="co"># Initialize the error estimators</span></a>
+<a class="sourceLine" id="cb419-10" title="10">Sa1&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-11" title="11">Na1&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-12" title="12">Sa2&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-13" title="13">Na2&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-14" title="14">SR&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-15" title="15">mT&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-16" title="16">MT&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-17" title="17">R&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb419-18" title="18"></a>
+<a class="sourceLine" id="cb419-19" title="19"><span class="kw">plot</span>(<span class="ot">NULL</span>,<span class="dt">xlab =</span> <span class="st">&quot;examples&quot;</span>,</a>
+<a class="sourceLine" id="cb419-20" title="20">     <span class="dt">ylab =</span> <span class="st">&quot;Drift&quot;</span>,</a>
+<a class="sourceLine" id="cb419-21" title="21">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,itera),</a>
+<a class="sourceLine" id="cb419-22" title="22">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb419-23" title="23">     <span class="dt">main =</span> <span class="st">&quot;Algorithm 4: Drift detector&quot;</span>)</a>
+<a class="sourceLine" id="cb419-24" title="24"></a>
+<a class="sourceLine" id="cb419-25" title="25"></a>
+<a class="sourceLine" id="cb419-26" title="26"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>itera){</a>
+<a class="sourceLine" id="cb419-27" title="27">  <span class="co">## Loss at example i ##</span></a>
+<a class="sourceLine" id="cb419-28" title="28">  ei &lt;-<span class="st"> </span><span class="kw">ifelse</span>(i<span class="op">&lt;=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb419-29" title="29">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb419-30" title="30">               <span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>,.<span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb419-31" title="31">  </a>
+<a class="sourceLine" id="cb419-32" title="32">  R[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb419-33" title="33"></a>
+<a class="sourceLine" id="cb419-34" title="34">  Sa1[<span class="dv">1</span>]&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb419-35" title="35">  Sa1[i]&lt;-ei <span class="op">+</span><span class="st"> </span>a1<span class="op">*</span>Sa1[i<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb419-36" title="36">  Na1[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb419-37" title="37">  Na1[i]&lt;-<span class="dv">1</span><span class="op">+</span>a1<span class="op">*</span>Na1[i<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb419-38" title="38">  Ma1&lt;-Sa1[i]<span class="op">/</span>Na1[i]</a>
+<a class="sourceLine" id="cb419-39" title="39">  Sa2[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb419-40" title="40">  Sa2[i]&lt;-ei <span class="op">+</span><span class="st"> </span>a2<span class="op">*</span>Sa2[i<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb419-41" title="41">  Na2[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb419-42" title="42">  Na2[i]&lt;-<span class="dv">1</span><span class="op">+</span>a2<span class="op">*</span>Na2[i<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb419-43" title="43">  Ma2&lt;-Sa2[i]<span class="op">/</span>Na2[i]</a>
+<a class="sourceLine" id="cb419-44" title="44">  R[i]&lt;-Ma2<span class="op">/</span>Ma1</a>
+<a class="sourceLine" id="cb419-45" title="45">  </a>
+<a class="sourceLine" id="cb419-46" title="46">  <span class="co">## PH test ##</span></a>
+<a class="sourceLine" id="cb419-47" title="47">  SR[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb419-48" title="48">  SR[i]&lt;-SR[i<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>R[i]</a>
+<a class="sourceLine" id="cb419-49" title="49">  mT[<span class="dv">1</span>]&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb419-50" title="50">  mT[i]&lt;-mT[i<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>R[i] <span class="op">-</span><span class="st"> </span>SR[i]<span class="op">/</span>i <span class="op">-</span><span class="st"> </span>g</a>
+<a class="sourceLine" id="cb419-51" title="51">  MT&lt;-<span class="kw">min</span>(<span class="kw">c</span>(MT,mT[i]))</a>
+<a class="sourceLine" id="cb419-52" title="52">  </a>
+<a class="sourceLine" id="cb419-53" title="53">  <span class="cf">if</span>(mT[i]<span class="op">-</span>MT <span class="op">&gt;=</span><span class="st"> </span>l)</a>
+<a class="sourceLine" id="cb419-54" title="54">  {drift =<span class="st"> </span><span class="ot">TRUE</span>} <span class="cf">else</span> {drift =<span class="st"> </span><span class="ot">FALSE</span>}</a>
+<a class="sourceLine" id="cb419-55" title="55">  </a>
+<a class="sourceLine" id="cb419-56" title="56">  <span class="kw">points</span>(<span class="dt">x=</span>i,<span class="dt">y=</span>drift,<span class="dt">pch=</span><span class="dv">20</span>,<span class="dt">cex=</span>.<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb419-57" title="57">}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-286-1.png" width="672" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>

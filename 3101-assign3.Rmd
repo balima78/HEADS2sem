@@ -1,0 +1,90 @@
+## Assignment feature selection
+
+2020-05-11
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### Boruta Package in R
+
+**113 patients at the Los Angeles County Hospital Shock Unit (afifi.sav)**
+
+Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HGB1, HCT1)
+
+Read data
+```{r}
+library(haven)
+data2 <- read_sav("2.UploadedData/afifi.sav")
+data2<-as.data.frame(data2)
+
+str(data2)
+```
+
+Implement Boruta
+```{r, echo = F}
+#select only complete cases
+data2<-data2[complete.cases(data2),]
+
+library(Boruta)
+
+boruta <- Boruta(HGB2~., data = data2, doTrace = 2)
+```
+
+results from boruta
+```{r}
+library(printr)
+print(boruta)
+```
+
+selected features
+```{r}
+plot(boruta, xlab = "", xaxt = "n")
+
+lz<-lapply(1:ncol(boruta$ImpHistory),function(i) boruta$ImpHistory[is.finite(boruta$ImpHistory[,i]),i])
+names(lz) <- colnames(boruta$ImpHistory)
+Labels <- sort(sapply(lz,median))
+axis(side = 1,las=2,labels = names(Labels),
+     at = 1:ncol(boruta$ImpHistory), cex.axis = 0.7)
+
+print(getSelectedAttributes(boruta))
+```
+
+Extract attribute statistics
+```{r}
+attStats(boruta)
+```
+
+with the selected features, **fit a linear model**
+```{r}
+
+#form<-getConfirmedFormula(boruta)
+form<-getNonRejectedFormula(boruta)
+
+model<-lm(form, data = data2)
+
+library(broom)
+tidy(model)
+glance(model)
+
+print(form)
+```
+
+plot model assumptions
+```{r}
+par(mfrow=c(2,2))
+
+plot(model)
+```
+
+references
+
+https://www.analyticsvidhya.com/blog/2016/03/select-important-variables-boruta-package/
+
+https://www.andreaperlato.com/mlpost/feature-selection-using-boruta-algorithm/
+
+https://earlglynn.github.io/RNotes/package/Boruta/index.html
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+
