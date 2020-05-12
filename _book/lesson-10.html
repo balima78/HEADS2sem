@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-11" />
+<meta name="date" content="2020-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,6 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
@@ -240,6 +241,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="lesson-7-2.html"><a href="lesson-7-2.html"><i class="fa fa-check"></i><b>5.2</b> Lesson 7</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="lesson-7-2.html"><a href="lesson-7-2.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
 </ul></li>
+<li class="chapter" data-level="5.3" data-path="lesson-12.html"><a href="lesson-12.html"><i class="fa fa-check"></i><b>5.3</b> Lesson 12</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="lesson-12.html"><a href="lesson-12.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
 <li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
@@ -277,24 +281,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>To evaluate if Sense Age is associated with internet usage in the elderly adjusting for SHLT</li>
 </ul>
 <p>Read data</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(foreign)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3">data &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/internet.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## re-encoding from UTF-8</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">data&lt;-<span class="kw">as.data.frame</span>(data)</a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">str</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1"><span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb282-2" title="2"></a>
+<a class="sourceLine" id="cb282-3" title="3">data &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/internet.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb282-4" title="4"></a>
+<a class="sourceLine" id="cb282-5" title="5">data&lt;-<span class="kw">as.data.frame</span>(data)</a>
+<a class="sourceLine" id="cb282-6" title="6"></a>
+<a class="sourceLine" id="cb282-7" title="7"><span class="kw">str</span>(data)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    42 obs. of  4 variables:
 ##  $ ID      : num  1 1 2 2 3 3 4 4 5 5 ...
 ##  $ SAGE    : num  60 82 50 75 40 50 77 80 60 74 ...
 ##  $ INTERNET: num  1 0 1 0 1 0 1 0 1 0 ...
 ##  $ SHLT    : num  1 1 4 4 3 3 3 3 3 4 ...</code></pre>
 <p>Conditional Logistic model</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(survival)</a>
-<a class="sourceLine" id="cb7-2" title="2"></a>
-<a class="sourceLine" id="cb7-3" title="3">model&lt;-<span class="kw">clogit</span>(INTERNET<span class="op">~</span>SAGE<span class="op">+</span>SHLT<span class="op">+</span><span class="kw">strata</span>(ID), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb7-4" title="4"></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" title="1"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb284-2" title="2"></a>
+<a class="sourceLine" id="cb284-3" title="3">model&lt;-<span class="kw">clogit</span>(INTERNET<span class="op">~</span>SAGE<span class="op">+</span>SHLT<span class="op">+</span><span class="kw">strata</span>(ID), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb284-4" title="4"></a>
+<a class="sourceLine" id="cb284-5" title="5"><span class="kw">summary</span>(model)</a></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(rep(1, 42L), INTERNET) ~ SAGE + SHLT + strata(ID), 
 ##     data = data, method = &quot;exact&quot;)

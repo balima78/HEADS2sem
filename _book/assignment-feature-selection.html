@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-11" />
+<meta name="date" content="2020-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,6 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
@@ -240,6 +241,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="lesson-7-2.html"><a href="lesson-7-2.html"><i class="fa fa-check"></i><b>5.2</b> Lesson 7</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="lesson-7-2.html"><a href="lesson-7-2.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
 </ul></li>
+<li class="chapter" data-level="5.3" data-path="lesson-12.html"><a href="lesson-12.html"><i class="fa fa-check"></i><b>5.3</b> Lesson 12</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="lesson-12.html"><a href="lesson-12.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
 <li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
@@ -275,11 +279,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>113 patients at the Los Angeles County Hospital Shock Unit (afifi.sav)</strong></p>
 <p>Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HGB1, HCT1)</p>
 <p>Read data</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(haven)</a>
-<a class="sourceLine" id="cb3-2" title="2">data2 &lt;-<span class="st"> </span><span class="kw">read_sav</span>(<span class="st">&quot;2.UploadedData/afifi.sav&quot;</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3">data2&lt;-<span class="kw">as.data.frame</span>(data2)</a>
-<a class="sourceLine" id="cb3-4" title="4"></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="kw">str</span>(data2)</a></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" title="1"><span class="kw">library</span>(haven)</a>
+<a class="sourceLine" id="cb286-2" title="2">data2 &lt;-<span class="st"> </span><span class="kw">read_sav</span>(<span class="st">&quot;2.UploadedData/afifi.sav&quot;</span>)</a>
+<a class="sourceLine" id="cb286-3" title="3">data2&lt;-<span class="kw">as.data.frame</span>(data2)</a>
+<a class="sourceLine" id="cb286-4" title="4"></a>
+<a class="sourceLine" id="cb286-5" title="5"><span class="kw">str</span>(data2)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    113 obs. of  17 variables:
 ##  $ IDNUM    : num  340 412 426 444 515 517 518 522 526 527 ...
 ##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
@@ -334,27 +338,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   ..- attr(*, &quot;display_width&quot;)= int 7</code></pre>
 <p>Implement Boruta</p>
 <p>results from boruta</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(printr)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">print</span>(boruta)</a></code></pre></div>
-<pre><code>## Boruta performed 99 iterations in 13.35349 secs.
-##  6 attributes confirmed important: AGE, BSA1, CARDIAC1, CIRCTIME1,
-## HCT1 and 1 more;
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="kw">library</span>(printr)</a>
+<a class="sourceLine" id="cb288-2" title="2"><span class="kw">print</span>(boruta)</a></code></pre></div>
+<pre><code>## Boruta performed 99 iterations in 14.83403 secs.
+##  5 attributes confirmed important: AGE, CARDIAC1, CIRCTIME1, HCT1,
+## REDCELL1;
 ##  7 attributes confirmed unimportant: CVP1, HEART1, IDNUM,
 ## PLASVOL1, SBP1 and 2 more;
-##  3 tentative attributes left: APPTIME1, DBP1, MAP1;</code></pre>
+##  4 tentative attributes left: APPTIME1, BSA1, DBP1, MAP1;</code></pre>
 <p>selected features</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">plot</span>(boruta, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2"></a>
-<a class="sourceLine" id="cb7-3" title="3">lz&lt;-<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(boruta<span class="op">$</span>ImpHistory),<span class="cf">function</span>(i) boruta<span class="op">$</span>ImpHistory[<span class="kw">is.finite</span>(boruta<span class="op">$</span>ImpHistory[,i]),i])</a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="kw">names</span>(lz) &lt;-<span class="st"> </span><span class="kw">colnames</span>(boruta<span class="op">$</span>ImpHistory)</a>
-<a class="sourceLine" id="cb7-5" title="5">Labels &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sapply</span>(lz,median))</a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>,<span class="dt">las=</span><span class="dv">2</span>,<span class="dt">labels =</span> <span class="kw">names</span>(Labels),</a>
-<a class="sourceLine" id="cb7-7" title="7">     <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(boruta<span class="op">$</span>ImpHistory), <span class="dt">cex.axis =</span> <span class="fl">0.7</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">print</span>(<span class="kw">getSelectedAttributes</span>(boruta))</a></code></pre></div>
-<pre><code>## [1] &quot;AGE&quot;       &quot;BSA1&quot;      &quot;CARDIAC1&quot;  &quot;CIRCTIME1&quot; &quot;REDCELL1&quot;  &quot;HCT1&quot;</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" title="1"><span class="kw">plot</span>(boruta, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb290-2" title="2"></a>
+<a class="sourceLine" id="cb290-3" title="3">lz&lt;-<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(boruta<span class="op">$</span>ImpHistory),<span class="cf">function</span>(i) boruta<span class="op">$</span>ImpHistory[<span class="kw">is.finite</span>(boruta<span class="op">$</span>ImpHistory[,i]),i])</a>
+<a class="sourceLine" id="cb290-4" title="4"><span class="kw">names</span>(lz) &lt;-<span class="st"> </span><span class="kw">colnames</span>(boruta<span class="op">$</span>ImpHistory)</a>
+<a class="sourceLine" id="cb290-5" title="5">Labels &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sapply</span>(lz,median))</a>
+<a class="sourceLine" id="cb290-6" title="6"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>,<span class="dt">las=</span><span class="dv">2</span>,<span class="dt">labels =</span> <span class="kw">names</span>(Labels),</a>
+<a class="sourceLine" id="cb290-7" title="7">     <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(boruta<span class="op">$</span>ImpHistory), <span class="dt">cex.axis =</span> <span class="fl">0.7</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1"><span class="kw">print</span>(<span class="kw">getSelectedAttributes</span>(boruta))</a></code></pre></div>
+<pre><code>## [1] &quot;AGE&quot;       &quot;CARDIAC1&quot;  &quot;CIRCTIME1&quot; &quot;REDCELL1&quot;  &quot;HCT1&quot;</code></pre>
 <p>Extract attribute statistics</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">attStats</span>(boruta)</a></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="kw">attStats</span>(boruta)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -370,158 +374,158 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td>IDNUM</td>
-<td align="right">0.1517117</td>
-<td align="right">0.0803603</td>
-<td align="right">-1.4920616</td>
-<td align="right">1.900130</td>
+<td align="right">0.1473461</td>
+<td align="right">0.4062690</td>
+<td align="right">-2.2900612</td>
+<td align="right">1.9708158</td>
 <td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="even">
 <td>AGE</td>
-<td align="right">4.1422943</td>
-<td align="right">4.0776834</td>
-<td align="right">1.0791020</td>
-<td align="right">7.379167</td>
-<td align="right">0.7575758</td>
+<td align="right">4.1293472</td>
+<td align="right">4.1108677</td>
+<td align="right">0.9760621</td>
+<td align="right">7.5978631</td>
+<td align="right">0.7171717</td>
 <td align="left">Confirmed</td>
 </tr>
 <tr class="odd">
 <td>SEX</td>
-<td align="right">-0.2607136</td>
-<td align="right">-0.8409850</td>
-<td align="right">-1.4101121</td>
-<td align="right">1.570998</td>
+<td align="right">-0.4363506</td>
+<td align="right">-0.7385775</td>
+<td align="right">-1.5190680</td>
+<td align="right">1.0372338</td>
 <td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="even">
 <td>SBP1</td>
-<td align="right">1.8196701</td>
-<td align="right">1.9473977</td>
-<td align="right">-0.3593812</td>
-<td align="right">3.840676</td>
-<td align="right">0.1717172</td>
+<td align="right">1.2675332</td>
+<td align="right">1.3136094</td>
+<td align="right">-0.9877035</td>
+<td align="right">2.8263270</td>
+<td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="odd">
 <td>MAP1</td>
-<td align="right">3.4778558</td>
-<td align="right">3.3648401</td>
-<td align="right">1.4097679</td>
-<td align="right">5.636677</td>
+<td align="right">3.2799824</td>
+<td align="right">3.2208108</td>
+<td align="right">1.2710892</td>
+<td align="right">8.1144665</td>
 <td align="right">0.6060606</td>
 <td align="left">Tentative</td>
 </tr>
 <tr class="even">
 <td>HEART1</td>
-<td align="right">0.2100310</td>
-<td align="right">-0.0000978</td>
-<td align="right">-1.0207458</td>
-<td align="right">3.300966</td>
+<td align="right">0.4802892</td>
+<td align="right">0.2703868</td>
+<td align="right">-0.8675089</td>
+<td align="right">2.9051318</td>
 <td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="odd">
 <td>DBP1</td>
-<td align="right">2.4726025</td>
-<td align="right">2.5130919</td>
-<td align="right">0.2023409</td>
-<td align="right">6.169704</td>
-<td align="right">0.4545455</td>
+<td align="right">2.2732396</td>
+<td align="right">2.1263872</td>
+<td align="right">0.0189792</td>
+<td align="right">5.9360089</td>
+<td align="right">0.3434343</td>
 <td align="left">Tentative</td>
 </tr>
 <tr class="even">
 <td>CVP1</td>
-<td align="right">-0.9402480</td>
-<td align="right">-1.2262371</td>
-<td align="right">-2.5951477</td>
-<td align="right">1.887657</td>
+<td align="right">-0.2915782</td>
+<td align="right">-0.5958642</td>
+<td align="right">-1.9801162</td>
+<td align="right">1.8558854</td>
 <td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="odd">
 <td>BSA1</td>
-<td align="right">3.4328202</td>
-<td align="right">3.4341716</td>
-<td align="right">0.7461243</td>
-<td align="right">6.264958</td>
-<td align="right">0.6464646</td>
-<td align="left">Confirmed</td>
+<td align="right">3.3493170</td>
+<td align="right">3.2751972</td>
+<td align="right">1.5107522</td>
+<td align="right">7.1322729</td>
+<td align="right">0.6161616</td>
+<td align="left">Tentative</td>
 </tr>
 <tr class="even">
 <td>CARDIAC1</td>
-<td align="right">4.5280848</td>
-<td align="right">4.5563930</td>
-<td align="right">2.0821596</td>
-<td align="right">7.871692</td>
-<td align="right">0.8080808</td>
+<td align="right">4.4206597</td>
+<td align="right">4.3992274</td>
+<td align="right">2.2478339</td>
+<td align="right">6.4482453</td>
+<td align="right">0.7878788</td>
 <td align="left">Confirmed</td>
 </tr>
 <tr class="odd">
 <td>APPTIME1</td>
-<td align="right">2.6927184</td>
-<td align="right">2.5183289</td>
-<td align="right">-0.0123265</td>
-<td align="right">6.309094</td>
-<td align="right">0.4242424</td>
+<td align="right">2.6313731</td>
+<td align="right">2.5778063</td>
+<td align="right">0.4829264</td>
+<td align="right">5.2601524</td>
+<td align="right">0.4141414</td>
 <td align="left">Tentative</td>
 </tr>
 <tr class="even">
 <td>CIRCTIME1</td>
-<td align="right">7.7656487</td>
-<td align="right">7.7370969</td>
-<td align="right">5.3463866</td>
-<td align="right">9.907827</td>
+<td align="right">7.7565666</td>
+<td align="right">7.7979221</td>
+<td align="right">5.6473791</td>
+<td align="right">10.0225069</td>
 <td align="right">0.9797980</td>
 <td align="left">Confirmed</td>
 </tr>
 <tr class="odd">
 <td>URINE1</td>
-<td align="right">-0.2501776</td>
-<td align="right">-0.2991546</td>
-<td align="right">-1.3503917</td>
-<td align="right">1.069198</td>
+<td align="right">-0.3816787</td>
+<td align="right">-0.2914073</td>
+<td align="right">-1.2744776</td>
+<td align="right">0.3743351</td>
 <td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="even">
 <td>PLASVOL1</td>
-<td align="right">0.9275072</td>
-<td align="right">0.9716013</td>
-<td align="right">-0.8665025</td>
-<td align="right">2.693182</td>
-<td align="right">0.0202020</td>
+<td align="right">1.6590866</td>
+<td align="right">1.6356248</td>
+<td align="right">-0.6676299</td>
+<td align="right">3.3260795</td>
+<td align="right">0.0000000</td>
 <td align="left">Rejected</td>
 </tr>
 <tr class="odd">
 <td>REDCELL1</td>
-<td align="right">4.0883848</td>
-<td align="right">3.9670301</td>
-<td align="right">1.6512573</td>
-<td align="right">6.462257</td>
-<td align="right">0.7676768</td>
+<td align="right">4.2309630</td>
+<td align="right">4.1903148</td>
+<td align="right">1.3766086</td>
+<td align="right">6.8995463</td>
+<td align="right">0.7373737</td>
 <td align="left">Confirmed</td>
 </tr>
 <tr class="even">
 <td>HCT1</td>
-<td align="right">8.7798827</td>
-<td align="right">8.6758768</td>
-<td align="right">6.8505330</td>
-<td align="right">11.551838</td>
-<td align="right">0.9898990</td>
+<td align="right">8.7953939</td>
+<td align="right">8.6546255</td>
+<td align="right">6.6957330</td>
+<td align="right">10.8857185</td>
+<td align="right">1.0000000</td>
 <td align="left">Confirmed</td>
 </tr>
 </tbody>
 </table>
 <p>with the selected features, <strong>fit a linear model</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">#form&lt;-getConfirmedFormula(boruta)</span></a>
-<a class="sourceLine" id="cb11-2" title="2">form&lt;-<span class="kw">getNonRejectedFormula</span>(boruta)</a>
-<a class="sourceLine" id="cb11-3" title="3"></a>
-<a class="sourceLine" id="cb11-4" title="4">model&lt;-<span class="kw">lm</span>(form, <span class="dt">data =</span> data2)</a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="kw">library</span>(broom)</a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="kw">tidy</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1"><span class="co">#form&lt;-getConfirmedFormula(boruta)</span></a>
+<a class="sourceLine" id="cb294-2" title="2">form&lt;-<span class="kw">getNonRejectedFormula</span>(boruta)</a>
+<a class="sourceLine" id="cb294-3" title="3"></a>
+<a class="sourceLine" id="cb294-4" title="4">model&lt;-<span class="kw">lm</span>(form, <span class="dt">data =</span> data2)</a>
+<a class="sourceLine" id="cb294-5" title="5"></a>
+<a class="sourceLine" id="cb294-6" title="6"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb294-7" title="7"><span class="kw">tidy</span>(model)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -605,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">glance</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1"><span class="kw">glance</span>(model)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -628,7 +632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">0.2898084</td>
 <td align="right">1.649498</td>
 <td align="right">5.715485</td>
-<td align="right">2.6e-06</td>
+<td align="right">0.0000026</td>
 <td align="right">10</td>
 <td align="right">-196.2836</td>
 <td align="right">414.5672</td>
@@ -638,15 +642,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">print</span>(form)</a></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1"><span class="kw">print</span>(form)</a></code></pre></div>
 <pre><code>## HGB2 ~ AGE + MAP1 + DBP1 + BSA1 + CARDIAC1 + APPTIME1 + CIRCTIME1 + 
 ##     REDCELL1 + HCT1
-## &lt;environment: 0x000000001a0d3df8&gt;</code></pre>
+## &lt;environment: 0x0000000030f604b8&gt;</code></pre>
 <p>plot model assumptions</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb15-2" title="2"></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="kw">plot</span>(model)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb298-2" title="2"></a>
+<a class="sourceLine" id="cb298-3" title="3"><span class="kw">plot</span>(model)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
 <p>references</p>
 <p><a href="https://www.analyticsvidhya.com/blog/2016/03/select-important-variables-boruta-package/" class="uri">https://www.analyticsvidhya.com/blog/2016/03/select-important-variables-boruta-package/</a></p>
 <p><a href="https://www.andreaperlato.com/mlpost/feature-selection-using-boruta-algorithm/" class="uri">https://www.andreaperlato.com/mlpost/feature-selection-using-boruta-algorithm/</a></p>

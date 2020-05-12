@@ -1,0 +1,27 @@
+net 
+{ 
+}
+node wine 
+{
+  states = ( "FALSE" "TRUE" );
+}
+node mi 
+{
+  states = ( "FALSE" "TRUE" );
+}
+node smoking 
+{
+  states = ( "FALSE" "TRUE" );
+}
+potential ( wine ) 
+{
+  data = ( 0.5 0.5 );
+}
+potential ( mi | wine smoking ) 
+{
+  data = (((0.6470588 0.3529412)(0.3333333 0.6666667))((0.75 0.25)(0.3461538 0.6538462))) ;
+}
+potential ( smoking ) 
+{
+  data = ( 0.4916667 0.5083333 );
+}

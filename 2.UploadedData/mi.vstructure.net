@@ -1,0 +1,47 @@
+net
+{
+	zcenginegenerator6314619632174047614L = "edu.ucla.belief.inference.JoinTreeSettings@1417b2d";
+}
+
+node wine
+{
+	states = ("TRUE" "FALSE" );
+	position = (293 -22);
+	ismapvariable = "false";
+	label = "wine";
+	diagnosistype = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node mi
+{
+	states = ("TRUE" "FALSE" );
+	position = (194 -102);
+	ismapvariable = "false";
+	label = "mi";
+	diagnosistype = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node smoking
+{
+	states = ("TRUE" "FALSE" );
+	position = (71 -26);
+	ismapvariable = "false";
+	label = "smoking";
+	diagnosistype = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+potential ( wine | )
+{
+	data = (	0.5	0.5	);
+}
+potential ( mi | wine smoking )
+{
+	data = (((	0.5	0.5	)
+		(	0.5	0.5	))
+		((	0.5	0.5	)
+		(	0.5	0.5	)));
+}
+potential ( smoking | )
+{
+	data = (	0.51	0.49	);
+}

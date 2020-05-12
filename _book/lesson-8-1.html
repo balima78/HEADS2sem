@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-11" />
+<meta name="date" content="2020-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -199,8 +199,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="lesson-9.html"><a href="lesson-9.html"><i class="fa fa-check"></i><b>3.10</b> Lesson 9</a><ul>
 <li class="chapter" data-level="3.10.1" data-path="lesson-9.html"><a href="lesson-9.html#exercises"><i class="fa fa-check"></i><b>3.10.1</b> exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>3.11</b> Lesson 9</a><ul>
-<li class="chapter" data-level="3.11.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#conditional-logistic-regression"><i class="fa fa-check"></i><b>3.11.1</b> Conditional Logistic Regression</a></li>
+<li class="chapter" data-level="3.11" data-path="lesson-10.html"><a href="lesson-10.html"><i class="fa fa-check"></i><b>3.11</b> Lesson 10</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="lesson-10.html"><a href="lesson-10.html#conditional-logistic-regression"><i class="fa fa-check"></i><b>3.11.1</b> Conditional Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="3.12" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.12</b> Assignment feature selection</a><ul>
 <li class="chapter" data-level="3.12.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.12.1</b> Boruta Package in R</a></li>
@@ -241,6 +241,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="lesson-7-2.html"><a href="lesson-7-2.html"><i class="fa fa-check"></i><b>5.2</b> Lesson 7</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="lesson-7-2.html"><a href="lesson-7-2.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
 </ul></li>
+<li class="chapter" data-level="5.3" data-path="lesson-12.html"><a href="lesson-12.html"><i class="fa fa-check"></i><b>5.3</b> Lesson 12</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="lesson-12.html"><a href="lesson-12.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
 <li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
@@ -275,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.10.1</span> Unsupervised Machine Learning - Clustering and Association Rules</h3>
 <p>Consider the the Cervical Cancer (Risk Factors) data set (available from UCI repository) and exploit the data using association rules (for binary variables) and clustering (for continuous variables).</p>
 <p>Read data</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" title="1"><span class="co"># factoriza variables</span></a></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" title="1"><span class="co"># factoriza variables</span></a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    858 obs. of  36 variables:
 ##  $ Age                               : int  18 15 34 52 46 42 51 26 45 44 ...
 ##  $ Number.of.sexual.partners         : num  4 1 1 5 3 3 3 1 1 3 ...
@@ -353,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sorting and recoding items ... [7 item(s)] done [0.00s].
 ## creating transaction tree ... done [0.00s].
 ## checking subsets of size 1 2 3 4 5 6 7 done [0.00s].
-## writing ... [448 rule(s)] done [0.00s].
+## writing ... [448 rule(s)] done [0.01s].
 ## creating S4 object  ... done [0.00s].</code></pre>
 <pre><code>##      lhs               rhs            support confidence     lift count
 ## [1]  {Dx.HPV=0,                                                        

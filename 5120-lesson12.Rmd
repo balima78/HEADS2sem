@@ -1,0 +1,63 @@
+## Lesson 12
+
+2020-05-12
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### Inference in Bayesian nets
+
+Exercise from class:
+
+Design the network with SamIam and fit the conditional probabilities with *R*
+
+Read the network designed with SamIam
+```{r}
+library(bnlearn)
+mi.net<-read.net("2.UploadedData/mi.vstructure.net")
+```
+
+see the conditional probabilities defined
+```{r}
+mi.net
+```
+
+make a graph object
+```{r}
+mi.graph<-bn.net(mi.net)
+
+plot(mi.graph)
+```
+
+Read the data to fit the network
+```{r}
+data<-read.csv("2.UploadedData/mi.dat")
+
+summary(data)
+```
+
+factorize variables
+```{r}
+data <- as.data.frame(apply(data,2, as.factor))
+```
+
+fit this network with the data we have
+```{r}
+mi.fit<-bn.fit(mi.graph,data)
+```
+
+see the new conditional probabilities fitted from the data
+```{r}
+mi.fit
+
+# export the results
+write.net(mi.fit,file="mi.fitinR.net")
+```
+
+Again in SamIam, we can see the results in a graph and play with the options
+![graph from SamIam](images/mi.graph.jpg)
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
