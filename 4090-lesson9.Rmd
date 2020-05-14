@@ -1,0 +1,170 @@
+## Lesson 9
+
+2020-05-12
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+Read data and packages
+```{r}
+### Packages
+
+# Load package 'caret'
+library(caret)
+# Load package 'ellipse'
+library(ellipse)
+# Load package 'e1071'
+library("e1071")
+# Load package 'pROC'
+library(pROC)
+
+### Data
+
+data(iris)
+
+attach(iris)
+
+x <- subset(iris, select=-Species)
+y <- Species
+```
+
+plot correlation between features classified by the outcome
+```{r}
+par(mfrow=c(1,1))
+
+featurePlot(x=x, y=y, plot="ellipse")
+```
+
+Identify species according to Petals width and length
+```{r}
+plot(x=Petal.Length, y=Petal.Width, col=Species, pch=20,
+     axes=F, main="Iris Data Set", ylab="Petal Width", xlab="Petal Length")
+legend(x=4, y=0.5, cex=.8, legend=levels(Species), col=1:3, pch=20)
+axis(1)
+axis(2)
+```
+
+### SVM classification
+
+#### Linear - 2 features
+```{r}
+svm.iris.linear <- svm(Species ~ Petal.Width + Petal.Length, data=iris, kernel="linear")
+summary(svm.iris.linear)
+```
+
+accuracy
+```{r}
+pred.linear <- predict(svm.iris.linear,x)
+print(table(pred.linear,y))
+```
+
+classification plot
+```{r}
+plot(svm.iris.linear, 
+     data = iris,
+     Petal.Width ~ Petal.Length,
+     svSymbol = 17, 
+     dataSymbol = 20, 
+     symbolPalette = c(3,2,4),
+     cex=2,
+     color.palette=grey.colors)
+```
+
+#### Linear - 4 features
+```{r}
+svm.iris.linear.all <- svm(Species ~ ., data=iris, kernel="linear")
+summary(svm.iris.linear.all)
+```
+
+accuracy
+```{r}
+pred.all <- predict(svm.iris.linear.all,x)
+print(table(pred.all,y))
+```
+
+classification plot
+```{r}
+plot(svm.iris.linear.all, 
+     data = iris,
+     Petal.Width ~ Petal.Length, # para ver em 2D é preciso escolher duas variaveis
+     svSymbol = 17, 
+     dataSymbol = 20, 
+     symbolPalette = c(3,2,4),
+     cex=2,
+     color.palette=grey.colors,
+     slice = list(Sepal.Width = 3, Sepal.Length = 6.0)) # fixam-se as duas variaveis que não estão disponiveis
+
+```
+
+#### Radial - 2 features
+```{r}
+svm.iris <- svm(Species ~ Petal.Width + Petal.Length, data=iris)
+summary(svm.iris)
+```
+
+accuracy
+```{r}
+pred <- predict(svm.iris,x)
+print(table(pred,y))
+```
+
+classification plot
+```{r}
+plot(svm.iris, 
+     data = iris,
+     Petal.Width ~ Petal.Length,
+     svSymbol = 17, 
+     dataSymbol = 20, 
+     symbolPalette = c(3,2,4),
+     cex=2,
+     color.palette=grey.colors)
+```
+
+#### Radial - 4 features
+```{r}
+svm.iris.all <- svm(Species ~ ., data=iris)
+summary(svm.iris.all)
+```
+
+accuracy
+```{r}
+pred.all <- predict(svm.iris.all,x)
+print(table(pred.all,y))
+``` 
+
+classification plot
+```{r}
+plot(svm.iris.all, 
+     data = iris,
+     Petal.Width ~ Petal.Length, # para ver em 2D seleccionam-se duas variaveis
+     svSymbol = 17, 
+     dataSymbol = 20, 
+     symbolPalette = c(3,2,4),
+     cex=2,
+     color.palette=grey.colors,
+     slice = list(Sepal.Width = 2.5, Sepal.Length = 3.5)) # as restantes variaveis são fixas para determinados valores
+```
+
+#### Tuning SVM parameters
+```{r}
+set.seed(523)
+svm.tune <- tune(svm, train.x=x, train.y=y, 
+                 kernel="radial", ranges=list(cost=10^(-1:2), gamma=c(.5,1,2)))
+
+print(svm.tune)
+```
+
+with the best parameters (cost, gamma) fit a SVM
+```{r}
+svm.iris.tuned <- svm(Species ~ ., data=iris, kernel="radial", cost=1, gamma=0.5)
+summary(svm.iris.tuned)
+```
+
+accuracy
+```{r}
+pred.tuned <- predict(svm.iris.tuned,x)
+print(table(pred.tuned,y))
+```
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
