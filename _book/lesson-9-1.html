@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.12 Lesson 9 | HEADS 2nd semester</title>
+  <title>4.11 Lesson 9 | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.12 Lesson 9 | HEADS 2nd semester" />
+  <meta property="og:title" content="4.11 Lesson 9 | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.12 Lesson 9 | HEADS 2nd semester" />
+  <meta name="twitter:title" content="4.11 Lesson 9 | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="assignment-svm.html"/>
-<link rel="next" href="bayes.html"/>
+<link rel="prev" href="lesson-8-1.html"/>
+<link rel="next" href="assignment-svm.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -132,6 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
@@ -232,10 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.10" data-path="lesson-8-1.html"><a href="lesson-8-1.html"><i class="fa fa-check"></i><b>4.10</b> Lesson 8</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="lesson-8-1.html"><a href="lesson-8-1.html#unsupervised-machine-learning---clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Unsupervised Machine Learning - Clustering and Association Rules</a></li>
 </ul></li>
-<li class="chapter" data-level="4.11" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.11</b> Assignment SVM</a></li>
-<li class="chapter" data-level="4.12" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>4.12</b> Lesson 9</a><ul>
-<li class="chapter" data-level="4.12.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#svm-classification"><i class="fa fa-check"></i><b>4.12.1</b> SVM classification</a></li>
+<li class="chapter" data-level="4.11" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>4.11</b> Lesson 9</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
 </ul></li>
+<li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
@@ -275,46 +276,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="lesson-9-1" class="section level2">
-<h2><span class="header-section-number">4.12</span> Lesson 9</h2>
+<h2><span class="header-section-number">4.11</span> Lesson 9</h2>
 <p>2020-05-12</p>
 <p>Read data and packages</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">### Packages</span></a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># Load package &#39;caret&#39;</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co"># Load package &#39;ellipse&#39;</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="kw">library</span>(ellipse)</a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co"># Load package &#39;e1071&#39;</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="kw">library</span>(<span class="st">&quot;e1071&quot;</span>)</a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co"># Load package &#39;pROC&#39;</span></a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb3-11" title="11"></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">### Data</span></a>
-<a class="sourceLine" id="cb3-13" title="13"></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="kw">data</span>(iris)</a>
-<a class="sourceLine" id="cb3-15" title="15"></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="kw">attach</span>(iris)</a>
-<a class="sourceLine" id="cb3-17" title="17"></a>
-<a class="sourceLine" id="cb3-18" title="18">x &lt;-<span class="st"> </span><span class="kw">subset</span>(iris, <span class="dt">select=</span><span class="op">-</span>Species)</a>
-<a class="sourceLine" id="cb3-19" title="19">y &lt;-<span class="st"> </span>Species</a></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="co">### Packages</span></a>
+<a class="sourceLine" id="cb428-2" title="2"></a>
+<a class="sourceLine" id="cb428-3" title="3"><span class="co"># Load package &#39;caret&#39;</span></a>
+<a class="sourceLine" id="cb428-4" title="4"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb428-5" title="5"><span class="co"># Load package &#39;ellipse&#39;</span></a>
+<a class="sourceLine" id="cb428-6" title="6"><span class="kw">library</span>(ellipse)</a>
+<a class="sourceLine" id="cb428-7" title="7"><span class="co"># Load package &#39;e1071&#39;</span></a>
+<a class="sourceLine" id="cb428-8" title="8"><span class="kw">library</span>(<span class="st">&quot;e1071&quot;</span>)</a>
+<a class="sourceLine" id="cb428-9" title="9"><span class="co"># Load package &#39;pROC&#39;</span></a>
+<a class="sourceLine" id="cb428-10" title="10"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb428-11" title="11"></a>
+<a class="sourceLine" id="cb428-12" title="12"><span class="co">### Data</span></a>
+<a class="sourceLine" id="cb428-13" title="13"></a>
+<a class="sourceLine" id="cb428-14" title="14"><span class="kw">data</span>(iris)</a>
+<a class="sourceLine" id="cb428-15" title="15"></a>
+<a class="sourceLine" id="cb428-16" title="16"><span class="kw">attach</span>(iris)</a>
+<a class="sourceLine" id="cb428-17" title="17"></a>
+<a class="sourceLine" id="cb428-18" title="18">x &lt;-<span class="st"> </span><span class="kw">subset</span>(iris, <span class="dt">select=</span><span class="op">-</span>Species)</a>
+<a class="sourceLine" id="cb428-19" title="19">y &lt;-<span class="st"> </span>Species</a></code></pre></div>
 <p>plot correlation between features classified by the outcome</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;ellipse&quot;</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb429-2" title="2"></a>
+<a class="sourceLine" id="cb429-3" title="3"><span class="kw">featurePlot</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">plot=</span><span class="st">&quot;ellipse&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
 <p>Identify species according to Petals width and length</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>Petal.Length, <span class="dt">y=</span>Petal.Width, <span class="dt">col=</span>Species, <span class="dt">pch=</span><span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb5-2" title="2">     <span class="dt">axes=</span>F, <span class="dt">main=</span><span class="st">&quot;Iris Data Set&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Petal Width&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Petal Length&quot;</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">4</span>, <span class="dt">y=</span><span class="fl">0.5</span>, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">legend=</span><span class="kw">levels</span>(Species), <span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">pch=</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw">axis</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>Petal.Length, <span class="dt">y=</span>Petal.Width, <span class="dt">col=</span>Species, <span class="dt">pch=</span><span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb430-2" title="2">     <span class="dt">axes=</span>F, <span class="dt">main=</span><span class="st">&quot;Iris Data Set&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Petal Width&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Petal Length&quot;</span>)</a>
+<a class="sourceLine" id="cb430-3" title="3"><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">4</span>, <span class="dt">y=</span><span class="fl">0.5</span>, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">legend=</span><span class="kw">levels</span>(Species), <span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">pch=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb430-4" title="4"><span class="kw">axis</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb430-5" title="5"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
 <div id="svm-classification" class="section level3">
-<h3><span class="header-section-number">4.12.1</span> SVM classification</h3>
+<h3><span class="header-section-number">4.11.1</span> SVM classification</h3>
 <div id="linear---2-features" class="section level4">
-<h4><span class="header-section-number">4.12.1.1</span> Linear - 2 features</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">svm.iris.linear &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">+</span><span class="st"> </span>Petal.Length, <span class="dt">data=</span>iris, <span class="dt">kernel=</span><span class="st">&quot;linear&quot;</span>)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">summary</span>(svm.iris.linear)</a></code></pre></div>
+<h4><span class="header-section-number">4.11.1.1</span> Linear - 2 features</h4>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" title="1">svm.iris.linear &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">+</span><span class="st"> </span>Petal.Length, <span class="dt">data=</span>iris, <span class="dt">kernel=</span><span class="st">&quot;linear&quot;</span>)</a>
+<a class="sourceLine" id="cb431-2" title="2"><span class="kw">summary</span>(svm.iris.linear)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Species ~ Petal.Width + Petal.Length, data = iris, 
@@ -336,28 +337,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Levels: 
 ##  setosa versicolor virginica</code></pre>
 <p>accuracy</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">pred.linear &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.linear,x)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.linear,y))</a></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" title="1">pred.linear &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.linear,x)</a>
+<a class="sourceLine" id="cb433-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.linear,y))</a></code></pre></div>
 <pre><code>##             y
 ## pred.linear  setosa versicolor virginica
 ##   setosa         50          0         0
 ##   versicolor      0         47         4
 ##   virginica       0          3        46</code></pre>
 <p>classification plot</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">plot</span>(svm.iris.linear, </a>
-<a class="sourceLine" id="cb10-2" title="2">     <span class="dt">data =</span> iris,</a>
-<a class="sourceLine" id="cb10-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length,</a>
-<a class="sourceLine" id="cb10-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb10-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb10-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb10-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb10-8" title="8">     <span class="dt">color.palette=</span>grey.colors)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" title="1"><span class="kw">plot</span>(svm.iris.linear, </a>
+<a class="sourceLine" id="cb435-2" title="2">     <span class="dt">data =</span> iris,</a>
+<a class="sourceLine" id="cb435-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length,</a>
+<a class="sourceLine" id="cb435-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb435-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb435-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb435-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb435-8" title="8">     <span class="dt">color.palette=</span>grey.colors)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
 </div>
 <div id="linear---4-features" class="section level4">
-<h4><span class="header-section-number">4.12.1.2</span> Linear - 4 features</h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">svm.iris.linear.all &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">kernel=</span><span class="st">&quot;linear&quot;</span>)</a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">summary</span>(svm.iris.linear.all)</a></code></pre></div>
+<h4><span class="header-section-number">4.11.1.2</span> Linear - 4 features</h4>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" title="1">svm.iris.linear.all &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">kernel=</span><span class="st">&quot;linear&quot;</span>)</a>
+<a class="sourceLine" id="cb436-2" title="2"><span class="kw">summary</span>(svm.iris.linear.all)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Species ~ ., data = iris, kernel = &quot;linear&quot;)
@@ -378,29 +379,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Levels: 
 ##  setosa versicolor virginica</code></pre>
 <p>accuracy</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">pred.all &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.linear.all,x)</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.all,y))</a></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1">pred.all &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.linear.all,x)</a>
+<a class="sourceLine" id="cb438-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.all,y))</a></code></pre></div>
 <pre><code>##             y
 ## pred.all     setosa versicolor virginica
 ##   setosa         50          0         0
 ##   versicolor      0         46         1
 ##   virginica       0          4        49</code></pre>
 <p>classification plot</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">plot</span>(svm.iris.linear.all, </a>
-<a class="sourceLine" id="cb15-2" title="2">     <span class="dt">data =</span> iris,</a>
-<a class="sourceLine" id="cb15-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length, <span class="co"># para ver em 2D é preciso escolher duas variaveis</span></a>
-<a class="sourceLine" id="cb15-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb15-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb15-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb15-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb15-8" title="8">     <span class="dt">color.palette=</span>grey.colors,</a>
-<a class="sourceLine" id="cb15-9" title="9">     <span class="dt">slice =</span> <span class="kw">list</span>(<span class="dt">Sepal.Width =</span> <span class="dv">3</span>, <span class="dt">Sepal.Length =</span> <span class="fl">6.0</span>)) <span class="co"># fixam-se as duas variaveis que não estão disponiveis</span></a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="kw">plot</span>(svm.iris.linear.all, </a>
+<a class="sourceLine" id="cb440-2" title="2">     <span class="dt">data =</span> iris,</a>
+<a class="sourceLine" id="cb440-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length, <span class="co"># para ver em 2D é preciso escolher duas variaveis</span></a>
+<a class="sourceLine" id="cb440-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb440-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb440-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb440-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb440-8" title="8">     <span class="dt">color.palette=</span>grey.colors,</a>
+<a class="sourceLine" id="cb440-9" title="9">     <span class="dt">slice =</span> <span class="kw">list</span>(<span class="dt">Sepal.Width =</span> <span class="dv">3</span>, <span class="dt">Sepal.Length =</span> <span class="fl">6.0</span>)) <span class="co"># fixam-se as duas variaveis que não estão disponiveis</span></a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-302-1.png" width="672" /></p>
 </div>
 <div id="radial---2-features" class="section level4">
-<h4><span class="header-section-number">4.12.1.3</span> Radial - 2 features</h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">svm.iris &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">+</span><span class="st"> </span>Petal.Length, <span class="dt">data=</span>iris)</a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw">summary</span>(svm.iris)</a></code></pre></div>
+<h4><span class="header-section-number">4.11.1.3</span> Radial - 2 features</h4>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" title="1">svm.iris &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">+</span><span class="st"> </span>Petal.Length, <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb441-2" title="2"><span class="kw">summary</span>(svm.iris)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Species ~ Petal.Width + Petal.Length, data = iris)
@@ -421,28 +422,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Levels: 
 ##  setosa versicolor virginica</code></pre>
 <p>accuracy</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris,x)</a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred,y))</a></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris,x)</a>
+<a class="sourceLine" id="cb443-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred,y))</a></code></pre></div>
 <pre><code>##             y
 ## pred         setosa versicolor virginica
 ##   setosa         50          0         0
 ##   versicolor      0         47         3
 ##   virginica       0          3        47</code></pre>
 <p>classification plot</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">plot</span>(svm.iris, </a>
-<a class="sourceLine" id="cb20-2" title="2">     <span class="dt">data =</span> iris,</a>
-<a class="sourceLine" id="cb20-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length,</a>
-<a class="sourceLine" id="cb20-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb20-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb20-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb20-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb20-8" title="8">     <span class="dt">color.palette=</span>grey.colors)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" title="1"><span class="kw">plot</span>(svm.iris, </a>
+<a class="sourceLine" id="cb445-2" title="2">     <span class="dt">data =</span> iris,</a>
+<a class="sourceLine" id="cb445-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length,</a>
+<a class="sourceLine" id="cb445-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb445-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb445-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb445-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb445-8" title="8">     <span class="dt">color.palette=</span>grey.colors)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-305-1.png" width="672" /></p>
 </div>
 <div id="radial---4-features" class="section level4">
-<h4><span class="header-section-number">4.12.1.4</span> Radial - 4 features</h4>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">svm.iris.all &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)</a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">summary</span>(svm.iris.all)</a></code></pre></div>
+<h4><span class="header-section-number">4.11.1.4</span> Radial - 4 features</h4>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" title="1">svm.iris.all &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb446-2" title="2"><span class="kw">summary</span>(svm.iris.all)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Species ~ ., data = iris)
@@ -463,32 +464,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Levels: 
 ##  setosa versicolor virginica</code></pre>
 <p>accuracy</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">pred.all &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.all,x)</a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.all,y))</a></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" title="1">pred.all &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.all,x)</a>
+<a class="sourceLine" id="cb448-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.all,y))</a></code></pre></div>
 <pre><code>##             y
 ## pred.all     setosa versicolor virginica
 ##   setosa         50          0         0
 ##   versicolor      0         48         2
 ##   virginica       0          2        48</code></pre>
 <p>classification plot</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">plot</span>(svm.iris.all, </a>
-<a class="sourceLine" id="cb25-2" title="2">     <span class="dt">data =</span> iris,</a>
-<a class="sourceLine" id="cb25-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length, <span class="co"># para ver em 2D seleccionam-se duas variaveis</span></a>
-<a class="sourceLine" id="cb25-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb25-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb25-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb25-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb25-8" title="8">     <span class="dt">color.palette=</span>grey.colors,</a>
-<a class="sourceLine" id="cb25-9" title="9">     <span class="dt">slice =</span> <span class="kw">list</span>(<span class="dt">Sepal.Width =</span> <span class="fl">2.5</span>, <span class="dt">Sepal.Length =</span> <span class="fl">3.5</span>)) <span class="co"># as restantes variaveis são fixas para determinados valores</span></a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" title="1"><span class="kw">plot</span>(svm.iris.all, </a>
+<a class="sourceLine" id="cb450-2" title="2">     <span class="dt">data =</span> iris,</a>
+<a class="sourceLine" id="cb450-3" title="3">     Petal.Width <span class="op">~</span><span class="st"> </span>Petal.Length, <span class="co"># para ver em 2D seleccionam-se duas variaveis</span></a>
+<a class="sourceLine" id="cb450-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb450-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb450-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb450-7" title="7">     <span class="dt">cex=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb450-8" title="8">     <span class="dt">color.palette=</span>grey.colors,</a>
+<a class="sourceLine" id="cb450-9" title="9">     <span class="dt">slice =</span> <span class="kw">list</span>(<span class="dt">Sepal.Width =</span> <span class="fl">2.5</span>, <span class="dt">Sepal.Length =</span> <span class="fl">3.5</span>)) <span class="co"># as restantes variaveis são fixas para determinados valores</span></a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-308-1.png" width="672" /></p>
 </div>
 <div id="tuning-svm-parameters" class="section level4">
-<h4><span class="header-section-number">4.12.1.5</span> Tuning SVM parameters</h4>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
-<a class="sourceLine" id="cb26-2" title="2">svm.tune &lt;-<span class="st"> </span><span class="kw">tune</span>(svm, <span class="dt">train.x=</span>x, <span class="dt">train.y=</span>y, </a>
-<a class="sourceLine" id="cb26-3" title="3">                 <span class="dt">kernel=</span><span class="st">&quot;radial&quot;</span>, <span class="dt">ranges=</span><span class="kw">list</span>(<span class="dt">cost=</span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">gamma=</span><span class="kw">c</span>(.<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">2</span>)))</a>
-<a class="sourceLine" id="cb26-4" title="4"></a>
-<a class="sourceLine" id="cb26-5" title="5"><span class="kw">print</span>(svm.tune)</a></code></pre></div>
+<h4><span class="header-section-number">4.11.1.5</span> Tuning SVM parameters</h4>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" title="1"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb451-2" title="2">svm.tune &lt;-<span class="st"> </span><span class="kw">tune</span>(svm, <span class="dt">train.x=</span>x, <span class="dt">train.y=</span>y, </a>
+<a class="sourceLine" id="cb451-3" title="3">                 <span class="dt">kernel=</span><span class="st">&quot;radial&quot;</span>, <span class="dt">ranges=</span><span class="kw">list</span>(<span class="dt">cost=</span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">gamma=</span><span class="kw">c</span>(.<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">2</span>)))</a>
+<a class="sourceLine" id="cb451-4" title="4"></a>
+<a class="sourceLine" id="cb451-5" title="5"><span class="kw">print</span>(svm.tune)</a></code></pre></div>
 <pre><code>## 
 ## Parameter tuning of &#39;svm&#39;:
 ## 
@@ -500,8 +501,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## - best performance: 0.04</code></pre>
 <p>with the best parameters (cost, gamma) fit a SVM</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">svm.iris.tuned &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">kernel=</span><span class="st">&quot;radial&quot;</span>, <span class="dt">cost=</span><span class="dv">1</span>, <span class="dt">gamma=</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="kw">summary</span>(svm.iris.tuned)</a></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1">svm.iris.tuned &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">kernel=</span><span class="st">&quot;radial&quot;</span>, <span class="dt">cost=</span><span class="dv">1</span>, <span class="dt">gamma=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb453-2" title="2"><span class="kw">summary</span>(svm.iris.tuned)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Species ~ ., data = iris, kernel = &quot;radial&quot;, cost = 1, 
@@ -523,8 +524,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Levels: 
 ##  setosa versicolor virginica</code></pre>
 <p>accuracy</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">pred.tuned &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.tuned,x)</a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.tuned,y))</a></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" title="1">pred.tuned &lt;-<span class="st"> </span><span class="kw">predict</span>(svm.iris.tuned,x)</a>
+<a class="sourceLine" id="cb455-2" title="2"><span class="kw">print</span>(<span class="kw">table</span>(pred.tuned,y))</a></code></pre></div>
 <pre><code>##             y
 ## pred.tuned   setosa versicolor virginica
 ##   setosa         50          0         0
@@ -535,14 +536,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="assignment-svm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-8-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-svm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

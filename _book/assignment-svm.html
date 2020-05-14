@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.11 Assignment SVM | HEADS 2nd semester</title>
+  <title>4.12 Assignment SVM | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.11 Assignment SVM | HEADS 2nd semester" />
+  <meta property="og:title" content="4.12 Assignment SVM | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.11 Assignment SVM | HEADS 2nd semester" />
+  <meta name="twitter:title" content="4.12 Assignment SVM | HEADS 2nd semester" />
   
   <meta name="twitter:description" content="HEADS’s homeworks compilation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lesson-8-1.html"/>
-<link rel="next" href="lesson-9-1.html"/>
+<link rel="prev" href="lesson-9-1.html"/>
+<link rel="next" href="bayes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -132,6 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
@@ -232,10 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.10" data-path="lesson-8-1.html"><a href="lesson-8-1.html"><i class="fa fa-check"></i><b>4.10</b> Lesson 8</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="lesson-8-1.html"><a href="lesson-8-1.html#unsupervised-machine-learning---clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Unsupervised Machine Learning - Clustering and Association Rules</a></li>
 </ul></li>
-<li class="chapter" data-level="4.11" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.11</b> Assignment SVM</a></li>
-<li class="chapter" data-level="4.12" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>4.12</b> Lesson 9</a><ul>
-<li class="chapter" data-level="4.12.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#svm-classification"><i class="fa fa-check"></i><b>4.12.1</b> SVM classification</a></li>
+<li class="chapter" data-level="4.11" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>4.11</b> Lesson 9</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
 </ul></li>
+<li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
@@ -275,66 +276,160 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="assignment-svm" class="section level2">
-<h2><span class="header-section-number">4.11</span> Assignment SVM</h2>
+<h2><span class="header-section-number">4.12</span> Assignment SVM</h2>
 <p>2020-05-12</p>
 <p>Read data and packages</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># Get data set from UCI repository - Breast Cancer Coimbra</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># - available from https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Coimbra</span></a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># Define the filename</span></a>
-<a class="sourceLine" id="cb3-7" title="7">filename &lt;-<span class="st"> &quot;2.UploadedData/dataR2.csv&quot;</span></a>
-<a class="sourceLine" id="cb3-8" title="8"></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co"># Load the CSV file from the local directory</span></a>
-<a class="sourceLine" id="cb3-10" title="10">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(filename, <span class="dt">header=</span>T)</a>
-<a class="sourceLine" id="cb3-11" title="11"></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co"># Define Classification as factor</span></a>
-<a class="sourceLine" id="cb3-13" title="13">dataset<span class="op">$</span>Classification &lt;-<span class="st"> </span><span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Patient&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb457-2" title="2"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb457-3" title="3"><span class="co"># Get data set from UCI repository - Breast Cancer Coimbra</span></a>
+<a class="sourceLine" id="cb457-4" title="4"><span class="co"># - available from https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Coimbra</span></a>
+<a class="sourceLine" id="cb457-5" title="5"></a>
+<a class="sourceLine" id="cb457-6" title="6"><span class="co"># Define the filename</span></a>
+<a class="sourceLine" id="cb457-7" title="7">filename &lt;-<span class="st"> &quot;2.UploadedData/dataR2.csv&quot;</span></a>
+<a class="sourceLine" id="cb457-8" title="8"></a>
+<a class="sourceLine" id="cb457-9" title="9"><span class="co"># Load the CSV file from the local directory</span></a>
+<a class="sourceLine" id="cb457-10" title="10">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(filename, <span class="dt">header=</span>T)</a>
+<a class="sourceLine" id="cb457-11" title="11"></a>
+<a class="sourceLine" id="cb457-12" title="12"><span class="co"># Define Classification as factor</span></a>
+<a class="sourceLine" id="cb457-13" title="13">dataset<span class="op">$</span>Classification &lt;-<span class="st"> </span><span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Patient&quot;</span>))</a></code></pre></div>
 <p>Holdout a validation set, by defining the indices of the training set</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2">training.index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(dataset<span class="op">$</span>Classification, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">list=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3">validation &lt;-<span class="st"> </span>dataset[<span class="op">-</span>training.index,]</a>
-<a class="sourceLine" id="cb4-4" title="4">dataset &lt;-<span class="st"> </span>dataset[training.index,]</a></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb458-2" title="2">training.index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(dataset<span class="op">$</span>Classification, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">list=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb458-3" title="3">validation &lt;-<span class="st"> </span>dataset[<span class="op">-</span>training.index,]</a>
+<a class="sourceLine" id="cb458-4" title="4">dataset &lt;-<span class="st"> </span>dataset[training.index,]</a></code></pre></div>
 <p>Levels of the class</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">levels</span>(dataset<span class="op">$</span>Classification)</a></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" title="1"><span class="kw">levels</span>(dataset<span class="op">$</span>Classification)</a></code></pre></div>
 <pre><code>## [1] &quot;Control&quot; &quot;Patient&quot;</code></pre>
 <p>Class distribution</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">proportions &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Classification))</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">cbind</span>(<span class="dt">Frequency=</span><span class="kw">table</span>(dataset<span class="op">$</span>Classification), <span class="dt">Proportion=</span><span class="kw">round</span>(proportions<span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>))</a></code></pre></div>
-<pre><code>##         Frequency Proportion
-## Control        42      44.68
-## Patient        52      55.32</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" title="1">proportions &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Classification))</a>
+<a class="sourceLine" id="cb461-2" title="2"><span class="kw">cbind</span>(<span class="dt">Frequency=</span><span class="kw">table</span>(dataset<span class="op">$</span>Classification), <span class="dt">Proportion=</span><span class="kw">round</span>(proportions<span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>))</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Frequency</th>
+<th align="right">Proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td align="right">42</td>
+<td align="right">44.68</td>
+</tr>
+<tr class="even">
+<td>Patient</td>
+<td align="right">52</td>
+<td align="right">55.32</td>
+</tr>
+</tbody>
+</table>
 <p>Statistical Summary</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">summary</span>(dataset)</a></code></pre></div>
-<pre><code>##       Age             BMI           Glucose          Insulin      
-##  Min.   :25.00   Min.   :18.37   Min.   : 60.00   Min.   : 2.540  
-##  1st Qu.:45.25   1st Qu.:23.00   1st Qu.: 85.00   1st Qu.: 4.389  
-##  Median :60.50   Median :28.02   Median : 92.00   Median : 6.121  
-##  Mean   :59.01   Mean   :27.95   Mean   : 98.65   Mean   :10.623  
-##  3rd Qu.:71.75   3rd Qu.:31.25   3rd Qu.:102.00   3rd Qu.:12.451  
-##  Max.   :89.00   Max.   :38.58   Max.   :201.00   Max.   :58.460  
-##       HOMA             Leptin        Adiponectin        Resistin    
-##  Min.   : 0.5192   Min.   : 4.311   Min.   : 1.656   Min.   : 3.21  
-##  1st Qu.: 0.9705   1st Qu.:12.555   1st Qu.: 5.468   1st Qu.: 7.11  
-##  Median : 1.4282   Median :22.396   Median : 8.353   Median :11.23  
-##  Mean   : 2.9147   Mean   :27.994   Mean   :10.153   Mean   :15.13  
-##  3rd Qu.: 2.9926   3rd Qu.:39.788   3rd Qu.:11.820   3rd Qu.:17.35  
-##  Max.   :25.0503   Max.   :90.280   Max.   :38.040   Max.   :82.10  
-##      MCP.1         Classification
-##  Min.   :  45.84   Control:42    
-##  1st Qu.: 271.35   Patient:52    
-##  Median : 477.90                 
-##  Mean   : 554.98                 
-##  3rd Qu.: 728.66                 
-##  Max.   :1698.44</code></pre>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" title="1"><span class="kw">summary</span>(dataset)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">Age</th>
+<th align="center">BMI</th>
+<th align="center">Glucose</th>
+<th align="center">Insulin</th>
+<th align="center">HOMA</th>
+<th align="center">Leptin</th>
+<th align="center">Adiponectin</th>
+<th align="center">Resistin</th>
+<th align="center">MCP.1</th>
+<th align="left">Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td align="center">Min. :25.00</td>
+<td align="center">Min. :18.37</td>
+<td align="center">Min. : 60.00</td>
+<td align="center">Min. : 2.540</td>
+<td align="center">Min. : 0.5192</td>
+<td align="center">Min. : 4.311</td>
+<td align="center">Min. : 1.656</td>
+<td align="center">Min. : 3.21</td>
+<td align="center">Min. : 45.84</td>
+<td align="left">Control:42</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="center">1st Qu.:45.25</td>
+<td align="center">1st Qu.:23.00</td>
+<td align="center">1st Qu.: 85.00</td>
+<td align="center">1st Qu.: 4.389</td>
+<td align="center">1st Qu.: 0.9705</td>
+<td align="center">1st Qu.:12.555</td>
+<td align="center">1st Qu.: 5.468</td>
+<td align="center">1st Qu.: 7.11</td>
+<td align="center">1st Qu.: 271.35</td>
+<td align="left">Patient:52</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td align="center">Median :60.50</td>
+<td align="center">Median :28.02</td>
+<td align="center">Median : 92.00</td>
+<td align="center">Median : 6.121</td>
+<td align="center">Median : 1.4282</td>
+<td align="center">Median :22.396</td>
+<td align="center">Median : 8.353</td>
+<td align="center">Median :11.23</td>
+<td align="center">Median : 477.90</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="center">Mean :59.01</td>
+<td align="center">Mean :27.95</td>
+<td align="center">Mean : 98.65</td>
+<td align="center">Mean :10.623</td>
+<td align="center">Mean : 2.9147</td>
+<td align="center">Mean :27.994</td>
+<td align="center">Mean :10.153</td>
+<td align="center">Mean :15.13</td>
+<td align="center">Mean : 554.98</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td align="center">3rd Qu.:71.75</td>
+<td align="center">3rd Qu.:31.25</td>
+<td align="center">3rd Qu.:102.00</td>
+<td align="center">3rd Qu.:12.451</td>
+<td align="center">3rd Qu.: 2.9926</td>
+<td align="center">3rd Qu.:39.788</td>
+<td align="center">3rd Qu.:11.820</td>
+<td align="center">3rd Qu.:17.35</td>
+<td align="center">3rd Qu.: 728.66</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="center">Max. :89.00</td>
+<td align="center">Max. :38.58</td>
+<td align="center">Max. :201.00</td>
+<td align="center">Max. :58.460</td>
+<td align="center">Max. :25.0503</td>
+<td align="center">Max. :90.280</td>
+<td align="center">Max. :38.040</td>
+<td align="center">Max. :82.10</td>
+<td align="center">Max. :1698.44</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
 <p>Learn SVM with radial kernel (all features)</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Load package &#39;e1071&#39;</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">library</span>(<span class="st">&quot;e1071&quot;</span>)</a>
-<a class="sourceLine" id="cb11-3" title="3"></a>
-<a class="sourceLine" id="cb11-4" title="4">svm.all &lt;-<span class="st"> </span><span class="kw">svm</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset)</a></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1"><span class="co"># Load package &#39;e1071&#39;</span></a>
+<a class="sourceLine" id="cb463-2" title="2"><span class="kw">library</span>(<span class="st">&quot;e1071&quot;</span>)</a>
+<a class="sourceLine" id="cb463-3" title="3"></a>
+<a class="sourceLine" id="cb463-4" title="4">svm.all &lt;-<span class="st"> </span><span class="kw">svm</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset)</a></code></pre></div>
 <p>Summary</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">summary</span>(svm.all)</a></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="kw">summary</span>(svm.all)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Classification ~ ., data = dataset)
@@ -355,49 +450,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Levels: 
 ##  Control Patient</code></pre>
 <p>classification plot for Glucose and Age</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">plot</span>(svm.all, </a>
-<a class="sourceLine" id="cb14-2" title="2">     <span class="dt">data =</span> dataset,</a>
-<a class="sourceLine" id="cb14-3" title="3">     Glucose <span class="op">~</span><span class="st"> </span>Age, <span class="co"># para ver em 2D é necessário selecionar duas variaveis</span></a>
-<a class="sourceLine" id="cb14-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb14-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb14-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb14-7" title="7">     <span class="dt">color.palette=</span>grey.colors,</a>
-<a class="sourceLine" id="cb14-8" title="8">     <span class="dt">slice =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb14-9" title="9">       <span class="co">#                  Age = 59.01,</span></a>
-<a class="sourceLine" id="cb14-10" title="10">       <span class="dt">BMI =</span> <span class="fl">27.95</span>, <span class="co"># as restantes variaveis são fixadas para os seus valores médios</span></a>
-<a class="sourceLine" id="cb14-11" title="11">       <span class="co">#                  Glucose=98.65,</span></a>
-<a class="sourceLine" id="cb14-12" title="12">       <span class="dt">Insulin=</span><span class="fl">10.623</span>, <span class="co"># mean value</span></a>
-<a class="sourceLine" id="cb14-13" title="13">       <span class="dt">HOMA=</span><span class="fl">2.9147</span>, <span class="co"># mean value</span></a>
-<a class="sourceLine" id="cb14-14" title="14">       <span class="dt">Leptin=</span><span class="fl">27.994</span>, <span class="co"># mean value</span></a>
-<a class="sourceLine" id="cb14-15" title="15">       <span class="dt">Adiponectin=</span><span class="fl">10.153</span>, <span class="co"># mean value</span></a>
-<a class="sourceLine" id="cb14-16" title="16">       <span class="dt">Resistin=</span><span class="fl">15.13</span>, <span class="co"># mean value</span></a>
-<a class="sourceLine" id="cb14-17" title="17">       <span class="dt">MCP.1=</span><span class="fl">554.98</span>)) <span class="co"># mean value</span></a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1"><span class="kw">plot</span>(svm.all, </a>
+<a class="sourceLine" id="cb466-2" title="2">     <span class="dt">data =</span> dataset,</a>
+<a class="sourceLine" id="cb466-3" title="3">     Glucose <span class="op">~</span><span class="st"> </span>Age, <span class="co"># para ver em 2D é necessário selecionar duas variaveis</span></a>
+<a class="sourceLine" id="cb466-4" title="4">     <span class="dt">svSymbol =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb466-5" title="5">     <span class="dt">dataSymbol =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb466-6" title="6">     <span class="dt">symbolPalette =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb466-7" title="7">     <span class="dt">color.palette=</span>grey.colors,</a>
+<a class="sourceLine" id="cb466-8" title="8">     <span class="dt">slice =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb466-9" title="9">       <span class="co">#                  Age = 59.01,</span></a>
+<a class="sourceLine" id="cb466-10" title="10">       <span class="dt">BMI =</span> <span class="fl">27.95</span>, <span class="co"># as restantes variaveis são fixadas para os seus valores médios</span></a>
+<a class="sourceLine" id="cb466-11" title="11">       <span class="co">#                  Glucose=98.65,</span></a>
+<a class="sourceLine" id="cb466-12" title="12">       <span class="dt">Insulin=</span><span class="fl">10.623</span>, <span class="co"># mean value</span></a>
+<a class="sourceLine" id="cb466-13" title="13">       <span class="dt">HOMA=</span><span class="fl">2.9147</span>, <span class="co"># mean value</span></a>
+<a class="sourceLine" id="cb466-14" title="14">       <span class="dt">Leptin=</span><span class="fl">27.994</span>, <span class="co"># mean value</span></a>
+<a class="sourceLine" id="cb466-15" title="15">       <span class="dt">Adiponectin=</span><span class="fl">10.153</span>, <span class="co"># mean value</span></a>
+<a class="sourceLine" id="cb466-16" title="16">       <span class="dt">Resistin=</span><span class="fl">15.13</span>, <span class="co"># mean value</span></a>
+<a class="sourceLine" id="cb466-17" title="17">       <span class="dt">MCP.1=</span><span class="fl">554.98</span>)) <span class="co"># mean value</span></a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-320-1.png" width="672" /></p>
 <p>Run algorithms using 3 times 10-fold cross validation</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
-<a class="sourceLine" id="cb15-2" title="2">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb15-3" title="3">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb15-4" title="4">                        <span class="dt">classProbs=</span>T,</a>
-<a class="sourceLine" id="cb15-5" title="5">                        <span class="dt">savePredictions =</span> T, <span class="dt">repeats =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb15-6" title="6"></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb15-8" title="8">fit.svm.linear &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
-<a class="sourceLine" id="cb15-9" title="9">                        <span class="dt">method=</span><span class="st">&quot;svmLinear&quot;</span>, </a>
-<a class="sourceLine" id="cb15-10" title="10">                        <span class="dt">metric=</span>metric, </a>
-<a class="sourceLine" id="cb15-11" title="11">                        <span class="dt">trControl=</span>control, </a>
-<a class="sourceLine" id="cb15-12" title="12">                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), </a>
-<a class="sourceLine" id="cb15-13" title="13">                        <span class="dt">tuneLength =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb15-14" title="14"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb15-15" title="15">fit.svm.radial &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
-<a class="sourceLine" id="cb15-16" title="16">                        <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, </a>
-<a class="sourceLine" id="cb15-17" title="17">                        <span class="dt">metric=</span>metric, </a>
-<a class="sourceLine" id="cb15-18" title="18">                        <span class="dt">trControl=</span>control, </a>
-<a class="sourceLine" id="cb15-19" title="19">                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), </a>
-<a class="sourceLine" id="cb15-20" title="20">                        <span class="dt">tuneLength =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" title="1">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
+<a class="sourceLine" id="cb467-2" title="2">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb467-3" title="3">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb467-4" title="4">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb467-5" title="5">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb467-6" title="6"></a>
+<a class="sourceLine" id="cb467-7" title="7"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb467-8" title="8">fit.svm.linear &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
+<a class="sourceLine" id="cb467-9" title="9">                        <span class="dt">method=</span><span class="st">&quot;svmLinear&quot;</span>, </a>
+<a class="sourceLine" id="cb467-10" title="10">                        <span class="dt">metric=</span>metric, </a>
+<a class="sourceLine" id="cb467-11" title="11">                        <span class="dt">trControl=</span>control, </a>
+<a class="sourceLine" id="cb467-12" title="12">                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), </a>
+<a class="sourceLine" id="cb467-13" title="13">                        <span class="dt">tuneLength =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb467-14" title="14"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb467-15" title="15">fit.svm.radial &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
+<a class="sourceLine" id="cb467-16" title="16">                        <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, </a>
+<a class="sourceLine" id="cb467-17" title="17">                        <span class="dt">metric=</span>metric, </a>
+<a class="sourceLine" id="cb467-18" title="18">                        <span class="dt">trControl=</span>control, </a>
+<a class="sourceLine" id="cb467-19" title="19">                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), </a>
+<a class="sourceLine" id="cb467-20" title="20">                        <span class="dt">tuneLength =</span> <span class="dv">10</span>)</a></code></pre></div>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">linear=</span>fit.svm.linear, <span class="dt">radial=</span>fit.svm.radial)</a>
-<a class="sourceLine" id="cb16-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">linear=</span>fit.svm.linear, <span class="dt">radial=</span>fit.svm.radial)</a>
+<a class="sourceLine" id="cb468-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb468-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -420,17 +515,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## linear  0.0 0.6000000    0.8 0.7166667 0.8333333    1    0
 ## radial  0.2 0.6666667    0.8 0.7622222 0.8333333    1    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb18-2" title="2"></a>
-<a class="sourceLine" id="cb18-3" title="3">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient,</a>
-<a class="sourceLine" id="cb18-4" title="4">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3 x 10-fold CV -&quot;</span>,fit<span class="op">$</span>method), </a>
-<a class="sourceLine" id="cb18-5" title="5">                                                  <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb470-2" title="2"></a>
+<a class="sourceLine" id="cb470-3" title="3">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient,</a>
+<a class="sourceLine" id="cb470-4" title="4">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3 x 10-fold CV -&quot;</span>,fit<span class="op">$</span>method), </a>
+<a class="sourceLine" id="cb470-5" title="5">                                                  <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-323-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
 <p>Inspect model linear</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">print</span>(fit.svm.linear)</a></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" title="1"><span class="kw">print</span>(fit.svm.linear)</a></code></pre></div>
 <pre><code>## Support Vector Machines with Linear Kernel 
 ## 
 ## 94 samples
@@ -446,11 +541,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   0.7657778  0.7   0.7166667
 ## 
 ## Tuning parameter &#39;C&#39; was held constant at a value of 1</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">getModelInfo</span>(fit.svm.linear)<span class="op">$</span>svmLinear<span class="op">$</span>parameters</a></code></pre></div>
-<pre><code>##   parameter   class label
-## 1         C numeric  Cost</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1"><span class="kw">getModelInfo</span>(fit.svm.linear)<span class="op">$</span>svmLinear<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C</td>
+<td align="left">numeric</td>
+<td align="left">Cost</td>
+</tr>
+</tbody>
+</table>
 <p>Inspect model radial</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">print</span>(fit.svm.radial)</a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1"><span class="kw">print</span>(fit.svm.radial)</a></code></pre></div>
 <pre><code>## Support Vector Machines with Radial Basis Function Kernel 
 ## 
 ## 94 samples
@@ -477,25 +586,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Tuning parameter &#39;sigma&#39; was held constant at a value of 0.09382649
 ## ROC was used to select the optimal model using the largest value.
 ## The final values used for the model were sigma = 0.09382649 and C = 4.</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">getModelInfo</span>(fit.svm.radial)<span class="op">$</span>svmRadial<span class="op">$</span>parameters</a></code></pre></div>
-<pre><code>##   parameter   class label
-## 1     sigma numeric Sigma
-## 2         C numeric  Cost</code></pre>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1"><span class="kw">getModelInfo</span>(fit.svm.radial)<span class="op">$</span>svmRadial<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">sigma</td>
+<td align="left">numeric</td>
+<td align="left">Sigma</td>
+</tr>
+<tr class="even">
+<td align="left">C</td>
+<td align="left">numeric</td>
+<td align="left">Cost</td>
+</tr>
+</tbody>
+</table>
 <p>ROC complexity for models</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">plot</span>(fit.svm.radial)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" title="1"><span class="kw">plot</span>(fit.svm.radial)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
 <p>Improve Radial</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">myGrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">C =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">sigma=</span><span class="fl">0.09382649</span>)</a>
-<a class="sourceLine" id="cb29-2" title="2"></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb29-4" title="4">fit.svm.radial.tune &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
-<a class="sourceLine" id="cb29-5" title="5">                             <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, </a>
-<a class="sourceLine" id="cb29-6" title="6">                             <span class="dt">metric=</span>metric, </a>
-<a class="sourceLine" id="cb29-7" title="7">                             <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb29-8" title="8">                             <span class="dt">tuneGrid =</span> myGrid)</a>
-<a class="sourceLine" id="cb29-9" title="9"></a>
-<a class="sourceLine" id="cb29-10" title="10"><span class="co"># ROC complexity for models</span></a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="kw">print</span>(fit.svm.radial.tune)</a></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" title="1">myGrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">C =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">sigma=</span><span class="fl">0.09382649</span>)</a>
+<a class="sourceLine" id="cb479-2" title="2"></a>
+<a class="sourceLine" id="cb479-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb479-4" title="4">fit.svm.radial.tune &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
+<a class="sourceLine" id="cb479-5" title="5">                             <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, </a>
+<a class="sourceLine" id="cb479-6" title="6">                             <span class="dt">metric=</span>metric, </a>
+<a class="sourceLine" id="cb479-7" title="7">                             <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb479-8" title="8">                             <span class="dt">tuneGrid =</span> myGrid)</a>
+<a class="sourceLine" id="cb479-9" title="9"></a>
+<a class="sourceLine" id="cb479-10" title="10"><span class="co"># ROC complexity for models</span></a>
+<a class="sourceLine" id="cb479-11" title="11"><span class="kw">print</span>(fit.svm.radial.tune)</a></code></pre></div>
 <pre><code>## Support Vector Machines with Radial Basis Function Kernel 
 ## 
 ## 94 samples
@@ -517,11 +644,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ROC was used to select the optimal model using the largest value.
 ## The final values used for the model were sigma = 0.09382649 and C = 4.</code></pre>
 <p>Summarize accuracy of models</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">linear=</span>fit.svm.linear, </a>
-<a class="sourceLine" id="cb31-2" title="2">                   <span class="dt">radial=</span>fit.svm.radial, </a>
-<a class="sourceLine" id="cb31-3" title="3">                   <span class="dt">tune=</span>fit.svm.radial.tune)</a>
-<a class="sourceLine" id="cb31-4" title="4">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="kw">summary</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">linear=</span>fit.svm.linear, </a>
+<a class="sourceLine" id="cb481-2" title="2">                   <span class="dt">radial=</span>fit.svm.radial, </a>
+<a class="sourceLine" id="cb481-3" title="3">                   <span class="dt">tune=</span>fit.svm.radial.tune)</a>
+<a class="sourceLine" id="cb481-4" title="4">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb481-5" title="5"><span class="kw">summary</span>(results)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## summary.resamples(object = results)
@@ -547,22 +674,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## radial  0.2 0.6666667    0.8 0.7622222 0.8333333    1    0
 ## tune    0.2 0.6166667    0.8 0.7688889 1.0000000    1    0</code></pre>
 <p>ROC curves for models</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb33-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient,</a>
-<a class="sourceLine" id="cb33-3" title="3">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3 x 10-fold CV -&quot;</span>,fit<span class="op">$</span>method), </a>
-<a class="sourceLine" id="cb33-4" title="4">                                                  <span class="dt">debug=</span>F, </a>
-<a class="sourceLine" id="cb33-5" title="5">                                                  <span class="dt">print.auc=</span>T)})</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb483-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>Patient,</a>
+<a class="sourceLine" id="cb483-3" title="3">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3 x 10-fold CV -&quot;</span>,fit<span class="op">$</span>method), </a>
+<a class="sourceLine" id="cb483-4" title="4">                                                  <span class="dt">debug=</span>F, </a>
+<a class="sourceLine" id="cb483-5" title="5">                                                  <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-330-1.png" width="672" /></p>
 <p>Compare accuracy of models</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-331-1.png" width="672" /></p>
 <p>Make predictions</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb35-2" title="2"></a>
-<a class="sourceLine" id="cb35-3" title="3"><span class="co"># Estimate skill of RF on the validation dataset</span></a>
-<a class="sourceLine" id="cb35-4" title="4">predictions.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.svm.radial.tune, validation, <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)</a>
-<a class="sourceLine" id="cb35-5" title="5">predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.svm.radial.tune, validation, <span class="dt">type=</span><span class="st">&quot;raw&quot;</span>)</a>
-<a class="sourceLine" id="cb35-6" title="6"><span class="kw">confusionMatrix</span>(predictions, validation<span class="op">$</span>Classification)</a></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb485-2" title="2"></a>
+<a class="sourceLine" id="cb485-3" title="3"><span class="co"># Estimate skill of RF on the validation dataset</span></a>
+<a class="sourceLine" id="cb485-4" title="4">predictions.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.svm.radial.tune, validation, <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)</a>
+<a class="sourceLine" id="cb485-5" title="5">predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.svm.radial.tune, validation, <span class="dt">type=</span><span class="st">&quot;raw&quot;</span>)</a>
+<a class="sourceLine" id="cb485-6" title="6"><span class="kw">confusionMatrix</span>(predictions, validation<span class="op">$</span>Classification)</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -591,25 +718,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        &#39;Positive&#39; Class : Control         
 ## </code></pre>
 <p>plot ROC</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">plot.roc</span>(validation<span class="op">$</span>Classification, </a>
-<a class="sourceLine" id="cb37-2" title="2">         predictions.prob<span class="op">$</span>Patient, </a>
-<a class="sourceLine" id="cb37-3" title="3">         <span class="dt">print.auc=</span>T, </a>
-<a class="sourceLine" id="cb37-4" title="4">         <span class="dt">axes=</span>F, </a>
-<a class="sourceLine" id="cb37-5" title="5">         <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3 x 10-fold CV -&quot;</span>,fit.svm.radial.tune<span class="op">$</span>method), </a>
-<a class="sourceLine" id="cb37-6" title="6">         <span class="dt">debug=</span>F)</a>
-<a class="sourceLine" id="cb37-7" title="7"><span class="kw">axis</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb37-8" title="8"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" title="1"><span class="kw">plot.roc</span>(validation<span class="op">$</span>Classification, </a>
+<a class="sourceLine" id="cb487-2" title="2">         predictions.prob<span class="op">$</span>Patient, </a>
+<a class="sourceLine" id="cb487-3" title="3">         <span class="dt">print.auc=</span>T, </a>
+<a class="sourceLine" id="cb487-4" title="4">         <span class="dt">axes=</span>F, </a>
+<a class="sourceLine" id="cb487-5" title="5">         <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3 x 10-fold CV -&quot;</span>,fit.svm.radial.tune<span class="op">$</span>method), </a>
+<a class="sourceLine" id="cb487-6" title="6">         <span class="dt">debug=</span>F)</a>
+<a class="sourceLine" id="cb487-7" title="7"><span class="kw">axis</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb487-8" title="8"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="lesson-8-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lesson-9-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lesson-9-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

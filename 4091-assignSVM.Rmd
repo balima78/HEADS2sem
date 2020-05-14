@@ -2,7 +2,7 @@
 
 2020-05-12
 
-```{r setup, include=FALSE}
+```{r , include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
@@ -87,7 +87,7 @@ metric <- "ROC"
 control <- trainControl(method="repeatedcv", number=10,
                         summaryFunction=twoClassSummary, 
                         classProbs=T,
-                        savePredictions = T, repeats = 3)
+                        savePredictions = TRUE, repeats = 3)
 
 set.seed(7)
 fit.svm.linear <- train(Classification ~ ., data=dataset, 
