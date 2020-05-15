@@ -9,63 +9,205 @@ knitr::opts_chunk$set(echo = T, message = F, warning = F, error = F)
 
 ```
 
-
 Consider the the Cervical Cancer (Risk Factors) data set (available from UCI repository) and exploit the data using association rules (for binary variables) and clustering (for continuous variables).
 
 Read data
 ```{r}
 library(tidyverse)
 
+## read the data
 dataset<-read.csv("2.UploadedData/risk_factors_cervical_cancer.csv",na.strings = c("NA","?",""))
 
-# idenfified categorical variables
-categorical<-c("Smokes", "Hormonal.Contraceptives", "IUD","STDs",
+# identified categorical variables
+categorical<-c("Smokes", "Hormonal.Contraceptives", "IUD", # "STDs" not included beacause it is defined from the other STDs
                "STDs.condylomatosis","STDs.cervical.condylomatosis", 
                "STDs.vulvo.perineal.condylomatosis", "STDs.syphilis",
                "STDs.pelvic.inflammatory.disease",
                "STDs.genital.herpes","STDs.molluscum.contagiosum",
                "STDs.AIDS", "STDs.HIV", "STDs.Hepatitis.B", "STDs.HPV",
-               "Dx.Cancer", "Dx.CIN", "Dx.HPV", "Hinselmann", "Schiller",
-               "Citology", "Biopsy")
-
-# idenfified continuous variables
-continuos<-c("Age","Number.of.sexual.partners","First.sexual.intercourse",
+               "Dx.Cancer", "Dx.CIN", "Dx.HPV", "Hinselmann", "Schiller", #, DX not included beacause it is defined from the other Dxs
+               "Citology", "Biopsy")  
+# # identified categorical variables
+continuous<-c("Age","Number.of.sexual.partners","First.sexual.intercourse",
              "Num.of.pregnancies","Smokes..years.","Smokes..packs.year.",
              "Hormonal.Contraceptives..years.","IUD..years.", "STDs..number.",
-             "STDs..Number.of.diagnosis","STDs..Time.since.first.diagnosis", 
-             "STDs..Time.since.last.diagnosis")
-
-# factoriza variables
-dataset[categorical] <- lapply(dataset[categorical], factor)
-
-str(dataset)
+             "STDs..Number.of.diagnosis" #,"STDs..Time.since.first.diagnosis", 
+             #"STDs..Time.since.last.diagnosis"
+             )
 ```
 
 #### Association rules
 ```{r}
+# selected only categorical features
+datacat<-dataset %>% select(!!categorical)
+
+# transforme as logical
+# with this transformation we only consider positive events, 
+# i.e, 'Smokes' stands for 'Smokes = 1' and 'Dx.Cancer' stands for 'Dx.Cancer' and so on...
+datacat<-as.data.frame(lapply(datacat, as.logical))
+
+# filter only complete cases
+datacat_complete<-datacat[complete.cases(datacat), ]
+str(datacat_complete)
+```
+
+Coerce Item List to the Transactions class
+```{r}
 library(arules)
-transactions <- as(dataset[categorical[16:22]], "transactions")
+transactions <- as(datacat_complete, "transactions") 
 class(transactions)
-inspect(head(transactions, 2))
+summary(transactions)
+inspect(head(transactions, 10))
 ```
 
-model association rules (for binary variables)
+plot more frequent events
 ```{r}
-rules <- apriori(transactions, parameter = list(supp = 0.2, conf = 0.5, target = "rules"))
-
-inspect(head(rules, 10, by = c("lift", "support")))
+itemFrequencyPlot(transactions, support = .05)
 ```
 
-select rules where Dx.Cancer = 0 & lift >1
+applying Apriori
 ```{r}
-rulesDx <- subset(rules,
-                  subset = rhs %in% c("Dx.Cancer=0") & lift > 1)
-inspect(rulesDx)
+rules <- apriori(datacat_complete, parameter = list(supp = 0.01, conf = 0.1, target = "rules"))
+
+summary(rules)
 ```
 
-#### clustering (for continuous variables)
+see the first 10 resulted rules ordered by lift and support
+```{r}
+inspect(
+  head(
+    rules, 
+    10, by = c("lift", "support")
+    )
+  )
+```
+
+see the first 10 resulted rules ordered by support and lift 
+```{r}
+inspect(
+  head(
+    subset(rules, subset = lift > 1.1), 
+    10, by = c("support", "lift")
+    )
+  )
+```
+
+see the results for Dx.HPV and Dx.Cancer
+```{r}
+inspect(
+  subset(rules, 
+         subset = rhs %in% c("Dx.HPV", "Dx.Cancer") & lift > 1)
+)
+```
+
+Visualize 15 results by lift and support values
+```{r}
+library(arulesViz)
+plot(head(rules, 15, by = c("lift", "support")))
+```
+
+graph
+```{r}
+plot(head(rules, 15, by = c("lift", "support")), method="graph")
+```
+
+plot parallel coordenates
+```{r}
+plot(head(rules, 15, by = c("lift", "support")), method="paracoord", control=list(reorder=TRUE))
+```
+
+#### K-means
+
+```{r}
+# selected only continuos features
+datacont<-dataset %>% select(!!continuous)
+
+# filter only complete cases
+datacont_complete<-datacont[complete.cases(datacont), ]
+str(datacont_complete)
+```
+
+Determine number of clusters
+
+within groups sum of squares
+```{r}
+wss <- (nrow(datacont_complete)-1)*sum(apply(datacont_complete,2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(datacont_complete,
+                                     centers=i)$withinss)
+```
+
+A plot of the within groups sum of squares by number of clusters extracted
+```{r}
+plot(1:15, wss, type="b", xlab="Number of Clusters",
+     ylab="Within groups sum of squares")
+abline(v = 3, col="red", lwd=1.5, lty=2)
+```
+
+K-Means Cluster Analysis
+```{r}
+fit3 <- kmeans(datacont_complete, 3) # 3 cluster solution
+```
+
+compactness of the clustering (between_SS / total_SS)
+```{r}
+fit3$betweenss / fit3$totss * 100
+```
+
+get cluster means
+```{r}
+aggregate(datacont_complete,by=list(fit3$cluster),FUN=mean)
+# append cluster assignment
+datacont_complete <- data.frame(datacont_complete, fit3$cluster)
+```
+
+plot clusters for 
+```{r}
+plot(datacont_complete$Age, datacont_complete$Number.of.sexual.partners , col = fit3$cluster)
+
+```
+
+visualize clusters
+```{r}
+library(factoextra)
+
+fviz_cluster(fit3, data = datacont_complete,
+             palette = "jco",
+             ggtheme = theme_minimal(),
+             main = "Partitioning Clustering Plot"
+)
+```
+
+Compute hierarchical k-means clustering
+```{r}
+res.hk <-hkmeans(datacont_complete, 3)
+# Elements returned by hkmeans()
+names(res.hk)
+```
+
+Visualize the tree
+```{r}
+fviz_dend(res.hk, cex = 0.6, palette = "jco", 
+          rect = TRUE, rect_border = "jco", rect_fill = TRUE)
+```
+
+alternative hierarchical clustering
+```{r}
+res.hc <- hclust(dist(datacont_complete),  method = "ward.D2")
+
+# plot the dendogram
+fviz_dend(res.hc, cex = 0.5, k = 3, palette = "jco") 
+```
 
 
+References
+
+http://www.rdatamining.com/examples/association-rules
+https://blog.aptitive.com/building-the-transactions-class-for-association-rule-mining-in-r-using-arules-and-apriori-c6be64268bc4
+https://rpubs.com/lingyanzhou/examples-association-rules
+
+https://www.statmethods.net/advstats/cluster.html
+https://towardsdatascience.com/clustering-analysis-in-r-using-k-means-73eca4fb7967
+https://rpubs.com/JanpuHou/278558
 
 <img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
 

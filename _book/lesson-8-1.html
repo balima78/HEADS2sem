@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-14" />
+<meta name="date" content="2020-05-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,7 +132,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
@@ -282,70 +281,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.10.1</span> Unsupervised Machine Learning - Clustering and Association Rules</h3>
 <p>Consider the the Cervical Cancer (Risk Factors) data set (available from UCI repository) and exploit the data using association rules (for binary variables) and clustering (for continuous variables).</p>
 <p>Read data</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" title="1"><span class="co"># factoriza variables</span></a></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    858 obs. of  36 variables:
-##  $ Age                               : int  18 15 34 52 46 42 51 26 45 44 ...
-##  $ Number.of.sexual.partners         : num  4 1 1 5 3 3 3 1 1 3 ...
-##  $ First.sexual.intercourse          : num  15 14 NA 16 21 23 17 26 20 15 ...
-##  $ Num.of.pregnancies                : num  1 1 1 4 4 2 6 3 5 NA ...
-##  $ Smokes                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 1 1 2 1 1 2 ...
-##  $ Smokes..years.                    : num  0 0 0 37 0 ...
-##  $ Smokes..packs.year.               : num  0 0 0 37 0 0 3.4 0 0 2.8 ...
-##  $ Hormonal.Contraceptives           : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 2 1 1 2 1 1 ...
-##  $ Hormonal.Contraceptives..years.   : num  0 0 0 3 15 0 0 2 0 0 ...
-##  $ IUD                               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 2 1 NA ...
-##  $ IUD..years.                       : num  0 0 0 0 0 0 7 7 0 NA ...
-##  $ STDs                              : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs..number.                     : num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ STDs.condylomatosis               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.cervical.condylomatosis      : Factor w/ 1 level &quot;0&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.vaginal.condylomatosis       : num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ STDs.vulvo.perineal.condylomatosis: Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.syphilis                     : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.pelvic.inflammatory.disease  : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.genital.herpes               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.molluscum.contagiosum        : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.AIDS                         : Factor w/ 1 level &quot;0&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.HIV                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.Hepatitis.B                  : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs.HPV                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ STDs..Number.of.diagnosis         : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ STDs..Time.since.first.diagnosis  : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ STDs..Time.since.last.diagnosis   : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ Dx.Cancer                         : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 1 1 1 1 2 1 ...
-##  $ Dx.CIN                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ Dx.HPV                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 2 1 1 1 1 2 1 ...
-##  $ Dx                                : int  0 0 0 0 0 0 0 0 1 0 ...
-##  $ Hinselmann                        : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 1 1 1 ...
-##  $ Schiller                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 1 1 1 ...
-##  $ Citology                          : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ Biopsy                            : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 2 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">## read the data</span></a>
+<a class="sourceLine" id="cb3-4" title="4">dataset&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/risk_factors_cervical_cancer.csv&quot;</span>,<span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;?&quot;</span>,<span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co"># identified categorical variables</span></a>
+<a class="sourceLine" id="cb3-7" title="7">categorical&lt;-<span class="kw">c</span>(<span class="st">&quot;Smokes&quot;</span>, <span class="st">&quot;Hormonal.Contraceptives&quot;</span>, <span class="st">&quot;IUD&quot;</span>, <span class="co"># &quot;STDs&quot; not included beacause it is defined from the other STDs</span></a>
+<a class="sourceLine" id="cb3-8" title="8">               <span class="st">&quot;STDs.condylomatosis&quot;</span>,<span class="st">&quot;STDs.cervical.condylomatosis&quot;</span>, </a>
+<a class="sourceLine" id="cb3-9" title="9">               <span class="st">&quot;STDs.vulvo.perineal.condylomatosis&quot;</span>, <span class="st">&quot;STDs.syphilis&quot;</span>,</a>
+<a class="sourceLine" id="cb3-10" title="10">               <span class="st">&quot;STDs.pelvic.inflammatory.disease&quot;</span>,</a>
+<a class="sourceLine" id="cb3-11" title="11">               <span class="st">&quot;STDs.genital.herpes&quot;</span>,<span class="st">&quot;STDs.molluscum.contagiosum&quot;</span>,</a>
+<a class="sourceLine" id="cb3-12" title="12">               <span class="st">&quot;STDs.AIDS&quot;</span>, <span class="st">&quot;STDs.HIV&quot;</span>, <span class="st">&quot;STDs.Hepatitis.B&quot;</span>, <span class="st">&quot;STDs.HPV&quot;</span>,</a>
+<a class="sourceLine" id="cb3-13" title="13">               <span class="st">&quot;Dx.Cancer&quot;</span>, <span class="st">&quot;Dx.CIN&quot;</span>, <span class="st">&quot;Dx.HPV&quot;</span>, <span class="st">&quot;Hinselmann&quot;</span>, <span class="st">&quot;Schiller&quot;</span>, <span class="co">#, DX not included beacause it is defined from the other Dxs</span></a>
+<a class="sourceLine" id="cb3-14" title="14">               <span class="st">&quot;Citology&quot;</span>, <span class="st">&quot;Biopsy&quot;</span>)  </a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co"># # identified categorical variables</span></a>
+<a class="sourceLine" id="cb3-16" title="16">continuous&lt;-<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Number.of.sexual.partners&quot;</span>,<span class="st">&quot;First.sexual.intercourse&quot;</span>,</a>
+<a class="sourceLine" id="cb3-17" title="17">             <span class="st">&quot;Num.of.pregnancies&quot;</span>,<span class="st">&quot;Smokes..years.&quot;</span>,<span class="st">&quot;Smokes..packs.year.&quot;</span>,</a>
+<a class="sourceLine" id="cb3-18" title="18">             <span class="st">&quot;Hormonal.Contraceptives..years.&quot;</span>,<span class="st">&quot;IUD..years.&quot;</span>, <span class="st">&quot;STDs..number.&quot;</span>,</a>
+<a class="sourceLine" id="cb3-19" title="19">             <span class="st">&quot;STDs..Number.of.diagnosis&quot;</span> <span class="co">#,&quot;STDs..Time.since.first.diagnosis&quot;, </span></a>
+<a class="sourceLine" id="cb3-20" title="20">             <span class="co">#&quot;STDs..Time.since.last.diagnosis&quot;</span></a>
+<a class="sourceLine" id="cb3-21" title="21">             )</a></code></pre></div>
 <div id="association-rules" class="section level4">
 <h4><span class="header-section-number">4.10.1.1</span> Association rules</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># selected only categorical features</span></a>
+<a class="sourceLine" id="cb4-2" title="2">datacat&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">!!</span>categorical)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># transforme as logical</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># with this transformation we only consider positive events, </span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co"># i.e, &#39;Smokes&#39; stands for &#39;Smokes = 1&#39; and &#39;Dx.Cancer&#39; stands for &#39;Dx.Cancer&#39; and so on...</span></a>
+<a class="sourceLine" id="cb4-7" title="7">datacat&lt;-<span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(datacat, as.logical))</a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co"># filter only complete cases</span></a>
+<a class="sourceLine" id="cb4-10" title="10">datacat_complete&lt;-datacat[<span class="kw">complete.cases</span>(datacat), ]</a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="kw">str</span>(datacat_complete)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    726 obs. of  21 variables:
+##  $ Smokes                            : logi  FALSE FALSE FALSE TRUE FALSE FALSE ...
+##  $ Hormonal.Contraceptives           : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+##  $ IUD                               : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.condylomatosis               : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.cervical.condylomatosis      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.vulvo.perineal.condylomatosis: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.syphilis                     : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.pelvic.inflammatory.disease  : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.genital.herpes               : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.molluscum.contagiosum        : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.AIDS                         : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.HIV                          : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.Hepatitis.B                  : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ STDs.HPV                          : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Dx.Cancer                         : logi  FALSE FALSE FALSE TRUE FALSE FALSE ...
+##  $ Dx.CIN                            : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Dx.HPV                            : logi  FALSE FALSE FALSE TRUE FALSE FALSE ...
+##  $ Hinselmann                        : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Schiller                          : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Citology                          : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Biopsy                            : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</code></pre>
+<p>Coerce Item List to the Transactions class</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(arules)</a>
+<a class="sourceLine" id="cb6-2" title="2">transactions &lt;-<span class="st"> </span><span class="kw">as</span>(datacat_complete, <span class="st">&quot;transactions&quot;</span>) </a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">class</span>(transactions)</a></code></pre></div>
 <pre><code>## [1] &quot;transactions&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;arules&quot;</code></pre>
-<pre><code>##     items          transactionID
-## [1] {Dx.Cancer=0,               
-##      Dx.CIN=0,                  
-##      Dx.HPV=0,                  
-##      Hinselmann=0,              
-##      Schiller=0,                
-##      Citology=0,                
-##      Biopsy=0}                 1
-## [2] {Dx.Cancer=0,               
-##      Dx.CIN=0,                  
-##      Dx.HPV=0,                  
-##      Hinselmann=0,              
-##      Schiller=0,                
-##      Citology=0,                
-##      Biopsy=0}                 2</code></pre>
-<p>model association rules (for binary variables)</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">summary</span>(transactions)</a></code></pre></div>
+<pre><code>## transactions as itemMatrix in sparse format with
+##  726 rows (elements/itemsets/transactions) and
+##  19 columns (items) and a density of 0.07206032 
+## 
+## most frequent items:
+## Hormonal.Contraceptives                  Smokes                     IUD 
+##                     466                     104                      81 
+##                Schiller                  Biopsy                 (Other) 
+##                      69                      50                     224 
+## 
+## element (itemset/transaction) length distribution:
+## sizes
+##   0   1   2   3   4   5   6   7 
+## 164 342 113  47  32  15   9   4 
+## 
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   1.000   1.369   2.000   7.000 
+## 
+## includes extended item information - examples:
+##                    labels               variables levels
+## 1                  Smokes                  Smokes   TRUE
+## 2 Hormonal.Contraceptives Hormonal.Contraceptives   TRUE
+## 3                     IUD                     IUD   TRUE
+## 
+## includes extended transaction information - examples:
+##   transactionID
+## 1             1
+## 2             2
+## 3             3</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">inspect</span>(<span class="kw">head</span>(transactions, <span class="dv">10</span>))</a></code></pre></div>
+<pre><code>##      items                                             transactionID
+## [1]  {}                                                1            
+## [2]  {}                                                2            
+## [3]  {}                                                3            
+## [4]  {Smokes,Hormonal.Contraceptives,Dx.Cancer,Dx.HPV} 4            
+## [5]  {Hormonal.Contraceptives}                         5            
+## [6]  {}                                                6            
+## [7]  {Smokes,IUD,Hinselmann,Schiller,Biopsy}           7            
+## [8]  {Hormonal.Contraceptives,IUD}                     8            
+## [9]  {Dx.Cancer,Dx.HPV}                                9            
+## [10] {Hormonal.Contraceptives}                         11</code></pre>
+<p>plot more frequent events</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">itemFrequencyPlot</span>(transactions, <span class="dt">support =</span> <span class="fl">.05</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>applying Apriori</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(datacat_complete, <span class="dt">parameter =</span> <span class="kw">list</span>(<span class="dt">supp =</span> <span class="fl">0.01</span>, <span class="dt">conf =</span> <span class="fl">0.1</span>, <span class="dt">target =</span> <span class="st">&quot;rules&quot;</span>))</a></code></pre></div>
 <pre><code>## Apriori
 ## 
 ## Parameter specification:
 ##  confidence minval smax arem  aval originalSupport maxtime support minlen
-##         0.5    0.1    1 none FALSE            TRUE       5     0.2      1
+##         0.1    0.1    1 none FALSE            TRUE       5    0.01      1
 ##  maxlen target   ext
 ##      10  rules FALSE
 ## 
@@ -353,254 +403,200 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  filter tree heap memopt load sort verbose
 ##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE
 ## 
-## Absolute minimum support count: 171 
+## Absolute minimum support count: 7 
 ## 
 ## set item appearances ...[0 item(s)] done [0.00s].
-## set transactions ...[14 item(s), 858 transaction(s)] done [0.00s].
-## sorting and recoding items ... [7 item(s)] done [0.00s].
+## set transactions ...[19 item(s), 726 transaction(s)] done [0.00s].
+## sorting and recoding items ... [13 item(s)] done [0.00s].
 ## creating transaction tree ... done [0.00s].
-## checking subsets of size 1 2 3 4 5 6 7 done [0.00s].
-## writing ... [448 rule(s)] done [0.00s].
+## checking subsets of size 1 2 3 4 done [0.00s].
+## writing ... [110 rule(s)] done [0.00s].
 ## creating S4 object  ... done [0.00s].</code></pre>
-<pre><code>##      lhs               rhs            support confidence     lift count
-## [1]  {Dx.HPV=0,                                                        
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8706294  0.9828947 1.075668   747
-## [2]  {Dx.Cancer=0,                                                     
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8706294  0.9828947 1.075668   747
-## [3]  {Dx.Cancer=0,                                                     
-##       Dx.HPV=0,                                                        
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8682984  0.9828496 1.075619   745
-## [4]  {Dx.CIN=0,                                                        
-##       Dx.HPV=0,                                                        
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8636364  0.9827586 1.075519   741
-## [5]  {Dx.Cancer=0,                                                     
-##       Dx.CIN=0,                                                        
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8636364  0.9827586 1.075519   741
-## [6]  {Dx.Cancer=0,                                                     
-##       Dx.CIN=0,                                                        
-##       Dx.HPV=0,                                                        
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8613054  0.9827128 1.075469   739
-## [7]  {Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8811189  0.9818182 1.074490   756
-## [8]  {Dx.CIN=0,                                                        
-##       Hinselmann=0,                                                    
-##       Citology=0,                                                      
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8741259  0.9816754 1.074334   750
-## [9]  {Dx.HPV=0,                                                        
-##       Hinselmann=0,                                                    
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8916084  0.9795134 1.071968   765
-## [10] {Dx.Cancer=0,                                                     
-##       Hinselmann=0,                                                    
-##       Biopsy=0}     =&gt; {Schiller=0} 0.8916084  0.9795134 1.071968   765</code></pre>
-<p>select rules where Dx.Cancer = 0 &amp; lift &gt;1</p>
-<pre><code>##      lhs               rhs             support confidence     lift count
-## [1]  {Schiller=0}   =&gt; {Dx.Cancer=0} 0.9009324  0.9859694 1.007097   773
-## [2]  {Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9219114  0.9850560 1.006164   791
-## [3]  {Citology=0}   =&gt; {Dx.Cancer=0} 0.9324009  0.9828010 1.003861   800
-## [4]  {Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9428904  0.9829891 1.004053   809
-## [5]  {Dx.HPV=0}     =&gt; {Dx.Cancer=0} 0.9766900  0.9976190 1.018997   838
-## [6]  {Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8927739  0.9858430 1.006968   766
-## [7]  {Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8787879  0.9882045 1.009380   754
-## [8]  {Hinselmann=0,                                                     
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8997669  0.9859515 1.007079   772
-## [9]  {Dx.HPV=0,                                                         
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8986014  0.9974127 1.018786   771
-## [10] {Dx.CIN=0,                                                         
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8916084  0.9858247 1.006950   765
-## [11] {Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8939394  0.9871300 1.008283   767
-## [12] {Hinselmann=0,                                                     
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9102564  0.9848676 1.005972   781
-## [13] {Dx.HPV=0,                                                         
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9195804  0.9974716 1.018846   789
-## [14] {Dx.CIN=0,                                                         
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9149184  0.9849435 1.006049   785
-## [15] {Hinselmann=0,                                                     
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9055944  0.9860406 1.007170   777
-## [16] {Dx.HPV=0,                                                         
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9300699  0.9975000 1.018875   798
-## [17] {Dx.CIN=0,                                                         
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9219114  0.9826087 1.003665   791
-## [18] {Dx.HPV=0,                                                         
-##       Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9405594  0.9975278 1.018903   807
-## [19] {Dx.CIN=0,                                                         
-##       Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9324009  0.9828010 1.003861   800
-## [20] {Dx.CIN=0,                                                         
-##       Dx.HPV=0}     =&gt; {Dx.Cancer=0} 0.9662005  0.9975933 1.018970   829
-## [21] {Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8717949  0.9881110 1.009285   748
-## [22] {Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8916084  0.9858247 1.006950   765
-## [23] {Dx.HPV=0,                                                         
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8904429  0.9973890 1.018762   764
-## [24] {Dx.CIN=0,                                                         
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8857809  0.9857328 1.006856   760
-## [25] {Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8776224  0.9881890 1.009364   753
-## [26] {Dx.HPV=0,                                                         
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8764569  0.9973475 1.018719   752
-## [27] {Dx.CIN=0,                                                         
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8694639  0.9880795 1.009253   746
-## [28] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8974359  0.9974093 1.018782   770
-## [29] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8904429  0.9858065 1.006931   764
-## [30] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8892774  0.9973856 1.018758   763
-## [31] {Hinselmann=0,                                                     
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8857809  0.9870130 1.008163   760
-## [32] {Dx.HPV=0,                                                         
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8916084  0.9973924 1.018765   765
-## [33] {Dx.CIN=0,                                                         
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8869464  0.9870298 1.008180   761
-## [34] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9079254  0.9974392 1.018813   779
-## [35] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9032634  0.9847522 1.005854   775
-## [36] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9125874  0.9974522 1.018826   783
-## [37] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9032634  0.9974260 1.018799   775
-## [38] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8951049  0.9858793 1.007005   768
-## [39] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.9195804  0.9974716 1.018846   789
-## [40] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0} =&gt; {Dx.Cancer=0} 0.9300699  0.9975000 1.018875   798
-## [41] {Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8706294  0.9880952 1.009269   747
-## [42] {Dx.HPV=0,                                                         
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8694639  0.9973262 1.018697   746
-## [43] {Dx.CIN=0,                                                         
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8648019  0.9880160 1.009188   742
-## [44] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8892774  0.9973856 1.018758   763
-## [45] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8846154  0.9857143 1.006837   759
-## [46] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8834499  0.9973684 1.018741   758
-## [47] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8752914  0.9973440 1.018716   751
-## [48] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8682984  0.9880637 1.009236   745
-## [49] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8671329  0.9973190 1.018690   744
-## [50] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0}   =&gt; {Dx.Cancer=0} 0.8881119  0.9973822 1.018755   762
-## [51] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8834499  0.9973684 1.018741   758
-## [52] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8787879  0.9869110 1.008059   754
-## [53] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8846154  0.9973719 1.018744   759
-## [54] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.9009324  0.9974194 1.018793   773
-## [55] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8927739  0.9973958 1.018769   766
-## [56] {Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8682984  0.9973226 1.018694   745
-## [57] {Dx.CIN=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8636364  0.9880000 1.009171   741
-## [58] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8624709  0.9973046 1.018675   740
-## [59] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8822844  0.9973650 1.018737   757
-## [60] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0}   =&gt; {Dx.Cancer=0} 0.8659674  0.9973154 1.018686   743
-## [61] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8764569  0.9973475 1.018719   752
-## [62] {Dx.CIN=0,                                                         
-##       Dx.HPV=0,                                                         
-##       Hinselmann=0,                                                     
-##       Schiller=0,                                                       
-##       Citology=0,                                                       
-##       Biopsy=0}     =&gt; {Dx.Cancer=0} 0.8613054  0.9973009 1.018672   739</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">summary</span>(rules)</a></code></pre></div>
+<pre><code>## set of 110 rules
+## 
+## rule length distribution (lhs + rhs):sizes
+##  1  2  3  4 
+##  3 45 54  8 
+## 
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   2.000   3.000   2.609   3.000   4.000 
+## 
+## summary of quality measures:
+##     support          confidence          lift             count    
+##  Min.   :0.01102   Min.   :0.1111   Min.   : 0.8309   Min.   :  8  
+##  1st Qu.:0.01377   1st Qu.:0.2564   1st Qu.: 1.2595   1st Qu.: 10  
+##  Median :0.01791   Median :0.6283   Median : 3.6341   Median : 13  
+##  Mean   :0.03168   Mean   :0.5591   Mean   : 7.1996   Mean   : 23  
+##  3rd Qu.:0.03168   3rd Qu.:0.7681   3rd Qu.:10.1200   3rd Qu.: 23  
+##  Max.   :0.64187   Max.   :1.0000   Max.   :41.5938   Max.   :466  
+## 
+## mining info:
+##              data ntransactions support confidence
+##  datacat_complete           726    0.01        0.1</code></pre>
+<p>see the first 10 resulted rules ordered by lift and support</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">inspect</span>(</a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="kw">head</span>(</a>
+<a class="sourceLine" id="cb17-3" title="3">    rules, </a>
+<a class="sourceLine" id="cb17-4" title="4">    <span class="dv">10</span>, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;lift&quot;</span>, <span class="st">&quot;support&quot;</span>)</a>
+<a class="sourceLine" id="cb17-5" title="5">    )</a>
+<a class="sourceLine" id="cb17-6" title="6">  )</a></code></pre></div>
+<pre><code>##      lhs                                     rhs                                     support confidence     lift count
+## [1]  {Hormonal.Contraceptives,                                                                                        
+##       Dx.Cancer}                          =&gt; {Dx.HPV}                             0.01515152  0.9166667 41.59375    11
+## [2]  {Dx.HPV}                             =&gt; {Dx.Cancer}                          0.02066116  0.9375000 40.03676    15
+## [3]  {Dx.Cancer}                          =&gt; {Dx.HPV}                             0.02066116  0.8823529 40.03676    15
+## [4]  {Hormonal.Contraceptives,                                                                                        
+##       Dx.HPV}                             =&gt; {Dx.Cancer}                          0.01515152  0.9166667 39.14706    11
+## [5]  {Smokes,                                                                                                         
+##       STDs.condylomatosis}                =&gt; {STDs.vulvo.perineal.condylomatosis} 0.01377410  1.0000000 19.10526    10
+## [6]  {STDs.condylomatosis,                                                                                            
+##       Schiller}                           =&gt; {STDs.vulvo.perineal.condylomatosis} 0.01377410  1.0000000 19.10526    10
+## [7]  {STDs.vulvo.perineal.condylomatosis} =&gt; {STDs.condylomatosis}                0.05234160  1.0000000 18.61538    38
+## [8]  {Hormonal.Contraceptives,                                                                                        
+##       STDs.vulvo.perineal.condylomatosis} =&gt; {STDs.condylomatosis}                0.03305785  1.0000000 18.61538    24
+## [9]  {Smokes,                                                                                                         
+##       STDs.vulvo.perineal.condylomatosis} =&gt; {STDs.condylomatosis}                0.01377410  1.0000000 18.61538    10
+## [10] {STDs.vulvo.perineal.condylomatosis,                                                                             
+##       Schiller}                           =&gt; {STDs.condylomatosis}                0.01377410  1.0000000 18.61538    10</code></pre>
+<p>see the first 10 resulted rules ordered by support and lift</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">inspect</span>(</a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="kw">head</span>(</a>
+<a class="sourceLine" id="cb19-3" title="3">    <span class="kw">subset</span>(rules, <span class="dt">subset =</span> lift <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.1</span>), </a>
+<a class="sourceLine" id="cb19-4" title="4">    <span class="dv">10</span>, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;support&quot;</span>, <span class="st">&quot;lift&quot;</span>)</a>
+<a class="sourceLine" id="cb19-5" title="5">    )</a>
+<a class="sourceLine" id="cb19-6" title="6">  )</a></code></pre></div>
+<pre><code>##      lhs                                     rhs                                     support confidence      lift count
+## [1]  {Biopsy}                             =&gt; {Schiller}                           0.06060606  0.8800000  9.259130    44
+## [2]  {Schiller}                           =&gt; {Biopsy}                             0.06060606  0.6376812  9.259130    44
+## [3]  {STDs.vulvo.perineal.condylomatosis} =&gt; {STDs.condylomatosis}                0.05234160  1.0000000 18.615385    38
+## [4]  {STDs.condylomatosis}                =&gt; {STDs.vulvo.perineal.condylomatosis} 0.05234160  0.9743590 18.615385    38
+## [5]  {Schiller}                           =&gt; {Hinselmann}                         0.04407713  0.4637681 10.202899    32
+## [6]  {Hinselmann}                         =&gt; {Schiller}                           0.04407713  0.9696970 10.202899    32
+## [7]  {Hormonal.Contraceptives,                                                                                         
+##       Schiller}                           =&gt; {Biopsy}                             0.03856749  0.6363636  9.240000    28
+## [8]  {Hormonal.Contraceptives,                                                                                         
+##       Biopsy}                             =&gt; {Schiller}                           0.03856749  0.8484848  8.927536    28
+## [9]  {Hormonal.Contraceptives,                                                                                         
+##       STDs.vulvo.perineal.condylomatosis} =&gt; {STDs.condylomatosis}                0.03305785  1.0000000 18.615385    24
+## [10] {Hormonal.Contraceptives,                                                                                         
+##       STDs.condylomatosis}                =&gt; {STDs.vulvo.perineal.condylomatosis} 0.03305785  0.9600000 18.341053    24</code></pre>
+<p>see the results for Dx.HPV and Dx.Cancer</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">inspect</span>(</a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="kw">subset</span>(rules, </a>
+<a class="sourceLine" id="cb21-3" title="3">         <span class="dt">subset =</span> rhs <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dx.HPV&quot;</span>, <span class="st">&quot;Dx.Cancer&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>lift <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb21-4" title="4">)</a></code></pre></div>
+<pre><code>##     lhs                                    rhs         support   
+## [1] {Dx.HPV}                            =&gt; {Dx.Cancer} 0.02066116
+## [2] {Dx.Cancer}                         =&gt; {Dx.HPV}    0.02066116
+## [3] {Hormonal.Contraceptives,Dx.HPV}    =&gt; {Dx.Cancer} 0.01515152
+## [4] {Hormonal.Contraceptives,Dx.Cancer} =&gt; {Dx.HPV}    0.01515152
+##     confidence lift     count
+## [1] 0.9375000  40.03676 15   
+## [2] 0.8823529  40.03676 15   
+## [3] 0.9166667  39.14706 11   
+## [4] 0.9166667  41.59375 11</code></pre>
+<p>Visualize 15 results by lift and support values</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">library</span>(arulesViz)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">plot</span>(<span class="kw">head</span>(rules, <span class="dv">15</span>, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;lift&quot;</span>, <span class="st">&quot;support&quot;</span>)))</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>graph</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">plot</span>(<span class="kw">head</span>(rules, <span class="dv">15</span>, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;lift&quot;</span>, <span class="st">&quot;support&quot;</span>)), <span class="dt">method=</span><span class="st">&quot;graph&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>plot parallel coordenates</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">plot</span>(<span class="kw">head</span>(rules, <span class="dv">15</span>, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;lift&quot;</span>, <span class="st">&quot;support&quot;</span>)), <span class="dt">method=</span><span class="st">&quot;paracoord&quot;</span>, <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">reorder=</span><span class="ot">TRUE</span>))</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
-<div id="clustering-for-continuous-variables" class="section level4">
-<h4><span class="header-section-number">4.10.1.2</span> clustering (for continuous variables)</h4>
+<div id="k-means" class="section level4">
+<h4><span class="header-section-number">4.10.1.2</span> K-means</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># selected only continuos features</span></a>
+<a class="sourceLine" id="cb26-2" title="2">datacont&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">!!</span>continuous)</a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="co"># filter only complete cases</span></a>
+<a class="sourceLine" id="cb26-5" title="5">datacont_complete&lt;-datacont[<span class="kw">complete.cases</span>(datacont), ]</a>
+<a class="sourceLine" id="cb26-6" title="6"><span class="kw">str</span>(datacont_complete)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    668 obs. of  10 variables:
+##  $ Age                            : int  18 15 52 46 42 51 26 45 44 27 ...
+##  $ Number.of.sexual.partners      : num  4 1 5 3 3 3 1 1 3 1 ...
+##  $ First.sexual.intercourse       : num  15 14 16 21 23 17 26 20 26 17 ...
+##  $ Num.of.pregnancies             : num  1 1 4 4 2 6 3 5 4 3 ...
+##  $ Smokes..years.                 : num  0 0 37 0 0 34 0 0 0 0 ...
+##  $ Smokes..packs.year.            : num  0 0 37 0 0 3.4 0 0 0 0 ...
+##  $ Hormonal.Contraceptives..years.: num  0 0 3 15 0 0 2 0 2 8 ...
+##  $ IUD..years.                    : num  0 0 0 0 0 7 7 0 0 0 ...
+##  $ STDs..number.                  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ STDs..Number.of.diagnosis      : int  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+<p>Determine number of clusters</p>
+<p>within groups sum of squares</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">wss &lt;-<span class="st"> </span>(<span class="kw">nrow</span>(datacont_complete)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="kw">sum</span>(<span class="kw">apply</span>(datacont_complete,<span class="dv">2</span>,var))</a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">15</span>) wss[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">kmeans</span>(datacont_complete,</a>
+<a class="sourceLine" id="cb28-3" title="3">                                     <span class="dt">centers=</span>i)<span class="op">$</span>withinss)</a></code></pre></div>
+<p>A plot of the within groups sum of squares by number of clusters extracted</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, wss, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Number of Clusters&quot;</span>,</a>
+<a class="sourceLine" id="cb29-2" title="2">     <span class="dt">ylab=</span><span class="st">&quot;Within groups sum of squares&quot;</span>)</a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">3</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>K-Means Cluster Analysis</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">fit3 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(datacont_complete, <span class="dv">3</span>) <span class="co"># 3 cluster solution</span></a></code></pre></div>
+<p>compactness of the clustering (between_SS / total_SS)</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">fit3<span class="op">$</span>betweenss <span class="op">/</span><span class="st"> </span>fit3<span class="op">$</span>totss <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<pre><code>## [1] 49.05081</code></pre>
+<p>get cluster means</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">aggregate</span>(datacont_complete,<span class="dt">by=</span><span class="kw">list</span>(fit3<span class="op">$</span>cluster),<span class="dt">FUN=</span>mean)</a></code></pre></div>
+<pre><code>##   Group.1      Age Number.of.sexual.partners First.sexual.intercourse
+## 1       1 21.62312                  2.422111                 16.31658
+## 2       2 52.58333                  3.083333                 18.08333
+## 3       3 34.79070                  2.655039                 18.37209
+##   Num.of.pregnancies Smokes..years. Smokes..packs.year.
+## 1           1.819095      0.5700221           0.2434217
+## 2           5.416667     19.8333333          10.6386002
+## 3           2.957364      1.3971353           0.3179675
+##   Hormonal.Contraceptives..years. IUD..years. STDs..number.
+## 1                        1.328473   0.1953518     0.1658291
+## 2                        1.187500   1.5833333     0.0000000
+## 3                        3.824660   0.9973256     0.1744186
+##   STDs..Number.of.diagnosis
+## 1                0.09045226
+## 2                0.00000000
+## 3                0.10077519</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># append cluster assignment</span></a>
+<a class="sourceLine" id="cb35-2" title="2">datacont_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(datacont_complete, fit3<span class="op">$</span>cluster)</a></code></pre></div>
+<p>plot clusters for</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">plot</span>(datacont_complete<span class="op">$</span>Age, datacont_complete<span class="op">$</span>Number.of.sexual.partners , <span class="dt">col =</span> fit3<span class="op">$</span>cluster)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>visualize clusters</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">library</span>(factoextra)</a>
+<a class="sourceLine" id="cb37-2" title="2"></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="kw">fviz_cluster</span>(fit3, <span class="dt">data =</span> datacont_complete,</a>
+<a class="sourceLine" id="cb37-4" title="4">             <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>,</a>
+<a class="sourceLine" id="cb37-5" title="5">             <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>(),</a>
+<a class="sourceLine" id="cb37-6" title="6">             <span class="dt">main =</span> <span class="st">&quot;Partitioning Clustering Plot&quot;</span></a>
+<a class="sourceLine" id="cb37-7" title="7">)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Compute hierarchical k-means clustering</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">res.hk &lt;-<span class="kw">hkmeans</span>(datacont_complete, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="co"># Elements returned by hkmeans()</span></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="kw">names</span>(res.hk)</a></code></pre></div>
+<pre><code>##  [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+##  [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+##  [9] &quot;ifault&quot;       &quot;data&quot;         &quot;hclust&quot;</code></pre>
+<p>Visualize the tree</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">fviz_dend</span>(res.hk, <span class="dt">cex =</span> <span class="fl">0.6</span>, <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>, </a>
+<a class="sourceLine" id="cb40-2" title="2">          <span class="dt">rect =</span> <span class="ot">TRUE</span>, <span class="dt">rect_border =</span> <span class="st">&quot;jco&quot;</span>, <span class="dt">rect_fill =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>alternative hierarchical clustering</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">res.hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(datacont_complete),  <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</a>
+<a class="sourceLine" id="cb41-2" title="2"></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="co"># plot the dendogram</span></a>
+<a class="sourceLine" id="cb41-4" title="4"><span class="kw">fviz_dend</span>(res.hc, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">k =</span> <span class="dv">3</span>, <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>) </a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>References</p>
+<p><a href="http://www.rdatamining.com/examples/association-rules" class="uri">http://www.rdatamining.com/examples/association-rules</a>
+<a href="https://blog.aptitive.com/building-the-transactions-class-for-association-rule-mining-in-r-using-arules-and-apriori-c6be64268bc4" class="uri">https://blog.aptitive.com/building-the-transactions-class-for-association-rule-mining-in-r-using-arules-and-apriori-c6be64268bc4</a>
+<a href="https://rpubs.com/lingyanzhou/examples-association-rules" class="uri">https://rpubs.com/lingyanzhou/examples-association-rules</a></p>
+<p><a href="https://www.statmethods.net/advstats/cluster.html" class="uri">https://www.statmethods.net/advstats/cluster.html</a>
+<a href="https://towardsdatascience.com/clustering-analysis-in-r-using-k-means-73eca4fb7967" class="uri">https://towardsdatascience.com/clustering-analysis-in-r-using-k-means-73eca4fb7967</a>
+<a href="https://rpubs.com/JanpuHou/278558" class="uri">https://rpubs.com/JanpuHou/278558</a></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
