@@ -1,4 +1,4 @@
-## Lesson 12
+## Bayesian Nets
 
 2020-05-12
 

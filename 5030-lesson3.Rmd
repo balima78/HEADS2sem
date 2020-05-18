@@ -1,4 +1,4 @@
-## Lesson 4
+## Bayesian statistical inference
 
 2020-03-03
 

@@ -1,4 +1,4 @@
-## Lesson 7
+## Logistic curve with Bayes
 
 2020-03-24
 
