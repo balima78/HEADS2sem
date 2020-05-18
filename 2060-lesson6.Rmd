@@ -1,8 +1,6 @@
-## Lesson 6
+## SIR model
 
 2020-03-30
-
-### SIR model
 
 **The SIR MODEL** (code given by the professor)
 
