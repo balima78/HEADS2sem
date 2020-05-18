@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.4 Survival Analysis | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.4 Survival Analysis | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.4 Survival Analysis | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="poisson-regression.html"/>
+<link rel="next" href="assignment-cancer.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="eda.html"><a href="eda.html"><i class="fa fa-check"></i><b>2.1</b> EDA</a></li>
+<li class="chapter" data-level="2.2" data-path="streams.html"><a href="streams.html"><i class="fa fa-check"></i><b>2.2</b> Streams</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+<li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix"><i class="fa fa-check"></i><b>2.4.1</b> keep sample matrix</a></li>
+<li class="chapter" data-level="2.4.2" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-sliding-window"><i class="fa fa-check"></i><b>2.4.2</b> keep sample matrix over a sliding window</a></li>
+<li class="chapter" data-level="2.4.3" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-weighted-sliding-window"><i class="fa fa-check"></i><b>2.4.3</b> keep sample matrix over a alpha weighted sliding window</a></li>
+<li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
+<li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="density-estimation.html"><a href="density-estimation.html"><i class="fa fa-check"></i><b>2.5</b> Density Estimation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="density-estimation.html"><a href="density-estimation.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="density-estimation.html"><a href="density-estimation.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="density-estimation.html"><a href="density-estimation.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="density-estimation.html"><a href="density-estimation.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="assignment-glucose.html"><a href="assignment-glucose.html"><i class="fa fa-check"></i><b>2.6</b> assignment Glucose</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="assignment-glucose.html"><a href="assignment-glucose.html#defining-a-function-for-expectation-maximization-algorithm"><i class="fa fa-check"></i><b>2.6.1</b> Defining a function for Expectation-Maximization algorithm</a></li>
+<li class="chapter" data-level="2.6.2" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves"><i class="fa fa-check"></i><b>2.6.2</b> 2 clusters density curves</a></li>
+<li class="chapter" data-level="2.6.3" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves-1"><i class="fa fa-check"></i><b>2.6.3</b> 3 clusters density curves</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html"><i class="fa fa-check"></i><b>2.7</b> assignment Second Lead from ECG</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#defining-a-function-for-expectation-maximization-em-algorithm"><i class="fa fa-check"></i><b>2.7.1</b> Defining a function for expectation-maximization (EM) algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#reading-the-data-and-ploting-the-leads-distribution"><i class="fa fa-check"></i><b>2.7.2</b> reading the data and ploting the leads distribution</a></li>
+<li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
+<li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
+<li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+<li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="random-numbers.html"><a href="random-numbers.html"><i class="fa fa-check"></i><b>2.8</b> Random Numbers</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="random-numbers.html"><a href="random-numbers.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="random-numbers.html"><a href="random-numbers.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="random-numbers.html"><a href="random-numbers.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="estimate-pi.html"><a href="estimate-pi.html"><i class="fa fa-check"></i><b>2.9</b> Estimate <span class="math inline">\(\pi\)</span></a></li>
+<li class="chapter" data-level="2.10" data-path="sir-model.html"><a href="sir-model.html"><i class="fa fa-check"></i><b>2.10</b> SIR model</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="sir-model.html"><a href="sir-model.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.1</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
+<li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.4</b> Survival Analysis</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="survival-analysis.html"><a href="survival-analysis.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.6" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>3.6</b> Cox Regression</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="cox-regression.html"><a href="cox-regression.html#example-from-classe-code-from-the-professor-1"><i class="fa fa-check"></i><b>3.6.1</b> Example from classe (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="assignment-cancer-1.html"><a href="assignment-cancer-1.html"><i class="fa fa-check"></i><b>3.7</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3.8</b> Repeated-measures ANOVA</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#rats-example-code-from-the-professor"><i class="fa fa-check"></i><b>3.8.1</b> Rats example (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.9</b> Linear Mixed Models</a></li>
+<li class="chapter" data-level="3.10" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.10</b> Exercises</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="exercises.html"><a href="exercises.html#diet-diet.sav"><i class="fa fa-check"></i><b>3.10.1</b> Diet (diet.sav)</a></li>
+<li class="chapter" data-level="3.10.2" data-path="exercises.html"><a href="exercises.html#child-development-dev3yrheads.sav"><i class="fa fa-check"></i><b>3.10.2</b> Child development (dev3yrheads.sav)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="conditional-logistic-regression.html"><a href="conditional-logistic-regression.html"><i class="fa fa-check"></i><b>3.11</b> Conditional Logistic Regression</a></li>
+<li class="chapter" data-level="3.12" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.12</b> Assignment feature selection</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.12.1</b> Boruta Package in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.13" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html"><i class="fa fa-check"></i><b>3.13</b> GLM (Poisson - Logistic)</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html#exercises-1"><i class="fa fa-check"></i><b>3.13.1</b> exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
+<li class="chapter" data-level="4.2" data-path="crossvalidation.html"><a href="crossvalidation.html"><i class="fa fa-check"></i><b>4.2</b> Crossvalidation</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="crossvalidation.html"><a href="crossvalidation.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
+<li class="chapter" data-level="4.2.2" data-path="crossvalidation.html"><a href="crossvalidation.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression-trees.html"><a href="regression-trees.html"><i class="fa fa-check"></i><b>4.3</b> Regression Trees</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="regression-trees.html"><a href="regression-trees.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regression-trees.html"><a href="regression-trees.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="regression-trees.html"><a href="regression-trees.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
+<li class="chapter" data-level="4.6" data-path="bayes-network.html"><a href="bayes-network.html"><i class="fa fa-check"></i><b>4.6</b> Bayes Network</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="bayes-network.html"><a href="bayes-network.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
+<li class="chapter" data-level="4.6.2" data-path="bayes-network.html"><a href="bayes-network.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
+<li class="chapter" data-level="4.6.3" data-path="bayes-network.html"><a href="bayes-network.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="naive-bayes-network.html"><a href="naive-bayes-network.html"><i class="fa fa-check"></i><b>4.7</b> Naive Bayes Network</a></li>
+<li class="chapter" data-level="4.8" data-path="ensemble-classifiers.html"><a href="ensemble-classifiers.html"><i class="fa fa-check"></i><b>4.8</b> Ensemble classifiers</a></li>
+<li class="chapter" data-level="4.9" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html"><i class="fa fa-check"></i><b>4.9</b> Machine Learning from Data Streams</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
+<li class="chapter" data-level="4.9.2" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>4.10</b> Unsupervised Machine Learning</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Clustering and Association Rules</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="support-vector-machine.html"><a href="support-vector-machine.html"><i class="fa fa-check"></i><b>4.11</b> Support Vector Machine</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="support-vector-machine.html"><a href="support-vector-machine.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
+<li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html"><i class="fa fa-check"></i><b>5.2</b> Logistic curve with Bayes</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="bayesian-nets.html"><a href="bayesian-nets.html"><i class="fa fa-check"></i><b>5.3</b> Bayesian Nets</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="bayesian-nets.html"><a href="bayesian-nets.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="survival-analysis" class="section level2">
+<h2><span class="header-section-number">3.4</span> Survival Analysis</h2>
+<p>2020-03-16</p>
+<div id="example-from-classe-code-from-the-professor" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Example from classe (code from the professor)</h3>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1"><span class="co">#Load the library required for a survival analysis</span></a>
+<a class="sourceLine" id="cb205-2" title="2"><span class="kw">library</span>(splines)</a>
+<a class="sourceLine" id="cb205-3" title="3"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb205-4" title="4"><span class="co">#Read data</span></a>
+<a class="sourceLine" id="cb205-5" title="5">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/data2.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
+<p>Variables included in the dataset:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">str</span>(data)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    274 obs. of  11 variables:
+##  $ id         : int  1 3 7 9 11 13 15 17 19 21 ...
+##  $ fu         : num  7 22 13 42 5 13 70 51 25 5 ...
+##  $ event      : int  1 0 0 1 0 1 0 1 0 0 ...
+##  $ event_HD   : int  0 0 0 0 1 0 0 0 1 1 ...
+##  $ event_RT   : int  0 1 1 0 0 0 1 0 0 0 ...
+##  $ event_CR   : int  1 3 3 1 2 1 3 1 2 2 ...
+##  $ peritonitis: int  0 1 1 1 1 0 1 0 1 1 ...
+##  $ sex        : int  1 1 0 0 0 0 1 0 1 1 ...
+##  $ age        : int  60 41 38 46 51 36 43 71 31 50 ...
+##  $ diab       : int  1 1 0 0 0 0 0 1 0 0 ...
+##  $ first      : int  0 0 1 0 0 1 1 0 0 1 ...</code></pre>
+<p>Kaplan-Meier survival curve</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">KM_<span class="dv">1</span>&lt;-<span class="kw">survfit</span>(<span class="kw">Surv</span>(data<span class="op">$</span>fu,data<span class="op">$</span>event)<span class="op">~</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb208-2" title="2"></a>
+<a class="sourceLine" id="cb208-3" title="3">KM_<span class="dv">1</span></a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ 1)
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##     274      62      NA      51      NA</code></pre>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">summary</span>(KM_<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ 1)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    274       2    0.993 0.00514        0.983        1.000
+##     2    266       6    0.970 0.01034        0.950        0.991
+##     5    242       2    0.962 0.01171        0.940        0.986
+##     6    232       2    0.954 0.01299        0.929        0.980
+##     7    220       2    0.945 0.01425        0.918        0.974
+##     8    210       2    0.936 0.01547        0.906        0.967
+##     9    198       4    0.917 0.01782        0.883        0.953
+##    10    190       2    0.908 0.01889        0.871        0.946
+##    12    176       2    0.897 0.02004        0.859        0.938
+##    13    174       6    0.866 0.02299        0.823        0.913
+##    14    166       2    0.856 0.02386        0.811        0.904
+##    17    150       2    0.845 0.02487        0.797        0.895
+##    18    144       2    0.833 0.02587        0.784        0.885
+##    22    128       2    0.820 0.02706        0.769        0.875
+##    23    114       2    0.806 0.02843        0.752        0.863
+##    24    110       2    0.791 0.02974        0.735        0.851
+##    27     94       2    0.774 0.03140        0.715        0.838
+##    35     62       4    0.724 0.03802        0.653        0.803
+##    36     58       2    0.699 0.04061        0.624        0.783
+##    37     54       4    0.647 0.04510        0.565        0.742
+##    38     50       2    0.621 0.04687        0.536        0.720
+##    42     46       2    0.594 0.04857        0.506        0.698
+##    51     36       2    0.561 0.05118        0.470        0.671
+##    60     28       2    0.521 0.05482        0.424        0.641</code></pre>
+<p>Plot survival curve with confidence intervals</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">plot</span>(KM_<span class="dv">1</span>, <span class="dt">mark.time =</span> F)</a>
+<a class="sourceLine" id="cb212-2" title="2"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p>Kaplan-Meier survival according to diabetes</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">KM.diab&lt;-<span class="kw">survfit</span>(<span class="kw">Surv</span>(data<span class="op">$</span>fu,data<span class="op">$</span>event) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>diab)</a>
+<a class="sourceLine" id="cb213-2" title="2"></a>
+<a class="sourceLine" id="cb213-3" title="3">KM.diab</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ data$diab)
+## 
+##               n events median 0.95LCL 0.95UCL
+## data$diab=0 206     38     NA      NA      NA
+## data$diab=1  68     24     37      36      NA</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">summary</span>(KM.diab)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(data$fu, data$event) ~ data$diab)
+## 
+##                 data$diab=0 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    206       2    0.990 0.00683        0.977        1.000
+##     2    202       4    0.971 0.01179        0.948        0.994
+##     6    178       2    0.960 0.01396        0.933        0.988
+##     8    160       2    0.948 0.01616        0.917        0.980
+##     9    148       2    0.935 0.01830        0.900        0.972
+##    10    146       2    0.922 0.02017        0.883        0.963
+##    12    132       2    0.908 0.02215        0.866        0.953
+##    13    130       6    0.866 0.02694        0.815        0.921
+##    17    110       2    0.851 0.02866        0.796        0.909
+##    23     88       2    0.831 0.03110        0.772        0.894
+##    27     72       2    0.808 0.03425        0.744        0.878
+##    35     48       4    0.741 0.04500        0.658        0.834
+##    37     42       2    0.705 0.04929        0.615        0.809
+##    38     40       2    0.670 0.05276        0.574        0.782
+##    42     36       2    0.633 0.05601        0.532        0.753
+## 
+##                 data$diab=1 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     2     64       2    0.969  0.0217       0.9270        1.000
+##     5     56       2    0.934  0.0319       0.8737        0.999
+##     7     52       2    0.898  0.0395       0.8240        0.979
+##     9     50       2    0.862  0.0454       0.7778        0.956
+##    14     44       2    0.823  0.0511       0.7288        0.930
+##    18     38       2    0.780  0.0568       0.6760        0.900
+##    22     34       2    0.734  0.0621       0.6218        0.866
+##    24     24       2    0.673  0.0704       0.5481        0.826
+##    36     14       2    0.577  0.0872       0.4288        0.775
+##    37     12       2    0.481  0.0955       0.3255        0.709
+##    51      6       2    0.320  0.1123       0.1612        0.637
+##    60      4       2    0.160  0.0978       0.0484        0.530</code></pre>
+<p>Plot survival curve according to diabetes</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="kw">plot</span>(KM.diab, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dt">mark.time =</span> F,</a>
+<a class="sourceLine" id="cb217-2" title="2">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab=</span><span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;S&quot;</span>)</a>
+<a class="sourceLine" id="cb217-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Diabetes&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>),</a>
+<a class="sourceLine" id="cb217-4" title="4">       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="dt">lty=</span><span class="dv">1</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p><strong>Log-rank test</strong></p>
+<p>H0: No difference between the groups.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="kw">survdiff</span>(<span class="kw">Surv</span>(data<span class="op">$</span>fu, data<span class="op">$</span>event) <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>diab, <span class="dt">rho =</span> <span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(data$fu, data$event) ~ data$diab, rho = 0)
+## 
+##               N Observed Expected (O-E)^2/E (O-E)^2/V
+## data$diab=0 206       38     47.5      1.89      8.27
+## data$diab=1  68       24     14.5      6.19      8.27
+## 
+##  Chisq= 8.3  on 1 degrees of freedom, p= 0.004</code></pre>
+<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="poisson-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-cancer.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

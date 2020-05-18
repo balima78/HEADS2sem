@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-15" />
+<meta name="date" content="2020-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -135,8 +135,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
-<li class="chapter" data-level="2.1" data-path="lesson-1.html"><a href="lesson-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson 1</a></li>
-<li class="chapter" data-level="2.2" data-path="lesson-2.html"><a href="lesson-2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson 2</a></li>
+<li class="chapter" data-level="2.1" data-path="eda.html"><a href="eda.html"><i class="fa fa-check"></i><b>2.1</b> EDA</a></li>
+<li class="chapter" data-level="2.2" data-path="streams.html"><a href="streams.html"><i class="fa fa-check"></i><b>2.2</b> Streams</a></li>
 <li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
 <li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix"><i class="fa fa-check"></i><b>2.4.1</b> keep sample matrix</a></li>
@@ -145,11 +145,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
 <li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="lesson-3.html"><a href="lesson-3.html"><i class="fa fa-check"></i><b>2.5</b> Lesson 3</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="lesson-3.html"><a href="lesson-3.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
-<li class="chapter" data-level="2.5.2" data-path="lesson-3.html"><a href="lesson-3.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
-<li class="chapter" data-level="2.5.3" data-path="lesson-3.html"><a href="lesson-3.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
-<li class="chapter" data-level="2.5.4" data-path="lesson-3.html"><a href="lesson-3.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+<li class="chapter" data-level="2.5" data-path="density-estimation.html"><a href="density-estimation.html"><i class="fa fa-check"></i><b>2.5</b> Density Estimation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="density-estimation.html"><a href="density-estimation.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="density-estimation.html"><a href="density-estimation.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="density-estimation.html"><a href="density-estimation.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="density-estimation.html"><a href="density-estimation.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="assignment-glucose.html"><a href="assignment-glucose.html"><i class="fa fa-check"></i><b>2.6</b> assignment Glucose</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="assignment-glucose.html"><a href="assignment-glucose.html#defining-a-function-for-expectation-maximization-algorithm"><i class="fa fa-check"></i><b>2.6.1</b> Defining a function for Expectation-Maximization algorithm</a></li>
@@ -164,89 +164,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
 <li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="lesson-4.html"><a href="lesson-4.html"><i class="fa fa-check"></i><b>2.8</b> Lesson 4</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="lesson-4.html"><a href="lesson-4.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
-<li class="chapter" data-level="2.8.2" data-path="lesson-4.html"><a href="lesson-4.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
-<li class="chapter" data-level="2.8.3" data-path="lesson-4.html"><a href="lesson-4.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
+<li class="chapter" data-level="2.8" data-path="random-numbers.html"><a href="random-numbers.html"><i class="fa fa-check"></i><b>2.8</b> Random Numbers</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="random-numbers.html"><a href="random-numbers.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="random-numbers.html"><a href="random-numbers.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="random-numbers.html"><a href="random-numbers.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="lesson-5.html"><a href="lesson-5.html"><i class="fa fa-check"></i><b>2.9</b> Lesson 5</a></li>
-<li class="chapter" data-level="2.10" data-path="lesson-6.html"><a href="lesson-6.html"><i class="fa fa-check"></i><b>2.10</b> Lesson 6</a><ul>
-<li class="chapter" data-level="2.10.1" data-path="lesson-6.html"><a href="lesson-6.html#sir-model"><i class="fa fa-check"></i><b>2.10.1</b> SIR model</a></li>
-<li class="chapter" data-level="2.10.2" data-path="lesson-6.html"><a href="lesson-6.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.2</b> Markov chain Monte Carlo</a></li>
+<li class="chapter" data-level="2.9" data-path="estimate-pi.html"><a href="estimate-pi.html"><i class="fa fa-check"></i><b>2.9</b> Estimate <span class="math inline">\(\pi\)</span></a></li>
+<li class="chapter" data-level="2.10" data-path="sir-model.html"><a href="sir-model.html"><i class="fa fa-check"></i><b>2.10</b> SIR model</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="sir-model.html"><a href="sir-model.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.1</b> Markov chain Monte Carlo</a></li>
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
-<li class="chapter" data-level="3.1" data-path="lesson-1-1.html"><a href="lesson-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Lesson 1</a></li>
-<li class="chapter" data-level="3.2" data-path="lesson-2-1.html"><a href="lesson-2-1.html"><i class="fa fa-check"></i><b>3.2</b> Lesson 2</a></li>
-<li class="chapter" data-level="3.3" data-path="lesson-4-1.html"><a href="lesson-4-1.html"><i class="fa fa-check"></i><b>3.3</b> Lesson 4</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="lesson-4-1.html"><a href="lesson-4-1.html#generalized-linear-models-glm"><i class="fa fa-check"></i><b>3.3.1</b> Generalized Linear Models (GLM)</a></li>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
+<li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="lesson-5-1.html"><a href="lesson-5-1.html"><i class="fa fa-check"></i><b>3.4</b> Lesson 5</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="lesson-5-1.html"><a href="lesson-5-1.html#survival-analysis"><i class="fa fa-check"></i><b>3.4.1</b> Survival Analysis</a></li>
+<li class="chapter" data-level="3.4" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.4</b> Survival Analysis</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="survival-analysis.html"><a href="survival-analysis.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
-<li class="chapter" data-level="3.6" data-path="lesson-6-1.html"><a href="lesson-6-1.html"><i class="fa fa-check"></i><b>3.6</b> Lesson 6</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="lesson-6-1.html"><a href="lesson-6-1.html#cox-regression"><i class="fa fa-check"></i><b>3.6.1</b> Cox Regression</a></li>
+<li class="chapter" data-level="3.6" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>3.6</b> Cox Regression</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="cox-regression.html"><a href="cox-regression.html#example-from-classe-code-from-the-professor-1"><i class="fa fa-check"></i><b>3.6.1</b> Example from classe (code from the professor)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="assignment-cancer-1.html"><a href="assignment-cancer-1.html"><i class="fa fa-check"></i><b>3.7</b> Assignment <em>cancer</em></a></li>
-<li class="chapter" data-level="3.8" data-path="lesson-7.html"><a href="lesson-7.html"><i class="fa fa-check"></i><b>3.8</b> Lesson 7</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="lesson-7.html"><a href="lesson-7.html#repeated-measures-anova"><i class="fa fa-check"></i><b>3.8.1</b> Repeated-measures ANOVA</a></li>
+<li class="chapter" data-level="3.8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3.8</b> Repeated-measures ANOVA</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#rats-example-code-from-the-professor"><i class="fa fa-check"></i><b>3.8.1</b> Rats example (code from the professor)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="lesson-8.html"><a href="lesson-8.html"><i class="fa fa-check"></i><b>3.9</b> Lesson 8</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="lesson-8.html"><a href="lesson-8.html#limear-mixed-models"><i class="fa fa-check"></i><b>3.9.1</b> Limear Mixed Models</a></li>
+<li class="chapter" data-level="3.9" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.9</b> Linear Mixed Models</a></li>
+<li class="chapter" data-level="3.10" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.10</b> Exercises</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="exercises.html"><a href="exercises.html#diet-diet.sav"><i class="fa fa-check"></i><b>3.10.1</b> Diet (diet.sav)</a></li>
+<li class="chapter" data-level="3.10.2" data-path="exercises.html"><a href="exercises.html#child-development-dev3yrheads.sav"><i class="fa fa-check"></i><b>3.10.2</b> Child development (dev3yrheads.sav)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.10" data-path="lesson-9.html"><a href="lesson-9.html"><i class="fa fa-check"></i><b>3.10</b> Lesson 9</a><ul>
-<li class="chapter" data-level="3.10.1" data-path="lesson-9.html"><a href="lesson-9.html#exercises"><i class="fa fa-check"></i><b>3.10.1</b> exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="3.11" data-path="lesson-10.html"><a href="lesson-10.html"><i class="fa fa-check"></i><b>3.11</b> Lesson 10</a><ul>
-<li class="chapter" data-level="3.11.1" data-path="lesson-10.html"><a href="lesson-10.html#conditional-logistic-regression"><i class="fa fa-check"></i><b>3.11.1</b> Conditional Logistic Regression</a></li>
-</ul></li>
+<li class="chapter" data-level="3.11" data-path="conditional-logistic-regression.html"><a href="conditional-logistic-regression.html"><i class="fa fa-check"></i><b>3.11</b> Conditional Logistic Regression</a></li>
 <li class="chapter" data-level="3.12" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.12</b> Assignment feature selection</a><ul>
 <li class="chapter" data-level="3.12.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.12.1</b> Boruta Package in R</a></li>
 </ul></li>
+<li class="chapter" data-level="3.13" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html"><i class="fa fa-check"></i><b>3.13</b> GLM (Poisson - Logistic)</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html#exercises-1"><i class="fa fa-check"></i><b>3.13.1</b> exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
-<li class="chapter" data-level="4.1" data-path="lesson-1-2.html"><a href="lesson-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson 1</a></li>
-<li class="chapter" data-level="4.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html"><i class="fa fa-check"></i><b>4.2</b> Lesson 2</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="lesson-2-2.html"><a href="lesson-2-2.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
-<li class="chapter" data-level="4.2.2" data-path="lesson-2-2.html"><a href="lesson-2-2.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
+<li class="chapter" data-level="4.2" data-path="crossvalidation.html"><a href="crossvalidation.html"><i class="fa fa-check"></i><b>4.2</b> Crossvalidation</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="crossvalidation.html"><a href="crossvalidation.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
+<li class="chapter" data-level="4.2.2" data-path="crossvalidation.html"><a href="crossvalidation.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html"><i class="fa fa-check"></i><b>4.3</b> Lesson 3</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="lesson-3-1.html"><a href="lesson-3-1.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
-<li class="chapter" data-level="4.3.2" data-path="lesson-3-1.html"><a href="lesson-3-1.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
-<li class="chapter" data-level="4.3.3" data-path="lesson-3-1.html"><a href="lesson-3-1.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+<li class="chapter" data-level="4.3" data-path="regression-trees.html"><a href="regression-trees.html"><i class="fa fa-check"></i><b>4.3</b> Regression Trees</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="regression-trees.html"><a href="regression-trees.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regression-trees.html"><a href="regression-trees.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="regression-trees.html"><a href="regression-trees.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
 <li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
-<li class="chapter" data-level="4.6" data-path="lesson-4-2.html"><a href="lesson-4-2.html"><i class="fa fa-check"></i><b>4.6</b> Lesson 4</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="lesson-4-2.html"><a href="lesson-4-2.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
-<li class="chapter" data-level="4.6.2" data-path="lesson-4-2.html"><a href="lesson-4-2.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
-<li class="chapter" data-level="4.6.3" data-path="lesson-4-2.html"><a href="lesson-4-2.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
+<li class="chapter" data-level="4.6" data-path="bayes-network.html"><a href="bayes-network.html"><i class="fa fa-check"></i><b>4.6</b> Bayes Network</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="bayes-network.html"><a href="bayes-network.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
+<li class="chapter" data-level="4.6.2" data-path="bayes-network.html"><a href="bayes-network.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
+<li class="chapter" data-level="4.6.3" data-path="bayes-network.html"><a href="bayes-network.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="lesson-5-2.html"><a href="lesson-5-2.html"><i class="fa fa-check"></i><b>4.7</b> Lesson 5</a></li>
-<li class="chapter" data-level="4.8" data-path="lesson-6-2.html"><a href="lesson-6-2.html"><i class="fa fa-check"></i><b>4.8</b> Lesson 6</a></li>
-<li class="chapter" data-level="4.9" data-path="lesson-7-1.html"><a href="lesson-7-1.html"><i class="fa fa-check"></i><b>4.9</b> Lesson 7</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="lesson-7-1.html"><a href="lesson-7-1.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
-<li class="chapter" data-level="4.9.2" data-path="lesson-7-1.html"><a href="lesson-7-1.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
+<li class="chapter" data-level="4.7" data-path="naive-bayes-network.html"><a href="naive-bayes-network.html"><i class="fa fa-check"></i><b>4.7</b> Naive Bayes Network</a></li>
+<li class="chapter" data-level="4.8" data-path="ensemble-classifiers.html"><a href="ensemble-classifiers.html"><i class="fa fa-check"></i><b>4.8</b> Ensemble classifiers</a></li>
+<li class="chapter" data-level="4.9" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html"><i class="fa fa-check"></i><b>4.9</b> Machine Learning from Data Streams</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
+<li class="chapter" data-level="4.9.2" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.10" data-path="lesson-8-1.html"><a href="lesson-8-1.html"><i class="fa fa-check"></i><b>4.10</b> Lesson 8</a><ul>
-<li class="chapter" data-level="4.10.1" data-path="lesson-8-1.html"><a href="lesson-8-1.html#unsupervised-machine-learning---clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Unsupervised Machine Learning - Clustering and Association Rules</a></li>
+<li class="chapter" data-level="4.10" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>4.10</b> Unsupervised Machine Learning</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Clustering and Association Rules</a></li>
 </ul></li>
-<li class="chapter" data-level="4.11" data-path="lesson-9-1.html"><a href="lesson-9-1.html"><i class="fa fa-check"></i><b>4.11</b> Lesson 9</a><ul>
-<li class="chapter" data-level="4.11.1" data-path="lesson-9-1.html"><a href="lesson-9-1.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
+<li class="chapter" data-level="4.11" data-path="support-vector-machine.html"><a href="support-vector-machine.html"><i class="fa fa-check"></i><b>4.11</b> Support Vector Machine</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="support-vector-machine.html"><a href="support-vector-machine.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
 </ul></li>
 <li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
-<li class="chapter" data-level="5.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html"><i class="fa fa-check"></i><b>5.1</b> Lesson 4</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="lesson-4-3.html"><a href="lesson-4-3.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+<li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="lesson-7-2.html"><a href="lesson-7-2.html"><i class="fa fa-check"></i><b>5.2</b> Lesson 7</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="lesson-7-2.html"><a href="lesson-7-2.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
+<li class="chapter" data-level="5.2" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html"><i class="fa fa-check"></i><b>5.2</b> Logistic curve with Bayes</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="lesson-12.html"><a href="lesson-12.html"><i class="fa fa-check"></i><b>5.3</b> Lesson 12</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="lesson-12.html"><a href="lesson-12.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+<li class="chapter" data-level="5.3" data-path="bayesian-nets.html"><a href="bayesian-nets.html"><i class="fa fa-check"></i><b>5.3</b> Bayesian Nets</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="bayesian-nets.html"><a href="bayesian-nets.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
@@ -278,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">HEADS 2nd semester</h1>
 <p class="author"><em>Bruno A Lima</em></p>
-<p class="date"><em>2020-05-15</em></p>
+<p class="date"><em>2020-05-18</em></p>
 </div>
 <div id="section" class="section level1 unnumbered">
 <h1></h1>

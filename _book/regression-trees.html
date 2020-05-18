@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.3 Regression Trees | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.3 Regression Trees | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.3 Regression Trees | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="crossvalidation.html"/>
+<link rel="next" href="assignment-trees.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="eda.html"><a href="eda.html"><i class="fa fa-check"></i><b>2.1</b> EDA</a></li>
+<li class="chapter" data-level="2.2" data-path="streams.html"><a href="streams.html"><i class="fa fa-check"></i><b>2.2</b> Streams</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+<li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix"><i class="fa fa-check"></i><b>2.4.1</b> keep sample matrix</a></li>
+<li class="chapter" data-level="2.4.2" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-sliding-window"><i class="fa fa-check"></i><b>2.4.2</b> keep sample matrix over a sliding window</a></li>
+<li class="chapter" data-level="2.4.3" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-weighted-sliding-window"><i class="fa fa-check"></i><b>2.4.3</b> keep sample matrix over a alpha weighted sliding window</a></li>
+<li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
+<li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="density-estimation.html"><a href="density-estimation.html"><i class="fa fa-check"></i><b>2.5</b> Density Estimation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="density-estimation.html"><a href="density-estimation.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="density-estimation.html"><a href="density-estimation.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="density-estimation.html"><a href="density-estimation.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="density-estimation.html"><a href="density-estimation.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="assignment-glucose.html"><a href="assignment-glucose.html"><i class="fa fa-check"></i><b>2.6</b> assignment Glucose</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="assignment-glucose.html"><a href="assignment-glucose.html#defining-a-function-for-expectation-maximization-algorithm"><i class="fa fa-check"></i><b>2.6.1</b> Defining a function for Expectation-Maximization algorithm</a></li>
+<li class="chapter" data-level="2.6.2" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves"><i class="fa fa-check"></i><b>2.6.2</b> 2 clusters density curves</a></li>
+<li class="chapter" data-level="2.6.3" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves-1"><i class="fa fa-check"></i><b>2.6.3</b> 3 clusters density curves</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html"><i class="fa fa-check"></i><b>2.7</b> assignment Second Lead from ECG</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#defining-a-function-for-expectation-maximization-em-algorithm"><i class="fa fa-check"></i><b>2.7.1</b> Defining a function for expectation-maximization (EM) algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#reading-the-data-and-ploting-the-leads-distribution"><i class="fa fa-check"></i><b>2.7.2</b> reading the data and ploting the leads distribution</a></li>
+<li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
+<li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
+<li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+<li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="random-numbers.html"><a href="random-numbers.html"><i class="fa fa-check"></i><b>2.8</b> Random Numbers</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="random-numbers.html"><a href="random-numbers.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="random-numbers.html"><a href="random-numbers.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="random-numbers.html"><a href="random-numbers.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="estimate-pi.html"><a href="estimate-pi.html"><i class="fa fa-check"></i><b>2.9</b> Estimate <span class="math inline">\(\pi\)</span></a></li>
+<li class="chapter" data-level="2.10" data-path="sir-model.html"><a href="sir-model.html"><i class="fa fa-check"></i><b>2.10</b> SIR model</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="sir-model.html"><a href="sir-model.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.1</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
+<li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.4</b> Survival Analysis</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="survival-analysis.html"><a href="survival-analysis.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.6" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>3.6</b> Cox Regression</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="cox-regression.html"><a href="cox-regression.html#example-from-classe-code-from-the-professor-1"><i class="fa fa-check"></i><b>3.6.1</b> Example from classe (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="assignment-cancer-1.html"><a href="assignment-cancer-1.html"><i class="fa fa-check"></i><b>3.7</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3.8</b> Repeated-measures ANOVA</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#rats-example-code-from-the-professor"><i class="fa fa-check"></i><b>3.8.1</b> Rats example (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.9</b> Linear Mixed Models</a></li>
+<li class="chapter" data-level="3.10" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.10</b> Exercises</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="exercises.html"><a href="exercises.html#diet-diet.sav"><i class="fa fa-check"></i><b>3.10.1</b> Diet (diet.sav)</a></li>
+<li class="chapter" data-level="3.10.2" data-path="exercises.html"><a href="exercises.html#child-development-dev3yrheads.sav"><i class="fa fa-check"></i><b>3.10.2</b> Child development (dev3yrheads.sav)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="conditional-logistic-regression.html"><a href="conditional-logistic-regression.html"><i class="fa fa-check"></i><b>3.11</b> Conditional Logistic Regression</a></li>
+<li class="chapter" data-level="3.12" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.12</b> Assignment feature selection</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.12.1</b> Boruta Package in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.13" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html"><i class="fa fa-check"></i><b>3.13</b> GLM (Poisson - Logistic)</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html#exercises-1"><i class="fa fa-check"></i><b>3.13.1</b> exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
+<li class="chapter" data-level="4.2" data-path="crossvalidation.html"><a href="crossvalidation.html"><i class="fa fa-check"></i><b>4.2</b> Crossvalidation</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="crossvalidation.html"><a href="crossvalidation.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
+<li class="chapter" data-level="4.2.2" data-path="crossvalidation.html"><a href="crossvalidation.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression-trees.html"><a href="regression-trees.html"><i class="fa fa-check"></i><b>4.3</b> Regression Trees</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="regression-trees.html"><a href="regression-trees.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regression-trees.html"><a href="regression-trees.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="regression-trees.html"><a href="regression-trees.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
+<li class="chapter" data-level="4.6" data-path="bayes-network.html"><a href="bayes-network.html"><i class="fa fa-check"></i><b>4.6</b> Bayes Network</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="bayes-network.html"><a href="bayes-network.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
+<li class="chapter" data-level="4.6.2" data-path="bayes-network.html"><a href="bayes-network.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
+<li class="chapter" data-level="4.6.3" data-path="bayes-network.html"><a href="bayes-network.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="naive-bayes-network.html"><a href="naive-bayes-network.html"><i class="fa fa-check"></i><b>4.7</b> Naive Bayes Network</a></li>
+<li class="chapter" data-level="4.8" data-path="ensemble-classifiers.html"><a href="ensemble-classifiers.html"><i class="fa fa-check"></i><b>4.8</b> Ensemble classifiers</a></li>
+<li class="chapter" data-level="4.9" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html"><i class="fa fa-check"></i><b>4.9</b> Machine Learning from Data Streams</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
+<li class="chapter" data-level="4.9.2" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>4.10</b> Unsupervised Machine Learning</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Clustering and Association Rules</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="support-vector-machine.html"><a href="support-vector-machine.html"><i class="fa fa-check"></i><b>4.11</b> Support Vector Machine</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="support-vector-machine.html"><a href="support-vector-machine.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
+<li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html"><i class="fa fa-check"></i><b>5.2</b> Logistic curve with Bayes</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="bayesian-nets.html"><a href="bayesian-nets.html"><i class="fa fa-check"></i><b>5.3</b> Bayesian Nets</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="bayesian-nets.html"><a href="bayesian-nets.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-trees" class="section level2">
+<h2><span class="header-section-number">4.3</span> Regression Trees</h2>
+<p>2020-02-18</p>
+<div id="using-rpart-and-the-breast-cancer-coimbra-data-set" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Using ‘rpart’ and the Breast Cancer Coimbra data set</h3>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1"><span class="co"># Define the filename</span></a>
+<a class="sourceLine" id="cb389-2" title="2">filename &lt;-<span class="st"> &quot;2.UploadedData/dataR2.csv&quot;</span></a>
+<a class="sourceLine" id="cb389-3" title="3"></a>
+<a class="sourceLine" id="cb389-4" title="4"><span class="co"># Load the CSV file from the local directory</span></a>
+<a class="sourceLine" id="cb389-5" title="5">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(filename, <span class="dt">header=</span>T)</a>
+<a class="sourceLine" id="cb389-6" title="6">dataset<span class="op">$</span>Classification&lt;-<span class="kw">factor</span>(dataset<span class="op">$</span>Classification, <span class="dt">levels=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Controls&quot;</span>,<span class="st">&quot;Patients&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb390-2" title="2"></a>
+<a class="sourceLine" id="cb390-3" title="3"><span class="co"># learn tree with Gini impurity</span></a>
+<a class="sourceLine" id="cb390-4" title="4">tree.gini&lt;-<span class="kw">rpart</span>(Classification<span class="op">~</span>.,<span class="dt">data =</span> dataset)</a>
+<a class="sourceLine" id="cb390-5" title="5"></a>
+<a class="sourceLine" id="cb390-6" title="6"><span class="co"># learn tree with information gain</span></a>
+<a class="sourceLine" id="cb390-7" title="7">tree.information&lt;-<span class="kw">rpart</span>(Classification<span class="op">~</span>., <span class="dt">data=</span>dataset,</a>
+<a class="sourceLine" id="cb390-8" title="8">                        <span class="dt">parms=</span><span class="kw">list</span>(<span class="dt">split=</span><span class="st">&quot;information&quot;</span>))</a></code></pre></div>
+<p>Summary Information</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1"><span class="kw">summary</span>(tree.information)</a></code></pre></div>
+<pre><code>## Call:
+## rpart(formula = Classification ~ ., data = dataset, parms = list(split = &quot;information&quot;))
+##   n= 116 
+## 
+##           CP nsplit rel error    xerror       xstd
+## 1 0.38461538      0 1.0000000 1.0000000 0.10300524
+## 2 0.08653846      1 0.6153846 0.8653846 0.10092601
+## 3 0.03846154      3 0.4423077 0.5769231 0.09069378
+## 4 0.01000000      7 0.2307692 0.5769231 0.09069378
+## 
+## Variable importance
+##         Age     Glucose         BMI        HOMA    Resistin     Insulin 
+##          25          21          12          11           9           7 
+##       MCP.1      Leptin Adiponectin 
+##           6           6           3 
+## 
+## Node number 1: 116 observations,    complexity param=0.3846154
+##   predicted class=Patients  expected loss=0.4482759  P(node) =1
+##     class counts:    52    64
+##    probabilities: 0.448 0.552 
+##   left son=2 (50 obs) right son=3 (66 obs)
+##   Primary splits:
+##       Glucose  &lt; 91.5      to the left,  improve=11.586660, (0 missing)
+##       HOMA     &lt; 2.169985  to the left,  improve= 8.039333, (0 missing)
+##       Age      &lt; 37        to the left,  improve= 7.453390, (0 missing)
+##       Resistin &lt; 13.71318  to the left,  improve= 6.993164, (0 missing)
+##       Insulin  &lt; 10.285    to the left,  improve= 6.048777, (0 missing)
+##   Surrogate splits:
+##       HOMA        &lt; 1.231021  to the left,  agree=0.698, adj=0.30, (0 split)
+##       Age         &lt; 37        to the left,  agree=0.664, adj=0.22, (0 split)
+##       Insulin     &lt; 4.8075    to the left,  agree=0.629, adj=0.14, (0 split)
+##       Adiponectin &lt; 22.12789  to the right, agree=0.612, adj=0.10, (0 split)
+##       MCP.1       &lt; 532.317   to the right, agree=0.612, adj=0.10, (0 split)
+## 
+## Node number 2: 50 observations,    complexity param=0.08653846
+##   predicted class=Controls  expected loss=0.3  P(node) =0.4310345
+##     class counts:    35    15
+##    probabilities: 0.700 0.300 
+##   left son=4 (15 obs) right son=5 (35 obs)
+##   Primary splits:
+##       Age      &lt; 44.5      to the left,  improve=6.641431, (0 missing)
+##       Resistin &lt; 13.24805  to the left,  improve=6.556913, (0 missing)
+##       BMI      &lt; 31.01992  to the right, improve=5.052061, (0 missing)
+##       Insulin  &lt; 3.4445    to the right, improve=3.236703, (0 missing)
+##       MCP.1    &lt; 228.949   to the left,  improve=2.734089, (0 missing)
+##   Surrogate splits:
+##       BMI         &lt; 31.71078  to the right, agree=0.78, adj=0.267, (0 split)
+##       Leptin      &lt; 31.16805  to the right, agree=0.76, adj=0.200, (0 split)
+##       MCP.1       &lt; 183.26    to the left,  agree=0.76, adj=0.200, (0 split)
+##       Adiponectin &lt; 12.34449  to the right, agree=0.72, adj=0.067, (0 split)
+## 
+## Node number 3: 66 observations,    complexity param=0.03846154
+##   predicted class=Patients  expected loss=0.2575758  P(node) =0.5689655
+##     class counts:    17    49
+##    probabilities: 0.258 0.742 
+##   left son=6 (47 obs) right son=7 (19 obs)
+##   Primary splits:
+##       Age      &lt; 48.5      to the right, improve=6.897003, (0 missing)
+##       Glucose  &lt; 118.5     to the left,  improve=4.016843, (0 missing)
+##       Leptin   &lt; 7.93315   to the left,  improve=3.666612, (0 missing)
+##       Resistin &lt; 11.92665  to the left,  improve=3.111218, (0 missing)
+##       HOMA     &lt; 2.173469  to the left,  improve=2.979801, (0 missing)
+##   Surrogate splits:
+##       HOMA        &lt; 0.6920566 to the right, agree=0.742, adj=0.105, (0 split)
+##       Adiponectin &lt; 15.105    to the left,  agree=0.742, adj=0.105, (0 split)
+##       Insulin     &lt; 3.057     to the right, agree=0.727, adj=0.053, (0 split)
+## 
+## Node number 4: 15 observations
+##   predicted class=Controls  expected loss=0  P(node) =0.1293103
+##     class counts:    15     0
+##    probabilities: 1.000 0.000 
+## 
+## Node number 5: 35 observations,    complexity param=0.08653846
+##   predicted class=Controls  expected loss=0.4285714  P(node) =0.3017241
+##     class counts:    20    15
+##    probabilities: 0.571 0.429 
+##   left son=10 (20 obs) right son=11 (15 obs)
+##   Primary splits:
+##       Resistin &lt; 13.24805  to the left,  improve=7.941566, (0 missing)
+##       Age      &lt; 74.5      to the right, improve=5.353821, (0 missing)
+##       BMI      &lt; 30.13047  to the right, improve=1.622848, (0 missing)
+##       Glucose  &lt; 85.5      to the left,  improve=1.479354, (0 missing)
+##       Insulin  &lt; 3.207     to the right, improve=1.464713, (0 missing)
+##   Surrogate splits:
+##       BMI     &lt; 27.9125   to the left,  agree=0.714, adj=0.333, (0 split)
+##       HOMA    &lt; 1.408116  to the left,  agree=0.714, adj=0.333, (0 split)
+##       Insulin &lt; 6.283     to the left,  agree=0.686, adj=0.267, (0 split)
+##       Age     &lt; 65.5      to the right, agree=0.657, adj=0.200, (0 split)
+##       Glucose &lt; 86.5      to the left,  agree=0.657, adj=0.200, (0 split)
+## 
+## Node number 6: 47 observations,    complexity param=0.03846154
+##   predicted class=Patients  expected loss=0.3617021  P(node) =0.4051724
+##     class counts:    17    30
+##    probabilities: 0.362 0.638 
+##   left son=12 (37 obs) right son=13 (10 obs)
+##   Primary splits:
+##       Glucose &lt; 118.5     to the left,  improve=5.231699, (0 missing)
+##       Leptin  &lt; 9.2319    to the left,  improve=4.358824, (0 missing)
+##       HOMA    &lt; 2.222398  to the left,  improve=3.016650, (0 missing)
+##       Insulin &lt; 5.673     to the left,  improve=2.666489, (0 missing)
+##       MCP.1   &lt; 297.372   to the left,  improve=2.089658, (0 missing)
+##   Surrogate splits:
+##       HOMA    &lt; 5.177161  to the left,  agree=0.894, adj=0.5, (0 split)
+##       Insulin &lt; 19.055    to the left,  agree=0.872, adj=0.4, (0 split)
+##       Leptin  &lt; 86.37605  to the left,  agree=0.830, adj=0.2, (0 split)
+##       MCP.1   &lt; 905.523   to the left,  agree=0.830, adj=0.2, (0 split)
+##       Age     &lt; 84        to the left,  agree=0.809, adj=0.1, (0 split)
+## 
+## Node number 7: 19 observations
+##   predicted class=Patients  expected loss=0  P(node) =0.1637931
+##     class counts:     0    19
+##    probabilities: 0.000 1.000 
+## 
+## Node number 10: 20 observations
+##   predicted class=Controls  expected loss=0.15  P(node) =0.1724138
+##     class counts:    17     3
+##    probabilities: 0.850 0.150 
+## 
+## Node number 11: 15 observations
+##   predicted class=Patients  expected loss=0.2  P(node) =0.1293103
+##     class counts:     3    12
+##    probabilities: 0.200 0.800 
+## 
+## Node number 12: 37 observations,    complexity param=0.03846154
+##   predicted class=Patients  expected loss=0.4594595  P(node) =0.3189655
+##     class counts:    17    20
+##    probabilities: 0.459 0.541 
+##   left son=24 (10 obs) right son=25 (27 obs)
+##   Primary splits:
+##       Age      &lt; 72.5      to the right, improve=3.334784, (0 missing)
+##       MCP.1    &lt; 297.372   to the left,  improve=3.104932, (0 missing)
+##       BMI      &lt; 32.275    to the right, improve=2.939143, (0 missing)
+##       Leptin   &lt; 9.2319    to the left,  improve=2.939143, (0 missing)
+##       Resistin &lt; 12.7652   to the left,  improve=2.201398, (0 missing)
+##   Surrogate splits:
+##       Leptin  &lt; 6.76555   to the left,  agree=0.811, adj=0.3, (0 split)
+##       Insulin &lt; 17.356    to the right, agree=0.757, adj=0.1, (0 split)
+##       HOMA    &lt; 4.164391  to the right, agree=0.757, adj=0.1, (0 split)
+##       MCP.1   &lt; 166.3975  to the left,  agree=0.757, adj=0.1, (0 split)
+## 
+## Node number 13: 10 observations
+##   predicted class=Patients  expected loss=0  P(node) =0.0862069
+##     class counts:     0    10
+##    probabilities: 0.000 1.000 
+## 
+## Node number 24: 10 observations
+##   predicted class=Controls  expected loss=0.2  P(node) =0.0862069
+##     class counts:     8     2
+##    probabilities: 0.800 0.200 
+## 
+## Node number 25: 27 observations,    complexity param=0.03846154
+##   predicted class=Patients  expected loss=0.3333333  P(node) =0.2327586
+##     class counts:     9    18
+##    probabilities: 0.333 0.667 
+##   left son=50 (7 obs) right son=51 (20 obs)
+##   Primary splits:
+##       BMI     &lt; 32.275    to the right, improve=5.860887, (0 missing)
+##       Leptin  &lt; 15.02435  to the right, improve=2.744531, (0 missing)
+##       MCP.1   &lt; 292.096   to the left,  improve=1.158823, (0 missing)
+##       Insulin &lt; 5.673     to the left,  improve=0.979303, (0 missing)
+##       Glucose &lt; 103.5     to the left,  improve=0.854835, (0 missing)
+##   Surrogate splits:
+##       Leptin &lt; 68.09345  to the right, agree=0.815, adj=0.286, (0 split)
+##       MCP.1  &lt; 832.433   to the right, agree=0.815, adj=0.286, (0 split)
+## 
+## Node number 50: 7 observations
+##   predicted class=Controls  expected loss=0.1428571  P(node) =0.06034483
+##     class counts:     6     1
+##    probabilities: 0.857 0.143 
+## 
+## Node number 51: 20 observations
+##   predicted class=Patients  expected loss=0.15  P(node) =0.1724138
+##     class counts:     3    17
+##    probabilities: 0.150 0.850</code></pre>
+<p>Summary Gini</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" title="1"><span class="kw">summary</span>(tree.gini)</a></code></pre></div>
+<pre><code>## Call:
+## rpart(formula = Classification ~ ., data = dataset)
+##   n= 116 
+## 
+##           CP nsplit rel error    xerror       xstd
+## 1 0.38461538      0 1.0000000 1.0000000 0.10300524
+## 2 0.10576923      1 0.6153846 0.7307692 0.09720906
+## 3 0.06730769      3 0.4038462 0.7307692 0.09720906
+## 4 0.01000000      5 0.2692308 0.7500000 0.09784651
+## 
+## Variable importance
+##     Glucose        HOMA         BMI         Age      Leptin     Insulin 
+##          21          14          14          13          12          12 
+##    Resistin Adiponectin       MCP.1 
+##           7           4           4 
+## 
+## Node number 1: 116 observations,    complexity param=0.3846154
+##   predicted class=Patients  expected loss=0.4482759  P(node) =1
+##     class counts:    52    64
+##    probabilities: 0.448 0.552 
+##   left son=2 (50 obs) right son=3 (66 obs)
+##   Primary splits:
+##       Glucose  &lt; 91.5      to the left,  improve=11.136890, (0 missing)
+##       HOMA     &lt; 2.169985  to the left,  improve= 7.526679, (0 missing)
+##       Resistin &lt; 13.71318  to the left,  improve= 6.668751, (0 missing)
+##       Age      &lt; 37        to the left,  improve= 6.601118, (0 missing)
+##       Insulin  &lt; 10.285    to the left,  improve= 5.651907, (0 missing)
+##   Surrogate splits:
+##       HOMA        &lt; 1.231021  to the left,  agree=0.698, adj=0.30, (0 split)
+##       Age         &lt; 37        to the left,  agree=0.664, adj=0.22, (0 split)
+##       Insulin     &lt; 4.8075    to the left,  agree=0.629, adj=0.14, (0 split)
+##       Adiponectin &lt; 22.12789  to the right, agree=0.612, adj=0.10, (0 split)
+##       MCP.1       &lt; 532.317   to the right, agree=0.612, adj=0.10, (0 split)
+## 
+## Node number 2: 50 observations,    complexity param=0.1057692
+##   predicted class=Controls  expected loss=0.3  P(node) =0.4310345
+##     class counts:    35    15
+##    probabilities: 0.700 0.300 
+##   left son=4 (29 obs) right son=5 (21 obs)
+##   Primary splits:
+##       Resistin &lt; 13.24805  to the left,  improve=5.334975, (0 missing)
+##       Age      &lt; 44.5      to the left,  improve=3.857143, (0 missing)
+##       Insulin  &lt; 3.4445    to the right, improve=2.951220, (0 missing)
+##       BMI      &lt; 31.01992  to the right, improve=2.842105, (0 missing)
+##       HOMA     &lt; 0.8390145 to the right, improve=1.882353, (0 missing)
+##   Surrogate splits:
+##       BMI     &lt; 27.9125   to the left,  agree=0.74, adj=0.381, (0 split)
+##       Insulin &lt; 6.3155    to the left,  agree=0.70, adj=0.286, (0 split)
+##       HOMA    &lt; 1.408116  to the left,  agree=0.70, adj=0.286, (0 split)
+##       Leptin  &lt; 29.01205  to the left,  agree=0.70, adj=0.286, (0 split)
+##       MCP.1   &lt; 587.3165  to the left,  agree=0.68, adj=0.238, (0 split)
+## 
+## Node number 3: 66 observations,    complexity param=0.06730769
+##   predicted class=Patients  expected loss=0.2575758  P(node) =0.5689655
+##     class counts:    17    49
+##    probabilities: 0.258 0.742 
+##   left son=6 (26 obs) right son=7 (40 obs)
+##   Primary splits:
+##       Age      &lt; 65.5      to the right, improve=3.569347, (0 missing)
+##       Leptin   &lt; 7.93315   to the left,  improve=3.266637, (0 missing)
+##       Resistin &lt; 11.92665  to the left,  improve=2.201071, (0 missing)
+##       BMI      &lt; 32.48096  to the right, improve=2.187879, (0 missing)
+##       HOMA     &lt; 2.173469  to the left,  improve=2.183601, (0 missing)
+##   Surrogate splits:
+##       Leptin   &lt; 47.14355  to the right, agree=0.697, adj=0.231, (0 split)
+##       MCP.1    &lt; 207.996   to the left,  agree=0.682, adj=0.192, (0 split)
+##       Resistin &lt; 4.558425  to the left,  agree=0.667, adj=0.154, (0 split)
+##       Glucose  &lt; 107       to the right, agree=0.652, adj=0.115, (0 split)
+##       HOMA     &lt; 17.95804  to the right, agree=0.636, adj=0.077, (0 split)
+## 
+## Node number 4: 29 observations
+##   predicted class=Controls  expected loss=0.1034483  P(node) =0.25
+##     class counts:    26     3
+##    probabilities: 0.897 0.103 
+## 
+## Node number 5: 21 observations,    complexity param=0.1057692
+##   predicted class=Patients  expected loss=0.4285714  P(node) =0.1810345
+##     class counts:     9    12
+##    probabilities: 0.429 0.571 
+##   left son=10 (10 obs) right son=11 (11 obs)
+##   Primary splits:
+##       BMI     &lt; 30.0273   to the right, improve=8.485714, (0 missing)
+##       Leptin  &lt; 35.16835  to the right, improve=3.857143, (0 missing)
+##       Age     &lt; 45.5      to the left,  improve=2.670330, (0 missing)
+##       HOMA    &lt; 0.8695296 to the right, improve=1.714286, (0 missing)
+##       Insulin &lt; 5.2615    to the right, improve=1.341270, (0 missing)
+##   Surrogate splits:
+##       Age         &lt; 40.5      to the left,  agree=0.810, adj=0.6, (0 split)
+##       Leptin      &lt; 28.041    to the right, agree=0.810, adj=0.6, (0 split)
+##       Insulin     &lt; 3.6505    to the right, agree=0.714, adj=0.4, (0 split)
+##       HOMA        &lt; 0.8695296 to the right, agree=0.714, adj=0.4, (0 split)
+##       Adiponectin &lt; 6.456392  to the left,  agree=0.667, adj=0.3, (0 split)
+## 
+## Node number 6: 26 observations,    complexity param=0.06730769
+##   predicted class=Patients  expected loss=0.4615385  P(node) =0.2241379
+##     class counts:    12    14
+##    probabilities: 0.462 0.538 
+##   left son=12 (7 obs) right son=13 (19 obs)
+##   Primary splits:
+##       Glucose  &lt; 98.5      to the left,  improve=5.554656, (0 missing)
+##       HOMA     &lt; 1.483263  to the left,  improve=2.998265, (0 missing)
+##       Resistin &lt; 12.7652   to the left,  improve=2.983683, (0 missing)
+##       Insulin  &lt; 5.923     to the left,  improve=1.923077, (0 missing)
+##       Leptin   &lt; 16.5075   to the left,  improve=1.923077, (0 missing)
+##   Surrogate splits:
+##       Insulin &lt; 5.533     to the left,  agree=0.885, adj=0.571, (0 split)
+##       HOMA    &lt; 1.100691  to the left,  agree=0.885, adj=0.571, (0 split)
+##       Leptin  &lt; 9.2716    to the left,  agree=0.846, adj=0.429, (0 split)
+##       BMI     &lt; 21.31248  to the left,  agree=0.769, adj=0.143, (0 split)
+## 
+## Node number 7: 40 observations
+##   predicted class=Patients  expected loss=0.125  P(node) =0.3448276
+##     class counts:     5    35
+##    probabilities: 0.125 0.875 
+## 
+## Node number 10: 10 observations
+##   predicted class=Controls  expected loss=0.1  P(node) =0.0862069
+##     class counts:     9     1
+##    probabilities: 0.900 0.100 
+## 
+## Node number 11: 11 observations
+##   predicted class=Patients  expected loss=0  P(node) =0.09482759
+##     class counts:     0    11
+##    probabilities: 0.000 1.000 
+## 
+## Node number 12: 7 observations
+##   predicted class=Controls  expected loss=0  P(node) =0.06034483
+##     class counts:     7     0
+##    probabilities: 1.000 0.000 
+## 
+## Node number 13: 19 observations
+##   predicted class=Patients  expected loss=0.2631579  P(node) =0.1637931
+##     class counts:     5    14
+##    probabilities: 0.263 0.737</code></pre>
+<p>Plot</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb395-2" title="2"><span class="kw">plot</span>(tree.information,<span class="dt">main=</span><span class="st">&quot;Information&quot;</span>)</a>
+<a class="sourceLine" id="cb395-3" title="3"><span class="kw">text</span>(tree.information)</a>
+<a class="sourceLine" id="cb395-4" title="4"><span class="kw">plot</span>(tree.gini, <span class="dt">main=</span><span class="st">&quot;Gini&quot;</span>)</a>
+<a class="sourceLine" id="cb395-5" title="5"><span class="kw">text</span>(tree.gini)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-268-1.png" width="672" /></p>
+</div>
+<div id="random-forest" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Random Forest</h3>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb396-2" title="2"><span class="kw">library</span>(pROC)</a></code></pre></div>
+<p>Run algorithms using 3 times 10-fold cross validation</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1"><span class="co"># set definitions</span></a>
+<a class="sourceLine" id="cb397-2" title="2">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
+<a class="sourceLine" id="cb397-3" title="3"></a>
+<a class="sourceLine" id="cb397-4" title="4">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb397-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb397-6" title="6">                        <span class="dt">classProbs=</span>T,</a>
+<a class="sourceLine" id="cb397-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>, <span class="dt">repeats=</span><span class="dv">3</span>)</a></code></pre></div>
+<p>train Tree and RF</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" title="1"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb398-2" title="2">fit.cart.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb398-3" title="3"></a>
+<a class="sourceLine" id="cb398-4" title="4"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb398-5" title="5">fit.rf.rcv &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control)</a></code></pre></div>
+<p>summarize accuracy of models</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv, <span class="dt">rf=</span>fit.rf.rcv)</a>
+<a class="sourceLine" id="cb399-2" title="2">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb399-3" title="3"><span class="kw">summary</span>(results)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## summary.resamples(object = results)
+## 
+## Models: rpart, rf 
+## Number of resamples: 30 
+## 
+## ROC 
+##            Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## rpart 0.4428571 0.6297619 0.7166667 0.6827513 0.7482143 0.8571429    0
+## rf    0.6000000 0.7333333 0.8000000 0.8175132 0.9000000 1.0000000    0
+## 
+## Sens 
+##       Min. 1st Qu. Median      Mean 3rd Qu. Max. NA&#39;s
+## rpart  0.4     0.5    0.6 0.6344444     0.8    1    0
+## rf     0.4     0.6    0.6 0.6577778     0.8    1    0
+## 
+## Spec 
+##            Min.   1st Qu.    Median      Mean   3rd Qu. Max. NA&#39;s
+## rpart 0.2857143 0.6666667 0.7142857 0.7341270 0.8333333    1    0
+## rf    0.3333333 0.6666667 0.8333333 0.7642857 0.8511905    1    0</code></pre>
+<p>ROC curves for models</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb401-2" title="2">rocs &lt;-<span class="st"> </span><span class="kw">lapply</span>(fit.models, <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,fit<span class="op">$</span>pred<span class="op">$</span>P, </a>
+<a class="sourceLine" id="cb401-3" title="3">                                                  <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold-CV&quot;</span>,fit<span class="op">$</span>method), </a>
+<a class="sourceLine" id="cb401-4" title="4">                                                  <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-273-1.png" width="672" /></p>
+<p>Compare accuracy of models</p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
+<p>Inspect models</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1"><span class="kw">print</span>(fit.cart.rcv)</a></code></pre></div>
+<pre><code>## CART 
+## 
+## 116 samples
+##   9 predictor
+##   2 classes: &#39;Controls&#39;, &#39;Patients&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 105, 105, 104, 104, 103, 104, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp          ROC        Sens       Spec     
+##   0.06730769  0.6730556  0.5400000  0.7563492
+##   0.10576923  0.6827513  0.6344444  0.7341270
+##   0.38461538  0.5290476  0.1922222  0.8658730
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.1057692.</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1"><span class="co">#getModelInfo(fit.cart.rcv)</span></a>
+<a class="sourceLine" id="cb405-2" title="2"><span class="co">#getModelInfo(fit.cart.rcv)$rpart</span></a>
+<a class="sourceLine" id="cb405-3" title="3"><span class="kw">getModelInfo</span>(fit.cart.rcv)<span class="op">$</span>rpart<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cp</td>
+<td align="left">numeric</td>
+<td align="left">Complexity Parameter</td>
+</tr>
+</tbody>
+</table>
+<p>Inspect models</p>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" title="1"><span class="kw">print</span>(fit.rf.rcv)</a></code></pre></div>
+<pre><code>## Random Forest 
+## 
+## 116 samples
+##   9 predictor
+##   2 classes: &#39;Controls&#39;, &#39;Patients&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 105, 105, 104, 104, 103, 104, ... 
+## Resampling results across tuning parameters:
+## 
+##   mtry  ROC        Sens       Spec     
+##   2     0.8012037  0.6455556  0.7603175
+##   5     0.8175132  0.6577778  0.7642857
+##   9     0.8128439  0.6955556  0.7714286
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 5.</code></pre>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" title="1"><span class="co">#getModelInfo(fit.rf.rcv)</span></a>
+<a class="sourceLine" id="cb408-2" title="2"><span class="co">#getModelInfo(fit.rf.rcv)$rf</span></a>
+<a class="sourceLine" id="cb408-3" title="3"><span class="kw">getModelInfo</span>(fit.rf.rcv)<span class="op">$</span>rf<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mtry</td>
+<td align="left">numeric</td>
+<td align="left">#Randomly Selected Predictors</td>
+</tr>
+</tbody>
+</table>
+<p>ROC complexity for models</p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" title="1"><span class="kw">plot</span>(fit.cart.rcv)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" title="1"><span class="kw">plot</span>(fit.rf.rcv)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-277-2.png" width="672" /></p>
+</div>
+<div id="improve-random-forest" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Improve Random Forest</h3>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb411-1" title="1">myGrid&lt;-<span class="kw">expand.grid</span>(<span class="dt">mtry=</span><span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># numero de variaveis/colunas a considerar na RF</span></a>
+<a class="sourceLine" id="cb411-2" title="2"></a>
+<a class="sourceLine" id="cb411-3" title="3"><span class="kw">set.seed</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb411-4" title="4">fit.rf.rcv.tune &lt;-<span class="st"> </span><span class="kw">train</span>(Classification <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>dataset, </a>
+<a class="sourceLine" id="cb411-5" title="5">                         <span class="dt">method=</span><span class="st">&quot;rf&quot;</span>, <span class="dt">metric=</span>metric, </a>
+<a class="sourceLine" id="cb411-6" title="6">                         <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb411-7" title="7">                         <span class="dt">tuneGrid =</span> myGrid)</a></code></pre></div>
+<p>summarize accuracy of models</p>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" title="1">fit.models&lt;-<span class="kw">list</span>(<span class="dt">rpart=</span>fit.cart.rcv,<span class="dt">rf =</span> fit.rf.rcv, <span class="dt">rf.tune=</span>fit.rf.rcv.tune)</a>
+<a class="sourceLine" id="cb412-2" title="2"></a>
+<a class="sourceLine" id="cb412-3" title="3">results&lt;-<span class="kw">resamples</span>(fit.models)</a>
+<a class="sourceLine" id="cb412-4" title="4"><span class="kw">summary</span>(results)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## summary.resamples(object = results)
+## 
+## Models: rpart, rf, rf.tune 
+## Number of resamples: 30 
+## 
+## ROC 
+##              Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## rpart   0.4428571 0.6297619 0.7166667 0.6827513 0.7482143 0.8571429    0
+## rf      0.6000000 0.7333333 0.8000000 0.8175132 0.9000000 1.0000000    0
+## rf.tune 0.6285714 0.7333333 0.8452381 0.8229101 0.9226190 0.9857143    0
+## 
+## Sens 
+##         Min. 1st Qu. Median      Mean 3rd Qu. Max. NA&#39;s
+## rpart    0.4     0.5    0.6 0.6344444     0.8    1    0
+## rf       0.4     0.6    0.6 0.6577778     0.8    1    0
+## rf.tune  0.4     0.6    0.6 0.6777778     0.8    1    0
+## 
+## Spec 
+##              Min.   1st Qu.    Median      Mean   3rd Qu. Max. NA&#39;s
+## rpart   0.2857143 0.6666667 0.7142857 0.7341270 0.8333333    1    0
+## rf      0.3333333 0.6666667 0.8333333 0.7642857 0.8511905    1    0
+## rf.tune 0.3333333 0.6666667 0.8333333 0.7706349 0.8571429    1    0</code></pre>
+<p>Roc curves for models</p>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb414-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb414-2" title="2">rocs&lt;-<span class="kw">lapply</span>(fit.models,</a>
+<a class="sourceLine" id="cb414-3" title="3">             <span class="cf">function</span>(fit){<span class="kw">plot.roc</span>(fit<span class="op">$</span>pred<span class="op">$</span>obs,</a>
+<a class="sourceLine" id="cb414-4" title="4">                                    fit<span class="op">$</span>pred<span class="op">$</span>P,</a>
+<a class="sourceLine" id="cb414-5" title="5">                                    <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;3x10-fold CV-&quot;</span>,fit<span class="op">$</span>method),<span class="dt">debug=</span>F,<span class="dt">print.auc=</span>T)})</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-280-1.png" width="672" /></p>
+<p>Compare accuracy of models</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-281-1.png" width="672" /></p>
+<p>Inspect models</p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" title="1"><span class="kw">getModelInfo</span>(fit.rf.rcv.tune)<span class="op">$</span>rf<span class="op">$</span>parameters</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">class</th>
+<th align="left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mtry</td>
+<td align="left">numeric</td>
+<td align="left">#Randomly Selected Predictors</td>
+</tr>
+</tbody>
+</table>
+<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="crossvalidation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
