@@ -1,4 +1,4 @@
-## Lesson 5
+## Survival Analysis
 
 2020-03-16
 
@@ -6,9 +6,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-### Survival Analysis
-
-#### Example from classe (code from the professor)
+### Example from classe (code from the professor)
 
 ```{r}
 #Load the library required for a survival analysis

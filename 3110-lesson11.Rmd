@@ -1,0 +1,108 @@
+## GLM (Poisson - Logistic)
+
+2020-05-18
+
+### exercises
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+1. We want to know if the number of awards earned by students at one high school is associated to the type of program in which the student was enrolled (prog: 1=vocational, 2=general, 3=academic) and the score on their final exam in math (math).
+
+Read the data
+```{r}
+library(tidyverse)
+sim <- read_csv("2.UploadedData/sim.csv")
+
+summary(sim)
+```
+
+table outcome
+```{r}
+table(sim$num_awards)
+
+sim<-sim %>% mutate(prog = factor(prog))
+```
+
+fit a poisson regression
+```{r}
+poisson <- glm(num_awards ~ prog + math, data =
+                 sim, family = "poisson")
+
+summary(poisson)
+```
+
+compute relative risks (RR)
+```{r}
+exp(cbind(RR = coef(poisson), confint(poisson)))
+```
+
+histogram for the outcome
+```{r}
+hist(sim$num_awards)
+```
+
+due to the excess of zerosit would be advise to consider a ZERO-INFLATED POISSON REGRESSION
+
+2. A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school.
+```{r}
+school <- read_csv("2.UploadedData/school.csv")
+
+summary(school)
+```
+
+fit a logistic regression model
+```{r}
+logistic <- glm(admit ~ gre + gpa + rank, data = school, family = "binomial")
+summary(logistic)
+```
+
+compute OR and 95%CI
+```{r}
+exp(cbind(OR = coef(logistic), confint(logistic)))
+```
+
+Predict the probability (p) of admission
+```{r}
+probabilities <- predict(logistic, type = "response")
+```
+
+add a column with the logit values
+```{r}
+school <- school %>%
+  mutate(logit = log(probabilities/(1-probabilities))) 
+```
+
+plot linearity between logit and predictive variables
+```{r}
+ggplot(school, aes(logit, gpa)) + geom_point() + geom_smooth()
+ggplot(school, aes(logit, gre)) + geom_point() + geom_smooth()
+ggplot(school, aes(logit, rank)) + geom_point() + geom_smooth()
+```
+
+test models' goodness of fit
+```{r}
+library(ResourceSelection)
+hoslem.test(school$admit, fitted(logistic))
+```
+as the p-value is higher than 0.05 we do not reject H0: good fit of the model to the data.
+
+ROC - AUC
+```{r}
+library(pROC)
+plot.roc(school$admit, fitted(logistic))
+```
+
+Confusion matrix
+```{r}
+library(caret)
+confusionMatrix(factor(school$admit), factor(ifelse(probabilities<0.5,0,1)))
+```
+
+
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+

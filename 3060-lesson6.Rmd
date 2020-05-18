@@ -1,4 +1,4 @@
-## Lesson 6
+## Cox Regression
 
 2020-03-23
 
@@ -6,9 +6,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-### Cox Regression
-
-#### Example from classe (code from the professor)
+### Example from classe (code from the professor)
 
 ```{r}
 #Load the library required for a survival analysis

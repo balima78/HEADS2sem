@@ -1,4 +1,4 @@
-## Lesson 4
+## Poisson Regression
 
 2020-03-02
 
@@ -6,9 +6,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-### Generalized Linear Models (GLM)
-
-#### GLM - Poisson regression
+### GLM - Poisson regression
 
 ```{r}
 library(foreign)

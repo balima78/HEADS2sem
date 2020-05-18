@@ -1,4 +1,4 @@
-## Lesson 7
+## Repeated-measures ANOVA
 
 2020-04-20
 
@@ -6,9 +6,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-### Repeated-measures ANOVA
-
-#### Rats example (code from the professor)
+### Rats example (code from the professor)
 
 5 rats are weighed 4 times with intervals of 4 weeks (week 8 to 20).
 ```{r}

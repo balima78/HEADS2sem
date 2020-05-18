@@ -1,12 +1,10 @@
-## Lesson 8
+## Linear Mixed Models
 
 2020-04-28
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
-
-### Limear Mixed Models
 
 Repeated measures designs: measurements are taken several times in each participant. 
 

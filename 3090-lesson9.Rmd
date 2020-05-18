@@ -1,4 +1,4 @@
-## Lesson 9
+## Exercises
 
 2020-05-05
 
@@ -6,9 +6,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-### exercises
-
-#### Diet (diet.sav)
+### Diet (diet.sav)
 
 - To evaluate weight loss diets, a sample of 60 overweight individuals was collected. 
 
@@ -48,7 +46,7 @@ modeldt<-lmer(weigth ~ diet + time + (time|subject) , data1)
 summary(modeldt)
 ```
 
-#### Child development (dev3yrheads.sav)
+### Child development (dev3yrheads.sav)
 
 In a study on risk factors that affect child development, 1145 children were followed up to the third year of life.
 

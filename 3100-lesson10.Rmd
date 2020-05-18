@@ -1,12 +1,10 @@
-## Lesson 10
+## Conditional Logistic Regression
 
 2020-05-11
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
-
-### Conditional Logistic Regression
 
 **Internet (internet.sav)**
 
