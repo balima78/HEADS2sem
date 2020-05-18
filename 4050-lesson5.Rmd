@@ -1,4 +1,4 @@
-## Lesson 5
+## Naive Bayes Network
 
 2020-03-10
 

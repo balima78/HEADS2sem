@@ -1,8 +1,8 @@
-## Lesson 8
+## Unsupervised Machine Learning
 
 2020-05-05
 
-### Unsupervised Machine Learning - Clustering and Association Rules
+### Clustering and Association Rules
 
 ```{r , include=FALSE}
 knitr::opts_chunk$set(echo = T, message = F, warning = F, error = F)

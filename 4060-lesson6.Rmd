@@ -1,4 +1,4 @@
-## Lesson 6
+## Ensemble classifiers
 
 2020-03-24
 

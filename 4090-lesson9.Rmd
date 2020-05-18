@@ -1,4 +1,4 @@
-## Lesson 9
+## Support Vector Machine
 
 2020-05-12
 

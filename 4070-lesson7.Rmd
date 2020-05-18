@@ -1,8 +1,7 @@
-## Lesson 7
+## Machine Learning from Data Streams
 
 2020-04-21
 
-Machine Learning from Data Streams
 
 ### Repositories
 

@@ -1,4 +1,4 @@
-## Lesson 4
+## Bayes Network
 
 2020-03-03
 
