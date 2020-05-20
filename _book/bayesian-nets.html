@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -236,6 +236,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11.1" data-path="support-vector-machine.html"><a href="support-vector-machine.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
 </ul></li>
 <li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
+<li class="chapter" data-level="4.13" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>4.13</b> Text mining</a><ul>
+<li class="chapter" data-level="4.13.1" data-path="text-mining.html"><a href="text-mining.html#preprocessing"><i class="fa fa-check"></i><b>4.13.1</b> Preprocessing</a></li>
+<li class="chapter" data-level="4.13.2" data-path="text-mining.html"><a href="text-mining.html#representation"><i class="fa fa-check"></i><b>4.13.2</b> Representation</a></li>
+<li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
+<li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
@@ -282,10 +288,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Exercise from class:</p>
 <p>Design the network with SamIam and fit the conditional probabilities with <em>R</em></p>
 <p>Read the network designed with SamIam</p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" title="1"><span class="kw">library</span>(bnlearn)</a>
-<a class="sourceLine" id="cb524-2" title="2">mi.net&lt;-<span class="kw">read.net</span>(<span class="st">&quot;2.UploadedData/mi.vstructure.net&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" title="1"><span class="kw">library</span>(bnlearn)</a>
+<a class="sourceLine" id="cb549-2" title="2">mi.net&lt;-<span class="kw">read.net</span>(<span class="st">&quot;2.UploadedData/mi.vstructure.net&quot;</span>)</a></code></pre></div>
 <p>see the conditional probabilities defined</p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" title="1">mi.net</a></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb550-1" title="1">mi.net</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network parameters
 ## 
@@ -320,14 +326,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   TRUE FALSE 
 ##  0.51  0.49</code></pre>
 <p>make a graph object</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" title="1">mi.graph&lt;-<span class="kw">bn.net</span>(mi.net)</a>
-<a class="sourceLine" id="cb527-2" title="2"></a>
-<a class="sourceLine" id="cb527-3" title="3"><span class="kw">plot</span>(mi.graph)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-377-1.png" width="672" /></p>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb552-1" title="1">mi.graph&lt;-<span class="kw">bn.net</span>(mi.net)</a>
+<a class="sourceLine" id="cb552-2" title="2"></a>
+<a class="sourceLine" id="cb552-3" title="3"><span class="kw">plot</span>(mi.graph)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-393-1.png" width="672" /></p>
 <p>Read the data to fit the network</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" title="1">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/mi.dat&quot;</span>)</a>
-<a class="sourceLine" id="cb528-2" title="2"></a>
-<a class="sourceLine" id="cb528-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" title="1">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/mi.dat&quot;</span>)</a>
+<a class="sourceLine" id="cb553-2" title="2"></a>
+<a class="sourceLine" id="cb553-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -359,11 +365,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>factorize variables</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" title="1">data &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">apply</span>(data,<span class="dv">2</span>, as.factor))</a></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb554-1" title="1">data &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">apply</span>(data,<span class="dv">2</span>, as.factor))</a></code></pre></div>
 <p>fit this network with the data we have</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" title="1">mi.fit&lt;-<span class="kw">bn.fit</span>(mi.graph,data)</a></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb555-1" title="1">mi.fit&lt;-<span class="kw">bn.fit</span>(mi.graph,data)</a></code></pre></div>
 <p>see the new conditional probabilities fitted from the data</p>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" title="1">mi.fit</a></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" title="1">mi.fit</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network parameters
 ## 
@@ -397,8 +403,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Conditional probability table:
 ##      FALSE      TRUE 
 ## 0.4916667 0.5083333</code></pre>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1"><span class="co"># export the results</span></a>
-<a class="sourceLine" id="cb533-2" title="2"><span class="kw">write.net</span>(mi.fit,<span class="dt">file=</span><span class="st">&quot;mi.fitinR.net&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" title="1"><span class="co"># export the results</span></a>
+<a class="sourceLine" id="cb558-2" title="2"><span class="kw">write.net</span>(mi.fit,<span class="dt">file=</span><span class="st">&quot;mi.fitinR.net&quot;</span>)</a></code></pre></div>
 <p>Again in SamIam, we can see the results in a graph and play with the options
 <img src="images/mi.graph.jpg" alt="graph from SamIam" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>

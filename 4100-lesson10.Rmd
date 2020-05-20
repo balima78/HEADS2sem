@@ -1,0 +1,126 @@
+## Text mining
+
+2020-05-19
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+all code from the professor
+
+Loading data
+```{r}
+library("tm")
+library("SnowballC")
+library("readr")
+library("dplyr")
+
+t1 <- read_csv("2.UploadedData/all_sources_metadata_2020-03-13.csv")
+glimpse(t1) 
+```
+
+### Preprocessing
+
+```{r}
+# Remove lines with no abstract
+t2<-subset(t1, !is.na(t1$abstract))
+```
+
+Create the text corpus
+```{r}
+corpus = Corpus(VectorSource(t2$abstract))
+corpus[[1]][1]
+t2$doi[1]
+```
+
+Conversion to lowercase
+```{r}
+corpus = tm_map(corpus, PlainTextDocument)
+corpus = tm_map(corpus, tolower)
+corpus[[1]][1]  
+```
+
+Remove punctuation
+```{r}
+corpus = tm_map(corpus, removePunctuation)
+corpus[[1]][1]
+```
+
+Remove stopwords
+```{r}
+corpus = tm_map(corpus, removeWords, c("cloth", stopwords("english")))
+corpus[[1]][1]
+```
+
+Stemming
+```{r}
+corpus = tm_map(corpus, stemDocument)
+corpus[[1]][1] 
+```
+
+Create document term matrix
+```{r}
+frequencies = DocumentTermMatrix(corpus)
+
+#Remove sparcity
+sparse = removeSparseTerms(frequencies, 0.995)
+```
+
+### Representation
+
+Find correlation between terms
+```{r}
+findAssocs(sparse,"quarantin",0.1)
+```
+
+Find correlation between terms
+```{r}
+findAssocs(sparse,"treatment",0.2)
+```
+
+Convert the matrix into a data frame, a format widely used in 'R' for predictive modeling. Outcome will be the class
+```{r}
+tSparse = as.data.frame(as.matrix(sparse))
+colnames(tSparse) = make.names(colnames(tSparse))
+tSparse$recommended_id = t2$source_x  
+```
+
+Histogram
+```{r}
+wf=data.frame(term=colnames(tSparse[,-2250]),occurrences=colSums(Filter(is.numeric, tSparse)))
+library(ggplot2)
+p <- ggplot(subset(wf, colSums(Filter(is.numeric, tSparse))>10000), aes(term, occurrences))
+p <- p + geom_bar(stat="identity")
+p <- p + theme(axis.text.x=element_text(angle=45, hjust=1))
+p
+```
+
+
+
+### Discovery
+
+wordcloud
+```{r}
+library(wordcloud)
+set.seed(42)
+#limit words by specifying min frequency
+wordcloud(colnames(tSparse[,-2250]),colSums(Filter(is.numeric, tSparse)), min.freq=7000)
+```
+
+wordcloud with colors
+```{r}
+library(RColorBrewer)
+wordcloud(colnames(tSparse[,-2250]),colSums(Filter(is.numeric, tSparse)), min.freq=7000, colors=brewer.pal(6,"Dark2"))
+
+```
+
+### Output knowledge
+
+Check the baseline accuracy (proportion of majority class)
+```{r}
+prop.table(table(tSparse$recommended_id)) 
+```
+
+continue for the [random forest algorithm]()
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

@@ -1,0 +1,99 @@
+---
+title: "LEARN - lesson6"
+date: "2020-05-19"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+### Build a Radom Forest classification algorithm
+
+#### prepare data
+```{r}
+library("tm")
+library("SnowballC")
+library("readr")
+library("tidyverse")
+
+#Loading data
+t1 <- read_csv("C:/Users/user/Documents/HEADS2sem/2.UploadedData/all_sources_metadata_2020-03-13.csv")
+glimpse(t1)
+
+# Remove lines with no abstract
+t2<-subset(t1, !is.na(t1$abstract))
+
+#Create the text corpus
+corpus = Corpus(VectorSource(t2$abstract))
+
+#Conversion to lowercase
+corpus = tm_map(corpus, PlainTextDocument)
+corpus = tm_map(corpus, tolower)
+
+#Remove punctuation
+corpus = tm_map(corpus, removePunctuation)
+
+#Remove stopwords
+corpus = tm_map(corpus, removeWords, c("cloth", stopwords("english")))
+
+#Stemming
+corpus = tm_map(corpus, stemDocument)
+
+#Create document term matrix
+frequencies = DocumentTermMatrix(corpus)
+
+#Remove sparcity
+sparse = removeSparseTerms(frequencies, 0.995)
+
+#Convert the matrix into a data frame, a format widely used in 'R' for predictive modeling. Outcome will be the class
+tSparse = as.data.frame(as.matrix(sparse))
+colnames(tSparse) = make.names(colnames(tSparse))
+tSparse$recommended_id = t2$source_x   
+```
+
+#### Output knowledge (cont.)
+
+Check the baseline accuracy (proportion of majority class)
+```{r}
+prop.table(table(tSparse$recommended_id)) 
+```
+
+Creating train and test data for Machine Learning
+```{r}
+library(caTools)
+set.seed(100)
+split = sample.split(tSparse$recommended_id, SplitRatio = 0.66)
+trainSparse = subset(tSparse, split==TRUE)
+testSparse = subset(tSparse, split==FALSE)
+```
+
+Factorize label
+```{r}
+trainSparse$recommended_id = as.factor(trainSparse$recommended_id)
+testSparse$recommended_id = as.factor(testSparse$recommended_id )
+```
+
+Run random forest
+```{r}
+library(randomForest)
+set.seed(100)
+RF_model = randomForest(recommended_id ~ ., data=trainSparse)
+``` 
+
+table results
+```{r}
+predictRF = predict(RF_model, newdata=testSparse)
+table(testSparse$recommended_id, predictRF)
+```
+
+Confusion matrix
+```{r}
+library(caret)
+confusionMatrix(testSparse$recommended_id, predictRF)
+```
+
