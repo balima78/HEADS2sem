@@ -121,6 +121,6 @@ Check the baseline accuracy (proportion of majority class)
 prop.table(table(tSparse$recommended_id)) 
 ```
 
-continue for the [random forest algorithm]()
+continue for the [random forest algorithm](https://htmlpreview.github.io/?https://github.com/balima78/HEADS2sem/blob/master/3.Results/_4100-lesson10cont.html)
 
 <img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-20" />
+<meta name="date" content="2020-05-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -349,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>results from boruta</p>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="kw">library</span>(printr)</a>
 <a class="sourceLine" id="cb288-2" title="2"><span class="kw">print</span>(boruta)</a></code></pre></div>
-<pre><code>## Boruta performed 99 iterations in 14.84101 secs.
+<pre><code>## Boruta performed 99 iterations in 15.424 secs.
 ##  5 attributes confirmed important: AGE, CARDIAC1, CIRCTIME1, HCT1,
 ## REDCELL1;
 ##  7 attributes confirmed unimportant: CVP1, HEART1, IDNUM,
@@ -654,7 +654,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1"><span class="kw">print</span>(form)</a></code></pre></div>
 <pre><code>## HGB2 ~ AGE + MAP1 + DBP1 + BSA1 + CARDIAC1 + APPTIME1 + CIRCTIME1 + 
 ##     REDCELL1 + HCT1
-## &lt;environment: 0x000000003254d6c8&gt;</code></pre>
+## &lt;environment: 0x000000002b478750&gt;</code></pre>
 <p>plot model assumptions</p>
 <div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb298-2" title="2"></a>
