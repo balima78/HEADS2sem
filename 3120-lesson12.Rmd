@@ -1,0 +1,77 @@
+## Survival Analysis
+
+2020-05-25
+
+### exercises
+
+code and comments from the professor
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+read data and have a look at it
+```{r}
+# Load required packages
+library(survival)
+library(survminer)
+library(dplyr)
+
+data(ovarian)
+glimpse(ovarian)
+help(ovarian)
+
+# Change data labels
+ovarian$rx <- factor(ovarian$rx, levels = c("1", "2"), labels = c("A", "B"))
+ovarian$resid.ds <- factor(ovarian$resid.ds, levels = c("1", "2"), labels = c("no", "yes"))
+ovarian$ecog.ps <- factor(ovarian$ecog.ps, levels = c("1", "2"), labels = c("good", "bad"))
+```
+
+#### Apply one of the techniques given in this course to answer the following questions: do
+patients benefit from therapy regimen A as opposed to regimen B?
+
+Fit survival data using the Kaplan-Meier method. A + behind survival times indicates censored data points.
+```{r}
+surv_object <- Surv(time = ovarian$futime, event = ovarian$fustat)
+surv_object
+```
+
+The next step is to fit the Kaplan-Meier curves. You can easily do that by passing the surv_object to the survfit function. You can also stratify the curve depending on the treatment regimen rx that patients were assigned to. A summary() of the resulting fit1 object shows, among other things, survival times, the proportion of surviving patients at every time point, namely your p.1, p.2, ... from above, and treatment groups.
+```{r}
+fit1 <- survfit(surv_object ~ rx, data = ovarian)
+summary(fit1)
+```
+
+You can examine the corresponding survival curve by passing the survival object to the ggsurvplot function. The pval = TRUE argument is very useful, because it plots the p-value of a log rank test as well!
+```{r}
+ggsurvplot(fit1, data = ovarian, pval = TRUE)
+```
+
+By convention, vertical lines indicate censored data, their corresponding x values the time at which censoring occurred.The log-rank p-value of 0.3 indicates a non-significant result if you consider p < 0.05 to indicate statistical significance. In this study, none of the treatments examined were significantly superior, although patients receiving treatment B are doing better in the follow-up. What about the other variables?
+
+Examine prdictive value of residual disease status
+```{r}
+fit2 <- survfit(surv_object ~ resid.ds, data = ovarian)
+ggsurvplot(fit2, data = ovarian, pval = TRUE)
+```
+
+The Kaplan-Meier plots stratified according to residual disease status look a bit different:
+The curves diverge early and the log-rank test is almost significant. You might want to argue that a follow-up study with an increased sample size could validate these results, that is, that patients with positive residual disease status have a significantly worse prognosis compared to patients without residual disease.
+
+#### Do patients’ age and fitness significantly influence the outcome? Is residual disease a prognostic biomarker in terms of survival?
+
+Cox proportional hazards models allow you to include covariates. You can build Cox proportional hazards models using the coxph function and visualize them using the ggforest. These type of plot is called a forest plot. It shows so-called hazard ratios (HR) which are derived from the model for all covariates that we included in the formula in coxph. Briefly, an HR > 1 indicates an increased risk of death (according to the definition of h(t)) if a specific condition is met by a patient. An HR < 1, on the other hand, indicates a decreased risk.
+
+Fit a Cox proportional hazards model
+```{r}
+fit.coxph <- coxph(surv_object ~ rx + resid.ds + age + ecog.ps, data = ovarian)
+ggforest(fit.coxph, data = ovarian)
+```
+
+Every HR represents a relative risk of death that compares one instance of a binary feature to the other instance. For example, a hazard ratio of 0.4 for treatment groups tells you that patients who received treatment B have a reduced risk of dying compared to patients who received treatment A (which served as a reference to calculate the hazard ratio). As shown by the forest plot, the respective 95% confidence interval is 0.11 - 1.4 and this result is no significant.
+
+Using this model, you can see that the age variable significantly influence the patients risk of death in this study. This could be quite different from what you saw with the Kaplan-Meier estimator and the log-rank test. Whereas the former estimates the survival probability, the latter calculates the risk of death and respective hazard ratios. The results of these methods yield can differ in terms of significance.
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+

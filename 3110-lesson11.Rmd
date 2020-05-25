@@ -38,12 +38,30 @@ compute relative risks (RR)
 exp(cbind(RR = coef(poisson), confint(poisson)))
 ```
 
+
+plot residuals against predicted
+```{r}
+pred<-predict(poisson, data=sim)
+res<-residuals(poisson, data=sim)
+plot(pred,res)
+```
+
 histogram for the outcome
 ```{r}
 hist(sim$num_awards)
 ```
 
-due to the excess of zerosit would be advise to consider a ZERO-INFLATED POISSON REGRESSION
+we can chek models zero inflation
+```{r}
+library(performance)
+check_zeroinflation(poisson, tolerance= 0.05) # tolerance we are willing to acept
+```
+
+and also dispersion
+```{r}
+library(AER)
+dispersiontest(poisson)
+```
 
 2. A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school.
 ```{r}
@@ -54,14 +72,27 @@ summary(school)
 
 fit a logistic regression model
 ```{r}
+# factor variable rank
+school$rank<-factor(school$rank)
+
 logistic <- glm(admit ~ gre + gpa + rank, data = school, family = "binomial")
 summary(logistic)
 ```
 
 compute OR and 95%CI
 ```{r}
-exp(cbind(OR = coef(logistic), confint(logistic)))
+ors<-exp(cbind(OR = coef(logistic), confint(logistic)))
+
+ors
 ```
+
+plot ORs and CIs
+```{r}
+library(forestmodel)
+
+forest_model(logistic)
+```
+
 
 Predict the probability (p) of admission
 ```{r}
@@ -94,12 +125,18 @@ library(pROC)
 plot.roc(school$admit, fitted(logistic))
 ```
 
+determine best cutoff
+```{r}
+test.roc<-roc(school$admit, fitted(logistic))
+
+coords(test.roc,"best", res="threshold", transpose = F)
+```
+
 Confusion matrix
 ```{r}
 library(caret)
 confusionMatrix(factor(school$admit), factor(ifelse(probabilities<0.5,0,1)))
 ```
-
 
 
 

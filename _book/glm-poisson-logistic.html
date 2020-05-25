@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-23" />
+<meta name="date" content="2020-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="assignment-feature-selection.html"/>
-<link rel="next" href="learn.html"/>
+<link rel="next" href="survival-analysis.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,8 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.4</b> Survival Analysis</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="survival-analysis.html"><a href="survival-analysis.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
+<li class="chapter" data-level="3.4" data-path="kaplan-meier-curves.html"><a href="kaplan-meier-curves.html"><i class="fa fa-check"></i><b>3.4</b> Kaplan-Meier curves</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="kaplan-meier-curves.html"><a href="kaplan-meier-curves.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
 <li class="chapter" data-level="3.6" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>3.6</b> Cox Regression</a><ul>
@@ -203,6 +203,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.13" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html"><i class="fa fa-check"></i><b>3.13</b> GLM (Poisson - Logistic)</a><ul>
 <li class="chapter" data-level="3.13.1" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html#exercises-1"><i class="fa fa-check"></i><b>3.13.1</b> exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.14" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.14</b> Survival Analysis</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.14.1</b> exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
@@ -442,16 +445,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>histogram for the outcome</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1"><span class="kw">hist</span>(sim<span class="op">$</span>num_awards)</a></code></pre></div>
+<p>plot residuals against predicted</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">pred&lt;-<span class="kw">predict</span>(poisson, <span class="dt">data=</span>sim)</a>
+<a class="sourceLine" id="cb305-2" title="2">res&lt;-<span class="kw">residuals</span>(poisson, <span class="dt">data=</span>sim)</a>
+<a class="sourceLine" id="cb305-3" title="3"><span class="kw">plot</span>(pred,res)</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
-<p>due to the excess of zerosit would be advise to consider a ZERO-INFLATED POISSON REGRESSION</p>
+<p>histogram for the outcome</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1"><span class="kw">hist</span>(sim<span class="op">$</span>num_awards)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
+<p>we can chek models zero inflation</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1"><span class="kw">library</span>(performance)</a>
+<a class="sourceLine" id="cb307-2" title="2"><span class="kw">check_zeroinflation</span>(poisson, <span class="dt">tolerance=</span> <span class="fl">0.05</span>) <span class="co"># tolerance we are willing to acept</span></a></code></pre></div>
+<pre><code>## # Check for zero-inflation
+## 
+##    Observed zeros: 124
+##   Predicted zeros: 122
+##             Ratio: 0.98</code></pre>
+<p>and also dispersion</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1"><span class="kw">library</span>(AER)</a>
+<a class="sourceLine" id="cb309-2" title="2"><span class="kw">dispersiontest</span>(poisson)</a></code></pre></div>
+<pre><code>## 
+##  Overdispersion test
+## 
+## data:  poisson
+## z = 0.53224, p-value = 0.2973
+## alternative hypothesis: true dispersion is greater than 1
+## sample estimates:
+## dispersion 
+##   1.047254</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school.</li>
 </ol>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">school &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;2.UploadedData/school.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb306-2" title="2"></a>
-<a class="sourceLine" id="cb306-3" title="3"><span class="kw">summary</span>(school)</a></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1">school &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;2.UploadedData/school.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb311-2" title="2"></a>
+<a class="sourceLine" id="cb311-3" title="3"><span class="kw">summary</span>(school)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -508,8 +535,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>fit a logistic regression model</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">logistic &lt;-<span class="st"> </span><span class="kw">glm</span>(admit <span class="op">~</span><span class="st"> </span>gre <span class="op">+</span><span class="st"> </span>gpa <span class="op">+</span><span class="st"> </span>rank, <span class="dt">data =</span> school, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb307-2" title="2"><span class="kw">summary</span>(logistic)</a></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="co"># factor variable rank</span></a>
+<a class="sourceLine" id="cb312-2" title="2">school<span class="op">$</span>rank&lt;-<span class="kw">factor</span>(school<span class="op">$</span>rank)</a>
+<a class="sourceLine" id="cb312-3" title="3"></a>
+<a class="sourceLine" id="cb312-4" title="4">logistic &lt;-<span class="st"> </span><span class="kw">glm</span>(admit <span class="op">~</span><span class="st"> </span>gre <span class="op">+</span><span class="st"> </span>gpa <span class="op">+</span><span class="st"> </span>rank, <span class="dt">data =</span> school, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb312-5" title="5"><span class="kw">summary</span>(logistic)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = admit ~ gre + gpa + rank, family = &quot;binomial&quot;, 
@@ -517,26 +547,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -1.5802  -0.8848  -0.6382   1.1575   2.1732  
+## -1.6268  -0.8662  -0.6388   1.1490   2.0790  
 ## 
 ## Coefficients:
-##              Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept) -3.449548   1.132846  -3.045   0.00233 ** 
-## gre          0.002294   0.001092   2.101   0.03564 *  
-## gpa          0.777014   0.327484   2.373   0.01766 *  
-## rank        -0.560031   0.127137  -4.405 0.0000106 ***
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -3.989979   1.139951  -3.500 0.000465 ***
+## gre          0.002264   0.001094   2.070 0.038465 *  
+## gpa          0.804038   0.331819   2.423 0.015388 *  
+## rank2       -0.675443   0.316490  -2.134 0.032829 *  
+## rank3       -1.340204   0.345306  -3.881 0.000104 ***
+## rank4       -1.551464   0.417832  -3.713 0.000205 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 499.98  on 399  degrees of freedom
-## Residual deviance: 459.44  on 396  degrees of freedom
-## AIC: 467.44
+## Residual deviance: 458.52  on 394  degrees of freedom
+## AIC: 470.52
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>compute OR and 95%CI</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic), <span class="kw">confint</span>(logistic)))</a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1">ors&lt;-<span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(logistic), <span class="kw">confint</span>(logistic)))</a>
+<a class="sourceLine" id="cb314-2" title="2"></a>
+<a class="sourceLine" id="cb314-3" title="3">ors</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -549,97 +583,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td>(Intercept)</td>
-<td align="right">0.0317600</td>
-<td align="right">0.0033095</td>
-<td align="right">0.2835650</td>
+<td align="right">0.0185001</td>
+<td align="right">0.0018892</td>
+<td align="right">0.1665354</td>
 </tr>
 <tr class="even">
 <td>gre</td>
-<td align="right">1.0022966</td>
-<td align="right">1.0001716</td>
-<td align="right">1.0044714</td>
+<td align="right">1.0022670</td>
+<td align="right">1.0001376</td>
+<td align="right">1.0044457</td>
 </tr>
 <tr class="odd">
 <td>gpa</td>
-<td align="right">2.1749672</td>
-<td align="right">1.1520824</td>
-<td align="right">4.1717746</td>
+<td align="right">2.2345448</td>
+<td align="right">1.1738582</td>
+<td align="right">4.3238349</td>
 </tr>
 <tr class="even">
-<td>rank</td>
-<td align="right">0.5711911</td>
-<td align="right">0.4426565</td>
-<td align="right">0.7294389</td>
+<td>rank2</td>
+<td align="right">0.5089310</td>
+<td align="right">0.2722897</td>
+<td align="right">0.9448343</td>
+</tr>
+<tr class="odd">
+<td>rank3</td>
+<td align="right">0.2617923</td>
+<td align="right">0.1316417</td>
+<td align="right">0.5115181</td>
+</tr>
+<tr class="even">
+<td>rank4</td>
+<td align="right">0.2119375</td>
+<td align="right">0.0907155</td>
+<td align="right">0.4706961</td>
 </tr>
 </tbody>
 </table>
+<p>plot ORs and CIs</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="kw">library</span>(forestmodel)</a>
+<a class="sourceLine" id="cb315-2" title="2"></a>
+<a class="sourceLine" id="cb315-3" title="3"><span class="kw">forest_model</span>(logistic)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
 <p>Predict the probability (p) of admission</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1">probabilities &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1">probabilities &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a></code></pre></div>
 <p>add a column with the logit values</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1">school &lt;-<span class="st"> </span>school <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb311-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">logit =</span> <span class="kw">log</span>(probabilities<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>probabilities))) </a></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1">school &lt;-<span class="st"> </span>school <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb317-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">logit =</span> <span class="kw">log</span>(probabilities<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>probabilities))) </a></code></pre></div>
 <p>plot linearity between logit and predictive variables</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="kw">ggplot</span>(school, <span class="kw">aes</span>(logit, gpa)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="kw">ggplot</span>(school, <span class="kw">aes</span>(logit, gre)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-204-2.png" width="672" /></p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1"><span class="kw">ggplot</span>(school, <span class="kw">aes</span>(logit, rank)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-204-3.png" width="672" /></p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">ggplot</span>(school, <span class="kw">aes</span>(logit, gpa)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="kw">ggplot</span>(school, <span class="kw">aes</span>(logit, gre)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-208-2.png" width="672" /></p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="kw">ggplot</span>(school, <span class="kw">aes</span>(logit, rank)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-208-3.png" width="672" /></p>
 <p>test models’ goodness of fit</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="kw">library</span>(ResourceSelection)</a>
-<a class="sourceLine" id="cb315-2" title="2"><span class="kw">hoslem.test</span>(school<span class="op">$</span>admit, <span class="kw">fitted</span>(logistic))</a></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1"><span class="kw">library</span>(ResourceSelection)</a>
+<a class="sourceLine" id="cb321-2" title="2"><span class="kw">hoslem.test</span>(school<span class="op">$</span>admit, <span class="kw">fitted</span>(logistic))</a></code></pre></div>
 <pre><code>## 
 ##  Hosmer and Lemeshow goodness of fit (GOF) test
 ## 
 ## data:  school$admit, fitted(logistic)
-## X-squared = 3.2185, df = 8, p-value = 0.9199</code></pre>
+## X-squared = 11.085, df = 8, p-value = 0.1969</code></pre>
 <p>as the p-value is higher than 0.05 we do not reject H0: good fit of the model to the data.</p>
 <p>ROC - AUC</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb317-2" title="2"><span class="kw">plot.roc</span>(school<span class="op">$</span>admit, <span class="kw">fitted</span>(logistic))</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb323-2" title="2"><span class="kw">plot.roc</span>(school<span class="op">$</span>admit, <span class="kw">fitted</span>(logistic))</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<p>determine best cutoff</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" title="1">test.roc&lt;-<span class="kw">roc</span>(school<span class="op">$</span>admit, <span class="kw">fitted</span>(logistic))</a>
+<a class="sourceLine" id="cb324-2" title="2"></a>
+<a class="sourceLine" id="cb324-3" title="3"><span class="kw">coords</span>(test.roc,<span class="st">&quot;best&quot;</span>, <span class="dt">res=</span><span class="st">&quot;threshold&quot;</span>, <span class="dt">transpose =</span> F)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">threshold</th>
+<th align="right">specificity</th>
+<th align="right">sensitivity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.3536984</td>
+<td align="right">0.7435897</td>
+<td align="right">0.5748031</td>
+</tr>
+</tbody>
+</table>
 <p>Confusion matrix</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb318-2" title="2"><span class="kw">confusionMatrix</span>(<span class="kw">factor</span>(school<span class="op">$</span>admit), <span class="kw">factor</span>(<span class="kw">ifelse</span>(probabilities<span class="op">&lt;</span><span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb325-2" title="2"><span class="kw">confusionMatrix</span>(<span class="kw">factor</span>(school<span class="op">$</span>admit), <span class="kw">factor</span>(<span class="kw">ifelse</span>(probabilities<span class="op">&lt;</span><span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction   0   1
-##          0 253  20
-##          1  98  29
-##                                            
-##                Accuracy : 0.705            
-##                  95% CI : (0.6577, 0.7493) 
-##     No Information Rate : 0.8775           
-##     P-Value [Acc &gt; NIR] : 1                
-##                                            
-##                   Kappa : 0.1856           
-##                                            
-##  Mcnemar&#39;s Test P-Value : 0.000000000001356
-##                                            
-##             Sensitivity : 0.7208           
-##             Specificity : 0.5918           
-##          Pos Pred Value : 0.9267           
-##          Neg Pred Value : 0.2283           
-##              Prevalence : 0.8775           
-##          Detection Rate : 0.6325           
-##    Detection Prevalence : 0.6825           
-##       Balanced Accuracy : 0.6563           
-##                                            
-##        &#39;Positive&#39; Class : 0                
+##          0 254  19
+##          1  97  30
+##                                             
+##                Accuracy : 0.71              
+##                  95% CI : (0.6628, 0.754)   
+##     No Information Rate : 0.8775            
+##     P-Value [Acc &gt; NIR] : 1                 
+##                                             
+##                   Kappa : 0.1994            
+##                                             
+##  Mcnemar&#39;s Test P-Value : 0.0000000000008724
+##                                             
+##             Sensitivity : 0.7236            
+##             Specificity : 0.6122            
+##          Pos Pred Value : 0.9304            
+##          Neg Pred Value : 0.2362            
+##              Prevalence : 0.8775            
+##          Detection Rate : 0.6350            
+##    Detection Prevalence : 0.6825            
+##       Balanced Accuracy : 0.6679            
+##                                             
+##        &#39;Positive&#39; Class : 0                 
 ## </code></pre>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="assignment-feature-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="learn.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="survival-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

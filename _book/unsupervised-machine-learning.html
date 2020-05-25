@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-23" />
+<meta name="date" content="2020-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,8 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.4</b> Survival Analysis</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="survival-analysis.html"><a href="survival-analysis.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
+<li class="chapter" data-level="3.4" data-path="kaplan-meier-curves.html"><a href="kaplan-meier-curves.html"><i class="fa fa-check"></i><b>3.4</b> Kaplan-Meier curves</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="kaplan-meier-curves.html"><a href="kaplan-meier-curves.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
 <li class="chapter" data-level="3.6" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>3.6</b> Cox Regression</a><ul>
@@ -203,6 +203,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.13" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html"><i class="fa fa-check"></i><b>3.13</b> GLM (Poisson - Logistic)</a><ul>
 <li class="chapter" data-level="3.13.1" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html#exercises-1"><i class="fa fa-check"></i><b>3.13.1</b> exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.14" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.14</b> Survival Analysis</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.14.1</b> exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
@@ -289,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Read data</p>
 <div id="association-rules" class="section level4">
 <h4><span class="header-section-number">4.10.1.1</span> Association rules</h4>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="kw">str</span>(datacat_complete)</a></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" title="1"><span class="kw">str</span>(datacat_complete)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    726 obs. of  21 variables:
 ##  $ Smokes                            : logi  FALSE FALSE FALSE TRUE FALSE FALSE ...
 ##  $ Hormonal.Contraceptives           : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
@@ -357,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [9]  {Dx.Cancer,Dx.HPV}                                9            
 ## [10] {Hormonal.Contraceptives}                         11</code></pre>
 <p>plot more frequent events
-<img src="heads2sem_files/figure-html/unnamed-chunk-307-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-319-1.png" width="672" /></p>
 <p>applying Apriori</p>
 <pre><code>## Apriori
 ## 
@@ -448,11 +451,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [3] 0.9166667  39.14706 11   
 ## [4] 0.9166667  41.59375 11</code></pre>
 <p>Visualize 15 results by lift and support values
-<img src="heads2sem_files/figure-html/unnamed-chunk-312-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
 <p>graph
-<img src="heads2sem_files/figure-html/unnamed-chunk-313-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
 <p>plot parallel coordenates
-<img src="heads2sem_files/figure-html/unnamed-chunk-314-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
 </div>
 <div id="k-means" class="section level4">
 <h4><span class="header-section-number">4.10.1.2</span> K-means</h4>
@@ -470,7 +473,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Determine number of clusters</p>
 <p>within groups sum of squares</p>
 <p>A plot of the within groups sum of squares by number of clusters extracted
-<img src="heads2sem_files/figure-html/unnamed-chunk-317-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-329-1.png" width="672" /></p>
 <p>K-Means Cluster Analysis</p>
 <p>compactness of the clustering (between_SS / total_SS)</p>
 <pre><code>## [1] 48.70424</code></pre>
@@ -534,17 +537,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>plot clusters for
-<img src="heads2sem_files/figure-html/unnamed-chunk-321-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
 <p>visualize clusters
-<img src="heads2sem_files/figure-html/unnamed-chunk-322-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
 <p>Compute hierarchical k-means clustering</p>
 <pre><code>##  [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
 ##  [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
 ##  [9] &quot;ifault&quot;       &quot;data&quot;         &quot;hclust&quot;</code></pre>
 <p>Visualize the tree
-<img src="heads2sem_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-336-1.png" width="672" /></p>
 <p>alternative hierarchical clustering
-<img src="heads2sem_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
+<img src="heads2sem_files/figure-html/unnamed-chunk-337-1.png" width="672" /></p>
 <p>References</p>
 <p><a href="http://www.rdatamining.com/examples/association-rules" class="uri">http://www.rdatamining.com/examples/association-rules</a>
 <a href="https://blog.aptitive.com/building-the-transactions-class-for-association-rule-mining-in-r-using-arules-and-apriori-c6be64268bc4" class="uri">https://blog.aptitive.com/building-the-transactions-class-for-association-rule-mining-in-r-using-arules-and-apriori-c6be64268bc4</a>

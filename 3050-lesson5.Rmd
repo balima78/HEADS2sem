@@ -1,4 +1,4 @@
-## Survival Analysis
+## Kaplan-Meier curves
 
 2020-03-16
 
