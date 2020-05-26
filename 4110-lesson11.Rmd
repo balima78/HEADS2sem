@@ -1,0 +1,142 @@
+## Visual Data  Mining
+
+2020-05-26
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+all code from the professor
+
+Download [Overweight or obese population](/https://data.oecd.org/healthrisk/overweight-or-obese-population.htm/) from **OECD Data**
+
+Loading data
+```{r}
+library("tidyverse")
+oecd.obse <- read.csv("2.UploadedData/oecd_obese.csv", encoding="UTF-8", header= TRUE, sep=",")
+
+names(oecd.obse)[1]<-"LOCATION" # change first column name
+```
+
+See the data
+```{r}
+library(knitr)
+library(kableExtra)
+head(oecd.obse, 15)
+```
+
+Explore the dataset
+```{r}
+summary(oecd.obse)
+
+```
+
+### ggplot2
+
+Real world data
+```{r}
+library(ggplot2)
+library(ggforce)
+s <- ggplot(data=oecd.obse)
+s <- s + aes(x=TIME, y=Value )
+s <- s + aes(color=LOCATION)
+#s <- s + geom_smooth(method="lm")
+s <- s + geom_line(size=1)
+s
+```
+
+Clean it up, just keeping "measured" records
+```{r}
+oecd.obse.measure <- filter(oecd.obse, SUBJECT == "MEASURED")
+```
+
+Plot value over time by Location
+```{r}
+s <- ggplot(data=oecd.obse.measure)
+s <- s + aes(x=TIME, y=Value )
+s <- s + aes(color=LOCATION)
+s <- s + geom_line(size=1)
+s
+```
+
+Zoom Mexico
+```{r}
+library(ggforce)
+t <- ggplot(data=oecd.obse.measure)
+t <- t + aes(x=TIME, y=Value )
+t <- t + aes(color=LOCATION)
+t <- t + geom_line(size=1)
+t <- t + facet_zoom(xy = LOCATION == c("MEX"))
+t
+
+```
+
+### vdmR
+
+again filter data and see value
+```{r}
+library(vdmR)
+
+measured.obse <- oecd.obse[which(oecd.obse$SUBJECT=='MEASURED'), ]
+
+quantile(measured.obse$Value)
+```
+
+now we can use `vdmR` library to see the data in a browser.
+
+create a histogram:
+
+`vhist(Value, measured.obse, "hist01", "measured.obse", color = LOCATION)`
+
+and launch it with  data table: 
+
+`vlaunch(measured.obse, "main", "measured.obse", browse=TRUE)`
+
+Japan, Korea are below 1st quartiles, whereas USA, New Zealand, Austria, UK and Hungary are above 3rd quartile.
+
+Read new data annd merge it with initial data
+```{r}
+pyll <- read.csv("2.UploadedData/PYLL.csv", encoding="UTF-8", header= TRUE, sep=",")
+names(pyll)[1]<-"LOCATION"
+deaths_cancer <- read.csv("2.UploadedData/Deaths_Cancer.csv", encoding="UTF-8", header= TRUE, sep=",")
+names(deaths_cancer)[1]<-"LOCATION"
+
+merged <- merge(oecd.obse,pyll, by.x=c('LOCATION','TIME'), by.y=c('LOCATION','TIME'))
+```
+
+dropping some columns and rename them
+```{r}
+merged <- merged[,-c(8:12)]
+merged <- merged[,-9]
+merged <- merged[,-c(3:6)]
+colnames(merged) <- c("LOCATION", "TIME", "OBESITY", "PYLL")
+```
+
+create a scatter plot:
+
+`vscat(OBESITY, PYLL, merged, "scat01", "measured.obse")`
+
+and launch it with data
+
+`vlaunch(merged, "main", "measured.obse", browse=TRUE)`
+
+merge new data and dropp some columns and rename them:
+```{r}
+merged<- merge(merged,deaths_cancer, by.x=c('LOCATION','TIME'), by.y=c('LOCATION','TIME'))
+
+merged <- merged[,-c(5:8)]
+merged <- merged[,-6]
+colnames(merged) <- c("LOCATION", "TIME", "OBESITY", "PYLL", "DEATHS_CANCER")
+```
+
+
+create a new scatter plot:
+
+`vscat(OBESITY, DEATHS_CANCER, merged, "scat02", "measured.obse")`
+
+and launch it with data
+
+`vlaunch(merged, "main", "measured.obse", browse=TRUE)`
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

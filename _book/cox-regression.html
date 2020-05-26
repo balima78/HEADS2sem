@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.6 Cox Regression | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.6 Cox Regression | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-25" />
+<meta name="date" content="2020-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -245,6 +245,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
 <li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
 </ul></li>
+<li class="chapter" data-level="4.14" data-path="visual-data-mining.html"><a href="visual-data-mining.html"><i class="fa fa-check"></i><b>4.14</b> Visual Data Mining</a><ul>
+<li class="chapter" data-level="4.14.1" data-path="visual-data-mining.html"><a href="visual-data-mining.html#ggplot2"><i class="fa fa-check"></i><b>4.14.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.14.2" data-path="visual-data-mining.html"><a href="visual-data-mining.html#vdmr"><i class="fa fa-check"></i><b>4.14.2</b> vdmR</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
@@ -366,10 +370,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For each variable and for the global model.</p>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1">test.res &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(cox3)</a>
 <a class="sourceLine" id="cb240-2" title="2">test.res</a></code></pre></div>
-<pre><code>##                          rho chisq     p
-## as.factor(data$Group)2 0.274 0.822 0.365
-## data$Age               0.179 0.379 0.538
-## GLOBAL                    NA 0.836 0.658</code></pre>
+<pre><code>##                        chisq df    p
+## as.factor(data$Group) 0.6809  1 0.41
+## data$Age              0.0437  1 0.83
+## GLOBAL                1.2163  2 0.54</code></pre>
 <p>Graphical diagnostic</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="kw">library</span>(survminer)</a>
 <a class="sourceLine" id="cb242-2" title="2"><span class="kw">ggcoxzph</span>(test.res)</a></code></pre></div>
@@ -404,12 +408,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -421,6 +424,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

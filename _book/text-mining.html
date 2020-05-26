@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.13 Text mining | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.13 Text mining | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-25" />
+<meta name="date" content="2020-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="assignment-svm.html"/>
-<link rel="next" href="bayes.html"/>
+<link rel="next" href="visual-data-mining.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -245,6 +245,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
 <li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
 </ul></li>
+<li class="chapter" data-level="4.14" data-path="visual-data-mining.html"><a href="visual-data-mining.html"><i class="fa fa-check"></i><b>4.14</b> Visual Data Mining</a><ul>
+<li class="chapter" data-level="4.14.1" data-path="visual-data-mining.html"><a href="visual-data-mining.html#ggplot2"><i class="fa fa-check"></i><b>4.14.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.14.2" data-path="visual-data-mining.html"><a href="visual-data-mining.html#vdmr"><i class="fa fa-check"></i><b>4.14.2</b> vdmR</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
@@ -295,22 +299,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb533-5" title="5"></a>
 <a class="sourceLine" id="cb533-6" title="6">t1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;2.UploadedData/all_sources_metadata_2020-03-13.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb533-7" title="7"><span class="kw">glimpse</span>(t1) </a></code></pre></div>
-<pre><code>## Observations: 29,500
-## Variables: 14
-## $ sha                           &lt;chr&gt; &quot;c630ebcdf30652f0422c3ec12a00b50...
-## $ source_x                      &lt;chr&gt; &quot;CZI&quot;, &quot;CZI&quot;, &quot;CZI&quot;, &quot;CZI&quot;, &quot;CZI...
-## $ title                         &lt;chr&gt; &quot;Angiotensin-converting enzyme 2...
-## $ doi                           &lt;chr&gt; &quot;10.1007/s00134-020-05985-9&quot;, &quot;1...
-## $ pmcid                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, ...
-## $ pubmed_id                     &lt;dbl&gt; 32125455, NA, NA, 32093211, 3212...
-## $ license                       &lt;chr&gt; &quot;cc-by-nc&quot;, &quot;cc-by&quot;, &quot;cc-by&quot;, &quot;c...
-## $ abstract                      &lt;chr&gt; NA, NA, &quot;The geographic spread o...
-## $ publish_time                  &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 20...
-## $ authors                       &lt;chr&gt; &quot;Zhang, Haibo; Penninger, Josef ...
-## $ journal                       &lt;chr&gt; &quot;Intensive Care Med&quot;, &quot;Cell Disc...
-## $ `Microsoft Academic Paper ID` &lt;dbl&gt; 2002765492, 3003430844, 30060654...
-## $ `WHO #Covidence`              &lt;chr&gt; &quot;#3252&quot;, &quot;#1861&quot;, &quot;#1043&quot;, &quot;#199...
-## $ has_full_text                 &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, FALSE, T...</code></pre>
+<pre><code>## Rows: 29,500
+## Columns: 14
+## $ sha                           &lt;chr&gt; &quot;c630ebcdf30652f0422c3ec12a00b50241dc...
+## $ source_x                      &lt;chr&gt; &quot;CZI&quot;, &quot;CZI&quot;, &quot;CZI&quot;, &quot;CZI&quot;, &quot;CZI&quot;, &quot;C...
+## $ title                         &lt;chr&gt; &quot;Angiotensin-converting enzyme 2 (ACE...
+## $ doi                           &lt;chr&gt; &quot;10.1007/s00134-020-05985-9&quot;, &quot;10.103...
+## $ pmcid                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ pubmed_id                     &lt;dbl&gt; 32125455, NA, NA, 32093211, 32125453,...
+## $ license                       &lt;chr&gt; &quot;cc-by-nc&quot;, &quot;cc-by&quot;, &quot;cc-by&quot;, &quot;cc-by&quot;...
+## $ abstract                      &lt;chr&gt; NA, NA, &quot;The geographic spread of 201...
+## $ publish_time                  &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2...
+## $ authors                       &lt;chr&gt; &quot;Zhang, Haibo; Penninger, Josef M.; L...
+## $ journal                       &lt;chr&gt; &quot;Intensive Care Med&quot;, &quot;Cell Discovery...
+## $ `Microsoft Academic Paper ID` &lt;dbl&gt; 2002765492, 3003430844, 3006065484, 1...
+## $ `WHO #Covidence`              &lt;chr&gt; &quot;#3252&quot;, &quot;#1861&quot;, &quot;#1043&quot;, &quot;#1999&quot;, &quot;...
+## $ has_full_text                 &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, ...</code></pre>
 <div id="preprocessing" class="section level3">
 <h3><span class="header-section-number">4.13.1</span> Preprocessing</h3>
 <div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" title="1"><span class="co"># Remove lines with no abstract</span></a>
@@ -414,14 +418,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="assignment-svm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="visual-data-mining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -440,12 +443,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -457,6 +459,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

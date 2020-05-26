@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.3 assignment Histogram | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.3 assignment Histogram | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-25" />
+<meta name="date" content="2020-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -245,6 +245,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
 <li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
 </ul></li>
+<li class="chapter" data-level="4.14" data-path="visual-data-mining.html"><a href="visual-data-mining.html"><i class="fa fa-check"></i><b>4.14</b> Visual Data Mining</a><ul>
+<li class="chapter" data-level="4.14.1" data-path="visual-data-mining.html"><a href="visual-data-mining.html#ggplot2"><i class="fa fa-check"></i><b>4.14.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.14.2" data-path="visual-data-mining.html"><a href="visual-data-mining.html#vdmr"><i class="fa fa-check"></i><b>4.14.2</b> vdmR</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
@@ -340,28 +344,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <pre><code>## 
 ##  ### Iteration 500 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##     13     43     90    141    137     66      9      1      0      0 
-##    &lt;=8  &lt;=Inf 
-##      0      0 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##     13     43     90    141    137     66      9      1      0      0      0 
+##  &lt;=Inf 
+##      0 
 ## 
 ##  ### Iteration 1000 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##     19     64    184    311    279    123     18      2      0      0 
-##    &lt;=8  &lt;=Inf 
-##      0      0 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##     19     64    184    311    279    123     18      2      0      0      0 
+##  &lt;=Inf 
+##      0 
 ## 
 ##  ### Iteration 1500 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##     19     65    184    311    281    142     73    135    158     85 
-##    &lt;=8  &lt;=Inf 
-##     36     11 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##     19     65    184    311    281    142     73    135    158     85     36 
+##  &lt;=Inf 
+##     11 
 ## 
 ##  ### Iteration 2000 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##     19     65    184    311    284    159    121    262    309    198 
-##    &lt;=8  &lt;=Inf 
-##     71     17</code></pre>
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##     19     65    184    311    284    159    121    262    309    198     71 
+##  &lt;=Inf 
+##     17</code></pre>
 <p><strong>keep sample histogram over a sliding window</strong></p>
 <p>definitions and iteration</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># definitions</span></a>
@@ -415,28 +419,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <pre><code>## 
 ##  ### Iteration 500 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##     13     43     90    141    137     66      9      1      0      0 
-##    &lt;=8  &lt;=Inf 
-##      0      0 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##     13     43     90    141    137     66      9      1      0      0      0 
+##  &lt;=Inf 
+##      0 
 ## 
 ##  ### Iteration 1000 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##      6     21     94    170    142     57      9      1      0      0 
-##    &lt;=8  &lt;=Inf 
-##      0      0 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##      6     21     94    170    142     57      9      1      0      0      0 
+##  &lt;=Inf 
+##      0 
 ## 
 ##  ### Iteration 1500 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##      0      1      0      0      2     19     55    133    158     85 
-##    &lt;=8  &lt;=Inf 
-##     36     11 
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##      0      1      0      0      2     19     55    133    158     85     36 
+##  &lt;=Inf 
+##     11 
 ## 
 ##  ### Iteration 2000 
-##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9 
-##      0      0      0      0      3     17     48    127    151    113 
-##    &lt;=8  &lt;=Inf 
-##     35      6</code></pre>
+##   &lt;=-3 &lt;=-1.9 &lt;=-0.8  &lt;=0.3  &lt;=1.4  &lt;=2.5  &lt;=3.6  &lt;=4.7  &lt;=5.8  &lt;=6.9    &lt;=8 
+##      0      0      0      0      3     17     48    127    151    113     35 
+##  &lt;=Inf 
+##      6</code></pre>
 <p><strong>keep sample histogram over a alpha weighted sliding window</strong></p>
 <p>definitions</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">w &lt;-<span class="st"> </span><span class="dv">500</span></a>
@@ -492,16 +496,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <pre><code>## 
 ##  ### Iteration 500 
-##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
-##  3.2949751 16.9824961 29.3163498 44.6117439 41.4464742 19.9554876 
-##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
-##  3.2883843  0.1384587  0.0000000  0.0000000  0.0000000  0.0000000 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5      &lt;=3.6 
+##  3.2949751 16.9824961 29.3163498 44.6117439 41.4464742 19.9554876  3.2883843 
+##      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  0.1384587  0.0000000  0.0000000  0.0000000  0.0000000 
 ## 
 ##  ### Iteration 1000 
-##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
-##  1.8919283  5.7544636 34.7204532 49.2432118 47.7857598 15.7306842 
-##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
-##  3.7872339  0.1206349  0.0000000  0.0000000  0.0000000  0.0000000 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5      &lt;=3.6 
+##  1.8919283  5.7544636 34.7204532 49.2432118 47.7857598 15.7306842  3.7872339 
+##      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  0.1206349  0.0000000  0.0000000  0.0000000  0.0000000 
 ## 
 ##  ### Iteration 1500 
 ##          &lt;=-3        &lt;=-1.9        &lt;=-0.8         &lt;=0.3         &lt;=1.4 
@@ -563,30 +567,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="heads2sem_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <pre><code>## 
 ##  ### Iteration 500 
-##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
-##  3.2949751 16.9824961 29.3163498 44.6117439 41.4464742 19.9554876 
-##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
-##  3.2883843  0.1384587  0.0000000  0.0000000  0.0000000  0.0000000 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5      &lt;=3.6 
+##  3.2949751 16.9824961 29.3163498 44.6117439 41.4464742 19.9554876  3.2883843 
+##      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  0.1384587  0.0000000  0.0000000  0.0000000  0.0000000 
 ## 
 ##  ### Iteration 1000 
-##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
-##  2.0566770  6.6035884 36.1862707 51.4737990 49.8580835 16.7284586 
-##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
-##  3.9516531  0.1275578  0.0000000  0.0000000  0.0000000  0.0000000 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5      &lt;=3.6 
+##  2.0566770  6.6035884 36.1862707 51.4737990 49.8580835 16.7284586  3.9516531 
+##      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+##  0.1275578  0.0000000  0.0000000  0.0000000  0.0000000 
 ## 
 ##  ### Iteration 1500 
-##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5 
-##  0.1028339  0.5261720  1.8093135  2.5736899  3.0009968  8.7036712 
-##      &lt;=3.6      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
-## 16.9834370 38.5969517 50.3959783 26.9750167 13.2775825  4.4380306 
+##       &lt;=-3     &lt;=-1.9     &lt;=-0.8      &lt;=0.3      &lt;=1.4      &lt;=2.5      &lt;=3.6 
+##  0.1028339  0.5261720  1.8093135  2.5736899  3.0009968  8.7036712 16.9834370 
+##      &lt;=4.7      &lt;=5.8      &lt;=6.9        &lt;=8      &lt;=Inf 
+## 38.5969517 50.3959783 26.9750167 13.2775825  4.4380306 
 ## 
 ##  ### Iteration 2000 
-##         &lt;=-3       &lt;=-1.9       &lt;=-0.8        &lt;=0.3        &lt;=1.4 
-##  0.005141693  0.026308601  0.090465677  0.128684497  0.848030834 
-##        &lt;=2.5        &lt;=3.6        &lt;=4.7        &lt;=5.8        &lt;=6.9 
-##  5.661012898 15.987200946 43.246924516 54.044482016 33.235467534 
-##          &lt;=8        &lt;=Inf 
-## 10.866619313  3.263214833</code></pre>
+##         &lt;=-3       &lt;=-1.9       &lt;=-0.8        &lt;=0.3        &lt;=1.4        &lt;=2.5 
+##  0.005141693  0.026308601  0.090465677  0.128684497  0.848030834  5.661012898 
+##        &lt;=3.6        &lt;=4.7        &lt;=5.8        &lt;=6.9          &lt;=8        &lt;=Inf 
+## 15.987200946 43.246924516 54.044482016 33.235467534 10.866619313  3.263214833</code></pre>
 
 </div>
             </section>
@@ -614,12 +616,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -631,6 +632,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

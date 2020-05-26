@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.3 Bayesian Nets | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.3 Bayesian Nets | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-25" />
+<meta name="date" content="2020-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -245,6 +245,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
 <li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
 </ul></li>
+<li class="chapter" data-level="4.14" data-path="visual-data-mining.html"><a href="visual-data-mining.html"><i class="fa fa-check"></i><b>4.14</b> Visual Data Mining</a><ul>
+<li class="chapter" data-level="4.14.1" data-path="visual-data-mining.html"><a href="visual-data-mining.html#ggplot2"><i class="fa fa-check"></i><b>4.14.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.14.2" data-path="visual-data-mining.html"><a href="visual-data-mining.html#vdmr"><i class="fa fa-check"></i><b>4.14.2</b> vdmR</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
 <li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
@@ -291,10 +295,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Exercise from class:</p>
 <p>Design the network with SamIam and fit the conditional probabilities with <em>R</em></p>
 <p>Read the network designed with SamIam</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" title="1"><span class="kw">library</span>(bnlearn)</a>
-<a class="sourceLine" id="cb567-2" title="2">mi.net&lt;-<span class="kw">read.net</span>(<span class="st">&quot;2.UploadedData/mi.vstructure.net&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1"><span class="kw">library</span>(bnlearn)</a>
+<a class="sourceLine" id="cb579-2" title="2">mi.net&lt;-<span class="kw">read.net</span>(<span class="st">&quot;2.UploadedData/mi.vstructure.net&quot;</span>)</a></code></pre></div>
 <p>see the conditional probabilities defined</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" title="1">mi.net</a></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb580-1" title="1">mi.net</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network parameters
 ## 
@@ -329,50 +333,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   TRUE FALSE 
 ##  0.51  0.49</code></pre>
 <p>make a graph object</p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" title="1">mi.graph&lt;-<span class="kw">bn.net</span>(mi.net)</a>
-<a class="sourceLine" id="cb570-2" title="2"></a>
-<a class="sourceLine" id="cb570-3" title="3"><span class="kw">plot</span>(mi.graph)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-405-1.png" width="672" /></p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb582-1" title="1">mi.graph&lt;-<span class="kw">bn.net</span>(mi.net)</a>
+<a class="sourceLine" id="cb582-2" title="2"></a>
+<a class="sourceLine" id="cb582-3" title="3"><span class="kw">plot</span>(mi.graph)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-417-1.png" width="672" /></p>
 <p>Read the data to fit the network</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb571-1" title="1">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/mi.dat&quot;</span>)</a>
-<a class="sourceLine" id="cb571-2" title="2"></a>
-<a class="sourceLine" id="cb571-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1">data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/mi.dat&quot;</span>)</a>
+<a class="sourceLine" id="cb583-2" title="2"></a>
+<a class="sourceLine" id="cb583-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th></th>
-<th align="center">smoking</th>
-<th align="center">wine</th>
-<th align="center">mi</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+smoking
+</th>
+<th style="text-align:left;">
+wine
+</th>
+<th style="text-align:left;">
+mi
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td></td>
-<td align="center">Mode :logical</td>
-<td align="center">Mode :logical</td>
-<td align="center">Mode :logical</td>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Mode :logical
+</td>
+<td style="text-align:left;">
+Mode :logical
+</td>
+<td style="text-align:left;">
+Mode :logical
+</td>
 </tr>
-<tr class="even">
-<td></td>
-<td align="center">FALSE:59</td>
-<td align="center">FALSE:60</td>
-<td align="center">FALSE:60</td>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+FALSE:59
+</td>
+<td style="text-align:left;">
+FALSE:60
+</td>
+<td style="text-align:left;">
+FALSE:60
+</td>
 </tr>
-<tr class="odd">
-<td></td>
-<td align="center">TRUE :61</td>
-<td align="center">TRUE :60</td>
-<td align="center">TRUE :60</td>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+TRUE :61
+</td>
+<td style="text-align:left;">
+TRUE :60
+</td>
+<td style="text-align:left;">
+TRUE :60
+</td>
 </tr>
 </tbody>
 </table>
 <p>factorize variables</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb572-1" title="1">data &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">apply</span>(data,<span class="dv">2</span>, as.factor))</a></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb584-1" title="1">data &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">apply</span>(data,<span class="dv">2</span>, as.factor))</a></code></pre></div>
 <p>fit this network with the data we have</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" title="1">mi.fit&lt;-<span class="kw">bn.fit</span>(mi.graph,data)</a></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" title="1">mi.fit&lt;-<span class="kw">bn.fit</span>(mi.graph,data)</a></code></pre></div>
 <p>see the new conditional probabilities fitted from the data</p>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb574-1" title="1">mi.fit</a></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb586-1" title="1">mi.fit</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network parameters
 ## 
@@ -406,8 +438,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Conditional probability table:
 ##      FALSE      TRUE 
 ## 0.4916667 0.5083333</code></pre>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb576-1" title="1"><span class="co"># export the results</span></a>
-<a class="sourceLine" id="cb576-2" title="2"><span class="kw">write.net</span>(mi.fit,<span class="dt">file=</span><span class="st">&quot;mi.fitinR.net&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1"><span class="co"># export the results</span></a>
+<a class="sourceLine" id="cb588-2" title="2"><span class="kw">write.net</span>(mi.fit,<span class="dt">file=</span><span class="st">&quot;mi.fitinR.net&quot;</span>)</a></code></pre></div>
 <p>Again in SamIam, we can see the results in a graph and play with the options
 <img src="images/mi.graph.jpg" alt="graph from SamIam" /></p>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
@@ -440,12 +472,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -457,6 +488,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

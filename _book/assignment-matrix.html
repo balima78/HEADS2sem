@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.4 assignment Matrix | HEADS 2nd semester</title>
   <meta name="description" content="HEADS’s homeworks compilation." />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.4 assignment Matrix | HEADS 2nd semester" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-25" />
+<meta name="date" content="2020-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,6 +244,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.2" data-path="text-mining.html"><a href="text-mining.html#representation"><i class="fa fa-check"></i><b>4.13.2</b> Representation</a></li>
 <li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
 <li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.14" data-path="visual-data-mining.html"><a href="visual-data-mining.html"><i class="fa fa-check"></i><b>4.14</b> Visual Data Mining</a><ul>
+<li class="chapter" data-level="4.14.1" data-path="visual-data-mining.html"><a href="visual-data-mining.html#ggplot2"><i class="fa fa-check"></i><b>4.14.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.14.2" data-path="visual-data-mining.html"><a href="visual-data-mining.html#vdmr"><i class="fa fa-check"></i><b>4.14.2</b> vdmR</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
@@ -566,40 +570,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb83-39" title="39">}</a></code></pre></div>
 <pre><code>## 
 ##  ### Iteration 500 
-##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8 
-##  9.862771 12.716282 40.696190 79.798698  6.004151  1.962992  3.740664 
-##   &lt;=382.2   &lt;=464.6     &lt;=547 
-##  1.514095  1.058584  1.679942 
+##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8   &lt;=382.2 
+##  9.862771 12.716282 40.696190 79.798698  6.004151  1.962992  3.740664  1.514095 
+##   &lt;=464.6     &lt;=547 
+##  1.058584  1.679942 
 ##    &lt;=-194.6    &lt;=-112.2     &lt;=-29.8      &lt;=52.6       &lt;=135     &lt;=217.4 
 ##   6.0146182   2.6308680  22.1702078 118.5148834   7.7376949   0.5858054 
 ##     &lt;=299.8     &lt;=382.2     &lt;=464.6       &lt;=547 
 ##   1.3802920   0.0000000   0.0000000   0.0000000 
 ## 
 ##  ### Iteration 1000 
-##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8 
-## 26.342501 19.498601 38.162601 57.694790  5.353712  4.551458  6.840510 
-##   &lt;=382.2   &lt;=464.6     &lt;=547 
-##  2.790566  3.056812  2.694537 
-##   &lt;=-194.6   &lt;=-112.2    &lt;=-29.8     &lt;=52.6      &lt;=135    &lt;=217.4 
-## 12.4932951  5.5643186 12.3378996 89.6498784 40.6335931  3.9734132 
-##    &lt;=299.8    &lt;=382.2    &lt;=464.6      &lt;=547 
-##  2.1006708  0.2330195  0.0000000  0.0000000 
+##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8   &lt;=382.2 
+## 26.342501 19.498601 38.162601 57.694790  5.353712  4.551458  6.840510  2.790566 
+##   &lt;=464.6     &lt;=547 
+##  3.056812  2.694537 
+##   &lt;=-194.6   &lt;=-112.2    &lt;=-29.8     &lt;=52.6      &lt;=135    &lt;=217.4    &lt;=299.8 
+## 12.4932951  5.5643186 12.3378996 89.6498784 40.6335931  3.9734132  2.1006708 
+##    &lt;=382.2    &lt;=464.6      &lt;=547 
+##  0.2330195  0.0000000  0.0000000 
 ## 
 ##  ### Iteration 1500 
-##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8 
-##  8.272278 12.665316 48.309442 52.748796 11.978027 11.448122  9.207763 
-##   &lt;=382.2   &lt;=464.6     &lt;=547 
-##  4.034632  5.569572  3.149725 
-##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8 
-## 21.548245  7.717544 11.387921 99.318171 15.379753  5.650347  3.944561 
-##   &lt;=382.2   &lt;=464.6     &lt;=547 
-##  2.437131  0.000000  0.000000 
+##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8   &lt;=382.2 
+##  8.272278 12.665316 48.309442 52.748796 11.978027 11.448122  9.207763  4.034632 
+##   &lt;=464.6     &lt;=547 
+##  5.569572  3.149725 
+##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8   &lt;=382.2 
+## 21.548245  7.717544 11.387921 99.318171 15.379753  5.650347  3.944561  2.437131 
+##   &lt;=464.6     &lt;=547 
+##  0.000000  0.000000 
 ## 
 ##  ### Iteration 2000 
-##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8 
-## 11.103121 12.089897 37.567685 66.923853 29.056388  2.525527  3.223038 
-##   &lt;=382.2   &lt;=464.6     &lt;=547 
-##  1.606848  1.437631  1.869565 
+##  &lt;=-194.6  &lt;=-112.2   &lt;=-29.8    &lt;=52.6     &lt;=135   &lt;=217.4   &lt;=299.8   &lt;=382.2 
+## 11.103121 12.089897 37.567685 66.923853 29.056388  2.525527  3.223038  1.606848 
+##   &lt;=464.6     &lt;=547 
+##  1.437631  1.869565 
 ##    &lt;=-194.6    &lt;=-112.2     &lt;=-29.8      &lt;=52.6       &lt;=135     &lt;=217.4 
 ##   5.0810228   3.3434787  17.5203610 122.1273764  16.7587452   0.9993678 
 ##     &lt;=299.8     &lt;=382.2     &lt;=464.6       &lt;=547 
@@ -727,12 +731,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -744,6 +747,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
