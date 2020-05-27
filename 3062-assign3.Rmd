@@ -1,0 +1,108 @@
+## Assignment *alcohol*
+
+2020-04-13
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+library(printr)
+```
+
+**Exercise**
+
+The “alcohol.sav” database contains information about alcoholic patients who have finished their hospital treatment.
+
+Explore the predictors of the time elapsed from the release of alcohol treatment to
+relapse.
+
+Variables:
+
+ - Weeks: the number of weeks until relapse or censoring
+ 
+ - Event: 0-no relapse; 1-relapse
+ 
+ - Group: group of treatment (0-detox only; 1-detox plus therapy)
+ 
+ - Symptoms: level of psychological distress (ranging from 1-lowest to 5-highest)
+ 
+ - AA: attending of Alcoholics Anonymous (AA) meetings (0-no; 1-yes)
+
+*all code from the professor*
+
+Open the file in spss.
+```{r}
+library(foreign)
+data <- read.spss(file="2.UploadedData/Alcohol.sav", use.missing=TRUE) 
+data
+```
+
+Create the survival object
+```{r}
+# load packages
+library(splines)
+library(survival)
+Surv(data$weeks, data$Event)
+```
+
+obtain the median of survival.
+```{r}
+# produce the Kaplan-Meier curves and estimates.
+KM1 <- survfit(Surv(data$weeks, data$Event)~1)
+KM1
+```
+
+obtain the survival in several points of time.
+```{r}
+summary(KM1)
+```
+
+Plot survival curve with confidence intervals
+```{r}
+plot(KM1, mark.time=F)
+```
+
+produce the Kaplan-Meier curves and estimates according one factor (group of treatment)
+```{r}
+KM_group <- survfit(Surv(data$weeks, data$Event)~1+data$Group)
+# To obtain the median of survival according one factor (group of treatment).
+KM_group
+``` 
+
+obtain the survival in several points of time according one factor (group of treatment).
+```{r}
+summary(KM_group)
+```
+
+Plot survival curve with confidence intervals according one factor (group of treatment)
+```{r}
+plot(KM_group,col=c("red", "blue"),mark.time=F,ylim=c(0,1),xlab="time",ylab="S")
+legend("topright", title="Group", legend=c( "Detox" , "Treatment"), col=c("red" , "blue"), lty=1:1, cex=0.8)
+
+```
+
+Log-rank test
+```{r}
+survdiff(Surv(data$weeks, data$Event)~1+data$Group, rho=0)
+```
+
+CONCLUSION FROM LOG-RANK TEST: there is not a significant difference in the time until relapse between groups (p=0.1)
+
+Unadjusted cox regression.
+```{r}
+coxuni <- coxph(Surv(data$weeks, data$Event)~1+as.factor(data$Group))
+summary(coxuni)
+```
+
+CONCLUSION FROM Unadjusted cox regression: The conclusion from log-rank test is very similar to the conclusion from Log-Rank test. However, with this aproach (Cox regression), we can adjust for other variables.
+
+Multivariated cox regression.
+```{r}
+coxadjust <- coxph(Surv(data$weeks, data$Event)~1+as.factor(data$Group)+data$symptoms+as.factor(data$AA))
+summary(coxadjust)
+```
+
+When adjusted form level of psychological distress (symptoms) and attending AA there is a significant difference in the time until relapse between groups (p=0.018) 
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+
+

@@ -1,0 +1,237 @@
+## Bayesian temporal Nets
+
+2020-05-2>6
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+```
+
+### backstage functions
+
+from probability to rate
+
+```{r}
+library(gRain)
+
+rate <- function(p, t) {
+  out <- c(-log(1 - p) / t)
+  names(out) <- paste("Rate",t,"y",sep="")
+  out
+}
+```
+
+probability from one yearly time frame to another
+```{r}
+prob <- function(p, t.orig = 5, t.final = 1) {
+  out <- c(1 - exp( -rate(p, t.orig) * t.final))
+  out
+}
+```
+
+complement
+```{r}
+comp <- function(v){
+  out <- rep(v, each=2)
+  for (i in 2:length(out))
+    if (i %% 2 == 0)
+      out[i] <- 1 - out[i-1]
+    out
+}
+```
+
+HR
+```{r}
+odds.p <- function(p) { p / (1 - p) }
+p.odds <- function(odds) { odds / (1 + odds) }
+
+surv.hr <- function(ref, hr) {ref ^ hr}
+
+yn <- c("yes","no")
+ny <- c("no","yes")
+```
+
+create dependencies using RR, OR or HR
+```{r}
+associate <- function(ref,
+                      rr = NULL,
+                      or = NULL,
+                      hr = NULL) {
+  
+  if(!is.null(rr)) {
+    
+    prob <- ref * rr
+    
+  } else if(!is.null(or)) {
+    
+    prob <- p.odds((odds.p(ref) * or))
+    
+  } else if(!is.null(hr)) {
+    
+    prob <- 1 - ((1 - ref) ^ hr)
+    
+  } else prob <- ref
+  
+  if (length(which(prob > 1)) > 0) {
+    cat("Something went wrong... Prob > 1!\n")
+    return(NULL)
+  } else
+    return(c(prob, ref))
+}
+```
+
+add a static node
+```{r}
+addStatic <- function(cptList,
+                      nodeName,
+                      nodeStates=yn,
+                      nodeDependencies=NULL,
+                      nodeStatesProb=0.5) {
+  if (!is.null(nodeDependencies) && !is.na(nodeDependencies)) {
+    deps <- paste(nodeDependencies,collapse="+")
+    form <- as.formula(paste("~",nodeName,"+",deps,sep=""))
+  } else
+    form <- as.formula(paste("~",nodeName,sep=""))
+  
+  cptList[[length(cptList)+1]] <- cptable(form,
+                                          levels=nodeStates,
+                                          values=comp(nodeStatesProb))
+  names(cptList[[length(cptList)]]) <- nodeName
+  cptList
+}
+```
+
+add a temporal node
+```{r}
+addNode <- function(cptList,
+                    nodeName,
+                    nodeStates=yn,
+                    nodeDependencies=NULL,
+                    nodeStatesProb=0.5,
+                    nodeTemporal=FALSE,
+                    nodeLeaps=NULL) {
+  
+  if (nodeTemporal) {
+    
+    transProb = prob(p = nodeStatesProb,
+                     t.orig = nodeLeaps, 
+                     t.final = 1)
+    
+    cptList <- addStatic(cptList = cptList, nodeName = paste(nodeName,"1",sep="."), nodeStates = nodeStates,
+                         nodeDependencies = nodeDependencies, nodeStatesProb = transProb)
+    
+    for (i in 2:nodeLeaps)
+      cptList <- addStatic(cptList = cptList, nodeName = paste(nodeName,i,sep="."), nodeStates = nodeStates,
+                           nodeDependencies = c(nodeDependencies,paste(nodeName,i-1,sep=".")),
+                           nodeStatesProb = c(rep(1,length(transProb)),transProb))
+    
+  } else cptList <- addStatic(cptList = cptList, nodeName = nodeName, nodeStates = nodeStates,
+                              nodeDependencies = nodeDependencies, nodeStatesProb = nodeStatesProb)
+  
+  cptList
+}
+```
+
+### building the model
+```{r}
+library(bnlearn)
+
+allCPT <- NULL
+```
+
+add a static independent node
+```{r}
+allCPT <- addStatic(allCPT, nodeName="temp", nodeDependencies=NULL, nodeStatesProb=0.1)
+```
+
+add a static dependent node
+```{r}
+allCPT <- addStatic(allCPT, nodeName="other", nodeDependencies="temp",nodeStatesProb=c(0.4,0.7))
+```
+
+add a static doubly-dependent node
+```{r}
+allCPT <- addStatic(allCPT, nodeName="another",
+                    nodeDependencies=c("temp","other"),nodeStatesProb=c(0.4,0.7,0.3,0.5))
+
+#### add a temporal independent node
+
+#allCPT <- addNode(allCPT, nodeName="death", nodeDependencies=NULL,nodeStatesProb=c(0.2), nodeTemporal=TRUE, nodeLeaps=2)
+
+#### add a temporal dependent node
+
+#allCPT <- addNode(allCPT, nodeName="adjdeath", nodeDependencies="temp",nodeStatesProb=c(0.2,0.1), nodeTemporal=TRUE, nodeLeaps=2)
+
+#### add a temporal dependent node (using OR)
+
+#allCPT <- addNode(allCPT, nodeName="adjdeathOR", nodeDependencies="temp",nodeStatesProb=associate(ref=0.2, or=2), nodeTemporal=TRUE, nodeLeaps=10)
+
+#### add a temporal dependent node (using RR)
+
+#allCPT <- addNode(allCPT, nodeName="adjdeathRR", nodeDependencies="temp",nodeStatesProb=associate(ref=0.2, rr=2), nodeTemporal=TRUE, nodeLeaps=10)
+
+#### add a temporal dependent node (using HR)
+
+#allCPT <- addNode(allCPT, nodeName="adjdeathHR", nodeDependencies="temp",nodeStatesProb=associate(ref=0.2, hr=2), nodeTemporal=TRUE, nodeLeaps=10)
+
+```
+
+compiling the network
+```{r}
+cat(":: Compiling the network... ")
+plist <- compileCPT(allCPT, forceCheck = TRUE)
+net <- grain(plist, details = 2)
+cat("DONE ::\n")
+```
+
+plotting the network
+```{r}
+cat(":: Plotting the network... ")
+cat("(",length(net$universe$nodes)," nodes) ",sep="")
+plot(as.bn(net))
+print(summary(net))
+cat("DONE ::\n")
+```
+
+plotting the network
+```{r}
+cat(":: Storing the network... ")
+saveHuginNet(net, file="net.net")
+pdf(file="net.pdf", width=24, height=12)
+plot(net)
+dev.off()
+cat("DONE ::\n")
+```
+
+querying the network
+```{r}
+cat(":: Querying the network...\n")
+print(querygrain(net, nodes=c("other", "temp"), type="conditional"))
+print(querygrain(net, nodes=c("other"), type="joint"))
+cat("DONE ::\n")
+```
+
+setting evidence
+```{r}
+cat(":: Setting evidence in the network... ")
+net1 <- setFinding(net, nodes=c("temp"), states=c("yes")) 
+cat("DONE ::\n")
+```
+
+building from data
+```{r}
+cat(":: Building from data\n")
+data("cad1")
+head(cad1)
+dag.cad <- dag(~ CAD:Smoker:Inherit:Hyperchol + 
+                 AngPec:CAD + 
+                 Heartfail:CAD + 
+                 QWave:CAD)
+plot(dag.cad)
+bn.cad <- grain(dag.cad, data = cad1, smooth = 0.1)
+print(querygrain(bn.cad, nodes=c("CAD", "Smoker"), type="conditional"))
+cat("DONE ::\n")
+```
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

@@ -1,0 +1,46 @@
+net
+{
+  node_size = (100 30);
+
+}
+
+
+node temp
+{
+   label = ""; 
+   position = ( 200 100 );
+   states = ( "yes" "no" );
+}
+node other
+{
+   label = ""; 
+   position = ( 50 187 );
+   states = ( "yes" "no" );
+}
+node another
+{
+   label = ""; 
+   position = ( 50 13 );
+   states = ( "yes" "no" );
+}
+potential ( temp )
+{
+   data =  (0.1 0.9) ;
+}
+
+potential ( other | temp )
+{
+   data = 
+((0.4 0.6) 
+ (0.7 0.3))
+;
+}
+potential ( another | other temp )
+{
+   data = 
+(((0.4 0.6)  
+  (0.7 0.3)) 
+ ((0.3 0.7)  
+  (0.5 0.5)))
+;
+}
