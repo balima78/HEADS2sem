@@ -27,8 +27,9 @@ ovarian$resid.ds <- factor(ovarian$resid.ds, levels = c("1", "2"), labels = c("n
 ovarian$ecog.ps <- factor(ovarian$ecog.ps, levels = c("1", "2"), labels = c("good", "bad"))
 ```
 
-#### Apply one of the techniques given in this course to answer the following questions: do
-patients benefit from therapy regimen A as opposed to regimen B?
+Apply one of the techniques given in this course to answer the following questions: 
+
+#### Do patients benefit from therapy regimen A as opposed to regimen B?
 
 Fit survival data using the Kaplan-Meier method. A + behind survival times indicates censored data points.
 ```{r}
