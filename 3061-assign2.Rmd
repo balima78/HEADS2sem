@@ -21,8 +21,7 @@ Variables included in the dataset:
 str(data)
 ```
 
-a) Produce unadjusted Cox regressions for the covariates: pathsize as
-covariates.
+a) Produce unadjusted Cox regressions for the covariates: age, ln_yesno and pathsize
 
 Unadjusted Cox regression for age
 ```{r}
@@ -42,7 +41,7 @@ cox3 <- coxph(Surv(data$time, data$status) ~ data$pathsize)
 summary(cox3)
 ```
 
-b) Produce adjusted Cox regression as the variables age,ln_yesno and pathsize as
+b) Produce adjusted Cox regression with the variables age,ln_yesno and pathsize as
 covariates.
 
 Adjusted Cox regression for age,ln_yesno and pathsize
