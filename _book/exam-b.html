@@ -132,7 +132,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
 <li class="chapter" data-level="2.1" data-path="eda.html"><a href="eda.html"><i class="fa fa-check"></i><b>2.1</b> EDA</a></li>
@@ -302,74 +301,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>- acupuntura: grupo (0=no, 1=yes)</em>
 <em>- age: idade em anos</em></p>
 <p>Vou começar por ler os dados e fazer um resumo das variáveis:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1"><span class="kw">library</span>(foreign)</a>
-<a class="sourceLine" id="cb366-2" title="2"></a>
-<a class="sourceLine" id="cb366-3" title="3">heada&lt;-<span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/headache.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb366-4" title="4"></a>
-<a class="sourceLine" id="cb366-5" title="5">heada&lt;-<span class="kw">data.frame</span>(heada)</a>
-<a class="sourceLine" id="cb366-6" title="6"></a>
-<a class="sourceLine" id="cb366-7" title="7"><span class="kw">summary</span>(heada)</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="center">acupuncture</th>
-<th align="center">age</th>
-<th align="center">headache</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td align="center">não/no :55</td>
-<td align="center">Min. :20.00</td>
-<td align="center">Min. :0</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">sim/yes:25</td>
-<td align="center">1st Qu.:27.00</td>
-<td align="center">1st Qu.:1</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">NA</td>
-<td align="center">Median :31.00</td>
-<td align="center">Median :1</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">NA</td>
-<td align="center">Mean :30.43</td>
-<td align="center">Mean :2</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">NA</td>
-<td align="center">3rd Qu.:33.00</td>
-<td align="center">3rd Qu.:2</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">NA</td>
-<td align="center">Max. :40.00</td>
-<td align="center">Max. :7</td>
-</tr>
-<tr class="odd">
-<td>Fazen</td>
-<td align="center">do um histogram</td>
-<td align="center">a para a variave</td>
-<td align="center">l ‘headache’</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1"><span class="kw">hist</span>(heada<span class="op">$</span>headache)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-241-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3">heada&lt;-<span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;2.UploadedData/headache.sav&quot;</span>, <span class="dt">use.missing=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5">heada&lt;-<span class="kw">data.frame</span>(heada)</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="kw">summary</span>(heada)</a></code></pre></div>
+<pre><code>##   acupuncture      age           headache
+##  não/no :55   Min.   :20.00   Min.   :0  
+##  sim/yes:25   1st Qu.:27.00   1st Qu.:1  
+##               Median :31.00   Median :1  
+##               Mean   :30.43   Mean   :2  
+##               3rd Qu.:33.00   3rd Qu.:2  
+##               Max.   :40.00   Max.   :7</code></pre>
+<p>Fazendo um histograma para a variavel ‘headache’</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">hist</span>(heada<span class="op">$</span>headache)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Como neste problema a variável dependente é uma contagem e a sua distribuição é <em>skewed</em> para a direita, podemos aplicar uma regressão de poisson.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1">poisson &lt;-<span class="st"> </span><span class="kw">glm</span>(headache <span class="op">~</span><span class="st"> </span>acupuncture <span class="op">+</span><span class="st"> </span>age, </a>
-<a class="sourceLine" id="cb368-2" title="2">               <span class="dt">data =</span> heada, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</a>
-<a class="sourceLine" id="cb368-3" title="3"></a>
-<a class="sourceLine" id="cb368-4" title="4"><span class="kw">summary</span>(poisson)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">poisson &lt;-<span class="st"> </span><span class="kw">glm</span>(headache <span class="op">~</span><span class="st"> </span>acupuncture <span class="op">+</span><span class="st"> </span>age, </a>
+<a class="sourceLine" id="cb6-2" title="2">               <span class="dt">data =</span> heada, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw">summary</span>(poisson)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = headache ~ acupuncture + age, family = &quot;poisson&quot;, 
@@ -380,10 +333,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -2.4000  -0.5103  -0.5097   0.3043   3.1405  
 ## 
 ## Coefficients:
-##                       Estimate  Std. Error z value Pr(&gt;|z|)    
-## (Intercept)         0.47210196  0.57917272   0.815 0.414997    
-## acupuncturesim/yes  0.58768536  0.16127088   3.644 0.000268 ***
-## age                -0.00006793  0.01842918  -0.004 0.997059    
+##                      Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)         4.721e-01  5.792e-01   0.815 0.414997    
+## acupuncturesim/yes  5.877e-01  1.613e-01   3.644 0.000268 ***
+## age                -6.793e-05  1.843e-02  -0.004 0.997059    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -396,46 +349,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>Obtemos uma valor estatisticamente significativo para o coeficiente de ‘acupuncture’ mas não para ‘age’</p>
 <p>Calculando os RR (e respectivos intervalos de confiança)</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">RR =</span> <span class="kw">coef</span>(poisson), <span class="kw">confint</span>(poisson)))</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="right">RR</th>
-<th align="right">2.5 %</th>
-<th align="right">97.5 %</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td align="right">1.6033609</td>
-<td align="right">0.5086059</td>
-<td align="right">4.935990</td>
-</tr>
-<tr class="even">
-<td>acupuncturesim/yes</td>
-<td align="right">1.7998177</td>
-<td align="right">1.3088986</td>
-<td align="right">2.465976</td>
-</tr>
-<tr class="odd">
-<td>age</td>
-<td align="right">0.9999321</td>
-<td align="right">0.9645351</td>
-<td align="right">1.036866</td>
-</tr>
-<tr class="even">
-<td>Dos resultados de RR,</td>
-<td align="right">podemos con</td>
-<td align="right">cluir que 1.</td>
-<td align="right">8 é a taxa estimada de dores de cabeça para quem faz acupuntura relativamente à taxa estimada de dores de cabeça para quem não faz acupuntura, ajustando para a idade.Ou seja, quem faz acupuntura tem um risco aumentado de ter mais dores de cabeça quando comparado com com não faz acupuntura.</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">RR =</span> <span class="kw">coef</span>(poisson), <span class="kw">confint</span>(poisson)))</a></code></pre></div>
+<pre><code>##                           RR     2.5 %   97.5 %
+## (Intercept)        1.6033609 0.5086059 4.935990
+## acupuncturesim/yes 1.7998177 1.3088986 2.465976
+## age                0.9999321 0.9645351 1.036866</code></pre>
+<p>Dos resultados de RR, podemos concluir que 1.8 é a taxa estimada de dores de cabeça para quem faz acupuntura relativamente à taxa estimada de dores de cabeça para quem não faz acupuntura, ajustando para a idade.Ou seja, quem faz acupuntura tem um risco aumentado de ter mais dores de cabeça quando comparado com com não faz acupuntura.</p>
 <p>Podemos verificar também dispersão do modelo</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" title="1"><span class="kw">library</span>(AER)</a>
-<a class="sourceLine" id="cb371-2" title="2"><span class="kw">dispersiontest</span>(poisson)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">library</span>(AER)</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">dispersiontest</span>(poisson)</a></code></pre></div>
 <pre><code>## 
 ##  Overdispersion test
 ## 

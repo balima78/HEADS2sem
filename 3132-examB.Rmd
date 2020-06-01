@@ -42,6 +42,7 @@ Calculando os RR (e respectivos intervalos de confiança)
 ```{r}
 exp(cbind(RR = coef(poisson), confint(poisson)))
 ```
+
 Dos resultados de RR, podemos concluir que 1.8 é a taxa estimada de dores de cabeça para quem faz acupuntura relativamente à taxa estimada de dores de cabeça para quem não faz acupuntura, ajustando para a idade.Ou seja, quem faz acupuntura tem um risco aumentado de ter mais dores de cabeça quando comparado com com não faz acupuntura.  
 
 Podemos verificar também dispersão do modelo
