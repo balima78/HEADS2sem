@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-27" />
+<meta name="date" content="2020-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
-<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.1" data-path="linear-and-logistic-regressions.html"><a href="linear-and-logistic-regressions.html"><i class="fa fa-check"></i><b>3.1</b> Linear and Logistic Regressions</a></li>
 <li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
 <li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
@@ -208,6 +208,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.15" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.15</b> Survival Analysis</a><ul>
 <li class="chapter" data-level="3.15.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.15.1</b> exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="3.16" data-path="exam-a.html"><a href="exam-a.html"><i class="fa fa-check"></i><b>3.16</b> Exam A</a></li>
+<li class="chapter" data-level="3.17" data-path="exam-b.html"><a href="exam-b.html"><i class="fa fa-check"></i><b>3.17</b> Exam B</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
@@ -297,14 +299,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>2020-03-03</p>
 <div id="build-network-from-data-using-naive-bayes" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> Build network from data using naive bayes</h3>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" title="1"><span class="co"># get the library</span></a>
-<a class="sourceLine" id="cb455-2" title="2"><span class="kw">require</span>(bnlearn)</a>
-<a class="sourceLine" id="cb455-3" title="3"></a>
-<a class="sourceLine" id="cb455-4" title="4"><span class="co"># read data from CSV file, telling R that the first line contains headers</span></a>
-<a class="sourceLine" id="cb455-5" title="5">osa.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/osa.csv&quot;</span>, <span class="dt">header=</span>T)</a>
-<a class="sourceLine" id="cb455-6" title="6"></a>
-<a class="sourceLine" id="cb455-7" title="7"><span class="co"># check the data</span></a>
-<a class="sourceLine" id="cb455-8" title="8"><span class="kw">print</span>(<span class="kw">str</span>(osa.data))</a></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" title="1"><span class="co"># get the library</span></a>
+<a class="sourceLine" id="cb470-2" title="2"><span class="kw">require</span>(bnlearn)</a>
+<a class="sourceLine" id="cb470-3" title="3"></a>
+<a class="sourceLine" id="cb470-4" title="4"><span class="co"># read data from CSV file, telling R that the first line contains headers</span></a>
+<a class="sourceLine" id="cb470-5" title="5">osa.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/osa.csv&quot;</span>, <span class="dt">header=</span>T)</a>
+<a class="sourceLine" id="cb470-6" title="6"></a>
+<a class="sourceLine" id="cb470-7" title="7"><span class="co"># check the data</span></a>
+<a class="sourceLine" id="cb470-8" title="8"><span class="kw">print</span>(<span class="kw">str</span>(osa.data))</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    273 obs. of  7 variables:
 ##  $ bmi    : Factor w/ 2 levels &quot;NotObese&quot;,&quot;Obese&quot;: 2 2 2 2 2 2 2 1 1 2 ...
 ##  $ ac     : Factor w/ 2 levels &quot;Abnormal&quot;,&quot;Normal&quot;: 1 1 1 1 1 1 1 1 1 1 ...
@@ -315,31 +317,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ osa    : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 1 2 1 1 2 1 2 ...
 ## NULL</code></pre>
 <p>Learn a Bayes Network from the data using two naive bayes</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" title="1"><span class="co"># naive Bayes</span></a>
-<a class="sourceLine" id="cb457-2" title="2">osa.nb.net &lt;-<span class="st"> </span><span class="kw">naive.bayes</span>(osa.data, <span class="dt">training=</span><span class="st">&quot;osa&quot;</span>) <span class="co"># osa is the outcome of interest</span></a>
-<a class="sourceLine" id="cb457-3" title="3"><span class="co"># TAN</span></a>
-<a class="sourceLine" id="cb457-4" title="4">osa.tan.net &lt;-<span class="st"> </span><span class="kw">tree.bayes</span>(osa.data, <span class="dt">training=</span><span class="st">&quot;osa&quot;</span>) <span class="co"># osa is the outcome of interest</span></a>
-<a class="sourceLine" id="cb457-5" title="5"></a>
-<a class="sourceLine" id="cb457-6" title="6"><span class="co"># plot network</span></a>
-<a class="sourceLine" id="cb457-7" title="7"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb457-8" title="8"><span class="kw">plot</span>(osa.nb.net, <span class="dt">main =</span> <span class="st">&quot;naive Bayes&quot;</span>)</a>
-<a class="sourceLine" id="cb457-9" title="9"><span class="kw">plot</span>(osa.tan.net, <span class="dt">main =</span> <span class="st">&quot;Tree-Augmented naive Bayes&quot;</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-309-1.png" width="672" /></p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" title="1"><span class="co"># naive Bayes</span></a>
+<a class="sourceLine" id="cb472-2" title="2">osa.nb.net &lt;-<span class="st"> </span><span class="kw">naive.bayes</span>(osa.data, <span class="dt">training=</span><span class="st">&quot;osa&quot;</span>) <span class="co"># osa is the outcome of interest</span></a>
+<a class="sourceLine" id="cb472-3" title="3"><span class="co"># TAN</span></a>
+<a class="sourceLine" id="cb472-4" title="4">osa.tan.net &lt;-<span class="st"> </span><span class="kw">tree.bayes</span>(osa.data, <span class="dt">training=</span><span class="st">&quot;osa&quot;</span>) <span class="co"># osa is the outcome of interest</span></a>
+<a class="sourceLine" id="cb472-5" title="5"></a>
+<a class="sourceLine" id="cb472-6" title="6"><span class="co"># plot network</span></a>
+<a class="sourceLine" id="cb472-7" title="7"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb472-8" title="8"><span class="kw">plot</span>(osa.nb.net, <span class="dt">main =</span> <span class="st">&quot;naive Bayes&quot;</span>)</a>
+<a class="sourceLine" id="cb472-9" title="9"><span class="kw">plot</span>(osa.tan.net, <span class="dt">main =</span> <span class="st">&quot;Tree-Augmented naive Bayes&quot;</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-322-1.png" width="672" /></p>
 <p>split training and testing data sets</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1"><span class="co"># define training set</span></a>
-<a class="sourceLine" id="cb458-2" title="2"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
-<a class="sourceLine" id="cb458-3" title="3">training &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(osa.data), <span class="dt">size=</span><span class="dv">200</span>)</a>
-<a class="sourceLine" id="cb458-4" title="4"></a>
-<a class="sourceLine" id="cb458-5" title="5"><span class="co"># define training set</span></a>
-<a class="sourceLine" id="cb458-6" title="6">testing &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(osa.data))[<span class="op">-</span>training]</a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" title="1"><span class="co"># define training set</span></a>
+<a class="sourceLine" id="cb473-2" title="2"><span class="kw">set.seed</span>(<span class="dv">523</span>)</a>
+<a class="sourceLine" id="cb473-3" title="3">training &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(osa.data), <span class="dt">size=</span><span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb473-4" title="4"></a>
+<a class="sourceLine" id="cb473-5" title="5"><span class="co"># define training set</span></a>
+<a class="sourceLine" id="cb473-6" title="6">testing &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(osa.data))[<span class="op">-</span>training]</a></code></pre></div>
 <p>fit the defined networks with the train data itself</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" title="1">osa.nb.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.nb.net, osa.data[training,])</a>
-<a class="sourceLine" id="cb459-2" title="2">osa.tan.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.tan.net, osa.data[training,])</a></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1">osa.nb.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.nb.net, osa.data[training,])</a>
+<a class="sourceLine" id="cb474-2" title="2">osa.tan.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.tan.net, osa.data[training,])</a></code></pre></div>
 <p>predict outcome for test data</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" title="1">pred.nb &lt;-<span class="st"> </span><span class="kw">predict</span>(osa.nb.fit, osa.data[testing,])</a>
-<a class="sourceLine" id="cb460-2" title="2">pred.tan &lt;-<span class="st"> </span><span class="kw">predict</span>(osa.tan.fit, osa.data[testing,])</a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1">pred.nb &lt;-<span class="st"> </span><span class="kw">predict</span>(osa.nb.fit, osa.data[testing,])</a>
+<a class="sourceLine" id="cb475-2" title="2">pred.tan &lt;-<span class="st"> </span><span class="kw">predict</span>(osa.tan.fit, osa.data[testing,])</a></code></pre></div>
 <p>compute confusion matrix for each network</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" title="1"><span class="kw">table</span>(pred.nb, osa.data<span class="op">$</span>osa[testing])</a></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" title="1"><span class="kw">table</span>(pred.nb, osa.data<span class="op">$</span>osa[testing])</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -361,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" title="1"><span class="kw">table</span>(pred.tan, osa.data<span class="op">$</span>osa[testing])</a></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1"><span class="kw">table</span>(pred.tan, osa.data<span class="op">$</span>osa[testing])</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -386,17 +388,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</h3>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1"><span class="co"># learn the BNs from the data using hill-climbing</span></a>
-<a class="sourceLine" id="cb463-2" title="2">osa.hc.net &lt;-<span class="st"> </span><span class="kw">hc</span>(osa.data, <span class="dt">debug=</span>F) <span class="co"># hill-climbing</span></a>
-<a class="sourceLine" id="cb463-3" title="3">osa.tabu.net &lt;-<span class="st"> </span><span class="kw">tabu</span>(osa.data, <span class="dt">debug=</span>F) <span class="co"># Tabu greedy search</span></a>
-<a class="sourceLine" id="cb463-4" title="4"></a>
-<a class="sourceLine" id="cb463-5" title="5"><span class="co"># plot network</span></a>
-<a class="sourceLine" id="cb463-6" title="6"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb463-7" title="7"><span class="kw">plot</span>(osa.hc.net)</a>
-<a class="sourceLine" id="cb463-8" title="8"><span class="kw">plot</span>(osa.tabu.net)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-314-1.png" width="672" /></p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" title="1"><span class="co"># learn the BNs from the data using hill-climbing</span></a>
+<a class="sourceLine" id="cb478-2" title="2">osa.hc.net &lt;-<span class="st"> </span><span class="kw">hc</span>(osa.data, <span class="dt">debug=</span>F) <span class="co"># hill-climbing</span></a>
+<a class="sourceLine" id="cb478-3" title="3">osa.tabu.net &lt;-<span class="st"> </span><span class="kw">tabu</span>(osa.data, <span class="dt">debug=</span>F) <span class="co"># Tabu greedy search</span></a>
+<a class="sourceLine" id="cb478-4" title="4"></a>
+<a class="sourceLine" id="cb478-5" title="5"><span class="co"># plot network</span></a>
+<a class="sourceLine" id="cb478-6" title="6"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb478-7" title="7"><span class="kw">plot</span>(osa.hc.net)</a>
+<a class="sourceLine" id="cb478-8" title="8"><span class="kw">plot</span>(osa.tabu.net)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
 <p>describe the HC model</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="kw">print</span>(osa.hc.net)</a></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" title="1"><span class="kw">print</span>(osa.hc.net)</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network learned via Score-based methods
 ## 
@@ -416,7 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   tests used in the learning procedure:  63 
 ##   optimized:                             TRUE</code></pre>
 <p>describe the TABU model</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1"><span class="kw">print</span>(osa.tabu.net)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" title="1"><span class="kw">print</span>(osa.tabu.net)</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network learned via Score-based methods
 ## 
@@ -436,10 +438,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   tests used in the learning procedure:  177 
 ##   optimized:                             TRUE</code></pre>
 <p>after you have the grapfs, fit the networks with the data itself</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" title="1">osa.hc.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.hc.net, osa.data)</a>
-<a class="sourceLine" id="cb468-2" title="2">osa.tabu.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.tabu.net, osa.data)</a></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" title="1">osa.hc.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.hc.net, osa.data)</a>
+<a class="sourceLine" id="cb483-2" title="2">osa.tabu.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.tabu.net, osa.data)</a></code></pre></div>
 <p>print the conditional probability tables for HC</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" title="1"><span class="kw">print</span>(osa.hc.fit)</a></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1"><span class="kw">print</span>(osa.hc.fit)</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network parameters
 ## 
@@ -512,7 +514,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   No  0.31000000 0.59821429
 ##   Yes 0.69000000 0.40178571</code></pre>
 <p>print the conditional probability tables for TABU</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" title="1"><span class="kw">print</span>(osa.tabu.fit)</a></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" title="1"><span class="kw">print</span>(osa.tabu.fit)</a></code></pre></div>
 <pre><code>## 
 ##   Bayesian network parameters
 ## 
@@ -588,20 +590,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fit-existing-network-using-data" class="section level3">
 <h3><span class="header-section-number">4.6.3</span> Fit existing network using data</h3>
 <p>read network from file</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" title="1">osa.manual.fit &lt;-<span class="st"> </span><span class="kw">read.net</span>(<span class="st">&quot;2.UploadedData/osa_hc.net&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" title="1">osa.manual.fit &lt;-<span class="st"> </span><span class="kw">read.net</span>(<span class="st">&quot;2.UploadedData/osa_hc.net&quot;</span>)</a></code></pre></div>
 <p>transform the object (fit) into a unfitted network and plot it</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1"><span class="co"># transform the object (fit) into a unfitted network</span></a>
-<a class="sourceLine" id="cb474-2" title="2">osa.manual.net &lt;-<span class="st"> </span><span class="kw">bn.net</span>(osa.manual.fit)</a>
-<a class="sourceLine" id="cb474-3" title="3"></a>
-<a class="sourceLine" id="cb474-4" title="4"><span class="co"># plot network</span></a>
-<a class="sourceLine" id="cb474-5" title="5"><span class="kw">plot</span>(osa.manual.net)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-321-1.png" width="672" /></p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" title="1"><span class="co"># transform the object (fit) into a unfitted network</span></a>
+<a class="sourceLine" id="cb489-2" title="2">osa.manual.net &lt;-<span class="st"> </span><span class="kw">bn.net</span>(osa.manual.fit)</a>
+<a class="sourceLine" id="cb489-3" title="3"></a>
+<a class="sourceLine" id="cb489-4" title="4"><span class="co"># plot network</span></a>
+<a class="sourceLine" id="cb489-5" title="5"><span class="kw">plot</span>(osa.manual.net)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
 <p>fit the network with the data itself and save it as a .net file</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1"><span class="co"># fit the network with the data itself</span></a>
-<a class="sourceLine" id="cb475-2" title="2">osa.manual.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.manual.net, osa.data)</a>
-<a class="sourceLine" id="cb475-3" title="3"></a>
-<a class="sourceLine" id="cb475-4" title="4"><span class="co"># save the network in a file to open later in SamIam</span></a>
-<a class="sourceLine" id="cb475-5" title="5"><span class="kw">write.net</span>(osa.manual.fit, <span class="dt">file=</span><span class="st">&quot;osa.manual.fitted.net&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" title="1"><span class="co"># fit the network with the data itself</span></a>
+<a class="sourceLine" id="cb490-2" title="2">osa.manual.fit &lt;-<span class="st"> </span><span class="kw">bn.fit</span>(osa.manual.net, osa.data)</a>
+<a class="sourceLine" id="cb490-3" title="3"></a>
+<a class="sourceLine" id="cb490-4" title="4"><span class="co"># save the network in a file to open later in SamIam</span></a>
+<a class="sourceLine" id="cb490-5" title="5"><span class="kw">write.net</span>(osa.manual.fit, <span class="dt">file=</span><span class="st">&quot;osa.manual.fitted.net&quot;</span>)</a></code></pre></div>
 <p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
 
 </div>

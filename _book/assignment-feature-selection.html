@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-27" />
+<meta name="date" content="2020-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
-<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.1" data-path="linear-and-logistic-regressions.html"><a href="linear-and-logistic-regressions.html"><i class="fa fa-check"></i><b>3.1</b> Linear and Logistic Regressions</a></li>
 <li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
 <li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
@@ -208,6 +208,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.15" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.15</b> Survival Analysis</a><ul>
 <li class="chapter" data-level="3.15.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.15.1</b> exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="3.16" data-path="exam-a.html"><a href="exam-a.html"><i class="fa fa-check"></i><b>3.16</b> Exam A</a></li>
+<li class="chapter" data-level="3.17" data-path="exam-b.html"><a href="exam-b.html"><i class="fa fa-check"></i><b>3.17</b> Exam B</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
@@ -298,7 +300,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="boruta-package-in-r" class="section level3">
 <h3><span class="header-section-number">3.13.1</span> Boruta Package in R</h3>
 <p><strong>113 patients at the Los Angeles County Hospital Shock Unit (afifi.sav)</strong></p>
-<p>Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HGB1, HCT1)</p>
+<p>Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HCT1)</p>
 <p>Read data</p>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1"><span class="kw">library</span>(haven)</a>
 <a class="sourceLine" id="cb306-2" title="2">data2 &lt;-<span class="st"> </span><span class="kw">read_sav</span>(<span class="st">&quot;2.UploadedData/afifi.sav&quot;</span>)</a>
@@ -361,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>results from boruta</p>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="kw">library</span>(printr)</a>
 <a class="sourceLine" id="cb308-2" title="2"><span class="kw">print</span>(boruta)</a></code></pre></div>
-<pre><code>## Boruta performed 99 iterations in 14.96284 secs.
+<pre><code>## Boruta performed 99 iterations in 16.61794 secs.
 ##  5 attributes confirmed important: AGE, CARDIAC1, CIRCTIME1, HCT1,
 ## REDCELL1;
 ##  7 attributes confirmed unimportant: CVP1, HEART1, IDNUM, PLASVOL1,
@@ -666,7 +668,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1"><span class="kw">print</span>(form)</a></code></pre></div>
 <pre><code>## HGB2 ~ AGE + MAP1 + DBP1 + BSA1 + CARDIAC1 + APPTIME1 + CIRCTIME1 + 
 ##     REDCELL1 + HCT1
-## &lt;environment: 0x000000002b0f7270&gt;</code></pre>
+## &lt;environment: 0x000000001a296248&gt;</code></pre>
 <p>plot model assumptions</p>
 <div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb318-2" title="2"></a>

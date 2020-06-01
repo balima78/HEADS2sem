@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-27" />
+<meta name="date" content="2020-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
-<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.1" data-path="linear-and-logistic-regressions.html"><a href="linear-and-logistic-regressions.html"><i class="fa fa-check"></i><b>3.1</b> Linear and Logistic Regressions</a></li>
 <li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
 <li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
@@ -208,6 +208,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.15" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.15</b> Survival Analysis</a><ul>
 <li class="chapter" data-level="3.15.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.15.1</b> exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="3.16" data-path="exam-a.html"><a href="exam-a.html"><i class="fa fa-check"></i><b>3.16</b> Exam A</a></li>
+<li class="chapter" data-level="3.17" data-path="exam-b.html"><a href="exam-b.html"><i class="fa fa-check"></i><b>3.17</b> Exam B</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
@@ -298,14 +300,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>all code from the professor</p>
 <p>Download <a href="/https://data.oecd.org/healthrisk/overweight-or-obese-population.htm/">Overweight or obese population</a> from <strong>OECD Data</strong></p>
 <p>Loading data</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb578-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
-<a class="sourceLine" id="cb578-2" title="2">oecd.obse &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/oecd_obese.csv&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">header=</span> <span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb578-3" title="3"></a>
-<a class="sourceLine" id="cb578-4" title="4"><span class="kw">names</span>(oecd.obse)[<span class="dv">1</span>]&lt;-<span class="st">&quot;LOCATION&quot;</span> <span class="co"># change first column name</span></a></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
+<a class="sourceLine" id="cb593-2" title="2">oecd.obse &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/oecd_obese.csv&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">header=</span> <span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb593-3" title="3"></a>
+<a class="sourceLine" id="cb593-4" title="4"><span class="kw">names</span>(oecd.obse)[<span class="dv">1</span>]&lt;-<span class="st">&quot;LOCATION&quot;</span> <span class="co"># change first column name</span></a></code></pre></div>
 <p>See the data</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1"><span class="kw">library</span>(knitr)</a>
-<a class="sourceLine" id="cb579-2" title="2"><span class="kw">library</span>(kableExtra)</a>
-<a class="sourceLine" id="cb579-3" title="3"><span class="kw">head</span>(oecd.obse, <span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" title="1"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb594-2" title="2"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb594-3" title="3"><span class="kw">head</span>(oecd.obse, <span class="dv">15</span>)</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -720,7 +722,7 @@ A
 </tbody>
 </table>
 <p>Explore the dataset</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb580-1" title="1"><span class="kw">summary</span>(oecd.obse)</a></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb595-1" title="1"><span class="kw">summary</span>(oecd.obse)</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -954,42 +956,42 @@ NA
 <div id="ggplot2" class="section level3">
 <h3><span class="header-section-number">4.14.1</span> ggplot2</h3>
 <p>Real world data</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb581-2" title="2"><span class="kw">library</span>(ggforce)</a>
-<a class="sourceLine" id="cb581-3" title="3">s &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>oecd.obse)</a>
-<a class="sourceLine" id="cb581-4" title="4">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>Value )</a>
-<a class="sourceLine" id="cb581-5" title="5">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>LOCATION)</a>
-<a class="sourceLine" id="cb581-6" title="6"><span class="co">#s &lt;- s + geom_smooth(method=&quot;lm&quot;)</span></a>
-<a class="sourceLine" id="cb581-7" title="7">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb581-8" title="8">s</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-411-1.png" width="672" /></p>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb596-2" title="2"><span class="kw">library</span>(ggforce)</a>
+<a class="sourceLine" id="cb596-3" title="3">s &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>oecd.obse)</a>
+<a class="sourceLine" id="cb596-4" title="4">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>Value )</a>
+<a class="sourceLine" id="cb596-5" title="5">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>LOCATION)</a>
+<a class="sourceLine" id="cb596-6" title="6"><span class="co">#s &lt;- s + geom_smooth(method=&quot;lm&quot;)</span></a>
+<a class="sourceLine" id="cb596-7" title="7">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb596-8" title="8">s</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-424-1.png" width="672" /></p>
 <p>Clean it up, just keeping “measured” records</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb582-1" title="1">oecd.obse.measure &lt;-<span class="st"> </span><span class="kw">filter</span>(oecd.obse, SUBJECT <span class="op">==</span><span class="st"> &quot;MEASURED&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb597-1" title="1">oecd.obse.measure &lt;-<span class="st"> </span><span class="kw">filter</span>(oecd.obse, SUBJECT <span class="op">==</span><span class="st"> &quot;MEASURED&quot;</span>)</a></code></pre></div>
 <p>Plot value over time by Location</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1">s &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>oecd.obse.measure)</a>
-<a class="sourceLine" id="cb583-2" title="2">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>Value )</a>
-<a class="sourceLine" id="cb583-3" title="3">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>LOCATION)</a>
-<a class="sourceLine" id="cb583-4" title="4">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb583-5" title="5">s</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-413-1.png" width="672" /></p>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb598-1" title="1">s &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>oecd.obse.measure)</a>
+<a class="sourceLine" id="cb598-2" title="2">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>Value )</a>
+<a class="sourceLine" id="cb598-3" title="3">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>LOCATION)</a>
+<a class="sourceLine" id="cb598-4" title="4">s &lt;-<span class="st"> </span>s <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb598-5" title="5">s</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-426-1.png" width="672" /></p>
 <p>Zoom Mexico</p>
-<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb584-1" title="1"><span class="kw">library</span>(ggforce)</a>
-<a class="sourceLine" id="cb584-2" title="2">t &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>oecd.obse.measure)</a>
-<a class="sourceLine" id="cb584-3" title="3">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>Value )</a>
-<a class="sourceLine" id="cb584-4" title="4">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>LOCATION)</a>
-<a class="sourceLine" id="cb584-5" title="5">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb584-6" title="6">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">facet_zoom</span>(<span class="dt">xy =</span> LOCATION <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;MEX&quot;</span>))</a>
-<a class="sourceLine" id="cb584-7" title="7">t</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-414-1.png" width="672" /></p>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" title="1"><span class="kw">library</span>(ggforce)</a>
+<a class="sourceLine" id="cb599-2" title="2">t &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>oecd.obse.measure)</a>
+<a class="sourceLine" id="cb599-3" title="3">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>Value )</a>
+<a class="sourceLine" id="cb599-4" title="4">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>LOCATION)</a>
+<a class="sourceLine" id="cb599-5" title="5">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb599-6" title="6">t &lt;-<span class="st"> </span>t <span class="op">+</span><span class="st"> </span><span class="kw">facet_zoom</span>(<span class="dt">xy =</span> LOCATION <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;MEX&quot;</span>))</a>
+<a class="sourceLine" id="cb599-7" title="7">t</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-427-1.png" width="672" /></p>
 </div>
 <div id="vdmr" class="section level3">
 <h3><span class="header-section-number">4.14.2</span> vdmR</h3>
 <p>again filter data and see value</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" title="1"><span class="kw">library</span>(vdmR)</a>
-<a class="sourceLine" id="cb585-2" title="2"></a>
-<a class="sourceLine" id="cb585-3" title="3">measured.obse &lt;-<span class="st"> </span>oecd.obse[<span class="kw">which</span>(oecd.obse<span class="op">$</span>SUBJECT<span class="op">==</span><span class="st">&#39;MEASURED&#39;</span>), ]</a>
-<a class="sourceLine" id="cb585-4" title="4"></a>
-<a class="sourceLine" id="cb585-5" title="5"><span class="kw">quantile</span>(measured.obse<span class="op">$</span>Value)</a></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" title="1"><span class="kw">library</span>(vdmR)</a>
+<a class="sourceLine" id="cb600-2" title="2"></a>
+<a class="sourceLine" id="cb600-3" title="3">measured.obse &lt;-<span class="st"> </span>oecd.obse[<span class="kw">which</span>(oecd.obse<span class="op">$</span>SUBJECT<span class="op">==</span><span class="st">&#39;MEASURED&#39;</span>), ]</a>
+<a class="sourceLine" id="cb600-4" title="4"></a>
+<a class="sourceLine" id="cb600-5" title="5"><span class="kw">quantile</span>(measured.obse<span class="op">$</span>Value)</a></code></pre></div>
 <pre><code>##   0%  25%  50%  75% 100% 
 ## 18.6 29.4 53.3 61.2 71.3</code></pre>
 <p>now we can use <code>vdmR</code> library to see the data in a browser.</p>
@@ -999,27 +1001,27 @@ NA
 <p><code>vlaunch(measured.obse, "main", "measured.obse", browse=TRUE)</code></p>
 <p>Japan, Korea are below 1st quartiles, whereas USA, New Zealand, Austria, UK and Hungary are above 3rd quartile.</p>
 <p>Read new data annd merge it with initial data</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" title="1">pyll &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/PYLL.csv&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">header=</span> <span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb587-2" title="2"><span class="kw">names</span>(pyll)[<span class="dv">1</span>]&lt;-<span class="st">&quot;LOCATION&quot;</span></a>
-<a class="sourceLine" id="cb587-3" title="3">deaths_cancer &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/Deaths_Cancer.csv&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">header=</span> <span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb587-4" title="4"><span class="kw">names</span>(deaths_cancer)[<span class="dv">1</span>]&lt;-<span class="st">&quot;LOCATION&quot;</span></a>
-<a class="sourceLine" id="cb587-5" title="5"></a>
-<a class="sourceLine" id="cb587-6" title="6">merged &lt;-<span class="st"> </span><span class="kw">merge</span>(oecd.obse,pyll, <span class="dt">by.x=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>), <span class="dt">by.y=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" title="1">pyll &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/PYLL.csv&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">header=</span> <span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb602-2" title="2"><span class="kw">names</span>(pyll)[<span class="dv">1</span>]&lt;-<span class="st">&quot;LOCATION&quot;</span></a>
+<a class="sourceLine" id="cb602-3" title="3">deaths_cancer &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/Deaths_Cancer.csv&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">header=</span> <span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb602-4" title="4"><span class="kw">names</span>(deaths_cancer)[<span class="dv">1</span>]&lt;-<span class="st">&quot;LOCATION&quot;</span></a>
+<a class="sourceLine" id="cb602-5" title="5"></a>
+<a class="sourceLine" id="cb602-6" title="6">merged &lt;-<span class="st"> </span><span class="kw">merge</span>(oecd.obse,pyll, <span class="dt">by.x=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>), <span class="dt">by.y=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>))</a></code></pre></div>
 <p>dropping some columns and rename them</p>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span><span class="dv">12</span>)]</a>
-<a class="sourceLine" id="cb588-2" title="2">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="dv">9</span>]</a>
-<a class="sourceLine" id="cb588-3" title="3">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>)]</a>
-<a class="sourceLine" id="cb588-4" title="4"><span class="kw">colnames</span>(merged) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;LOCATION&quot;</span>, <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;OBESITY&quot;</span>, <span class="st">&quot;PYLL&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" title="1">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span><span class="dv">12</span>)]</a>
+<a class="sourceLine" id="cb603-2" title="2">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb603-3" title="3">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>)]</a>
+<a class="sourceLine" id="cb603-4" title="4"><span class="kw">colnames</span>(merged) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;LOCATION&quot;</span>, <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;OBESITY&quot;</span>, <span class="st">&quot;PYLL&quot;</span>)</a></code></pre></div>
 <p>create a scatter plot:</p>
 <p><code>vscat(OBESITY, PYLL, merged, "scat01", "measured.obse")</code></p>
 <p>and launch it with data</p>
 <p><code>vlaunch(merged, "main", "measured.obse", browse=TRUE)</code></p>
 <p>merge new data and dropp some columns and rename them:</p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" title="1">merged&lt;-<span class="st"> </span><span class="kw">merge</span>(merged,deaths_cancer, <span class="dt">by.x=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>), <span class="dt">by.y=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>))</a>
-<a class="sourceLine" id="cb589-2" title="2"></a>
-<a class="sourceLine" id="cb589-3" title="3">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)]</a>
-<a class="sourceLine" id="cb589-4" title="4">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="dv">6</span>]</a>
-<a class="sourceLine" id="cb589-5" title="5"><span class="kw">colnames</span>(merged) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;LOCATION&quot;</span>, <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;OBESITY&quot;</span>, <span class="st">&quot;PYLL&quot;</span>, <span class="st">&quot;DEATHS_CANCER&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb604-1" title="1">merged&lt;-<span class="st"> </span><span class="kw">merge</span>(merged,deaths_cancer, <span class="dt">by.x=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>), <span class="dt">by.y=</span><span class="kw">c</span>(<span class="st">&#39;LOCATION&#39;</span>,<span class="st">&#39;TIME&#39;</span>))</a>
+<a class="sourceLine" id="cb604-2" title="2"></a>
+<a class="sourceLine" id="cb604-3" title="3">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)]</a>
+<a class="sourceLine" id="cb604-4" title="4">merged &lt;-<span class="st"> </span>merged[,<span class="op">-</span><span class="dv">6</span>]</a>
+<a class="sourceLine" id="cb604-5" title="5"><span class="kw">colnames</span>(merged) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;LOCATION&quot;</span>, <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;OBESITY&quot;</span>, <span class="st">&quot;PYLL&quot;</span>, <span class="st">&quot;DEATHS_CANCER&quot;</span>)</a></code></pre></div>
 <p>create a new scatter plot:</p>
 <p><code>vscat(OBESITY, DEATHS_CANCER, merged, "scat02", "measured.obse")</code></p>
 <p>and launch it with data</p>

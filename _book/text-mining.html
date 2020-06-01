@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-05-27" />
+<meta name="date" content="2020-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
-<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.1" data-path="linear-and-logistic-regressions.html"><a href="linear-and-logistic-regressions.html"><i class="fa fa-check"></i><b>3.1</b> Linear and Logistic Regressions</a></li>
 <li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
 <li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
@@ -208,6 +208,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.15" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.15</b> Survival Analysis</a><ul>
 <li class="chapter" data-level="3.15.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.15.1</b> exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="3.16" data-path="exam-a.html"><a href="exam-a.html"><i class="fa fa-check"></i><b>3.16</b> Exam A</a></li>
+<li class="chapter" data-level="3.17" data-path="exam-b.html"><a href="exam-b.html"><i class="fa fa-check"></i><b>3.17</b> Exam B</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
 <li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
@@ -297,13 +299,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>2020-05-19</p>
 <p>all code from the professor</p>
 <p>Loading data</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tm&quot;</span>)</a>
-<a class="sourceLine" id="cb553-2" title="2"><span class="kw">library</span>(<span class="st">&quot;SnowballC&quot;</span>)</a>
-<a class="sourceLine" id="cb553-3" title="3"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)</a>
-<a class="sourceLine" id="cb553-4" title="4"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</a>
-<a class="sourceLine" id="cb553-5" title="5"></a>
-<a class="sourceLine" id="cb553-6" title="6">t1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;2.UploadedData/all_sources_metadata_2020-03-13.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb553-7" title="7"><span class="kw">glimpse</span>(t1) </a></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tm&quot;</span>)</a>
+<a class="sourceLine" id="cb568-2" title="2"><span class="kw">library</span>(<span class="st">&quot;SnowballC&quot;</span>)</a>
+<a class="sourceLine" id="cb568-3" title="3"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)</a>
+<a class="sourceLine" id="cb568-4" title="4"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</a>
+<a class="sourceLine" id="cb568-5" title="5"></a>
+<a class="sourceLine" id="cb568-6" title="6">t1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;2.UploadedData/all_sources_metadata_2020-03-13.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb568-7" title="7"><span class="kw">glimpse</span>(t1) </a></code></pre></div>
 <pre><code>## Rows: 29,500
 ## Columns: 14
 ## $ sha                           &lt;chr&gt; &quot;c630ebcdf30652f0422c3ec12a00b50241dc...
@@ -322,84 +324,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $ has_full_text                 &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, ...</code></pre>
 <div id="preprocessing" class="section level3">
 <h3><span class="header-section-number">4.13.1</span> Preprocessing</h3>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb555-1" title="1"><span class="co"># Remove lines with no abstract</span></a>
-<a class="sourceLine" id="cb555-2" title="2">t2&lt;-<span class="kw">subset</span>(t1, <span class="op">!</span><span class="kw">is.na</span>(t1<span class="op">$</span>abstract))</a></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" title="1"><span class="co"># Remove lines with no abstract</span></a>
+<a class="sourceLine" id="cb570-2" title="2">t2&lt;-<span class="kw">subset</span>(t1, <span class="op">!</span><span class="kw">is.na</span>(t1<span class="op">$</span>abstract))</a></code></pre></div>
 <p>Create the text corpus</p>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" title="1">corpus =<span class="st"> </span><span class="kw">Corpus</span>(<span class="kw">VectorSource</span>(t2<span class="op">$</span>abstract))</a>
-<a class="sourceLine" id="cb556-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb571-1" title="1">corpus =<span class="st"> </span><span class="kw">Corpus</span>(<span class="kw">VectorSource</span>(t2<span class="op">$</span>abstract))</a>
+<a class="sourceLine" id="cb571-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## $content
 ## [1] &quot;The geographic spread of 2019 novel coronavirus (COVID-19) infections from the epicenter of Wuhan, China, has provided an opportunity to study the natural history of the recently emerged virus. Using publicly available event-date data from the ongoing epidemic, the present study investigated the incubation period and other time intervals that govern the epidemiological dynamics of COVID-19 infections. Our results show that the incubation period falls within the range of 2&amp;ndash;14 days with 95% confidence and has a mean of around 5 days when approximated using the best-fit lognormal distribution. The mean time from illness onset to hospital admission (for treatment and/or isolation) was estimated at 3&amp;ndash;4 days without truncation and at 5&amp;ndash;9 days when right truncated. Based on the 95th percentile estimate of the incubation period, we recommend that the length of quarantine should be at least 14 days. The median time delay of 13 days from illness onset to death (17 days with right truncation) should be considered when estimating the COVID-19 case fatality risk.&quot;</code></pre>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" title="1">t2<span class="op">$</span>doi[<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" title="1">t2<span class="op">$</span>doi[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1] &quot;10.3390/jcm9020538&quot;</code></pre>
 <p>Conversion to lowercase</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, PlainTextDocument)</a>
-<a class="sourceLine" id="cb560-2" title="2">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, tolower)</a>
-<a class="sourceLine" id="cb560-3" title="3">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]  </a></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, PlainTextDocument)</a>
+<a class="sourceLine" id="cb575-2" title="2">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, tolower)</a>
+<a class="sourceLine" id="cb575-3" title="3">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]  </a></code></pre></div>
 <pre><code>## $content
 ## [1] &quot;the geographic spread of 2019 novel coronavirus (covid-19) infections from the epicenter of wuhan, china, has provided an opportunity to study the natural history of the recently emerged virus. using publicly available event-date data from the ongoing epidemic, the present study investigated the incubation period and other time intervals that govern the epidemiological dynamics of covid-19 infections. our results show that the incubation period falls within the range of 2&amp;ndash;14 days with 95% confidence and has a mean of around 5 days when approximated using the best-fit lognormal distribution. the mean time from illness onset to hospital admission (for treatment and/or isolation) was estimated at 3&amp;ndash;4 days without truncation and at 5&amp;ndash;9 days when right truncated. based on the 95th percentile estimate of the incubation period, we recommend that the length of quarantine should be at least 14 days. the median time delay of 13 days from illness onset to death (17 days with right truncation) should be considered when estimating the covid-19 case fatality risk.&quot;</code></pre>
 <p>Remove punctuation</p>
-<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb562-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, removePunctuation)</a>
-<a class="sourceLine" id="cb562-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb577-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, removePunctuation)</a>
+<a class="sourceLine" id="cb577-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## $content
 ## [1] &quot;the geographic spread of 2019 novel coronavirus covid19 infections from the epicenter of wuhan china has provided an opportunity to study the natural history of the recently emerged virus using publicly available eventdate data from the ongoing epidemic the present study investigated the incubation period and other time intervals that govern the epidemiological dynamics of covid19 infections our results show that the incubation period falls within the range of 2ndash14 days with 95 confidence and has a mean of around 5 days when approximated using the bestfit lognormal distribution the mean time from illness onset to hospital admission for treatment andor isolation was estimated at 3ndash4 days without truncation and at 5ndash9 days when right truncated based on the 95th percentile estimate of the incubation period we recommend that the length of quarantine should be at least 14 days the median time delay of 13 days from illness onset to death 17 days with right truncation should be considered when estimating the covid19 case fatality risk&quot;</code></pre>
 <p>Remove stopwords</p>
-<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, removeWords, <span class="kw">c</span>(<span class="st">&quot;cloth&quot;</span>, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)))</a>
-<a class="sourceLine" id="cb564-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, removeWords, <span class="kw">c</span>(<span class="st">&quot;cloth&quot;</span>, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)))</a>
+<a class="sourceLine" id="cb579-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## $content
 ## [1] &quot; geographic spread  2019 novel coronavirus covid19 infections   epicenter  wuhan china  provided  opportunity  study  natural history   recently emerged virus using publicly available eventdate data   ongoing epidemic  present study investigated  incubation period   time intervals  govern  epidemiological dynamics  covid19 infections  results show   incubation period falls within  range  2ndash14 days  95 confidence    mean  around 5 days  approximated using  bestfit lognormal distribution  mean time  illness onset  hospital admission  treatment andor isolation  estimated  3ndash4 days without truncation   5ndash9 days  right truncated based   95th percentile estimate   incubation period  recommend   length  quarantine    least 14 days  median time delay  13 days  illness onset  death 17 days  right truncation   considered  estimating  covid19 case fatality risk&quot;</code></pre>
 <p>Stemming</p>
-<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb566-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, stemDocument)</a>
-<a class="sourceLine" id="cb566-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>] </a></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1">corpus =<span class="st"> </span><span class="kw">tm_map</span>(corpus, stemDocument)</a>
+<a class="sourceLine" id="cb581-2" title="2">corpus[[<span class="dv">1</span>]][<span class="dv">1</span>] </a></code></pre></div>
 <pre><code>## $content
 ## [1] &quot;geograph spread 2019 novel coronavirus covid19 infect epicent wuhan china provid opportun studi natur histori recent emerg virus use public avail eventd data ongo epidem present studi investig incub period time interv govern epidemiolog dynam covid19 infect result show incub period fall within rang 2ndash14 day 95 confid mean around 5 day approxim use bestfit lognorm distribut mean time ill onset hospit admiss treatment andor isol estim 3ndash4 day without truncat 5ndash9 day right truncat base 95th percentil estim incub period recommend length quarantin least 14 day median time delay 13 day ill onset death 17 day right truncat consid estim covid19 case fatal risk&quot;</code></pre>
 <p>Create document term matrix</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" title="1">frequencies =<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpus)</a>
-<a class="sourceLine" id="cb568-2" title="2"></a>
-<a class="sourceLine" id="cb568-3" title="3"><span class="co">#Remove sparcity</span></a>
-<a class="sourceLine" id="cb568-4" title="4">sparse =<span class="st"> </span><span class="kw">removeSparseTerms</span>(frequencies, <span class="fl">0.995</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1">frequencies =<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpus)</a>
+<a class="sourceLine" id="cb583-2" title="2"></a>
+<a class="sourceLine" id="cb583-3" title="3"><span class="co">#Remove sparcity</span></a>
+<a class="sourceLine" id="cb583-4" title="4">sparse =<span class="st"> </span><span class="kw">removeSparseTerms</span>(frequencies, <span class="fl">0.995</span>)</a></code></pre></div>
 </div>
 <div id="representation" class="section level3">
 <h3><span class="header-section-number">4.13.2</span> Representation</h3>
 <p>Find correlation between terms</p>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" title="1"><span class="kw">findAssocs</span>(sparse,<span class="st">&quot;quarantin&quot;</span>,<span class="fl">0.1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb584-1" title="1"><span class="kw">findAssocs</span>(sparse,<span class="st">&quot;quarantin&quot;</span>,<span class="fl">0.1</span>)</a></code></pre></div>
 <pre><code>## $quarantin
 ##    measur complianc 
 ##      0.13      0.11</code></pre>
 <p>Find correlation between terms</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb571-1" title="1"><span class="kw">findAssocs</span>(sparse,<span class="st">&quot;treatment&quot;</span>,<span class="fl">0.2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb586-1" title="1"><span class="kw">findAssocs</span>(sparse,<span class="st">&quot;treatment&quot;</span>,<span class="fl">0.2</span>)</a></code></pre></div>
 <pre><code>## $treatment
 ##   treat  effect  clinic patient   young   trial  asthma     min  korean 
 ##    0.27    0.26    0.24    0.23    0.23    0.22    0.22    0.22    0.20</code></pre>
 <p>Convert the matrix into a data frame, a format widely used in ‘R’ for predictive modeling. Outcome will be the class</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" title="1">tSparse =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(sparse))</a>
-<a class="sourceLine" id="cb573-2" title="2"><span class="kw">colnames</span>(tSparse) =<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(tSparse))</a>
-<a class="sourceLine" id="cb573-3" title="3">tSparse<span class="op">$</span>recommended_id =<span class="st"> </span>t2<span class="op">$</span>source_x  </a></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1">tSparse =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(sparse))</a>
+<a class="sourceLine" id="cb588-2" title="2"><span class="kw">colnames</span>(tSparse) =<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(tSparse))</a>
+<a class="sourceLine" id="cb588-3" title="3">tSparse<span class="op">$</span>recommended_id =<span class="st"> </span>t2<span class="op">$</span>source_x  </a></code></pre></div>
 <p>Histogram</p>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb574-1" title="1">wf=<span class="kw">data.frame</span>(<span class="dt">term=</span><span class="kw">colnames</span>(tSparse[,<span class="op">-</span><span class="dv">2250</span>]),<span class="dt">occurrences=</span><span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse)))</a>
-<a class="sourceLine" id="cb574-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb574-3" title="3">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">subset</span>(wf, <span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse))<span class="op">&gt;</span><span class="dv">10000</span>), <span class="kw">aes</span>(term, occurrences))</a>
-<a class="sourceLine" id="cb574-4" title="4">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</a>
-<a class="sourceLine" id="cb574-5" title="5">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb574-6" title="6">p</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-403-1.png" width="672" /></p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" title="1">wf=<span class="kw">data.frame</span>(<span class="dt">term=</span><span class="kw">colnames</span>(tSparse[,<span class="op">-</span><span class="dv">2250</span>]),<span class="dt">occurrences=</span><span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse)))</a>
+<a class="sourceLine" id="cb589-2" title="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb589-3" title="3">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">subset</span>(wf, <span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse))<span class="op">&gt;</span><span class="dv">10000</span>), <span class="kw">aes</span>(term, occurrences))</a>
+<a class="sourceLine" id="cb589-4" title="4">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</a>
+<a class="sourceLine" id="cb589-5" title="5">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb589-6" title="6">p</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-416-1.png" width="672" /></p>
 </div>
 <div id="discovery" class="section level3">
 <h3><span class="header-section-number">4.13.3</span> Discovery</h3>
 <p>wordcloud</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" title="1"><span class="kw">library</span>(wordcloud)</a>
-<a class="sourceLine" id="cb575-2" title="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb575-3" title="3"><span class="co">#limit words by specifying min frequency</span></a>
-<a class="sourceLine" id="cb575-4" title="4"><span class="kw">wordcloud</span>(<span class="kw">colnames</span>(tSparse[,<span class="op">-</span><span class="dv">2250</span>]),<span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse)), <span class="dt">min.freq=</span><span class="dv">7000</span>)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-404-1.png" width="672" /></p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" title="1"><span class="kw">library</span>(wordcloud)</a>
+<a class="sourceLine" id="cb590-2" title="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb590-3" title="3"><span class="co">#limit words by specifying min frequency</span></a>
+<a class="sourceLine" id="cb590-4" title="4"><span class="kw">wordcloud</span>(<span class="kw">colnames</span>(tSparse[,<span class="op">-</span><span class="dv">2250</span>]),<span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse)), <span class="dt">min.freq=</span><span class="dv">7000</span>)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-417-1.png" width="672" /></p>
 <p>wordcloud with colors</p>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb576-1" title="1"><span class="kw">library</span>(RColorBrewer)</a>
-<a class="sourceLine" id="cb576-2" title="2"><span class="kw">wordcloud</span>(<span class="kw">colnames</span>(tSparse[,<span class="op">-</span><span class="dv">2250</span>]),<span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse)), <span class="dt">min.freq=</span><span class="dv">7000</span>, <span class="dt">colors=</span><span class="kw">brewer.pal</span>(<span class="dv">6</span>,<span class="st">&quot;Dark2&quot;</span>))</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-405-1.png" width="672" /></p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" title="1"><span class="kw">library</span>(RColorBrewer)</a>
+<a class="sourceLine" id="cb591-2" title="2"><span class="kw">wordcloud</span>(<span class="kw">colnames</span>(tSparse[,<span class="op">-</span><span class="dv">2250</span>]),<span class="kw">colSums</span>(<span class="kw">Filter</span>(is.numeric, tSparse)), <span class="dt">min.freq=</span><span class="dv">7000</span>, <span class="dt">colors=</span><span class="kw">brewer.pal</span>(<span class="dv">6</span>,<span class="st">&quot;Dark2&quot;</span>))</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-418-1.png" width="672" /></p>
 </div>
 <div id="output-knowledge" class="section level3">
 <h3><span class="header-section-number">4.13.4</span> Output knowledge</h3>
 <p>Check the baseline accuracy (proportion of majority class)</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb577-1" title="1"><span class="kw">prop.table</span>(<span class="kw">table</span>(tSparse<span class="op">$</span>recommended_id)) </a></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb592-1" title="1"><span class="kw">prop.table</span>(<span class="kw">table</span>(tSparse<span class="op">$</span>recommended_id)) </a></code></pre></div>
 <table>
 <thead>
 <tr class="header">

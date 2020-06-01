@@ -1,0 +1,57 @@
+## Exam B
+
+2020-06-01
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+
+_Considere a base de dados “headache.sav” que contém informações sobre 80 pacientes com cefaleias frequentes, alguns dos doentes fizeram acupuntura. Gostaríamos de saber se a acupuntura reduz o número de cefaleias dos doentes quando ajustado para a idade._
+
+_- headache: número de cefaleias num mês_
+_- acupuntura: grupo (0=no, 1=yes)_
+_- age: idade em anos_
+
+Vou começar por ler os dados e fazer um resumo das variáveis:
+```{r}
+library(foreign)
+
+heada<-read.spss(file="2.UploadedData/headache.sav", use.missing=TRUE)
+
+heada<-data.frame(heada)
+
+summary(heada)
+```
+Fazendo um histograma para a variavel 'headache'
+```{r}
+hist(heada$headache)
+```
+
+Como neste problema a variável dependente é uma contagem e a sua distribuição é _skewed_ para a direita, podemos aplicar uma regressão de poisson.
+```{r}
+poisson <- glm(headache ~ acupuncture + age, 
+               data = heada, family = "poisson")
+
+summary(poisson)
+```
+
+Obtemos uma valor estatisticamente significativo para o coeficiente de 'acupuncture' mas não para 'age'
+
+Calculando os RR (e respectivos intervalos de confiança)
+```{r}
+exp(cbind(RR = coef(poisson), confint(poisson)))
+```
+Dos resultados de RR, podemos concluir que 1.8 é a taxa estimada de dores de cabeça para quem faz acupuntura relativamente à taxa estimada de dores de cabeça para quem não faz acupuntura, ajustando para a idade.Ou seja, quem faz acupuntura tem um risco aumentado de ter mais dores de cabeça quando comparado com com não faz acupuntura.  
+
+Podemos verificar também dispersão do modelo
+```{r}
+library(AER)
+dispersiontest(poisson)
+```
+
+neste caso (p=0.28), não podemos afirmar que a dispersão seja estatisticamente diferente de 1. 
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+

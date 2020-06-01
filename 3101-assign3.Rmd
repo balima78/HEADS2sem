@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 
 **113 patients at the Los Angeles County Hospital Shock Unit (afifi.sav)**
 
-Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HGB1, HCT1)
+Build a model to predict the Hemoglobin at time 2 (HGB2) using the patients characteristics (AGE and SEX) and measurements taken at admission (SBP1, MAP1, HEART1, DBP1, CVP1, BSA1, CARDIAC1, APPTIME1, CIRCTIME1, URINE1, PLASVOL, REDCELL1, HCT1)
 
 Read data
 ```{r}

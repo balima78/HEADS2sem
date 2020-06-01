@@ -1,0 +1,78 @@
+## Exam A
+
+2020-06-01
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+_Considere a base de dados “Estudo.sav” que contém informações sobre 113 pacientes._
+
+_As informações baseiam-se em 3 variáveis:_
+
+_- State: estado relativo à cura (0: não curado; 1: curado)_
+_- Group: grupo de tratamento (0: sem tratamento; 1: com tratamento)_
+_- Duration: nº de dias de internamento_
+
+_Apresente um modelo para prever as chances de ser curado tendo como variáveis explicativas se fez ou não o tratamento estudado e a duração do internamento._
+
+_Interprete os coeficientes e avalie o modelo encontrado._ 
+
+Vou começar por ler os dados e ver um sumário das varáveis
+```{r}
+library(foreign)
+library(tidyverse)
+estudo<-read.spss(file="2.UploadedData/Estudo.sav", use.missing=TRUE)
+
+estudo<-data.frame(estudo)
+
+# criar variavel State 0/1, apenas para ter a certeza que estou a modelar o que pretendo
+estudo<-estudo %>% mutate(State01 = ifelse(State == "Curado/Cured",1,0))
+
+summary(estudo)
+
+```
+
+Agora vou definir um modelo de regressão logística para prever a variável dependente 'State' através das variáveis independentes 'Group' e 'Duration'
+```{r}
+
+logistic <- glm(State01 ~ Group + Duration, data = estudo, family = "binomial")
+
+summary(logistic)
+```
+
+Verificamos que a variável Group é estatisticamente significativa (para um nível de con fiança de 5%) mas a variável Duration não.
+
+Calculando os valores de OR (e respectivos intervalos de confiança) para as variáveis no modelo:
+```{r}
+exp(cbind(OR = coef(logistic), confint(logistic)))
+```
+
+pondo-os num _forest plot_
+```{r}
+library(forestmodel)
+
+forest_model(logistic, format_options = list(text_size = 3))
+```
+
+Ou seja, o grupo com tratamento tem um risco para a cura 3.4 vezes maior quando comparado com o grupo sem tratamento e ajustando para a duração do internamento.
+
+Para sabermos da qualidade do modelo para explicar os dados, aplicamos o teste de Hosmer-Lemeshow
+```{r}
+library(ResourceSelection)
+hoslem.test(estudo$State, fitted(logistic))
+```
+Como o valor de p é menor que 0.05, rejeitamos a hipótese de goodness of fit deste modelo. Ou seja o modelo não é um bom _fit_ para os dados
+
+Com as probabilidades obtidas do modelo podemos também calcular a qualidade do modelo para descriminar entre a cura e a não cura, com uma curva ROC e respectivo valor de AUC
+```{r}
+library(pROC)
+plot.roc(estudo$State, fitted(logistic), print.auc=T, ci=TRUE, thresholds="best", print.thres="best")
+```
+
+O valor da AUC (0.66) corrobora que este modelo não é muito bom a descriminar entre a cura e a não cura.
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
+
+
