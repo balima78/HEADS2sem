@@ -8,7 +8,7 @@
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 ```
 
-1. We want to know if the number of awards earned by students at one high school is associated to the type of program in which the student was enrolled (prog: 1=vocational, 2=general, 3=academic) and the score on their final exam in math (math).
+#### We want to know if the number of awards earned by students at one high school is associated to the type of program in which the student was enrolled (prog: 1=vocational, 2=general, 3=academic) and the score on their final exam in math (math).
 
 Read the data
 ```{r}
@@ -63,7 +63,7 @@ library(AER)
 dispersiontest(poisson)
 ```
 
-2. A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school.
+#### A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school.
 ```{r}
 school <- read_csv("2.UploadedData/school.csv")
 
@@ -122,7 +122,7 @@ as the p-value is higher than 0.05 we do not reject H0: good fit of the model to
 ROC - AUC
 ```{r}
 library(pROC)
-plot.roc(school$admit, fitted(logistic))
+plot.roc(school$admit, fitted(logistic), print.auc=T, ci=TRUE)
 ```
 
 determine best cutoff
