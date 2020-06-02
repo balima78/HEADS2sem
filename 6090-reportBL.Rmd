@@ -1,0 +1,258 @@
+## Dealing with imbalanced data: a practical approach
+
+2020-06-02
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+### Introduction
+
+We define a dataset as imbalanced when the classification's categories are not approximately equally represented. In real-world data ‘normal’ examples are the most frequent, while ‘abnormal’ or interesting’ examples are quite rare, that is why the problem of  imbalanced data is so common [@Chawla2002]. 
+
+In real life there are several examples of imbalanced data:
+
+-	A manufacturing assembly line where the number of defective products are significantly lower than those without defects
+-	A test to detect patients with cancer in a given residential area
+-	Credit card fraud detection 
+
+Again, in classification problems where one class outnumbers the other we face a problem of imbalanced data. Usually, majority class is referred as negative class, while the minority is the positive class. For learning algorithms based on imbalanced data, positive class instances are submerged in the negative class [@Gao2014].
+
+Imbalances can be classified as intrinsic – when is a direct result of the nature of the dataspace – or extrinsic – when imbalance depends on upon variable factors as time and storage. As an example of this last type of imbalance, we can think on a continuous stream of intrinsically balanced data that at a specific time period (due to same  kind of error) the acquired data can be imbalanced, and in this case the data set would be and intrinsic imbalanced data [@He2009].
+
+It is not appropriate to evaluate learning algorithms performance using its predictive accuracy when we are dealing with imbalanced data. In domains where we are interested is the positive class rather than the negative one, we need a higher prediction capability for the former, although traditional data mining algorithms do not behave properly in the instance of imbalanced data [@Chawla2002]. So, the main problems with imbalanced data arise when we want to learn from it. Imbalanced data compromise significantly the performance of most standard learning algorithms, this algorithms are not able to represent properly the distributive characteristics of the data and consequently fail to deliver acceptable accuracies across the classes of the data [@He2009].
+
+There are two major approaches to deal with imbalanced data: resampling methods (external methods) and imbalanced learning algorithms (internal methods) [@Gao2014]. The former uses resampling methods on the original imbalanced data in order to obtain a balanced input to train traditional learning algorithms. While the latter use modified learning algorithms so that are able to use original data without rebalance it [@Gao2014].
+
+
+```{r lib, echo=F, warning=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+### Methods
+
+In this study, I aim to identify and describe R packages available for dealing with imbalanced data. Also, for the exemplification on how to deal with imbalanced data, I use the Cervical cancer Data Set (CCDS) from UCI repository [@Dua:2019]. 
+A preliminary exploratory analysis is done in order to identify variables with excess of missing data, with the _amelia_ package [@amelia]. After excluding those variables with excessive number of missings, data is balanced for the outcome **Dx** with diferent methods and resulting balanced data is trained with a regression tree algorithm.   
+With the `caret` package I do the downsamplig (randomly subset the negative class to match the size of the positive class) and the upsampling (sampling with replacement from the positive class until match the size of the negative class). while, with SMOTE (`DMwR` package) and ROSE (`rose` package) methods, negative classs is down-sampled and the positive class is up-sampled. 
+
+All analysis is performed in RStudio with R programming lenguage [@r]
+
+
+### Results
+A total of 11 packages were identified and 10 of them are on CRAN. The package `IRIC` is corrently only available on _github_. These packages represent a  variaty of solutions to deal with imbalanced data. The packages `caret`, `mlr` and `DMwR` are packages for machine learning and data mining that include functions for balance imbalanced data.
+
+
+```{r packs, echo=FALSE}
+library(printr)
+
+packs<-read.csv2("2.UploadedData/packs.csv")
+
+packs # %>% select(-description)
+```
+
+To evaluate the use of different methods for balance the date, I use the CCDS data.  
+
+Let's load an look to the CCDS data:
+```{r cancer}
+library(tidyverse)
+
+## read the data
+dataset<-read.csv("2.UploadedData/risk_factors_cervical_cancer.csv",na.strings = c("NA","?",""))
+
+# exclude redundante variable
+dataset<-dataset %>% select(-STDs, -Dx.Cancer, -Dx.CIN, -Dx.HPV)
+
+# identified categorical variables
+categorical<-c("Smokes", "Hormonal.Contraceptives", "IUD", 
+               "STDs.condylomatosis","STDs.cervical.condylomatosis", 
+               "STDs.vulvo.perineal.condylomatosis", "STDs.syphilis",
+               "STDs.pelvic.inflammatory.disease",
+               "STDs.genital.herpes","STDs.molluscum.contagiosum",
+               "STDs.AIDS", "STDs.HIV", "STDs.Hepatitis.B", "STDs.HPV",
+               "Hinselmann", "Schiller", "Dx",  
+               "Citology", "Biopsy")  
+
+# factorize it
+dataset<-dataset %>% mutate_at(categorical, ~factor(.,levels = 0:1, labels = c("no","yes")))
+
+```
+
+```{r amelia}
+library(Amelia)
+# missings on original data
+missmap(dataset)
+```
+
+`Amelia` package allow us to see how missing data are distributed on our dataset. Alternatively we can just count missings by variable.
+```{r missings}
+apply(dataset, MARGIN = 2, function(x) sum(is.na(x)))
+```
+
+Do to the excessive among of missings, I excluded from the analysis, the variables ` STDs..Time.since.first.diagnosis` and `STDs..Time.since.last.diagnosis`. Although it would be advised to do an imputation of values where we have missing data, I did'nt do it. 
+
+```{r}
+dataset<-dataset %>% select(-STDs..Time.since.first.diagnosis, -STDs..Time.since.last.diagnosis)
+
+prop.table(table(dataset$Dx))
+```
+
+We will use this dataset to train a regression tree algorithm in order to predict the outcome **Dx**. But,
+we have a clear problem of imbalanced data if we want to predict **Dx** from which 97.2% are 'no' and only 2.8% are 'yes'.
+```{r}
+ggplot(dataset, aes(x=Dx)) + geom_bar() + theme_bw()
+```
+
+Now, I use four different methods to balance the data.
+
+Let's start balancing the data by downsampling (with the `caret` package):
+```{r down}
+library(caret)
+set.seed(1)
+down_train <- downSample(x = dataset[, !colnames(dataset) %in% "Dx"],
+                         y = dataset$Dx)
+
+# we have to remane the Class variable
+names(down_train)[30]<-"Dx"
+
+table(down_train$Dx)
+```
+
+Now the upsampling:
+```{r up}
+set.seed(1)
+up_train <- upSample(x = dataset[, !colnames(dataset) %in% "Dx"],
+                         y = dataset$Dx)
+
+# we have to remane the Class variable
+names(up_train)[30]<-"Dx"
+table(up_train$Dx)
+```
+
+Is time for SMOTE:
+```{r smote}
+library(DMwR)
+set.seed(1)
+smote_train <- SMOTE(Dx ~ ., data  = dataset,
+                     perc.over = 400,perc.under=200)                         
+table(smote_train$Dx) 
+```
+
+and now ROSE:
+```{r rose}
+library(ROSE)
+set.seed(1)
+rose_train <- ROSE(Dx ~ ., data  = dataset)$data                         
+table(rose_train$Dx) 
+```
+
+With the new 4 datasets we can fit the regresssion trees
+```{r train}
+metric <- "ROC"
+control <- trainControl(method = "repeatedcv",
+                        number = 10,
+                        repeats = 5,
+                        summaryFunction=twoClassSummary, 
+                        classProbs=TRUE,
+                        savePredictions = TRUE)
+
+set.seed(2)
+fit.rpart.down <- train(Dx ~ ., data=down_train, 
+                       method="rpart", metric=metric, trControl=control,
+                       na.action=na.exclude)
+
+set.seed(2)
+fit.rpart.up <- train(Dx ~ ., data=up_train, 
+                       method="rpart", metric=metric, trControl=control,
+                      na.action=na.exclude)
+
+set.seed(2)
+fit.rpart.smote <- train(Dx ~ ., data=smote_train, 
+                       method="rpart", metric=metric, trControl=control,
+                      na.action=na.exclude)
+
+set.seed(2)
+fit.rpart.rose <- train(Dx ~ ., data=rose_train, 
+                       method="rpart", metric=metric, trControl=control,
+                      na.action=na.exclude)
+
+```
+
+And now we can compare the results.
+```{r results}
+fit.models <- list(down.rpart=fit.rpart.down, 
+                   up.rpart=fit.rpart.up, 
+                   smote.rpart= fit.rpart.smote, 
+                   rose.rpart= fit.rpart.rose)
+
+
+results <- resamples(fit.models)
+```
+
+Let's look at the ROC curves
+```{r rocs}
+library(pROC)
+par(mfrow=c(2,2))
+# rocs <- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, 
+#                                                   #main=fit, 
+#                                                   debug=F, print.auc=T)})
+for (i in 1:4){
+  plot.roc(fit.models[[i]]$pred$obs,fit.models[[i]]$pred$yes,
+           main= names(fit.models)[i],
+           debug=F, print.auc=T)}
+
+```
+
+we can also see it in one plot:
+```{r ggroc}
+# combine the results
+ggroc<-rbind(data.frame(method = "Down", 
+                       sens=roc(fit.rpart.down$pred$obs,fit.rpart.down$pred$yes)$sensitivities,
+                       spec=roc(fit.rpart.down$pred$obs,fit.rpart.down$pred$yes)$specificities),
+             data.frame(method = "Up", 
+                       sens=roc(fit.rpart.up$pred$obs,fit.rpart.up$pred$yes)$sensitivities,
+                       spec=roc(fit.rpart.up$pred$obs,fit.rpart.up$pred$yes)$specificities),
+             data.frame(method = "SMOTE", 
+                       sens=roc(fit.rpart.smote$pred$obs,fit.rpart.smote$pred$yes)$sensitivities,
+                       spec=roc(fit.rpart.smote$pred$obs,fit.rpart.smote$pred$yes)$specificities),
+             data.frame(method = "ROSE", 
+                       sens=roc(fit.rpart.rose$pred$obs,fit.rpart.rose$pred$yes)$sensitivities,
+                       spec=roc(fit.rpart.rose$pred$obs,fit.rpart.rose$pred$yes)$specificities)
+)
+             
+custom_col <- c("#009E73", "#0072B2", "#D55E00", "#CC79A7")
+
+ggplot(ggroc, aes(x= 1-spec, y= sens, group = method)) +
+  geom_line(aes(color = method), size = 1) +
+  scale_color_manual(values = custom_col) +
+  geom_abline(intercept = 0, slope = 1, color = "gray", size = 1) +
+    theme_bw()
+
+```
+
+And compare accuracies
+```{r}
+dotplot(results)
+```
+
+In this exercise we obtained the best results with ROSE dataset. Although we can have a problem of overfitting.
+
+
+### Conclusion
+Here, I presented some simple examples on how to deal with imbalanced data, with some pratical examples. There are more sophisticated methods available from the **R** packages presented on the table, but they require a more sophisticated data pre-processing.
+
+In a real world work, before balance the data we must do a data partition between train and test datasets. Methods to balance the data must be done on training dataset and the trained model is applied on the imbalanced test set.
+
+**Real world framework**
+
+- do exploratory data analysis
+- look for missing data
+- exclude variables with more than 80% missings
+- try to input data to other remaining missings
+- do data partition between training data set and testing data set
+- balance your training dataset
+- train your algorithms with the training dataset
+- test them in your testing dataset
+- **DO NOT** balance your testing dataset
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

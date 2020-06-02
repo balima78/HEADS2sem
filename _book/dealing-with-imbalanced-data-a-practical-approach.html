@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.2 Dealing with imbalanced data: a practical approach | HEADS 2nd semester</title>
+  <meta name="description" content="HEADS’s homeworks compilation." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.2 Dealing with imbalanced data: a practical approach | HEADS 2nd semester" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="HEADS’s homeworks compilation." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.2 Dealing with imbalanced data: a practical approach | HEADS 2nd semester" />
+  
+  <meta name="twitter:description" content="HEADS’s homeworks compilation." />
+  
+
+<meta name="author" content="Bruno A Lima" />
+
+
+<meta name="date" content="2020-06-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="seminar1.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">HEADS 2nd semester 2019/2020</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="compstat.html"><a href="compstat.html"><i class="fa fa-check"></i><b>2</b> COMPSTAT</a><ul>
+<li class="chapter" data-level="2.1" data-path="eda.html"><a href="eda.html"><i class="fa fa-check"></i><b>2.1</b> EDA</a></li>
+<li class="chapter" data-level="2.2" data-path="streams.html"><a href="streams.html"><i class="fa fa-check"></i><b>2.2</b> Streams</a></li>
+<li class="chapter" data-level="2.3" data-path="assignment-histogram.html"><a href="assignment-histogram.html"><i class="fa fa-check"></i><b>2.3</b> assignment Histogram</a></li>
+<li class="chapter" data-level="2.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html"><i class="fa fa-check"></i><b>2.4</b> assignment Matrix</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix"><i class="fa fa-check"></i><b>2.4.1</b> keep sample matrix</a></li>
+<li class="chapter" data-level="2.4.2" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-sliding-window"><i class="fa fa-check"></i><b>2.4.2</b> keep sample matrix over a sliding window</a></li>
+<li class="chapter" data-level="2.4.3" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-weighted-sliding-window"><i class="fa fa-check"></i><b>2.4.3</b> keep sample matrix over a alpha weighted sliding window</a></li>
+<li class="chapter" data-level="2.4.4" data-path="assignment-matrix.html"><a href="assignment-matrix.html#keep-sample-matrix-over-a-alpha-fading-window"><i class="fa fa-check"></i><b>2.4.4</b> keep sample matrix over a alpha fading window</a></li>
+<li class="chapter" data-level="2.4.5" data-path="assignment-matrix.html"><a href="assignment-matrix.html#bonus"><i class="fa fa-check"></i><b>2.4.5</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="density-estimation.html"><a href="density-estimation.html"><i class="fa fa-check"></i><b>2.5</b> Density Estimation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="density-estimation.html"><a href="density-estimation.html#kernel-density-estimation"><i class="fa fa-check"></i><b>2.5.1</b> Kernel density estimation</a></li>
+<li class="chapter" data-level="2.5.2" data-path="density-estimation.html"><a href="density-estimation.html#conditional-density"><i class="fa fa-check"></i><b>2.5.2</b> Conditional density</a></li>
+<li class="chapter" data-level="2.5.3" data-path="density-estimation.html"><a href="density-estimation.html#expectation-maximization-for-the-two-latent-variables"><i class="fa fa-check"></i><b>2.5.3</b> Expectation Maximization for the two latent variables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="density-estimation.html"><a href="density-estimation.html#data-generation"><i class="fa fa-check"></i><b>2.5.4</b> Data Generation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="assignment-glucose.html"><a href="assignment-glucose.html"><i class="fa fa-check"></i><b>2.6</b> assignment Glucose</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="assignment-glucose.html"><a href="assignment-glucose.html#defining-a-function-for-expectation-maximization-algorithm"><i class="fa fa-check"></i><b>2.6.1</b> Defining a function for Expectation-Maximization algorithm</a></li>
+<li class="chapter" data-level="2.6.2" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves"><i class="fa fa-check"></i><b>2.6.2</b> 2 clusters density curves</a></li>
+<li class="chapter" data-level="2.6.3" data-path="assignment-glucose.html"><a href="assignment-glucose.html#clusters-density-curves-1"><i class="fa fa-check"></i><b>2.6.3</b> 3 clusters density curves</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html"><i class="fa fa-check"></i><b>2.7</b> assignment Second Lead from ECG</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#defining-a-function-for-expectation-maximization-em-algorithm"><i class="fa fa-check"></i><b>2.7.1</b> Defining a function for expectation-maximization (EM) algorithm</a></li>
+<li class="chapter" data-level="2.7.2" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#reading-the-data-and-ploting-the-leads-distribution"><i class="fa fa-check"></i><b>2.7.2</b> reading the data and ploting the leads distribution</a></li>
+<li class="chapter" data-level="2.7.3" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-2-latent-classes"><i class="fa fa-check"></i><b>2.7.3</b> EM algorithm for 2 latent classes</a></li>
+<li class="chapter" data-level="2.7.4" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#em-algorithm-for-3-latent-classes"><i class="fa fa-check"></i><b>2.7.4</b> EM algorithm for 3 latent classes</a></li>
+<li class="chapter" data-level="2.7.5" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#generating-1000-data-points-at-random-with-bootstrapped-with-guassian-distribution-and-em-with-3-clusters."><i class="fa fa-check"></i><b>2.7.5</b> Generating 1000 data points at random with bootstrapped, with guassian distribution and EM with 3 clusters.</a></li>
+<li class="chapter" data-level="2.7.6" data-path="assignment-second-lead-from-ecg.html"><a href="assignment-second-lead-from-ecg.html#bonus-1"><i class="fa fa-check"></i><b>2.7.6</b> Bonus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="random-numbers.html"><a href="random-numbers.html"><i class="fa fa-check"></i><b>2.8</b> Random Numbers</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="random-numbers.html"><a href="random-numbers.html#random-number-generation"><i class="fa fa-check"></i><b>2.8.1</b> Random Number Generation</a></li>
+<li class="chapter" data-level="2.8.2" data-path="random-numbers.html"><a href="random-numbers.html#my-simple-solution-for-a-random-number-generator"><i class="fa fa-check"></i><b>2.8.2</b> My simple solution for a random number generator:</a></li>
+<li class="chapter" data-level="2.8.3" data-path="random-numbers.html"><a href="random-numbers.html#transition-probabilities"><i class="fa fa-check"></i><b>2.8.3</b> Transition probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="estimate-pi.html"><a href="estimate-pi.html"><i class="fa fa-check"></i><b>2.9</b> Estimate <span class="math inline">\(\pi\)</span></a></li>
+<li class="chapter" data-level="2.10" data-path="sir-model.html"><a href="sir-model.html"><i class="fa fa-check"></i><b>2.10</b> SIR model</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="sir-model.html"><a href="sir-model.html#markov-chain-monte-carlo"><i class="fa fa-check"></i><b>2.10.1</b> Markov chain Monte Carlo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="assignment-sir-model.html"><a href="assignment-sir-model.html"><i class="fa fa-check"></i><b>2.11</b> Assignment SIR model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>3</b> STATS</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-and-logistic-regressions.html"><a href="linear-and-logistic-regressions.html"><i class="fa fa-check"></i><b>3.1</b> Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-transformation.html"><a href="variable-transformation.html"><i class="fa fa-check"></i><b>3.2</b> Variable transformation</a></li>
+<li class="chapter" data-level="3.3" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>3.3</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#glm---poisson-regression"><i class="fa fa-check"></i><b>3.3.1</b> GLM - Poisson regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="kaplan-meier-curves.html"><a href="kaplan-meier-curves.html"><i class="fa fa-check"></i><b>3.4</b> Kaplan-Meier curves</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="kaplan-meier-curves.html"><a href="kaplan-meier-curves.html#example-from-classe-code-from-the-professor"><i class="fa fa-check"></i><b>3.4.1</b> Example from classe (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assignment-cancer.html"><a href="assignment-cancer.html"><i class="fa fa-check"></i><b>3.5</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.6" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>3.6</b> Cox Regression</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="cox-regression.html"><a href="cox-regression.html#example-from-classe-code-from-the-professor-1"><i class="fa fa-check"></i><b>3.6.1</b> Example from classe (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="assignment-cancer-1.html"><a href="assignment-cancer-1.html"><i class="fa fa-check"></i><b>3.7</b> Assignment <em>cancer</em></a></li>
+<li class="chapter" data-level="3.8" data-path="assignment-alcohol.html"><a href="assignment-alcohol.html"><i class="fa fa-check"></i><b>3.8</b> Assignment <em>alcohol</em></a></li>
+<li class="chapter" data-level="3.9" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3.9</b> Repeated-measures ANOVA</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#rats-example-code-from-the-professor"><i class="fa fa-check"></i><b>3.9.1</b> Rats example (code from the professor)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.10</b> Linear Mixed Models</a></li>
+<li class="chapter" data-level="3.11" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.11</b> Exercises</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="exercises.html"><a href="exercises.html#diet-diet.sav"><i class="fa fa-check"></i><b>3.11.1</b> Diet (diet.sav)</a></li>
+<li class="chapter" data-level="3.11.2" data-path="exercises.html"><a href="exercises.html#child-development-dev3yrheads.sav"><i class="fa fa-check"></i><b>3.11.2</b> Child development (dev3yrheads.sav)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="conditional-logistic-regression.html"><a href="conditional-logistic-regression.html"><i class="fa fa-check"></i><b>3.12</b> Conditional Logistic Regression</a></li>
+<li class="chapter" data-level="3.13" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html"><i class="fa fa-check"></i><b>3.13</b> Assignment feature selection</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="assignment-feature-selection.html"><a href="assignment-feature-selection.html#boruta-package-in-r"><i class="fa fa-check"></i><b>3.13.1</b> Boruta Package in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.14" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html"><i class="fa fa-check"></i><b>3.14</b> GLM (Poisson - Logistic)</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="glm-poisson-logistic.html"><a href="glm-poisson-logistic.html#exercises-1"><i class="fa fa-check"></i><b>3.14.1</b> exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.15" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>3.15</b> Survival Analysis</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="survival-analysis.html"><a href="survival-analysis.html#exercises-2"><i class="fa fa-check"></i><b>3.15.1</b> exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.16" data-path="exam-a.html"><a href="exam-a.html"><i class="fa fa-check"></i><b>3.16</b> Exam A</a></li>
+<li class="chapter" data-level="3.17" data-path="exam-b.html"><a href="exam-b.html"><i class="fa fa-check"></i><b>3.17</b> Exam B</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learn.html"><a href="learn.html"><i class="fa fa-check"></i><b>4</b> LEARN</a><ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4.1</b> Classification</a></li>
+<li class="chapter" data-level="4.2" data-path="crossvalidation.html"><a href="crossvalidation.html"><i class="fa fa-check"></i><b>4.2</b> Crossvalidation</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="crossvalidation.html"><a href="crossvalidation.html#test-harness"><i class="fa fa-check"></i><b>4.2.1</b> Test harness</a></li>
+<li class="chapter" data-level="4.2.2" data-path="crossvalidation.html"><a href="crossvalidation.html#make-predictions"><i class="fa fa-check"></i><b>4.2.2</b> Make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression-trees.html"><a href="regression-trees.html"><i class="fa fa-check"></i><b>4.3</b> Regression Trees</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="regression-trees.html"><a href="regression-trees.html#using-rpart-and-the-breast-cancer-coimbra-data-set"><i class="fa fa-check"></i><b>4.3.1</b> Using ‘rpart’ and the Breast Cancer Coimbra data set</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regression-trees.html"><a href="regression-trees.html#random-forest"><i class="fa fa-check"></i><b>4.3.2</b> Random Forest</a></li>
+<li class="chapter" data-level="4.3.3" data-path="regression-trees.html"><a href="regression-trees.html#improve-random-forest"><i class="fa fa-check"></i><b>4.3.3</b> Improve Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="assignment-trees.html"><a href="assignment-trees.html"><i class="fa fa-check"></i><b>4.4</b> Assignment Trees</a></li>
+<li class="chapter" data-level="4.5" data-path="assignment-trees-up-sampling.html"><a href="assignment-trees-up-sampling.html"><i class="fa fa-check"></i><b>4.5</b> Assignment Trees - Up Sampling</a></li>
+<li class="chapter" data-level="4.6" data-path="bayes-network.html"><a href="bayes-network.html"><i class="fa fa-check"></i><b>4.6</b> Bayes Network</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="bayes-network.html"><a href="bayes-network.html#build-network-from-data-using-naive-bayes"><i class="fa fa-check"></i><b>4.6.1</b> Build network from data using naive bayes</a></li>
+<li class="chapter" data-level="4.6.2" data-path="bayes-network.html"><a href="bayes-network.html#learn-the-structure-of-a-bayesian-network-using-a-hill-climbing-hc-or-a-tabu-search-tabu-greedy-search"><i class="fa fa-check"></i><b>4.6.2</b> Learn the structure of a Bayesian network using a hill-climbing (HC) or a Tabu search (TABU) greedy search</a></li>
+<li class="chapter" data-level="4.6.3" data-path="bayes-network.html"><a href="bayes-network.html#fit-existing-network-using-data"><i class="fa fa-check"></i><b>4.6.3</b> Fit existing network using data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="naive-bayes-network.html"><a href="naive-bayes-network.html"><i class="fa fa-check"></i><b>4.7</b> Naive Bayes Network</a></li>
+<li class="chapter" data-level="4.8" data-path="ensemble-classifiers.html"><a href="ensemble-classifiers.html"><i class="fa fa-check"></i><b>4.8</b> Ensemble classifiers</a></li>
+<li class="chapter" data-level="4.9" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html"><i class="fa fa-check"></i><b>4.9</b> Machine Learning from Data Streams</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#repositories"><i class="fa fa-check"></i><b>4.9.1</b> Repositories</a></li>
+<li class="chapter" data-level="4.9.2" data-path="machine-learning-from-data-streams.html"><a href="machine-learning-from-data-streams.html#prequential-evaluation"><i class="fa fa-check"></i><b>4.9.2</b> Prequential evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>4.10</b> Unsupervised Machine Learning</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#clustering-and-association-rules"><i class="fa fa-check"></i><b>4.10.1</b> Clustering and Association Rules</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="support-vector-machine.html"><a href="support-vector-machine.html"><i class="fa fa-check"></i><b>4.11</b> Support Vector Machine</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="support-vector-machine.html"><a href="support-vector-machine.html#svm-classification"><i class="fa fa-check"></i><b>4.11.1</b> SVM classification</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="assignment-svm.html"><a href="assignment-svm.html"><i class="fa fa-check"></i><b>4.12</b> Assignment SVM</a></li>
+<li class="chapter" data-level="4.13" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>4.13</b> Text mining</a><ul>
+<li class="chapter" data-level="4.13.1" data-path="text-mining.html"><a href="text-mining.html#preprocessing"><i class="fa fa-check"></i><b>4.13.1</b> Preprocessing</a></li>
+<li class="chapter" data-level="4.13.2" data-path="text-mining.html"><a href="text-mining.html#representation"><i class="fa fa-check"></i><b>4.13.2</b> Representation</a></li>
+<li class="chapter" data-level="4.13.3" data-path="text-mining.html"><a href="text-mining.html#discovery"><i class="fa fa-check"></i><b>4.13.3</b> Discovery</a></li>
+<li class="chapter" data-level="4.13.4" data-path="text-mining.html"><a href="text-mining.html#output-knowledge"><i class="fa fa-check"></i><b>4.13.4</b> Output knowledge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.14" data-path="visual-data-mining.html"><a href="visual-data-mining.html"><i class="fa fa-check"></i><b>4.14</b> Visual Data Mining</a><ul>
+<li class="chapter" data-level="4.14.1" data-path="visual-data-mining.html"><a href="visual-data-mining.html#ggplot2"><i class="fa fa-check"></i><b>4.14.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.14.2" data-path="visual-data-mining.html"><a href="visual-data-mining.html#vdmr"><i class="fa fa-check"></i><b>4.14.2</b> vdmR</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bayes.html"><a href="bayes.html"><i class="fa fa-check"></i><b>5</b> BAYES</a><ul>
+<li class="chapter" data-level="5.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html"><i class="fa fa-check"></i><b>5.1</b> Bayesian statistical inference</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="bayesian-statistical-inference.html"><a href="bayesian-statistical-inference.html#representing-a-betaab-distribution"><i class="fa fa-check"></i><b>5.1.1</b> Representing a Beta(a,b) distribution:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html"><i class="fa fa-check"></i><b>5.2</b> Logistic curve with Bayes</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="logistic-curve-with-bayes.html"><a href="logistic-curve-with-bayes.html#a-dose-response-model"><i class="fa fa-check"></i><b>5.2.1</b> A dose-response model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="bayesian-nets.html"><a href="bayesian-nets.html"><i class="fa fa-check"></i><b>5.3</b> Bayesian Nets</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="bayesian-nets.html"><a href="bayesian-nets.html#inference-in-bayesian-nets"><i class="fa fa-check"></i><b>5.3.1</b> Inference in Bayesian nets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="bayesian-temporal-nets.html"><a href="bayesian-temporal-nets.html"><i class="fa fa-check"></i><b>5.4</b> Bayesian temporal Nets</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="bayesian-temporal-nets.html"><a href="bayesian-temporal-nets.html#backstage-functions"><i class="fa fa-check"></i><b>5.4.1</b> backstage functions</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bayesian-temporal-nets.html"><a href="bayesian-temporal-nets.html#building-the-model"><i class="fa fa-check"></i><b>5.4.2</b> building the model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
+<li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html"><i class="fa fa-check"></i><b>6.2</b> Dealing with imbalanced data: a practical approach</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#introduction"><i class="fa fa-check"></i><b>6.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#methods"><i class="fa fa-check"></i><b>6.2.2</b> Methods</a></li>
+<li class="chapter" data-level="6.2.3" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#results"><i class="fa fa-check"></i><b>6.2.3</b> Results</a></li>
+<li class="chapter" data-level="6.2.4" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#conclusion"><i class="fa fa-check"></i><b>6.2.4</b> Conclusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HEADS 2nd semester</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dealing-with-imbalanced-data-a-practical-approach" class="section level2">
+<h2><span class="header-section-number">6.2</span> Dealing with imbalanced data: a practical approach</h2>
+<p>2020-06-02</p>
+<div id="introduction" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Introduction</h3>
+<p>We define a dataset as imbalanced when the classification’s categories are not approximately equally represented. In real-world data ‘normal’ examples are the most frequent, while ‘abnormal’ or interesting’ examples are quite rare, that is why the problem of imbalanced data is so common <span class="citation">(Chawla et al. <a href="#ref-Chawla2002" role="doc-biblioref">2002</a>)</span>.</p>
+<p>In real life there are several examples of imbalanced data:</p>
+<ul>
+<li>A manufacturing assembly line where the number of defective products are significantly lower than those without defects</li>
+<li>A test to detect patients with cancer in a given residential area</li>
+<li>Credit card fraud detection</li>
+</ul>
+<p>Again, in classification problems where one class outnumbers the other we face a problem of imbalanced data. Usually, majority class is referred as negative class, while the minority is the positive class. For learning algorithms based on imbalanced data, positive class instances are submerged in the negative class <span class="citation">(Gao et al. <a href="#ref-Gao2014" role="doc-biblioref">2014</a>)</span>.</p>
+<p>Imbalances can be classified as intrinsic – when is a direct result of the nature of the dataspace – or extrinsic – when imbalance depends on upon variable factors as time and storage. As an example of this last type of imbalance, we can think on a continuous stream of intrinsically balanced data that at a specific time period (due to same kind of error) the acquired data can be imbalanced, and in this case the data set would be and intrinsic imbalanced data <span class="citation">(He and Garcia <a href="#ref-He2009" role="doc-biblioref">2009</a>)</span>.</p>
+<p>It is not appropriate to evaluate learning algorithms performance using its predictive accuracy when we are dealing with imbalanced data. In domains where we are interested is the positive class rather than the negative one, we need a higher prediction capability for the former, although traditional data mining algorithms do not behave properly in the instance of imbalanced data <span class="citation">(Chawla et al. <a href="#ref-Chawla2002" role="doc-biblioref">2002</a>)</span>. So, the main problems with imbalanced data arise when we want to learn from it. Imbalanced data compromise significantly the performance of most standard learning algorithms, this algorithms are not able to represent properly the distributive characteristics of the data and consequently fail to deliver acceptable accuracies across the classes of the data <span class="citation">(He and Garcia <a href="#ref-He2009" role="doc-biblioref">2009</a>)</span>.</p>
+<p>There are two major approaches to deal with imbalanced data: resampling methods (external methods) and imbalanced learning algorithms (internal methods) <span class="citation">(Gao et al. <a href="#ref-Gao2014" role="doc-biblioref">2014</a>)</span>. The former uses resampling methods on the original imbalanced data in order to obtain a balanced input to train traditional learning algorithms. While the latter use modified learning algorithms so that are able to use original data without rebalance it <span class="citation">(Gao et al. <a href="#ref-Gao2014" role="doc-biblioref">2014</a>)</span>.</p>
+</div>
+<div id="methods" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Methods</h3>
+<p>In this study, I aim to identify and describe R packages available for dealing with imbalanced data. Also, for the exemplification on how to deal with imbalanced data, I use the Cervical cancer Data Set (CCDS) from UCI repository <span class="citation">(Dua and Graff <a href="#ref-Dua:2019" role="doc-biblioref">2017</a>)</span>.
+A preliminary exploratory analysis is done in order to identify variables with excess of missing data, with the <em>amelia</em> package <span class="citation">(Honaker, King, and Blackwell <a href="#ref-amelia" role="doc-biblioref">2011</a>)</span>. After excluding those variables with excessive number of missings, data is balanced for the outcome <strong>Dx</strong> with diferent methods and resulting balanced data is trained with a regression tree algorithm.<br />
+With the <code>caret</code> package I do the downsamplig (randomly subset the negative class to match the size of the positive class) and the upsampling (sampling with replacement from the positive class until match the size of the negative class). while, with SMOTE (<code>DMwR</code> package) and ROSE (<code>rose</code> package) methods, negative classs is down-sampled and the positive class is up-sampled.</p>
+<p>All analysis is performed in RStudio with R programming lenguage <span class="citation">(R Core Team <a href="#ref-r" role="doc-biblioref">2013</a>)</span></p>
+</div>
+<div id="results" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Results</h3>
+<p>A total of 11 packages were identified and 10 of them are on CRAN. The package <code>IRIC</code> is corrently only available on <em>github</em>. These packages represent a variaty of solutions to deal with imbalanced data. The packages <code>caret</code>, <code>mlr</code> and <code>DMwR</code> are packages for machine learning and data mining that include functions for balance imbalanced data.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+package
+</th>
+<th style="text-align:left;">
+descriptive
+</th>
+<th style="text-align:left;">
+description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ROSE
+</td>
+<td style="text-align:left;">
+Random Over-Sampling Examples
+</td>
+<td style="text-align:left;">
+The package provides functions to deal with binary classification problems in the presence of imbalanced classes. Synthetic balanced samples are generated according to ROSE (Menardi and Torelli, 2013). Functions that implement more traditional remedies to the class imbalance are also provided, as well as different metrics to evaluate a learner accuracy. These are estimated by holdout, bootstrap or cross-validation methods.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+themis
+</td>
+<td style="text-align:left;">
+Extra Recipes Steps for Dealing with Unbalanced Data
+</td>
+<td style="text-align:left;">
+A dataset with an uneven number of cases in each class is said to be unbalanced. Many models produce a subpar performance on unbalanced datasets. A dataset can be balanced by increasing the number of minority cases using SMOTE 2011 &lt;arXiv:1106.1813&gt;, BorderlineSMOTE 2005 &lt;<a href="doi:10.1007/11538059_91%3E" class="uri">doi:10.1007/11538059_91&gt;</a>; and ADASYN 2008 &lt;<a href="https://ieeexplore.ieee.org/document/4633969%3E" class="uri">https://ieeexplore.ieee.org/document/4633969&gt;</a>;. Or by decreasing the number of majority cases using NearMiss 2003 &lt;<a href="https://www.site.uottawa.ca/~nat/Workshop2003/jzhang.pdf%3E" class="uri">https://www.site.uottawa.ca/~nat/Workshop2003/jzhang.pdf&gt;</a>; or Tomek link removal 1976 &lt;<a href="https://ieeexplore.ieee.org/document/4309452%3E" class="uri">https://ieeexplore.ieee.org/document/4309452&gt;</a>;.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+imbalance
+</td>
+<td style="text-align:left;">
+Preprocessing Algorithms for Imbalanced Datasets
+</td>
+<td style="text-align:left;">
+Class imbalance usually damages the performance of classifiers. Thus, it is important to treat data before applying a classifier algorithm. This package includes recent resampling algorithms in the literature: (Barua et al. 2014) &lt;<a href="doi:10.1109/tkde.2012.232%3E" class="uri">doi:10.1109/tkde.2012.232&gt;</a>;; (Das et al. 2015) &lt;<a href="doi:10.1109/tkde.2014.2324567%3E" class="uri">doi:10.1109/tkde.2014.2324567&gt;</a>;, (Zhang et al. 2014) &lt;<a href="doi:10.1016/j.inffus.2013.12.003%3E" class="uri">doi:10.1016/j.inffus.2013.12.003&gt;</a>;; (Gao et al. 2014) &lt;<a href="doi:10.1016/j.neucom.2014.02.006%3E" class="uri">doi:10.1016/j.neucom.2014.02.006&gt;</a>;; (Almogahed et al. 2014) &lt;<a href="doi:10.1007/s00500-014-1484-5%3E" class="uri">doi:10.1007/s00500-014-1484-5&gt;</a>;. It also includes an useful interface to perform oversampling.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+smotefamily
+</td>
+<td style="text-align:left;">
+A Collection of Oversampling Techniques for Class Imbalance Problem Based on SMOTE
+</td>
+<td style="text-align:left;">
+A collection of various oversampling techniques developed from SMOTE is provided. SMOTE is a oversampling technique which synthesizes a new minority instance between a pair of one minority instance and one of its K nearest neighbor. (see &lt;<a href="https://www.jair.org/media/953/live-953-2037-jair.pdf%3E" class="uri">https://www.jair.org/media/953/live-953-2037-jair.pdf&gt;</a>; for more information) Other techniques adopt this concept with other criteria in order to generate balanced dataset for class imbalance problem
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ebmc
+</td>
+<td style="text-align:left;">
+Ensemble-Based Methods for Class Imbalance Problem
+</td>
+<td style="text-align:left;">
+Four ensemble-based methods (SMOTEBoost, RUSBoost, UnderBagging, and SMOTEBagging) for class imbalance problem are implemented for binary classification. Such methods adopt ensemble methods and data re-sampling techniques to improve model performance in presence of class imbalance problem. One special feature offers the possibility to choose multiple supervised learning algorithms to build weak learners within ensemble models. References: Nitesh V. Chawla, Aleksandar Lazarevic, Lawrence O. Hall, and Kevin W. Bowyer (2003) &lt;<a href="doi:10.1007/978-3-540-39804-2_12%3E" class="uri">doi:10.1007/978-3-540-39804-2_12&gt;</a>;, Chris Seiffert, Taghi M. Khoshgoftaar, Jason Van Hulse, and Amri Napolitano (2010) &lt;<a href="doi:10.1109/TSMCA.2009.2029559%3E" class="uri">doi:10.1109/TSMCA.2009.2029559&gt;</a>;, R. Barandela, J. S. Sanchez, R. M. Valdovinos (2003) &lt;<a href="doi:10.1007/s10044-003-0192-z%3E" class="uri">doi:10.1007/s10044-003-0192-z&gt;</a>;, Shuo Wang and Xin Yao (2009) &lt;<a href="doi:10.1109/CIDM.2009.4938667%3E" class="uri">doi:10.1109/CIDM.2009.4938667&gt;</a>;, Yoav Freund and Robert E. Schapire (1997) &lt;<a href="doi:10.1006/jcss.1997.1504%3E" class="uri">doi:10.1006/jcss.1997.1504&gt;</a>;.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+unbalanced
+</td>
+<td style="text-align:left;">
+Racing for Unbalanced Methods Selection
+</td>
+<td style="text-align:left;">
+A dataset is said to be unbalanced when the class of interest (minority class) is much rarer than normal behaviour (majority class). The cost of missing a minority class is typically much higher that missing a majority class. Most learning systems are not prepared to cope with unbalanced data and several techniques have been proposed. This package implements some of most well-known techniques and propose a racing algorithm to select adaptively the most appropriate strategy for a given unbalanced task.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ebal
+</td>
+<td style="text-align:left;">
+Entropy reweighting to create balanced samples
+</td>
+<td style="text-align:left;">
+Package implements entropy balancing, a data preprocessing procedure that allows users to reweight a dataset such that the covariate distributions in the reweighted data satisfy a set of user specified moment conditions. This can be useful to create balanced samples in observational studies with a binary treatment where the control group data can be reweighted to match the covariate moments in the treatment group. Entropy balancing can also be used to reweight a survey sample to known characteristics from a target population.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IRIC
+</td>
+<td style="text-align:left;">
+Integrated R Library for Imbalanced Classification
+</td>
+<td style="text-align:left;">
+IRIC is an R library for imbalanced classification, which will bring convenience to users by integrating a wide set of solutions into one library.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+caret
+</td>
+<td style="text-align:left;">
+Classification and Regression Training
+</td>
+<td style="text-align:left;">
+Misc functions for training and plotting classification and regression models.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mlr3
+</td>
+<td style="text-align:left;">
+Machine Learning in R - Next Generation
+</td>
+<td style="text-align:left;">
+Efficient, object-oriented programming on the building blocks of machine learning. Provides ‘R6’ objects for tasks, learners, resamplings, and measures. The package is geared towards scalability and larger datasets by supporting parallelization and out-of-memory data-backends like databases. While ‘mlr3’ focuses on the core computational operations, add-on packages provide additional functionality.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DMwR
+</td>
+<td style="text-align:left;">
+Functions and data for “Data Mining with R”
+</td>
+<td style="text-align:left;">
+This package includes functions and data accompanying the book “Data Mining with R, learning with case studies”
+</td>
+</tr>
+</tbody>
+</table>
+<p>To evaluate the use of different methods for balance the date, I use the CCDS data.</p>
+<p>Let’s load an look to the CCDS data:</p>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb674-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb674-2" title="2"></a>
+<a class="sourceLine" id="cb674-3" title="3"><span class="co">## read the data</span></a>
+<a class="sourceLine" id="cb674-4" title="4">dataset&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/risk_factors_cervical_cancer.csv&quot;</span>,<span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;?&quot;</span>,<span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb674-5" title="5"></a>
+<a class="sourceLine" id="cb674-6" title="6"><span class="co"># exclude redundante variable</span></a>
+<a class="sourceLine" id="cb674-7" title="7">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs, <span class="op">-</span>Dx.Cancer, <span class="op">-</span>Dx.CIN, <span class="op">-</span>Dx.HPV)</a>
+<a class="sourceLine" id="cb674-8" title="8"></a>
+<a class="sourceLine" id="cb674-9" title="9"><span class="co"># identified categorical variables</span></a>
+<a class="sourceLine" id="cb674-10" title="10">categorical&lt;-<span class="kw">c</span>(<span class="st">&quot;Smokes&quot;</span>, <span class="st">&quot;Hormonal.Contraceptives&quot;</span>, <span class="st">&quot;IUD&quot;</span>, </a>
+<a class="sourceLine" id="cb674-11" title="11">               <span class="st">&quot;STDs.condylomatosis&quot;</span>,<span class="st">&quot;STDs.cervical.condylomatosis&quot;</span>, </a>
+<a class="sourceLine" id="cb674-12" title="12">               <span class="st">&quot;STDs.vulvo.perineal.condylomatosis&quot;</span>, <span class="st">&quot;STDs.syphilis&quot;</span>,</a>
+<a class="sourceLine" id="cb674-13" title="13">               <span class="st">&quot;STDs.pelvic.inflammatory.disease&quot;</span>,</a>
+<a class="sourceLine" id="cb674-14" title="14">               <span class="st">&quot;STDs.genital.herpes&quot;</span>,<span class="st">&quot;STDs.molluscum.contagiosum&quot;</span>,</a>
+<a class="sourceLine" id="cb674-15" title="15">               <span class="st">&quot;STDs.AIDS&quot;</span>, <span class="st">&quot;STDs.HIV&quot;</span>, <span class="st">&quot;STDs.Hepatitis.B&quot;</span>, <span class="st">&quot;STDs.HPV&quot;</span>,</a>
+<a class="sourceLine" id="cb674-16" title="16">               <span class="st">&quot;Hinselmann&quot;</span>, <span class="st">&quot;Schiller&quot;</span>, <span class="st">&quot;Dx&quot;</span>,  </a>
+<a class="sourceLine" id="cb674-17" title="17">               <span class="st">&quot;Citology&quot;</span>, <span class="st">&quot;Biopsy&quot;</span>)  </a>
+<a class="sourceLine" id="cb674-18" title="18"></a>
+<a class="sourceLine" id="cb674-19" title="19"><span class="co"># factorize it</span></a>
+<a class="sourceLine" id="cb674-20" title="20">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(categorical, <span class="op">~</span><span class="kw">factor</span>(.,<span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb675-1" title="1"><span class="kw">library</span>(Amelia)</a>
+<a class="sourceLine" id="cb675-2" title="2"><span class="co"># missings on original data</span></a>
+<a class="sourceLine" id="cb675-3" title="3"><span class="kw">missmap</span>(dataset)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/amelia-1.png" width="672" /></p>
+<p><code>Amelia</code> package allow us to see how missing data are distributed on our dataset. Alternatively we can just count missings by variable.</p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb676-1" title="1"><span class="kw">apply</span>(dataset, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))</a></code></pre></div>
+<pre><code>##                                Age          Number.of.sexual.partners 
+##                                  0                                 26 
+##           First.sexual.intercourse                 Num.of.pregnancies 
+##                                  7                                 56 
+##                             Smokes                     Smokes..years. 
+##                                 13                                 13 
+##                Smokes..packs.year.            Hormonal.Contraceptives 
+##                                 13                                108 
+##    Hormonal.Contraceptives..years.                                IUD 
+##                                108                                117 
+##                        IUD..years.                      STDs..number. 
+##                                117                                105 
+##                STDs.condylomatosis       STDs.cervical.condylomatosis 
+##                                105                                105 
+##        STDs.vaginal.condylomatosis STDs.vulvo.perineal.condylomatosis 
+##                                105                                105 
+##                      STDs.syphilis   STDs.pelvic.inflammatory.disease 
+##                                105                                105 
+##                STDs.genital.herpes         STDs.molluscum.contagiosum 
+##                                105                                105 
+##                          STDs.AIDS                           STDs.HIV 
+##                                105                                105 
+##                   STDs.Hepatitis.B                           STDs.HPV 
+##                                105                                105 
+##          STDs..Number.of.diagnosis   STDs..Time.since.first.diagnosis 
+##                                  0                                787 
+##    STDs..Time.since.last.diagnosis                                 Dx 
+##                                787                                  0 
+##                         Hinselmann                           Schiller 
+##                                  0                                  0 
+##                           Citology                             Biopsy 
+##                                  0                                  0</code></pre>
+<p>Do to the excessive among of missings, I excluded from the analysis, the variables <code>STDs..Time.since.first.diagnosis</code> and <code>STDs..Time.since.last.diagnosis</code>. Although it would be advised to do an imputation of values where we have missing data, I did’nt do it.</p>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb678-1" title="1">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs..Time.since.first.diagnosis, <span class="op">-</span>STDs..Time.since.last.diagnosis)</a>
+<a class="sourceLine" id="cb678-2" title="2"></a>
+<a class="sourceLine" id="cb678-3" title="3"><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Dx))</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+yes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.972028
+</td>
+<td style="text-align:right;">
+0.027972
+</td>
+</tr>
+</tbody>
+</table>
+<p>We will use this dataset to train a regression tree algorithm in order to predict the outcome <strong>Dx</strong>. But,
+we have a clear problem of imbalanced data if we want to predict <strong>Dx</strong> from which 97.2% are ‘no’ and only 2.8% are ‘yes’.</p>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb679-1" title="1"><span class="kw">ggplot</span>(dataset, <span class="kw">aes</span>(<span class="dt">x=</span>Dx)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-467-1.png" width="672" /></p>
+<p>Now, I use four different methods to balance the data.</p>
+<p>Let’s start balancing the data by downsampling (with the <code>caret</code> package):</p>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb680-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb680-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb680-3" title="3">down_train &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> dataset[, <span class="op">!</span><span class="kw">colnames</span>(dataset) <span class="op">%in%</span><span class="st"> &quot;Dx&quot;</span>],</a>
+<a class="sourceLine" id="cb680-4" title="4">                         <span class="dt">y =</span> dataset<span class="op">$</span>Dx)</a>
+<a class="sourceLine" id="cb680-5" title="5"></a>
+<a class="sourceLine" id="cb680-6" title="6"><span class="co"># we have to remane the Class variable</span></a>
+<a class="sourceLine" id="cb680-7" title="7"><span class="kw">names</span>(down_train)[<span class="dv">30</span>]&lt;-<span class="st">&quot;Dx&quot;</span></a>
+<a class="sourceLine" id="cb680-8" title="8"></a>
+<a class="sourceLine" id="cb680-9" title="9"><span class="kw">table</span>(down_train<span class="op">$</span>Dx)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+yes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+</tbody>
+</table>
+<p>Now the upsampling:</p>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb681-2" title="2">up_train &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> dataset[, <span class="op">!</span><span class="kw">colnames</span>(dataset) <span class="op">%in%</span><span class="st"> &quot;Dx&quot;</span>],</a>
+<a class="sourceLine" id="cb681-3" title="3">                         <span class="dt">y =</span> dataset<span class="op">$</span>Dx)</a>
+<a class="sourceLine" id="cb681-4" title="4"></a>
+<a class="sourceLine" id="cb681-5" title="5"><span class="co"># we have to remane the Class variable</span></a>
+<a class="sourceLine" id="cb681-6" title="6"><span class="kw">names</span>(up_train)[<span class="dv">30</span>]&lt;-<span class="st">&quot;Dx&quot;</span></a>
+<a class="sourceLine" id="cb681-7" title="7"><span class="kw">table</span>(up_train<span class="op">$</span>Dx)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+yes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+834
+</td>
+<td style="text-align:right;">
+834
+</td>
+</tr>
+</tbody>
+</table>
+<p>Is time for SMOTE:</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" title="1"><span class="kw">library</span>(DMwR)</a>
+<a class="sourceLine" id="cb682-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb682-3" title="3">smote_train &lt;-<span class="st"> </span><span class="kw">SMOTE</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data  =</span> dataset,</a>
+<a class="sourceLine" id="cb682-4" title="4">                     <span class="dt">perc.over =</span> <span class="dv">400</span>,<span class="dt">perc.under=</span><span class="dv">200</span>)                         </a>
+<a class="sourceLine" id="cb682-5" title="5"><span class="kw">table</span>(smote_train<span class="op">$</span>Dx) </a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+yes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+192
+</td>
+<td style="text-align:right;">
+120
+</td>
+</tr>
+</tbody>
+</table>
+<p>and now ROSE:</p>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" title="1"><span class="kw">library</span>(ROSE)</a>
+<a class="sourceLine" id="cb683-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb683-3" title="3">rose_train &lt;-<span class="st"> </span><span class="kw">ROSE</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data  =</span> dataset)<span class="op">$</span>data                         </a>
+<a class="sourceLine" id="cb683-4" title="4"><span class="kw">table</span>(rose_train<span class="op">$</span>Dx) </a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+yes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+346
+</td>
+<td style="text-align:right;">
+322
+</td>
+</tr>
+</tbody>
+</table>
+<p>With the new 4 datasets we can fit the regresssion trees</p>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb684-1" title="1">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
+<a class="sourceLine" id="cb684-2" title="2">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</a>
+<a class="sourceLine" id="cb684-3" title="3">                        <span class="dt">number =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb684-4" title="4">                        <span class="dt">repeats =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb684-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb684-6" title="6">                        <span class="dt">classProbs=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb684-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb684-8" title="8"></a>
+<a class="sourceLine" id="cb684-9" title="9"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb684-10" title="10">fit.rpart.down &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>down_train, </a>
+<a class="sourceLine" id="cb684-11" title="11">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb684-12" title="12">                       <span class="dt">na.action=</span>na.exclude)</a>
+<a class="sourceLine" id="cb684-13" title="13"></a>
+<a class="sourceLine" id="cb684-14" title="14"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb684-15" title="15">fit.rpart.up &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>up_train, </a>
+<a class="sourceLine" id="cb684-16" title="16">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb684-17" title="17">                      <span class="dt">na.action=</span>na.exclude)</a>
+<a class="sourceLine" id="cb684-18" title="18"></a>
+<a class="sourceLine" id="cb684-19" title="19"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb684-20" title="20">fit.rpart.smote &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>smote_train, </a>
+<a class="sourceLine" id="cb684-21" title="21">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb684-22" title="22">                      <span class="dt">na.action=</span>na.exclude)</a>
+<a class="sourceLine" id="cb684-23" title="23"></a>
+<a class="sourceLine" id="cb684-24" title="24"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb684-25" title="25">fit.rpart.rose &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>rose_train, </a>
+<a class="sourceLine" id="cb684-26" title="26">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb684-27" title="27">                      <span class="dt">na.action=</span>na.exclude)</a></code></pre></div>
+<p>And now we can compare the results.</p>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">down.rpart=</span>fit.rpart.down, </a>
+<a class="sourceLine" id="cb685-2" title="2">                   <span class="dt">up.rpart=</span>fit.rpart.up, </a>
+<a class="sourceLine" id="cb685-3" title="3">                   <span class="dt">smote.rpart=</span> fit.rpart.smote, </a>
+<a class="sourceLine" id="cb685-4" title="4">                   <span class="dt">rose.rpart=</span> fit.rpart.rose)</a>
+<a class="sourceLine" id="cb685-5" title="5"></a>
+<a class="sourceLine" id="cb685-6" title="6"></a>
+<a class="sourceLine" id="cb685-7" title="7">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a></code></pre></div>
+<p>Let’s look at the ROC curves</p>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb686-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb686-3" title="3"><span class="co"># rocs &lt;- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, </span></a>
+<a class="sourceLine" id="cb686-4" title="4"><span class="co">#                                                   #main=fit, </span></a>
+<a class="sourceLine" id="cb686-5" title="5"><span class="co">#                                                   debug=F, print.auc=T)})</span></a>
+<a class="sourceLine" id="cb686-6" title="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>){</a>
+<a class="sourceLine" id="cb686-7" title="7">  <span class="kw">plot.roc</span>(fit.models[[i]]<span class="op">$</span>pred<span class="op">$</span>obs,fit.models[[i]]<span class="op">$</span>pred<span class="op">$</span>yes,</a>
+<a class="sourceLine" id="cb686-8" title="8">           <span class="dt">main=</span> <span class="kw">names</span>(fit.models)[i],</a>
+<a class="sourceLine" id="cb686-9" title="9">           <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)}</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/rocs-1.png" width="672" /></p>
+<p>we can also see it in one plot:</p>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb687-1" title="1"><span class="co"># combine the results</span></a>
+<a class="sourceLine" id="cb687-2" title="2">ggroc&lt;-<span class="kw">rbind</span>(<span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;Down&quot;</span>, </a>
+<a class="sourceLine" id="cb687-3" title="3">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb687-4" title="4">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
+<a class="sourceLine" id="cb687-5" title="5">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;Up&quot;</span>, </a>
+<a class="sourceLine" id="cb687-6" title="6">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb687-7" title="7">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
+<a class="sourceLine" id="cb687-8" title="8">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;SMOTE&quot;</span>, </a>
+<a class="sourceLine" id="cb687-9" title="9">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb687-10" title="10">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
+<a class="sourceLine" id="cb687-11" title="11">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;ROSE&quot;</span>, </a>
+<a class="sourceLine" id="cb687-12" title="12">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb687-13" title="13">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities)</a>
+<a class="sourceLine" id="cb687-14" title="14">)</a>
+<a class="sourceLine" id="cb687-15" title="15">             </a>
+<a class="sourceLine" id="cb687-16" title="16">custom_col &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#009E73&quot;</span>, <span class="st">&quot;#0072B2&quot;</span>, <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;#CC79A7&quot;</span>)</a>
+<a class="sourceLine" id="cb687-17" title="17"></a>
+<a class="sourceLine" id="cb687-18" title="18"><span class="kw">ggplot</span>(ggroc, <span class="kw">aes</span>(<span class="dt">x=</span> <span class="dv">1</span><span class="op">-</span>spec, <span class="dt">y=</span> sens, <span class="dt">group =</span> method)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb687-19" title="19"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> method), <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb687-20" title="20"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> custom_col) <span class="op">+</span></a>
+<a class="sourceLine" id="cb687-21" title="21"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb687-22" title="22"><span class="st">    </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/ggroc-1.png" width="672" /></p>
+<p>And compare accuracies</p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-468-1.png" width="672" /></p>
+<p>In this exercise we obtained the best results with ROSE dataset. Although we can have a problem of overfitting.</p>
+</div>
+<div id="conclusion" class="section level3">
+<h3><span class="header-section-number">6.2.4</span> Conclusion</h3>
+<p>Here, I presented some simple examples on how to deal with imbalanced data, with some pratical examples. There are more sophisticated methods available from the <strong>R</strong> packages presented on the table, but they require a more sophisticated data pre-processing.</p>
+<p>In a real world work, before balance the data we must do a data partition between train and test datasets. Methods to balance the data must be done on training dataset and the trained model is applied on the imbalanced test set.</p>
+<p><strong>Real world framework</strong></p>
+<ul>
+<li>do exploratory data analysis</li>
+<li>look for missing data</li>
+<li>exclude variables with more than 80% missings</li>
+<li>try to input data to other remaining missings</li>
+<li>do data partition between training data set and testing data set</li>
+<li>balance your training dataset</li>
+<li>train your algorithms with the training dataset</li>
+<li>test them in your testing dataset</li>
+<li><strong>DO NOT</strong> balance your testing dataset</li>
+</ul>
+<p><img src="images/LogoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right"></p>
+
+</div>
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Chawla2002">
+<p>Chawla, Nitesh V., Kevin W. Bowyer, Lawrence O. Hall, and W. Philip Kegelmeyer. 2002. “snopes.com: Two-Striped Telamonia Spider.” <em>Journal of Artificial Intelligence Research</em> 16 (Sept. 28): 321–57. <a href="https://doi.org/10.1613/jair.953">https://doi.org/10.1613/jair.953</a>.</p>
+</div>
+<div id="ref-Dua:2019">
+<p>Dua, Dheeru, and Casey Graff. 2017. “UCI Machine Learning Repository.” University of California, Irvine, School of Information; Computer Sciences. <a href="http://archive.ics.uci.edu/ml">http://archive.ics.uci.edu/ml</a>.</p>
+</div>
+<div id="ref-Gao2014">
+<p>Gao, Ming, Xia Hong, Sheng Chen, Chris J. Harris, and Emad Khalaf. 2014. “PDFOS: PDF estimation based over-sampling for imbalanced two-class problems.” <em>Neurocomputing</em> 138: 248–59. <a href="https://doi.org/10.1016/j.neucom.2014.02.006">https://doi.org/10.1016/j.neucom.2014.02.006</a>.</p>
+</div>
+<div id="ref-He2009">
+<p>He, Haibo, and Edwardo A. Garcia. 2009. “Learning from imbalanced data.” <em>IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING</em> 21 (9): 1263–83. <a href="https://doi.org/10.1007/978-3-030-04663-7_4">https://doi.org/10.1007/978-3-030-04663-7_4</a>.</p>
+</div>
+<div id="ref-amelia">
+<p>Honaker, James, Gary King, and Matthew Blackwell. 2011. “Amelia II: A Program for Missing Data.” <em>Journal of Statistical Software</em> 45 (7): 1–47. <a href="http://www.jstatsoft.org/v45/i07/">http://www.jstatsoft.org/v45/i07/</a>.</p>
+</div>
+<div id="ref-r">
+<p>R Core Team. 2013. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="http://www.R-project.org/">http://www.R-project.org/</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="seminar1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["heads2sem.pdf", "heads2sem.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

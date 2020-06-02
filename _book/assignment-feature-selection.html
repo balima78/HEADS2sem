@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-06-01" />
+<meta name="date" content="2020-06-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -272,6 +272,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="seminar1.html"><a href="seminar1.html#bruno-lima"><i class="fa fa-check"></i><b>6.1.1</b> Bruno Lima</a></li>
 </ul></li>
+<li class="chapter" data-level="6.2" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html"><i class="fa fa-check"></i><b>6.2</b> Dealing with imbalanced data: a practical approach</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#introduction"><i class="fa fa-check"></i><b>6.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#methods"><i class="fa fa-check"></i><b>6.2.2</b> Methods</a></li>
+<li class="chapter" data-level="6.2.3" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#results"><i class="fa fa-check"></i><b>6.2.3</b> Results</a></li>
+<li class="chapter" data-level="6.2.4" data-path="dealing-with-imbalanced-data-a-practical-approach.html"><a href="dealing-with-imbalanced-data-a-practical-approach.html#conclusion"><i class="fa fa-check"></i><b>6.2.4</b> Conclusion</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -363,7 +369,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>results from boruta</p>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="kw">library</span>(printr)</a>
 <a class="sourceLine" id="cb308-2" title="2"><span class="kw">print</span>(boruta)</a></code></pre></div>
-<pre><code>## Boruta performed 99 iterations in 16.61794 secs.
+<pre><code>## Boruta performed 99 iterations in 15.95779 secs.
 ##  5 attributes confirmed important: AGE, CARDIAC1, CIRCTIME1, HCT1,
 ## REDCELL1;
 ##  7 attributes confirmed unimportant: CVP1, HEART1, IDNUM, PLASVOL1,
@@ -668,7 +674,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1"><span class="kw">print</span>(form)</a></code></pre></div>
 <pre><code>## HGB2 ~ AGE + MAP1 + DBP1 + BSA1 + CARDIAC1 + APPTIME1 + CIRCTIME1 + 
 ##     REDCELL1 + HCT1
-## &lt;environment: 0x000000001a296248&gt;</code></pre>
+## &lt;environment: 0x0000000018f39a18&gt;</code></pre>
 <p>plot model assumptions</p>
 <div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb318-2" title="2"></a>
