@@ -1,6 +1,6 @@
 ## Bayesian temporal Nets
 
-2020-05-2>6
+2020-05-26
 
 
 ```{r, include=FALSE}

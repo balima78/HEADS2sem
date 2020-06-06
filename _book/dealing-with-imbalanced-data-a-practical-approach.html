@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno A Lima" />
 
 
-<meta name="date" content="2020-06-02" />
+<meta name="date" content="2020-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.1" data-path="bayesian-temporal-nets.html"><a href="bayesian-temporal-nets.html#backstage-functions"><i class="fa fa-check"></i><b>5.4.1</b> backstage functions</a></li>
 <li class="chapter" data-level="5.4.2" data-path="bayesian-temporal-nets.html"><a href="bayesian-temporal-nets.html#building-the-model"><i class="fa fa-check"></i><b>5.4.2</b> building the model</a></li>
 </ul></li>
+<li class="chapter" data-level="5.5" data-path="temporal-modeling.html"><a href="temporal-modeling.html"><i class="fa fa-check"></i><b>5.5</b> Temporal Modeling</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="temporal-modeling.html"><a href="temporal-modeling.html#transition-probabilities-1"><i class="fa fa-check"></i><b>5.5.1</b> Transition probabilities</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="top.html"><a href="top.html"><i class="fa fa-check"></i><b>6</b> TOP.HIDA</a><ul>
 <li class="chapter" data-level="6.1" data-path="seminar1.html"><a href="seminar1.html"><i class="fa fa-check"></i><b>6.1</b> Seminar 1</a><ul>
@@ -467,32 +470,32 @@ This package includes functions and data accompanying the book “Data Mining wi
 </table>
 <p>To evaluate the use of different methods for balance the date, I use the CCDS data.</p>
 <p>Let’s load an look to the CCDS data:</p>
-<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb674-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb674-2" title="2"></a>
-<a class="sourceLine" id="cb674-3" title="3"><span class="co">## read the data</span></a>
-<a class="sourceLine" id="cb674-4" title="4">dataset&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/risk_factors_cervical_cancer.csv&quot;</span>,<span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;?&quot;</span>,<span class="st">&quot;&quot;</span>))</a>
-<a class="sourceLine" id="cb674-5" title="5"></a>
-<a class="sourceLine" id="cb674-6" title="6"><span class="co"># exclude redundante variable</span></a>
-<a class="sourceLine" id="cb674-7" title="7">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs, <span class="op">-</span>Dx.Cancer, <span class="op">-</span>Dx.CIN, <span class="op">-</span>Dx.HPV)</a>
-<a class="sourceLine" id="cb674-8" title="8"></a>
-<a class="sourceLine" id="cb674-9" title="9"><span class="co"># identified categorical variables</span></a>
-<a class="sourceLine" id="cb674-10" title="10">categorical&lt;-<span class="kw">c</span>(<span class="st">&quot;Smokes&quot;</span>, <span class="st">&quot;Hormonal.Contraceptives&quot;</span>, <span class="st">&quot;IUD&quot;</span>, </a>
-<a class="sourceLine" id="cb674-11" title="11">               <span class="st">&quot;STDs.condylomatosis&quot;</span>,<span class="st">&quot;STDs.cervical.condylomatosis&quot;</span>, </a>
-<a class="sourceLine" id="cb674-12" title="12">               <span class="st">&quot;STDs.vulvo.perineal.condylomatosis&quot;</span>, <span class="st">&quot;STDs.syphilis&quot;</span>,</a>
-<a class="sourceLine" id="cb674-13" title="13">               <span class="st">&quot;STDs.pelvic.inflammatory.disease&quot;</span>,</a>
-<a class="sourceLine" id="cb674-14" title="14">               <span class="st">&quot;STDs.genital.herpes&quot;</span>,<span class="st">&quot;STDs.molluscum.contagiosum&quot;</span>,</a>
-<a class="sourceLine" id="cb674-15" title="15">               <span class="st">&quot;STDs.AIDS&quot;</span>, <span class="st">&quot;STDs.HIV&quot;</span>, <span class="st">&quot;STDs.Hepatitis.B&quot;</span>, <span class="st">&quot;STDs.HPV&quot;</span>,</a>
-<a class="sourceLine" id="cb674-16" title="16">               <span class="st">&quot;Hinselmann&quot;</span>, <span class="st">&quot;Schiller&quot;</span>, <span class="st">&quot;Dx&quot;</span>,  </a>
-<a class="sourceLine" id="cb674-17" title="17">               <span class="st">&quot;Citology&quot;</span>, <span class="st">&quot;Biopsy&quot;</span>)  </a>
-<a class="sourceLine" id="cb674-18" title="18"></a>
-<a class="sourceLine" id="cb674-19" title="19"><span class="co"># factorize it</span></a>
-<a class="sourceLine" id="cb674-20" title="20">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(categorical, <span class="op">~</span><span class="kw">factor</span>(.,<span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)))</a></code></pre></div>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb675-1" title="1"><span class="kw">library</span>(Amelia)</a>
-<a class="sourceLine" id="cb675-2" title="2"><span class="co"># missings on original data</span></a>
-<a class="sourceLine" id="cb675-3" title="3"><span class="kw">missmap</span>(dataset)</a></code></pre></div>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb681-2" title="2"></a>
+<a class="sourceLine" id="cb681-3" title="3"><span class="co">## read the data</span></a>
+<a class="sourceLine" id="cb681-4" title="4">dataset&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;2.UploadedData/risk_factors_cervical_cancer.csv&quot;</span>,<span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;NA&quot;</span>,<span class="st">&quot;?&quot;</span>,<span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb681-5" title="5"></a>
+<a class="sourceLine" id="cb681-6" title="6"><span class="co"># exclude redundante variable</span></a>
+<a class="sourceLine" id="cb681-7" title="7">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs, <span class="op">-</span>Dx.Cancer, <span class="op">-</span>Dx.CIN, <span class="op">-</span>Dx.HPV)</a>
+<a class="sourceLine" id="cb681-8" title="8"></a>
+<a class="sourceLine" id="cb681-9" title="9"><span class="co"># identified categorical variables</span></a>
+<a class="sourceLine" id="cb681-10" title="10">categorical&lt;-<span class="kw">c</span>(<span class="st">&quot;Smokes&quot;</span>, <span class="st">&quot;Hormonal.Contraceptives&quot;</span>, <span class="st">&quot;IUD&quot;</span>, </a>
+<a class="sourceLine" id="cb681-11" title="11">               <span class="st">&quot;STDs.condylomatosis&quot;</span>,<span class="st">&quot;STDs.cervical.condylomatosis&quot;</span>, </a>
+<a class="sourceLine" id="cb681-12" title="12">               <span class="st">&quot;STDs.vulvo.perineal.condylomatosis&quot;</span>, <span class="st">&quot;STDs.syphilis&quot;</span>,</a>
+<a class="sourceLine" id="cb681-13" title="13">               <span class="st">&quot;STDs.pelvic.inflammatory.disease&quot;</span>,</a>
+<a class="sourceLine" id="cb681-14" title="14">               <span class="st">&quot;STDs.genital.herpes&quot;</span>,<span class="st">&quot;STDs.molluscum.contagiosum&quot;</span>,</a>
+<a class="sourceLine" id="cb681-15" title="15">               <span class="st">&quot;STDs.AIDS&quot;</span>, <span class="st">&quot;STDs.HIV&quot;</span>, <span class="st">&quot;STDs.Hepatitis.B&quot;</span>, <span class="st">&quot;STDs.HPV&quot;</span>,</a>
+<a class="sourceLine" id="cb681-16" title="16">               <span class="st">&quot;Hinselmann&quot;</span>, <span class="st">&quot;Schiller&quot;</span>, <span class="st">&quot;Dx&quot;</span>,  </a>
+<a class="sourceLine" id="cb681-17" title="17">               <span class="st">&quot;Citology&quot;</span>, <span class="st">&quot;Biopsy&quot;</span>)  </a>
+<a class="sourceLine" id="cb681-18" title="18"></a>
+<a class="sourceLine" id="cb681-19" title="19"><span class="co"># factorize it</span></a>
+<a class="sourceLine" id="cb681-20" title="20">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(categorical, <span class="op">~</span><span class="kw">factor</span>(.,<span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;no&quot;</span>,<span class="st">&quot;yes&quot;</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" title="1"><span class="kw">library</span>(Amelia)</a>
+<a class="sourceLine" id="cb682-2" title="2"><span class="co"># missings on original data</span></a>
+<a class="sourceLine" id="cb682-3" title="3"><span class="kw">missmap</span>(dataset)</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/amelia-1.png" width="672" /></p>
 <p><code>Amelia</code> package allow us to see how missing data are distributed on our dataset. Alternatively we can just count missings by variable.</p>
-<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb676-1" title="1"><span class="kw">apply</span>(dataset, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))</a></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" title="1"><span class="kw">apply</span>(dataset, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))</a></code></pre></div>
 <pre><code>##                                Age          Number.of.sexual.partners 
 ##                                  0                                 26 
 ##           First.sexual.intercourse                 Num.of.pregnancies 
@@ -526,9 +529,9 @@ This package includes functions and data accompanying the book “Data Mining wi
 ##                           Citology                             Biopsy 
 ##                                  0                                  0</code></pre>
 <p>Do to the excessive among of missings, I excluded from the analysis, the variables <code>STDs..Time.since.first.diagnosis</code> and <code>STDs..Time.since.last.diagnosis</code>. Although it would be advised to do an imputation of values where we have missing data, I did’nt do it.</p>
-<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb678-1" title="1">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs..Time.since.first.diagnosis, <span class="op">-</span>STDs..Time.since.last.diagnosis)</a>
-<a class="sourceLine" id="cb678-2" title="2"></a>
-<a class="sourceLine" id="cb678-3" title="3"><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Dx))</a></code></pre></div>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" title="1">dataset&lt;-dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>STDs..Time.since.first.diagnosis, <span class="op">-</span>STDs..Time.since.last.diagnosis)</a>
+<a class="sourceLine" id="cb685-2" title="2"></a>
+<a class="sourceLine" id="cb685-3" title="3"><span class="kw">prop.table</span>(<span class="kw">table</span>(dataset<span class="op">$</span>Dx))</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -553,19 +556,19 @@ yes
 </table>
 <p>We will use this dataset to train a regression tree algorithm in order to predict the outcome <strong>Dx</strong>. But,
 we have a clear problem of imbalanced data if we want to predict <strong>Dx</strong> from which 97.2% are ‘no’ and only 2.8% are ‘yes’.</p>
-<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb679-1" title="1"><span class="kw">ggplot</span>(dataset, <span class="kw">aes</span>(<span class="dt">x=</span>Dx)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-467-1.png" width="672" /></p>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" title="1"><span class="kw">ggplot</span>(dataset, <span class="kw">aes</span>(<span class="dt">x=</span>Dx)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-473-1.png" width="672" /></p>
 <p>Now, I use four different methods to balance the data.</p>
 <p>Let’s start balancing the data by downsampling (with the <code>caret</code> package):</p>
-<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb680-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb680-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb680-3" title="3">down_train &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> dataset[, <span class="op">!</span><span class="kw">colnames</span>(dataset) <span class="op">%in%</span><span class="st"> &quot;Dx&quot;</span>],</a>
-<a class="sourceLine" id="cb680-4" title="4">                         <span class="dt">y =</span> dataset<span class="op">$</span>Dx)</a>
-<a class="sourceLine" id="cb680-5" title="5"></a>
-<a class="sourceLine" id="cb680-6" title="6"><span class="co"># we have to remane the Class variable</span></a>
-<a class="sourceLine" id="cb680-7" title="7"><span class="kw">names</span>(down_train)[<span class="dv">30</span>]&lt;-<span class="st">&quot;Dx&quot;</span></a>
-<a class="sourceLine" id="cb680-8" title="8"></a>
-<a class="sourceLine" id="cb680-9" title="9"><span class="kw">table</span>(down_train<span class="op">$</span>Dx)</a></code></pre></div>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb687-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb687-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb687-3" title="3">down_train &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> dataset[, <span class="op">!</span><span class="kw">colnames</span>(dataset) <span class="op">%in%</span><span class="st"> &quot;Dx&quot;</span>],</a>
+<a class="sourceLine" id="cb687-4" title="4">                         <span class="dt">y =</span> dataset<span class="op">$</span>Dx)</a>
+<a class="sourceLine" id="cb687-5" title="5"></a>
+<a class="sourceLine" id="cb687-6" title="6"><span class="co"># we have to remane the Class variable</span></a>
+<a class="sourceLine" id="cb687-7" title="7"><span class="kw">names</span>(down_train)[<span class="dv">30</span>]&lt;-<span class="st">&quot;Dx&quot;</span></a>
+<a class="sourceLine" id="cb687-8" title="8"></a>
+<a class="sourceLine" id="cb687-9" title="9"><span class="kw">table</span>(down_train<span class="op">$</span>Dx)</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -589,13 +592,13 @@ yes
 </tbody>
 </table>
 <p>Now the upsampling:</p>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb681-2" title="2">up_train &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> dataset[, <span class="op">!</span><span class="kw">colnames</span>(dataset) <span class="op">%in%</span><span class="st"> &quot;Dx&quot;</span>],</a>
-<a class="sourceLine" id="cb681-3" title="3">                         <span class="dt">y =</span> dataset<span class="op">$</span>Dx)</a>
-<a class="sourceLine" id="cb681-4" title="4"></a>
-<a class="sourceLine" id="cb681-5" title="5"><span class="co"># we have to remane the Class variable</span></a>
-<a class="sourceLine" id="cb681-6" title="6"><span class="kw">names</span>(up_train)[<span class="dv">30</span>]&lt;-<span class="st">&quot;Dx&quot;</span></a>
-<a class="sourceLine" id="cb681-7" title="7"><span class="kw">table</span>(up_train<span class="op">$</span>Dx)</a></code></pre></div>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb688-2" title="2">up_train &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> dataset[, <span class="op">!</span><span class="kw">colnames</span>(dataset) <span class="op">%in%</span><span class="st"> &quot;Dx&quot;</span>],</a>
+<a class="sourceLine" id="cb688-3" title="3">                         <span class="dt">y =</span> dataset<span class="op">$</span>Dx)</a>
+<a class="sourceLine" id="cb688-4" title="4"></a>
+<a class="sourceLine" id="cb688-5" title="5"><span class="co"># we have to remane the Class variable</span></a>
+<a class="sourceLine" id="cb688-6" title="6"><span class="kw">names</span>(up_train)[<span class="dv">30</span>]&lt;-<span class="st">&quot;Dx&quot;</span></a>
+<a class="sourceLine" id="cb688-7" title="7"><span class="kw">table</span>(up_train<span class="op">$</span>Dx)</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -619,11 +622,11 @@ yes
 </tbody>
 </table>
 <p>Is time for SMOTE:</p>
-<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" title="1"><span class="kw">library</span>(DMwR)</a>
-<a class="sourceLine" id="cb682-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb682-3" title="3">smote_train &lt;-<span class="st"> </span><span class="kw">SMOTE</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data  =</span> dataset,</a>
-<a class="sourceLine" id="cb682-4" title="4">                     <span class="dt">perc.over =</span> <span class="dv">400</span>,<span class="dt">perc.under=</span><span class="dv">200</span>)                         </a>
-<a class="sourceLine" id="cb682-5" title="5"><span class="kw">table</span>(smote_train<span class="op">$</span>Dx) </a></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb689-1" title="1"><span class="kw">library</span>(DMwR)</a>
+<a class="sourceLine" id="cb689-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb689-3" title="3">smote_train &lt;-<span class="st"> </span><span class="kw">SMOTE</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data  =</span> dataset,</a>
+<a class="sourceLine" id="cb689-4" title="4">                     <span class="dt">perc.over =</span> <span class="dv">400</span>,<span class="dt">perc.under=</span><span class="dv">200</span>)                         </a>
+<a class="sourceLine" id="cb689-5" title="5"><span class="kw">table</span>(smote_train<span class="op">$</span>Dx) </a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -647,10 +650,10 @@ yes
 </tbody>
 </table>
 <p>and now ROSE:</p>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" title="1"><span class="kw">library</span>(ROSE)</a>
-<a class="sourceLine" id="cb683-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb683-3" title="3">rose_train &lt;-<span class="st"> </span><span class="kw">ROSE</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data  =</span> dataset)<span class="op">$</span>data                         </a>
-<a class="sourceLine" id="cb683-4" title="4"><span class="kw">table</span>(rose_train<span class="op">$</span>Dx) </a></code></pre></div>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb690-1" title="1"><span class="kw">library</span>(ROSE)</a>
+<a class="sourceLine" id="cb690-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb690-3" title="3">rose_train &lt;-<span class="st"> </span><span class="kw">ROSE</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data  =</span> dataset)<span class="op">$</span>data                         </a>
+<a class="sourceLine" id="cb690-4" title="4"><span class="kw">table</span>(rose_train<span class="op">$</span>Dx) </a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -674,79 +677,79 @@ yes
 </tbody>
 </table>
 <p>With the new 4 datasets we can fit the regresssion trees</p>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb684-1" title="1">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
-<a class="sourceLine" id="cb684-2" title="2">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</a>
-<a class="sourceLine" id="cb684-3" title="3">                        <span class="dt">number =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb684-4" title="4">                        <span class="dt">repeats =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb684-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
-<a class="sourceLine" id="cb684-6" title="6">                        <span class="dt">classProbs=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb684-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb684-8" title="8"></a>
-<a class="sourceLine" id="cb684-9" title="9"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb684-10" title="10">fit.rpart.down &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>down_train, </a>
-<a class="sourceLine" id="cb684-11" title="11">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb684-12" title="12">                       <span class="dt">na.action=</span>na.exclude)</a>
-<a class="sourceLine" id="cb684-13" title="13"></a>
-<a class="sourceLine" id="cb684-14" title="14"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb684-15" title="15">fit.rpart.up &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>up_train, </a>
-<a class="sourceLine" id="cb684-16" title="16">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb684-17" title="17">                      <span class="dt">na.action=</span>na.exclude)</a>
-<a class="sourceLine" id="cb684-18" title="18"></a>
-<a class="sourceLine" id="cb684-19" title="19"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb684-20" title="20">fit.rpart.smote &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>smote_train, </a>
-<a class="sourceLine" id="cb684-21" title="21">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb684-22" title="22">                      <span class="dt">na.action=</span>na.exclude)</a>
-<a class="sourceLine" id="cb684-23" title="23"></a>
-<a class="sourceLine" id="cb684-24" title="24"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb684-25" title="25">fit.rpart.rose &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>rose_train, </a>
-<a class="sourceLine" id="cb684-26" title="26">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb684-27" title="27">                      <span class="dt">na.action=</span>na.exclude)</a></code></pre></div>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb691-1" title="1">metric &lt;-<span class="st"> &quot;ROC&quot;</span></a>
+<a class="sourceLine" id="cb691-2" title="2">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</a>
+<a class="sourceLine" id="cb691-3" title="3">                        <span class="dt">number =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb691-4" title="4">                        <span class="dt">repeats =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb691-5" title="5">                        <span class="dt">summaryFunction=</span>twoClassSummary, </a>
+<a class="sourceLine" id="cb691-6" title="6">                        <span class="dt">classProbs=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb691-7" title="7">                        <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb691-8" title="8"></a>
+<a class="sourceLine" id="cb691-9" title="9"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb691-10" title="10">fit.rpart.down &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>down_train, </a>
+<a class="sourceLine" id="cb691-11" title="11">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb691-12" title="12">                       <span class="dt">na.action=</span>na.exclude)</a>
+<a class="sourceLine" id="cb691-13" title="13"></a>
+<a class="sourceLine" id="cb691-14" title="14"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb691-15" title="15">fit.rpart.up &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>up_train, </a>
+<a class="sourceLine" id="cb691-16" title="16">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb691-17" title="17">                      <span class="dt">na.action=</span>na.exclude)</a>
+<a class="sourceLine" id="cb691-18" title="18"></a>
+<a class="sourceLine" id="cb691-19" title="19"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb691-20" title="20">fit.rpart.smote &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>smote_train, </a>
+<a class="sourceLine" id="cb691-21" title="21">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb691-22" title="22">                      <span class="dt">na.action=</span>na.exclude)</a>
+<a class="sourceLine" id="cb691-23" title="23"></a>
+<a class="sourceLine" id="cb691-24" title="24"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb691-25" title="25">fit.rpart.rose &lt;-<span class="st"> </span><span class="kw">train</span>(Dx <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>rose_train, </a>
+<a class="sourceLine" id="cb691-26" title="26">                       <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">metric=</span>metric, <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb691-27" title="27">                      <span class="dt">na.action=</span>na.exclude)</a></code></pre></div>
 <p>And now we can compare the results.</p>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">down.rpart=</span>fit.rpart.down, </a>
-<a class="sourceLine" id="cb685-2" title="2">                   <span class="dt">up.rpart=</span>fit.rpart.up, </a>
-<a class="sourceLine" id="cb685-3" title="3">                   <span class="dt">smote.rpart=</span> fit.rpart.smote, </a>
-<a class="sourceLine" id="cb685-4" title="4">                   <span class="dt">rose.rpart=</span> fit.rpart.rose)</a>
-<a class="sourceLine" id="cb685-5" title="5"></a>
-<a class="sourceLine" id="cb685-6" title="6"></a>
-<a class="sourceLine" id="cb685-7" title="7">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a></code></pre></div>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb692-1" title="1">fit.models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">down.rpart=</span>fit.rpart.down, </a>
+<a class="sourceLine" id="cb692-2" title="2">                   <span class="dt">up.rpart=</span>fit.rpart.up, </a>
+<a class="sourceLine" id="cb692-3" title="3">                   <span class="dt">smote.rpart=</span> fit.rpart.smote, </a>
+<a class="sourceLine" id="cb692-4" title="4">                   <span class="dt">rose.rpart=</span> fit.rpart.rose)</a>
+<a class="sourceLine" id="cb692-5" title="5"></a>
+<a class="sourceLine" id="cb692-6" title="6"></a>
+<a class="sourceLine" id="cb692-7" title="7">results &lt;-<span class="st"> </span><span class="kw">resamples</span>(fit.models)</a></code></pre></div>
 <p>Let’s look at the ROC curves</p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" title="1"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb686-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb686-3" title="3"><span class="co"># rocs &lt;- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, </span></a>
-<a class="sourceLine" id="cb686-4" title="4"><span class="co">#                                                   #main=fit, </span></a>
-<a class="sourceLine" id="cb686-5" title="5"><span class="co">#                                                   debug=F, print.auc=T)})</span></a>
-<a class="sourceLine" id="cb686-6" title="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>){</a>
-<a class="sourceLine" id="cb686-7" title="7">  <span class="kw">plot.roc</span>(fit.models[[i]]<span class="op">$</span>pred<span class="op">$</span>obs,fit.models[[i]]<span class="op">$</span>pred<span class="op">$</span>yes,</a>
-<a class="sourceLine" id="cb686-8" title="8">           <span class="dt">main=</span> <span class="kw">names</span>(fit.models)[i],</a>
-<a class="sourceLine" id="cb686-9" title="9">           <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)}</a></code></pre></div>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb693-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb693-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb693-3" title="3"><span class="co"># rocs &lt;- lapply(fit.models, function(fit){plot.roc(fit$pred$obs,fit$pred$yes, </span></a>
+<a class="sourceLine" id="cb693-4" title="4"><span class="co">#                                                   #main=fit, </span></a>
+<a class="sourceLine" id="cb693-5" title="5"><span class="co">#                                                   debug=F, print.auc=T)})</span></a>
+<a class="sourceLine" id="cb693-6" title="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>){</a>
+<a class="sourceLine" id="cb693-7" title="7">  <span class="kw">plot.roc</span>(fit.models[[i]]<span class="op">$</span>pred<span class="op">$</span>obs,fit.models[[i]]<span class="op">$</span>pred<span class="op">$</span>yes,</a>
+<a class="sourceLine" id="cb693-8" title="8">           <span class="dt">main=</span> <span class="kw">names</span>(fit.models)[i],</a>
+<a class="sourceLine" id="cb693-9" title="9">           <span class="dt">debug=</span>F, <span class="dt">print.auc=</span>T)}</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/rocs-1.png" width="672" /></p>
 <p>we can also see it in one plot:</p>
-<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb687-1" title="1"><span class="co"># combine the results</span></a>
-<a class="sourceLine" id="cb687-2" title="2">ggroc&lt;-<span class="kw">rbind</span>(<span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;Down&quot;</span>, </a>
-<a class="sourceLine" id="cb687-3" title="3">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
-<a class="sourceLine" id="cb687-4" title="4">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
-<a class="sourceLine" id="cb687-5" title="5">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;Up&quot;</span>, </a>
-<a class="sourceLine" id="cb687-6" title="6">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
-<a class="sourceLine" id="cb687-7" title="7">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
-<a class="sourceLine" id="cb687-8" title="8">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;SMOTE&quot;</span>, </a>
-<a class="sourceLine" id="cb687-9" title="9">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
-<a class="sourceLine" id="cb687-10" title="10">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
-<a class="sourceLine" id="cb687-11" title="11">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;ROSE&quot;</span>, </a>
-<a class="sourceLine" id="cb687-12" title="12">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
-<a class="sourceLine" id="cb687-13" title="13">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities)</a>
-<a class="sourceLine" id="cb687-14" title="14">)</a>
-<a class="sourceLine" id="cb687-15" title="15">             </a>
-<a class="sourceLine" id="cb687-16" title="16">custom_col &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#009E73&quot;</span>, <span class="st">&quot;#0072B2&quot;</span>, <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;#CC79A7&quot;</span>)</a>
-<a class="sourceLine" id="cb687-17" title="17"></a>
-<a class="sourceLine" id="cb687-18" title="18"><span class="kw">ggplot</span>(ggroc, <span class="kw">aes</span>(<span class="dt">x=</span> <span class="dv">1</span><span class="op">-</span>spec, <span class="dt">y=</span> sens, <span class="dt">group =</span> method)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb687-19" title="19"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> method), <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb687-20" title="20"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> custom_col) <span class="op">+</span></a>
-<a class="sourceLine" id="cb687-21" title="21"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb687-22" title="22"><span class="st">    </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" title="1"><span class="co"># combine the results</span></a>
+<a class="sourceLine" id="cb694-2" title="2">ggroc&lt;-<span class="kw">rbind</span>(<span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;Down&quot;</span>, </a>
+<a class="sourceLine" id="cb694-3" title="3">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb694-4" title="4">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.down<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
+<a class="sourceLine" id="cb694-5" title="5">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;Up&quot;</span>, </a>
+<a class="sourceLine" id="cb694-6" title="6">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb694-7" title="7">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.up<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
+<a class="sourceLine" id="cb694-8" title="8">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;SMOTE&quot;</span>, </a>
+<a class="sourceLine" id="cb694-9" title="9">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb694-10" title="10">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.smote<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities),</a>
+<a class="sourceLine" id="cb694-11" title="11">             <span class="kw">data.frame</span>(<span class="dt">method =</span> <span class="st">&quot;ROSE&quot;</span>, </a>
+<a class="sourceLine" id="cb694-12" title="12">                       <span class="dt">sens=</span><span class="kw">roc</span>(fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb694-13" title="13">                       <span class="dt">spec=</span><span class="kw">roc</span>(fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>obs,fit.rpart.rose<span class="op">$</span>pred<span class="op">$</span>yes)<span class="op">$</span>specificities)</a>
+<a class="sourceLine" id="cb694-14" title="14">)</a>
+<a class="sourceLine" id="cb694-15" title="15">             </a>
+<a class="sourceLine" id="cb694-16" title="16">custom_col &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#009E73&quot;</span>, <span class="st">&quot;#0072B2&quot;</span>, <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;#CC79A7&quot;</span>)</a>
+<a class="sourceLine" id="cb694-17" title="17"></a>
+<a class="sourceLine" id="cb694-18" title="18"><span class="kw">ggplot</span>(ggroc, <span class="kw">aes</span>(<span class="dt">x=</span> <span class="dv">1</span><span class="op">-</span>spec, <span class="dt">y=</span> sens, <span class="dt">group =</span> method)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb694-19" title="19"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> method), <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb694-20" title="20"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> custom_col) <span class="op">+</span></a>
+<a class="sourceLine" id="cb694-21" title="21"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb694-22" title="22"><span class="st">    </span><span class="kw">theme_bw</span>()</a></code></pre></div>
 <p><img src="heads2sem_files/figure-html/ggroc-1.png" width="672" /></p>
 <p>And compare accuracies</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
-<p><img src="heads2sem_files/figure-html/unnamed-chunk-468-1.png" width="672" /></p>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb695-1" title="1"><span class="kw">dotplot</span>(results)</a></code></pre></div>
+<p><img src="heads2sem_files/figure-html/unnamed-chunk-474-1.png" width="672" /></p>
 <p>In this exercise we obtained the best results with ROSE dataset. Although we can have a problem of overfitting.</p>
 </div>
 <div id="conclusion" class="section level3">
