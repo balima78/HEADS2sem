@@ -1,0 +1,9 @@
+# LAB.HIDA {#lab}
+
+*Projeto Laboratorial em HIDA*
+
+**Conteúdos programáticos**
+
+Conteúdos a definir em cada edição mediante discussão e coordenação próxima com entidades associadas ao programa por via de projetos de investigação ou contrato laboral com os alunos. Estas instituições serão unidades de investigação, instituições prestadoras de cuidados de saúde ou indústria. A escolha dos problemas na área da análise inteligente de dados que serão desenvolvidos no projeto laboratorial será feita em cada edição desta unidade curricular, tendo em consideração não só o perfil e interesses dos alunos, como também os tópicos que no momento se considerem ser os mais relevantes na área. Os problemas a resolver poderão envolver a análise de tempos até ao acontecimento de determinado evento (morte, diagnóstico de doença, recidiva, etc.), a análise de grandes fluxos de dados, a análise de dado longitudinais, etc.
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">

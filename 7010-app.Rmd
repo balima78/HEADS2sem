@@ -1,0 +1,12 @@
+## Costs 4 Health
+
+https://github.com/balima78/lab.heads
+
+This is the repository for a Shiny app developed for the discipline Laboratory Project from HEADS doctoral program.
+
+The app is available from here:
+
+https://balima.shinyapps.io/lab_heads/
+
+
+<img src="images/logoFMUP.png" alt="logotipo FMUP" style="width:100px;height:40px;" align="right">
