@@ -145,6 +145,8 @@ abline(v = 3, col="red", lwd=1.5, lty=2)
 
 K-Means Cluster Analysis
 ```{r}
+set.seed(250)
+
 fit3 <- kmeans(datacont_complete, 3) # 3 cluster solution
 ```
 
@@ -175,6 +177,7 @@ fviz_cluster(fit3, data = datacont_complete,
              ggtheme = theme_minimal(),
              main = "Partitioning Clustering Plot"
 )
+
 ```
 
 Compute hierarchical k-means clustering
